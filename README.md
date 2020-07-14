@@ -34,7 +34,23 @@ Models are developed in collaboration with experimentalists and are used to inte
 
 We study both detailed biophysical models and simplified models, which are more amenable to analysis. Such an approach aids the isolation of the essential or minimal mechanisms underlying phenomena, the search for general principles, and the application of concepts and analogies from other fields.
 
+## Further Information and Resources
 
+*   [CV & Publications](https://github.com/artielbm/CV/blob/master/CV.md) (with links to PubMed and supplementary files)
+*   [Numerical Methods Chapter in "Methods for Neuronal Modeling" plus Software for Neuronal Modeling](http://mrb.niddk.nih.gov/sherman/Numerics.html)
+*   [Gallery of Models](http://mrb.niddk.nih.gov/sherman/gallery/index.html): Parameters and equations for a variety of models and supplementary material for papers.
+*   [Chapter in "Case Studies in Mathematical Modeling"](http://mrb.niddk.nih.gov/sherman/Utah.html)
+*   [Calcium calculator](https://web.njit.edu/~matveev/) for spatiotemporal calcium dynamics (Victor Matveev).  
+
+*   [Phantom Burster Animation](http://mrb.niddk.nih.gov/sherman/phantoms/phantom4.html)  
+    Authored by Andrew LeBeau using Flash  
+    (needs graphical browser and a free shockwave plug-in).
+*   [Model of Metabolic Insulin Signaling Pathways](http://mrb.niddk.nih.gov/sherman/Insulin.html)  
+    (with Ahmad Sedaghat and Michael Quon).
+*   [Modeling the Prevention and Reversal of Type 2 Diabetes](https://mbi.osu.edu/resources/success-stories/modeling-prevention-and-reversal-type-2-diabetes/)  
+    (Mathematical "success story" posted at the Mathematical Biosciences Institute, Ohio State Univesity)
+
+## On-Line Lectures
 
 
 
