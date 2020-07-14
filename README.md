@@ -53,41 +53,8 @@ We study both detailed biophysical models and simplified models, which are more 
 ## On-Line Lectures
 
 
+*   [Cross-currents between Biology and Mathematics on Models of Bursting](https://video.mbi.ohio-state.edu/video/player/?id=338) Presentation at Mathematical Biosciences Institute, Ohio State University, March, 2012.
+*   [Biological and Mathematical Perspectives on the Classification of Bursting Mechanisms](https://www.pathlms.com/siam/courses/2724/sections/3618) Presentation at SIAM Life Sciences meeting, August, 2012.
+*   [Bistability of Beta-Cell Mass in Type 2 Diabetes](https://mbi.osu.edu/video/player/?id=2741&title=Bistability+of+Beta+Cell+Mass+in+Diabetes) Presentation at Mathematical Biosciences Institute, August, 2013.
+*   [Prevention, Pathogenesis and Reversal of Type 2 Diabetes](http://www.fields.utoronto.ca/video-archive/2014/03/259-3080) Presentation at Fields Institute for Mathematical Sciences, March, 2014.
 
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/artielbm/artielbm.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/artielbm/artielbm.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
