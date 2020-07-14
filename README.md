@@ -20,6 +20,19 @@ fax: (301) 402 - 0535<br>
 
 * * *
 
+## Research Interests and Approach
+
+We use mathematical models to study the mechanisms of oscillatory electrical activity arising from ion channels in cell membranes and modulated by intracellular chemical processes. We are interested in both the behavior of single cells and the ways in which cells communicate and modify each other's behavior.
+
+Our main application has been to the biophysical basis of insulin secretion in pancreatic beta-cells. We have examined bursting oscillations in membrane potential and the role of electrical coupling between cells in the islet of Langerhans. Long-term goals are to understand how the membrane dynamics interact with intracellular events to regulate secretion and to generalize to other secretory cells and neurons.
+
+A second major focus has been mechanisms of synaptic transmission and short-term plasticity. Together with E. Stanley (NINDS) we have proposed a model for release and fast facilitation in which Ca2+ in microdomains, rather than bulk Ca2+, plays the leading role.
+
+Finally, we have begun to model the pathogenesis of diabetes, primarily type 2 but also some aspects of type 1. We seek to understand why it is easier to prevent diabetes than reverse it and how knowlege of the different pathways to diabetes (for example, through high fasting glucose vs. through high post-meal glucose) can be used to target diagnosis and therapy to the individual patient.
+
+Models are developed in collaboration with experimentalists and are used to interpret data and to design new experimental tests of hypotheses. Our primary tool for the analysis of models is the numerical solution of ordinary and partial differential equations. We use analytical, geometrical, graphical, and numerical techniques from the mathematical theory of dynamical systems to help construct and interpret the models. Perturbation techniques are used to get analytical results in special cases.
+
+We study both detailed biophysical models and simplified models, which are more amenable to analysis. Such an approach aids the isolation of the essential or minimal mechanisms underlying phenomena, the search for general principles, and the application of concepts and analogies from other fields.
 
 
 
