@@ -1,7 +1,7 @@
 # Arthur Sherman
 
 <p style="text-align:center;">
-<img src="Henge.jpg" alt="Photo of A_S"  style="width: 30%"/>
+<img src="Henge.jpg" alt="Photo of A_S"  style="width: 300"/>
 </p>
 
 
