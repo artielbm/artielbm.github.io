@@ -1,7 +1,7 @@
 # Arthur Sherman
 
 <p style="text-align:center;">
-<img src="Henge.jpg" alt="Photo of A_S"  style="width: 300"/>
+<img src="Henge.jpg" alt="Photo of AS"  width="350"/>
 </p>
 
 
@@ -37,7 +37,7 @@ We study both detailed biophysical models and simplified models, which are more 
 
 ## Further Information and Resources
 
-*   [CV & Publications](CV.md) (with links to PubMed and supplementary files)
+*   [CV & Publications](CV/CV.html) (with links to PubMed and supplementary files)
 *   [Numerical Methods Chapter in "Methods for Neuronal Modeling" plus Software for Neuronal Modeling](http://mrb.niddk.nih.gov/sherman/Numerics.html)
 *   [Gallery of Models](http://mrb.niddk.nih.gov/sherman/gallery/index.html): Parameters and equations for a variety of models and supplementary material for papers.
 *   [Chapter in "Case Studies in Mathematical Modeling"](http://mrb.niddk.nih.gov/sherman/Utah.html)
