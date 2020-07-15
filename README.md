@@ -1,7 +1,7 @@
 # Arthur Sherman
 
 
-![photo of AS](Henge.jpg){:height="300px" width="300px"}
+![photo of AS](Henge.jpg)
 
 ## Contact Address:
 
