@@ -40,7 +40,9 @@ New York University, Ph. D. Mathematics, October, 1986
 
 **2019** Awarded the Arthur T. Winfree Prize for theoretical work that has inspired significant new biology [[SMB](https://www.smb.org/arthur-winfree-prize/)]
 
-### Refereed Articles
+### Publications
+
+    ### Refereed Articles
 
 1. J. Ha and A. Sherman. 2020. _Type 2 Diabetes: One Disease, Many Pathways._ Am. J. Physiol. (Endocrinol. Metab.), in press. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/32663101/) [[The Paper]](https://doi.org/10.1152/ajpendo.00512.2019) [[Matlab and xpp files]](https://github.com/artielbm/Pathways/blob/master/readme.md) [[Other supplemental material at Figshare]](https://doi.org/10.6084/m9.figshare.10792412)
 1.  S. M. Briker, T. Hormenu, C. W. DuBose, L. S. Mabundo, S. T. Chung, J. Ha, A. Sherman, M. K. Tulloch-Reid, M. Bergman, A. E. Sumner. 2020. _Metabolic characteristics of Africans with normal glucose tolerance and elevated 1-hour glucose: insight from the Africans in America study._ BMJ Open Diabetes Research and Care. **8**(1):e000837. [[PubMed](https://www.ncbi.nlm.nih.gov/pubmed/31958302)]
@@ -140,7 +142,7 @@ New York University, Ph. D. Mathematics, October, 1986
 1.  A. S. Sherman and C. S. Peskin. 1988\. _Solving the Hodgkin-Huxley equations by a random walk method._ SIAM J. Sci. and Stat. Comput. **9**:170-190.  [[The Journal]](https://epubs.siam.org/doi/abs/10.1137/0909012)
 1.  A. S. Sherman and C. S. Peskin. 1986\. _A Monte Carlo method for scalar reaction diffusion equations._ SIAM J. Sci. and Stat. Comput. **7**:1360-1372.  [[The Journal]](https://epubs.siam.org/doi/abs/10.1137/0907090)
 
-### Invited Reviews
+    ### Invited Reviews
 
 1.  R. Bertram, L. S. Satin, and A. S. Sherman. 2018. _Closing in on the mechanisms of pulsatile insulin secretion._ Diabetes, **67**:351-359. [[PubMed]](https://www.ncbi.nlm.nih.gov/pubmed/29463575)
 100.  P. A. Fletcher, A. Sherman, and S. S. Stojilkovic. 2018. _Common and diverse elements of ion channels and receptors underlying electrical activity in endocrine pituitary cells._ Molecular and Cellular Endocrinology, **463**:23 - 36. [[PubMed](https://www.ncbi.nlm.nih.gov/pubmed/28652171)]
@@ -154,7 +156,7 @@ New York University, Ph. D. Mathematics, October, 1986
 1.  A. Sherman. 1996\. _Contributions of modeling to understanding stimulus-secretion coupling in pancreatic beta-cells_. Am. J. Physiol. **271** (Endocrinol. Metab. **34**): E362-E372.  [[PubMed](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=8770032&dopt=Abstract)]
 1.  A. Sherman. 1995\. _Theoretical aspects of synchronized bursting in beta-cells,_ in Pacemaker Activity and Intercellular Communication, J. D. Huizinga, ed., CRC Press, Boca Raton, pp. 323-337.
 
-### Book Chapters & Other Reviews
+    ### Book Chapters & Other Reviews
 
 1.  A. Sherman. 2016. _Endoplasmic reticulum- and plasma membrane-driven calcium oscillations_, in "Computational Neuroendocrinology" (Wiley-INF Masterclass in Neuroendocrinology Series), D. J. MacGregor and G. Leng, eds., John Wiley & Sons, Chichester, UK, p. 112-141. [[The Book](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1119951690.html)]
 1.  R. Bertram, A. Sherman, and L. S. Satin. 2013. _Electrical, Calcium, and Metabolic Oscillations in Pancreatic Islets,_ in "The Islets of Langerhans", 2nd edition, M. S. Islam, ed., Springer-Verlag, Berlin, p. 453-474.
