@@ -40,7 +40,7 @@ New York University, Ph. D. Mathematics, October, 1986
 
 **2019** Awarded the Arthur T. Winfree Prize for theoretical work that has inspired significant new biology [[SMB](https://www.smb.org/arthur-winfree-prize/)]
 
-### Publications
+### *Publications:*
 
    ### Journal Articles
 
