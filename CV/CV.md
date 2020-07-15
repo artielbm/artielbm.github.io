@@ -42,7 +42,7 @@ New York University, Ph. D. Mathematics, October, 1986
 
 ### Publications
 
-    ### Refereed Articles
+   ### Journal Articles
 
 1. J. Ha and A. Sherman. 2020. _Type 2 Diabetes: One Disease, Many Pathways._ Am. J. Physiol. (Endocrinol. Metab.), in press. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/32663101/) [[The Paper]](https://doi.org/10.1152/ajpendo.00512.2019) [[Matlab and xpp files]](https://github.com/artielbm/Pathways/blob/master/readme.md) [[Other supplemental material at Figshare]](https://doi.org/10.6084/m9.figshare.10792412)
 1.  S. M. Briker, T. Hormenu, C. W. DuBose, L. S. Mabundo, S. T. Chung, J. Ha, A. Sherman, M. K. Tulloch-Reid, M. Bergman, A. E. Sumner. 2020. _Metabolic characteristics of Africans with normal glucose tolerance and elevated 1-hour glucose: insight from the Africans in America study._ BMJ Open Diabetes Research and Care. **8**(1):e000837. [[PubMed](https://www.ncbi.nlm.nih.gov/pubmed/31958302)]
