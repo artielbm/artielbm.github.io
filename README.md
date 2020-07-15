@@ -1,7 +1,9 @@
 # Arthur Sherman
 
+<p style="text-align:center;">
+<img src="{{ site.url }}/Henge.jpg" alt="Photo of A_S"  style="width: 30%"/>
+</p>
 
-![photo of AS](Henge.jpg)
 
 ## Contact Address:
 
