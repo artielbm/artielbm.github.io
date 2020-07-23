@@ -1,0 +1,27 @@
+## Hindmarsh and Rose Model with adaptation and timescale factors phi and eps
+
+## all parameters are taken from Hindmarsh and Rose, 1984 
+## Proc R Soc Lond B Biol Sci, 221:87-102. 
+## https://pubmed.ncbi.nlm.nih.gov/6144106
+
+par I=1
+par z=0
+par w=-1.11, s=22
+par a=1, b=3.5, c=1, d=5.5, eps=0.0005, phi=0.1
+
+## Initial conditions
+init x=-0.8177
+init y=-3.865
+
+## Differential Equations
+ 
+x' = y - a*x*x*x + b*x*x + I - z
+y' = phi*(c - d*x*x - y)
+
+# Numerical and plotting parameters
+
+@ meth=cvode, bound=100000000, tol=1.0e-7, rtol=1.0e-7, dt=0.2, total=1000, maxstor=100000
+@ xhi=1000, ylo=-2, yhi=4
+
+done
+

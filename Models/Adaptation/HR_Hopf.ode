@@ -1,0 +1,38 @@
+## Hindmarsh and Rose Model with adaptation and timescale factors phi and eps
+## SNIC noadap bif from I=30 to -10
+## SNIC adap bif from I=100 to -100
+## SNIC I=0.1852, 3, 6,9 from z=30 to -30
+
+
+
+## all parameters are taken fron HR paper, 1984.
+
+par I0=-10.0, I1=5.0, tstart=2000
+par xbar=-0.55, s=40
+par a=1, b=3.5, c=1, d=5.5, eps=0.0005, phi=0.1
+par theta=0.13
+
+I = I0 + heav(t - tstart)*(I1 - I0)
+
+## Initial conditions
+
+init x = -0.76744
+init y = -2.2393
+init z = -8.69761
+
+
+## Differential equations
+## time is in ms, so multiply frequency by 1000 for Hz
+## x, y, and z non-dimensional
+ 
+x' = y - a*(x - theta)*(x - theta)*(x - theta) + b*(x - theta)*(x - theta) + I - z
+y' = phi*(c - d*x*x - y)
+z' = eps*(s*(x - xbar) - z)
+
+## Numerical and plotting parameters
+
+@ meth=cvode, bound=100000000, tol=1.0e-7, rtol=1.0e-7, dt=0.2, total=6000, maxstor=100000
+@ xp=t, yp=x, xhi=6000, ylo=-2, yhi=4
+
+done
+

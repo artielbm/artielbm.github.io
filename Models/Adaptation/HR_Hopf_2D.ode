@@ -1,0 +1,15 @@
+## Hindmarsh and Rose Model with adaptation and timescale factors phi and eps
+
+
+par I=6, z=0
+par theta=0.13, a=1, b=3.5, c=1, d=5.5, eps=0.0005, phi=0.1
+
+ 
+x' = y - a*(x-theta)*(x-theta)*(x-theta) + b*(x-theta)*(x-theta) + I - z
+y' = phi*(c - d*x*x - y)
+
+@ meth=cvode, bound=100000000, tol=1.0e-7, rtol=1.0e-7, dt=0.01, total=1000, maxstor=100000
+@ xhi=1000, ylo=-2, yhi=5
+
+done
+

@@ -1,0 +1,29 @@
+# Morris-Lecar model 
+
+# range of I: [40, 100]
+par I=41
+par eps=0.0001
+par gz=4, vk=-84,vl=-60,vca=120, s=2, vbar=-17
+par gk=8,gl=2, gca=4, cm=22
+par v1=-1.2,v2=18,v3=12,v4=17,phi=0.0666667
+
+# Units:
+# v: mV; g: nS; I: pA; cm: pF (incorrect in paper); t: ms
+
+dv/dt=(I + z*gz*(vk-v) + gl*(vl-v) + gk*w*(vk-v) + gca*minf(v)*(vca-v))/cm
+dw/dt=lamw(v)*(winf(v)-w)
+dz/dt=eps*(1/(1 + exp(-(v-vbar)/s)) - z)
+# where
+minf(v)=.5*(1 + tanh((v-v1)/v2))
+winf(v)=.5*(1 + tanh((v-v3)/v4))
+lamw(v)=phi*cosh((v-v3)/(2*v4))
+
+v(0)=-60.899
+w(0)=0.014873
+z(0)=0
+
+@ bell=0
+@ meth=cvode,bound=100000000, tol=1.0e-7, tol=1.0e-7, dt=0.05, total=10000, maxstor=100000
+@ xp=t, yp=v, xlo=0, xhi=10000, ylo=-80, yhi=40
+
+done
