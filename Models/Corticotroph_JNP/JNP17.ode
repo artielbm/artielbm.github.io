@@ -1,0 +1,231 @@
+# Model of corticotroph electrical activity described in:
+# "Modeling the diversity of spontaneous and agonist-induced electrical activity in anterior pituitary corticotrophs"
+# Patrick Allen Fletcher, Hana Zemkova, Stanko S. Stojilkovic, Arthur Sherman
+# Journal of Neurophysiology, Published 22 February 2017, Vol. no. , DOI: 10.1152/jn.00948.2016 
+#
+# Notes:
+# - make sure the system is at steady state before running a pulse simulation. The initial condition is set to the hyperpolarized state used for Fig. 4B
+# - set parameters as indicated below to obtain the trajectory of interest from Figures 3-6. Default model parameters produce low-frequency spiking
+# - to see the pulse profile, plot the auxiliary variable "g"
+
+#figure 3B top (diamond)   - gnab=0.22, gbk=1.1
+#figure 3B middle (circle) - gnab=0.22, gbk=0.25
+#figure 3B bottom (square) - gnab=0.22, gbk=0.05
+
+#figure 4B top (diamond)   - gnab=0.05, gcrhpulse=0.22, gbk=0.89
+#figure 4B middle (circle) - gnab=0.05, gcrhpulse=0.22, gbk=0.25
+#figure 4B bottom (square) - gnab=0.05, gcrhpulse=0.22, gbk=0 
+
+#figure 4D top (diamond)   - gkir=3.5, kp=0.3, gkirpulse=-2.4, gbk=0.96
+#figure 4D middle (circle) - gkir=3.5, kp=0.3, gkirpulse=-2.4, gbk=0.25 
+#figure 4D bottom (square) - gkir=3.5, kp=0.3, gkirpulse=-2.4, gbk=0
+
+#figure 4F top (diamond)   - gkleak=1.9, kp=0.1, gkirpulse=-1.875, gbk=0.96 
+#figure 4F middle (circle) - gkleak=1.9, kp=0.1, gkirpulse=-1.875, gbk=0.5
+#figure 4F bottom (square) - gkleak=1.9, kp=0.1, gkirpulse=-1.875, gbk=0
+
+#figure 6B top (diamond)   - vmca=-8, CRHvmca=-6, gbk=0.98
+#figure 6B middle (circle) - vmca=-8, CRHvmca=-6, gbk=0.7 
+#figure 6B bottom (square) - vmca=-8, CRHvmca=-6, gbk=0.1 
+
+#figure 7B top (diamond)   - gcrh=0.105, kcabk=2, CRHkcabk=1.4, gbk=1 
+#figure 7B middle (circle) - gcrh=0.105, kcabk=2, CRHkcabk=1.4, gbk=0.5  
+#figure 7B bottom (square) - gcrh=0.105, kcabk=2, CRHkcabk=1.4, gbk=0.1  
+
+#figure 7D diamond  - gcrh=0.105, kcabk=2, gbk=0.5 
+#figure 7D circle   - gcrh=0.105, kcabk=3.5, gbk=0.5
+#figure 7D star     - gcrh=0.105, kcabk=3.5, gbk=0.05
+#figure 7D square   - gcrh=0.105, kcabk=2, gbk=0.95
+
+par gnab=0.205
+par gbk=0.5
+par gkir=1.3
+par gkleak=0.1
+par kcabk=1.5
+par vmca=-12
+
+#steady state gCRH (when no pulse is desired)
+par gCRH=0
+
+#the following are the maximal desired change during a pulse simulation
+par gCRHpulse=0
+par gkirpulse=0
+par gkleakp=0.0
+par CRHkcabk=0
+par CRHvmca=0
+
+# Pulse profiles.  Time to peak is 2*tau, peak value is 1. 
+par kp=1
+num tau=12500
+num tpulse=5000
+delpulse=t-tpulse
+pnorm=4*tau*tau*exp(-2)
+pulse=delpulse*delpulse/pnorm*exp(-delpulse/tau)*heav(delpulse)
+g=pulse/(pulse+kp) * (1+kp)
+
+
+num Ek=-75
+num Eca=60
+num Ena=75
+num Ens=0
+num Cm=6.000
+
+vkdrive=v-Ek
+vnadrive=v-Ena
+vcadrive=v-Eca
+vnsdrive=v-Ens
+
+###### Sodium #########################
+
+# INa -- TTX-sensitive
+par gnav=10
+num tauhna=2
+num vmna=-15
+num smna=5
+num vhna=-60
+num shna=-10 
+mnainf = 1/(1+exp((vmna-v)/smna))
+hnainf = 1/(1+exp((vhna-v)/shna))
+inav = gnav*mnainf*mnainf*mnainf*hna*vnadrive
+
+
+###### Calcium ########################
+
+# ICa
+par gca=1.4
+num smca=10
+mcainf = 1/(1+exp(((vmca+CRHvmca*g)-v)/smca))
+ical = gca*mcainf*vcadrive
+
+
+# Ica,leak
+par gcaleak=0.025
+icaleak=gcaleak*vcadrive
+
+
+ica = ical+icaleak
+
+###### Potassium ######################
+
+# IK
+par gk=2.2
+num vn=0
+num sn=5 
+num taun=20
+ninf = 1/(1+exp((vn-v)/sn))
+ikdr = gk*n*vkdrive
+
+
+# IK A-type -- params from jcns 2007 paper
+par ga=0.5
+num tauha=20
+num vna=-20, sna=10, vha=-60, sha=-10
+nainf = 1/(1+exp((vna-v)/sna))
+hainf = 1/(1+exp((vha-v)/sha))
+ia = ga*nainf*ha*vkdrive
+
+
+# IKCa -- SK, IK, and/or BK FAR from Ca2+ channels
+par gkca=2
+num kkca=0.4
+c2=c*c
+nkcainf=c2/(c2+kkca*kkca)
+ikca = gkca*nkcainf*vkdrive
+
+
+# IBK -- due to BK channels NEAR Ca2+ channels, following domain Ca
+num taunbk=5
+num vbk0=0.1
+num snbk=5
+num A=0.11, kshift=18
+cad = -A*ical 
+vnbk   = vbk0-kshift*log(cad/(kcabk+CRHkcabk*g)) 
+nbkinf = 1/(1+exp((vnbk-v)/snbk))
+ibk = gbk*nbk*vkdrive
+
+
+# Ikir
+num vnkir=-55
+num snkir=-10
+nkirinf = 1/(1+exp((vnkir-v)/snkir))
+ikir = (gkir+gkirpulse*g)*nkirinf*vkdrive
+
+# Ikleak
+ikleak = (gkleak+gkleakp*g)*vkdrive
+
+ik = ikca + ibk + ikdr + ikir + ia + ikleak
+
+
+######## Non-specific #################
+
+# INab
+inab = gnab*vnsdrive
+
+iCRH=(gCRH+gCRHpulse*g)*vnsdrive
+
+ins=inab +iCRH
+
+
+###### Calcium handling ###############
+
+num fcyt=0.01000
+
+num alpha=0.0015
+Jin = -alpha*ica
+
+par nuc=0.03
+par kc=0.1
+jout=nuc*c2/(c2+kc*kc)
+
+Jmem = Jin - jout
+
+#wiener w
+#num sig=2
+#inoise=sig*w
+
+##### Equations #######################
+v'= -(inav+ica+ik+ins)/Cm
+#v'= -(inav+ica+ik+ins+inoise)/Cm
+c' = fcyt*(Jmem)
+
+hna'= (hnainf-hna)/tauhna
+n'= (ninf-n)/taun
+nbk'= (nbkinf-nbk)/taunbk
+ha'= (hainf-ha)/tauha
+
+init v=-68.8
+init c=0.05
+init hna=0.707
+init n=0.0
+init nbk=0.0
+init ha=0.707
+
+##### Auxiliary outputs ###############
+aux tsec=t/1000
+aux cad=cad
+
+aux inav=inav
+aux ical=ical
+aux icaleak=icaleak
+aux ikdr=ikdr
+aux ikir=ikir
+aux ikleak=ikleak
+aux ia=ia
+aux ikca=ikca
+aux ibk=ibk
+aux inab=inab
+
+aux iktot=ik
+aux Iin=inav+ica
+
+aux g=g
+
+##### Options #########################
+@ dt=0.5, method=runge
+@ total=30000
+
+@ maxstor=200000, bounds=10000000, xp=t, yp=v
+@ xlo=0, xhi=30000, ylo=-90, yhi=30, bell=0
+@ ntst=150,nmax=2000,npr=2000,ds=0.01,parmin=-1,parmax=2
+@ autoxmin=0, autoxmax=1,autoymin=-75,autoymax=25
+done
