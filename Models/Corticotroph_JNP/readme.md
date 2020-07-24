@@ -1,14 +1,14 @@
 # Model of corticotroph electrical activity
 
- The files here generate figure panels described in:
+ Two XPP files, described below, were used to generate figure panels described in:
 
 "Modeling the diversity of spontaneous and agonist-induced electrical activity in anterior pituitary corticotrophs"
  Patrick Allen Fletcher, Hana Zemkova, Stanko S. Stojilkovic, Arthur Sherman
  Journal of Neurophysiology, Published 22 February 2017, Vol. no. , DOI: [10.1152/jn.00948.2016](http://dx.doi.org/10.1152/jn.00948.2016)
 
-The ODE files can be run using Bard Ermentrout's [XPPAUT simulation tool](http://www.math.pitt.edu/~bard/xpp/xpp.html)
+The ODE files can be can be downloaded [here](https://artielbm.github.io/Models/Corticotroph_JNP/) and run using Bard Ermentrout's [XPPAUT simulation tool](http://www.math.pitt.edu/~bard/xpp/xpp.html)
 
-## JNP17.ode
+## [JNP17.ode](https://artielbm.github.io/Models/Corticotroph_JNP/JNP17.ode)
 
 This file describes corticotroph electrical activity without ER calcium dynamics, used to simulate spontaneous electrical activity and modulation by CRH-receptor activation
 
@@ -61,7 +61,7 @@ Notes:
 - star     - gcrh=0.105, kcabk=3.5, gbk=0.05
 - square   - gcrh=0.105, kcabk=2, gbk=0.95
 
-## JNP17er.ode
+## [JNP17er.ode](https://artielbm.github.io/Models/Corticotroph_JNP/JNP17er.ode)
 
 This file describes the model of corticotroph electrical activity modified to include ER calcium dynamics and IP3 receptor dynamics, used for simulation of Gq-coupled AVP receptor activation
 

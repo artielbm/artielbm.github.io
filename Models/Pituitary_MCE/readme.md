@@ -1,12 +1,12 @@
 # Pituitary cell model using a common core of ionic currents
 
-The files found here reproduce model trajectories described in:
+Two XPP files, described below, reproduce model trajectories described in:
 
 "Common and diverse elements of ion channels and receptors underlying electrical activity in endocrine pituitary cells" by Fletcher, Sherman, and Stojilkovic, Molecular and Cellular Endocrinology, 463:23–36, 2018. [10.1016/j.mce.2017.06.022](http://dx.doi.org/10.1016/j.mce.2017.06.022)
 
-The ODE files can be run using Bard Ermentrout's [XPPAUT simulation tool](http://www.math.pitt.edu/~bard/xpp/xpp.html)
+The ODE files can be can be downloaded [here](https://artielbm.github.io/Models/Pituitary_MCE/) and run using Bard Ermentrout's [XPPAUT simulation tool](http://www.math.pitt.edu/~bard/xpp/xpp.html)
 
-## MCE17a.ode
+## [MCE17a.ode](https://artielbm.github.io/Models/Pituitary_MCE/MCE17a.ode)
 
 This ODE file can be used to reproduce trajectories in Figures 2 and 6
 
@@ -29,7 +29,7 @@ Modify paramter values as follows:
 - middle - gNav=15, ggsp=0.15
 - bottom - gNab=0.2, ggirk=2
 
-## MCE17b.ode
+## [MCE17b.ode](https://artielbm.github.io/Models/Pituitary_MCE/MCE17b.ode)
 
 Pituitary cell model using a common core of ionic currents, modified to include ER calcium, a cytosolic calcium subspace, and IP3 receptor dynamics. This file can be used to reproduce Figure 7
 
