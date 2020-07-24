@@ -1,0 +1,497 @@
+#Figure3-5
+# G1 gkatpbara=3, gkatpb=150, gkatpbard=0.29, kserca=0.05
+# G7 gkatpbara=0.6, gkatpb=85, gkatpbard=0.27, kserca=0.5
+# G11 gkatpbara=0.15, gkatpb=25, gkatpbard=0.18, kserca=0.5
+
+
+#inital conditions beta cell
+v(0)=-71.33779976819424  
+n(0)=9.875188779513991e-05  
+c(0)=0.0630015242008439  
+cer(0)=81.57023672312617  
+cmd(0)=0.4188629403487558  
+g6p(0)=244.936858732948  
+fbp(0)=0.08283840527865462 
+adpm(0)=13.53015038508978  
+cam(0)=0.01102007399722167 
+nadhm(0)=0.02908310367935971 
+psim(0)=151.1015153147079  
+adp(0)=1913.096601466651  
+n1(0)=4.627586868810905  
+n2(0)=0.2262327588817945  
+n3(0)=0.003661670524646639  
+n4(0)=2.595179480355916e-06  
+n5(0)=7.762125378310579  
+n6(0)=274.1666227230976  
+nf(0)=0.00172689211245988  
+nr(0)=0.3002686554719045  
+
+#inital conditions alpha cell
+va(0)=-49.03736299581227  
+mcala(0)=0.1293341713632475  
+hcala(0)=0.8127842536675057  
+mcata(0)=0.4633857551023612  
+hcata(0)=0.3735421388722815  
+mcapqa(0)=0.0120465460803863  
+hcapqa(0)=0.8127842536675057  
+mnaa(0)=0.007938786735335676  
+hnaa(0)=0.2498175179717122 
+mkaa(0)=0.4001652246173745
+hkaa(0)=0.1373195977592295  
+mkdra(0)=0.2674634279865117 
+ca(0)=0.3449148387259899  
+cmdpqa(0)=11.51299890826233 
+cera(0)=58.71698724650182
+n1a(0)=1.057203539612775e-05
+n2a(0)=2.113947666062938e-05  
+n3a(0)=2.388848788981755e-05  
+n4a(0)=2.391806975716259e-06  
+n5a(0)=0.008850176609826538  
+n6a(0)=12.69715161782077  
+nfa(0)=0.001724142875712899  
+nra(0)=0.1927364884362762  
+
+#inital condition delta cell  
+vd(0)=-16.26895428994972  
+mcald(0)=0.8218051702003508  
+hcald(0)=0.6672499701175263  
+mcapqd(0)=0.5089033026581684  
+hcapqd(0)=0.6672499701175263  
+mnad(0)=0.9737137320580179  
+hnad(0)=0.006777955247303555  
+mkad(0)=0.9480884005315277 
+hkad(0)=0.02771925786328598  
+mkdrd(0)=0.5717652452166768 
+cd(0)=0.3051356309084454  
+cmdld(0)=19.82903375122306  
+cmdpqd(0)=27.93917378868966  
+cerd(0)=413.8135591677398  
+
+I(0)=48.04298494148047  
+G(0)=31.73727470720019 
+S(0)=18.71318922819339  
+
+#islet interactions
+par knockoutbd=0
+par knockoutba=0
+par knockoutdb=0
+par knockoutda=0
+
+#beta stimulating delta
+
+gGABAbar=(1-knockoutbd)*0.1+knockoutbd*0
+
+num vGABA=0
+
+EffId = 0.8/(1+exp(-(I-1500)/500))
+IGABA = gGABAbar*EffId*(vd-vGABA)
+
+#beta inhibiting alpha
+par tausom=2000
+par vc = 1e-13
+par gkatpbara=3
+par ka1=0.1
+par gkatpak=0.05
+
+EffIa=(1-knockoutba)*((0.015/(1+exp((-I+1500)/200)))+ka1)+knockoutba*ka1
+
+gkatpa=gkatpbara*EffIa
+
+Ikatpa=gkatpa*(va-vka)
+
+#delta inhibiting alpha
+par gGIRKko=0
+
+gGIRKbara=(1-knockoutda)*0.025+knockoutda*gGIRKko
+num vGIRK=-80
+par sombara2=35, ssom2=10
+EffSa=1/(1+exp(-(S-sombara2)/ssom2))
+IGIRKa=gGIRKbara*EffSa*(va-vGIRK)
+
+
+par ra=4.5, sombara=50, rako=0.001, ssom=15
+rm2a=(1-knockoutda)*ra/(1+exp(-(S-sombara)/ssom))+knockoutda*rako
+aux rm2a=rm2a
+
+#alpha stimulating beta
+par gthresh=40
+r20=0.004/(1+exp(-G+gthresh))+0.006
+
+aux r20=r20
+
+#delta inhibiting beta
+
+gGIRKbarb=(1-knockoutdb)*10+knockoutdb*0
+
+par sombarb2=35, sombarb=50, ssomb=15
+
+EffSb=1/(1+exp(-(S-sombarb2)/10))
+IGIRKb=gGIRKbarb*EffSb*(v-vGIRK)
+
+par rb=0.002, 
+rm2b=(1-knockoutdb)*rb/(1+exp(-(S-sombarb)/ssomb))+knockoutdb*0.001
+
+#parameters beta cell
+par fb = 2000
+par Jgk=0.4
+par factor=14
+par gkatpb=150
+
+num bas_r3=0.032, amplify=1, cm=5300
+num gkca=280, k4=150, gkatpbar=7000
+num kd=0.5, nca=590, raL=0.5
+num vca=25,vm=-6,sm=10,gca=7
+num vk=-75, gk=1800,vn=-16,sn=6,taun=5
+num kdd=17, ktd=26, ktt=1
+num fcyt=0.01, fer=0.01, fmd=0.01
+num kpmca=0.2,cbas=0.05,
+par B=1
+num per=0.0002, kserca3=0.1, kserca2b=0.01, sigmav=30
+par vmd=4.2e-3 
+num vcell=1.15, alpha=5.18e-6
+num phigk=0.3, KGPDH=0.0005
+num k1=30, k2=1, k3=50000
+num f13=0.02, f43=20, f23=0.2, f42=20, f41=20, lambda=0.06
+num taua=5,VmaxPFK=5, kappa=0.001, Jgpdh_bas=0.0005
+num fmito=0.01, gamma=0.001,p21=0.04,p22=1.1, exo_k1=20, bas_cmd=0.06935
+num p23=0.01, p24=0.016, Amtot=15, NADmtot=10, p1=400,p2=1,p3=0.01
+num Cmito=1.8, p17=0.002,p18=-0.03
+num p4=0.6, p5=0.1,p6=177,p7=5
+num p8=7,p9=0.1,p10=177,p11=5
+num p13=10,p14=190,p15=8.5,p16=35
+num p19=0.35, p20=2
+num khyd=0.00005, JhydSS=0.00005
+num amp=500,atot=2500
+num km1=100, r1=0.6, rm1=1
+#r20=0.006
+num r30=1.205 
+num rm3=0.0001, u1=2000, u2=3, u3=0.02
+num Kp=2.3, Kp2=2.3
+num tmsb=0.001
+num max_cmd=32, cmdp=4, kcmd=3
+
+#parameters alpha cell
+par fa= 150
+par gsocbara=0.025
+par ksercaa=0.05
+
+num vnaa=70,vka=-75,vcaa=65,vla=-20
+num cma=5,gcala=0.7, gcapqa=0.6
+par gcata=0.5
+num gnaa=11,gkaa=1,gkdra=4.5, gla=0.2
+num vcella=0.624e-12, vmdpqa=1.41e-15
+num fVpqa=0.00226, fmda=0.01
+num Ba=1, alphaa=5.18e-15 
+num kpmcaa=0.3, fcyta=0.01, fera=0.01
+num pleaka=0.0003, sigmava=31
+num vcalma=-30,scalma=10,vcalha=-33
+num scalha=-5,tcalh1a=60,tcalh2a=51
+num vcatma=-49,scatma=4,vcatha=-52
+num scatha=-5,tcatm1a=15,tcatm2a=0
+num tcath1a=20,tcath2a=5
+num vcapqma=-5,scapqma=10,vcapqha=-33
+num scapqha=-5,tcapqh1a=60,tcapqh2a=51
+num vnama=-30,vnaha=-52,snama=4
+num snaha=-8,tnah1a=120,tnah2a=0.5
+num vkama=-45,skama=10,vkaha=-68
+num skaha=-10,taukama=0.1,tkah1a=60
+num tkah2a=5,vkdrma=-25,skdrma=23
+num caerbara=70, ssoca=-20,vsoca=0
+num k1a=20, km1a=100
+num r1a=0.6, rm1a=1, r20a=0.006
+num r30a=1.205, rm3a=0.0001
+num u1a=2000, u2a=3,u3a=0.025
+num kpa=2.3, kp2a=2.3, GlucFacta=0.05
+
+#parameters delta cell
+par fd= 0.003
+par gkatpbard=0.29
+
+num vnad=70, vkd=-75, vcad=65
+num vld=-20, gcald=0.7, gcapqd=0.7
+num gnad=5, gkad=0.5, gkdrd=7.5
+num gld=0.2, vcelld=0.624e-12,vmdpqd=1.41e-15,vmdld=2.12e-15
+num fVld=0.00340,fVpqd=0.00226, fmdd=0.01, Bd=1 
+num alphad=5.18e-15,kpmcad=0.3, fcytd=0.01, ferd=0.01
+num pleakd=0.0003, sigmavd=31, ksercad=0.4
+num vcalmd=-30, scalmd=10,vcalhd=-33
+num scalhd=-5,tcalh1d=60,tcalh2d=51
+num vcapqmd=-15,scapqmd=10,vcapqhd=-33
+num scapqhd=-5,tcapqh1d=60,tcapqh2d=51
+num vnamd=-30,vnahd=-52,snamd=4
+num snahd=-8,tnah1d=120,tnah2d=0.5
+num vkamd=-45,skamd=10,vkahd=-68
+num skahd=-10,taukamd=0.1,tkah1d=60,tkah2d=5
+num vkdrmd=-25,skdrmd=23
+num con=0.00000000594
+
+#equations beta cell
+ikca = gkca/(1+(kd/c)^2)*(v-vk)
+minf = 1/(1+exp((vm-v)/sm))
+ica = gca*nca*minf*(v-vca)
+icaL = raL*ica
+icaR = (1-raL)*ica
+ninf = 1/(1+exp((vn-v)/sn))
+Ik = gk*n*(v-vk)
+topo = 0.08*(1+2*mgadp/kdd) + 0.89*(mgadp/kdd)^2
+bottomo = (1+mgadp/kdd)^2 * (1+adp3m/ktd+atp4m/ktt)
+katpo = (topo/bottomo)
+ikatp = gkatpb*(v-vk)
+vmdcyt=vmd/vcell
+JL = -alpha*icaL/vmd
+JR = -alpha*icaR/vcell
+Jmem = JR+vmdcyt*B*(cmd-c)-kpmca*(c-cbas)
+Jserca = kserca2b+kserca3*c
+Jleak = per*(cer - c)
+Jer = (Jleak - Jserca)
+f6p = phigk*g6p
+Jgpdh = KGPDH*sqrt(fbp) 
+Jgk_ms=kappa*Jgk
+mod_cmd=bas_cmd + max_cmd*cmd^cmdp/(cmd^cmdp+kcmd^cmdp)
+aux mod_cmd=mod_cmd
+
+weight1=1
+topa1=0
+bottom1=1
+weight2=atp^2/k4
+topa2=topa1
+bottom2=bottom1+weight2
+weight3=f6p^2/k3
+topa3=topa2+weight3
+bottom3=bottom2+weight3
+weight4=(f6p*atp)^2/(f43*k3*k4)
+topa4=topa3+weight4
+bottom4=bottom3+weight4
+weight5=fbp/k2
+topa5=topa4
+bottom5=bottom4+weight5
+weight6=(fbp*atp^2)/(k2*k4*f42)
+topa6=topa5
+bottom6=bottom5+weight6
+weight7=(fbp*f6p^2)/(k2*k3*f23)
+topa7=topa6+weight7
+bottom7=bottom6+weight7
+weight8=(fbp*f6p^2*atp^2)/(k2*k3*k4*f23*f42*f43)
+topa8=topa7+weight8
+bottom8=bottom7+weight8
+weight9=amp/k1
+topa9=topa8
+bottom9=bottom8+weight9
+weight10=(amp*atp^2)/(k1*k4*f41)
+topa10=topa9
+bottom10=bottom9+weight10
+weight11=(amp*f6p^2)/(k1*k3*f13)
+topa11=topa10+weight11
+bottom11=bottom10+weight11
+weight12=(amp*f6p^2*atp^2)/(k1*k3*k4*f13*f41*f43)
+topa12=topa11+weight12
+bottom12=bottom11+weight12
+weight13=(amp*fbp)/(k1*k2)
+topa13=topa12
+bottom13=bottom12+weight13
+weight14=(amp*fbp*atp^2)/(k1*k2*k4*f42*f41)
+topa14=topa13
+bottom14=bottom13+weight14
+weight15=(amp*fbp*f6p^2)/(k1*k2*k3*f23*f13)
+topa15=topa14
+topb=weight15
+bottom15=bottom14+weight15
+weight16=(amp*fbp*f6p^2*atp^2)/(k1*k2*k3*k4*f23*f13*f42*f41*f43)
+topa16=topa15+weight16
+bottom16=bottom15+weight16
+
+pfk=(lambda*VmaxPFK*topa16 + VmaxPFK*topb)/bottom16
+pfk_ms=kappa*pfk 
+!delta=3.9/53.2
+Juni=(p21*psim-p22)*c^2
+JNaCa=(p23/c)*cam*exp(p24*Psim)
+Jmito=JNaCa-Juni
+NADm=NADmtot-NADHm
+ATPm=Amtot-ADPm
+RATm=ATPm/ADPm
+JPDH=(p1/(p2+NADHm/NADm))*(Cam/(p3+Cam))*(Jgpdh+Jgpdh_bas)
+JHleak=p17*Psim+p18
+MM1=p4*NADHm/(p5+NADHm)
+JO=MM1/(1+exp((Psim-p6)/p7))
+MM2=p8*NADHm/(p9+NADHm)
+JHres=MM2/(1+exp((Psim-p10)/p11))
+b2=(p16*p13)/(p13+ATPm)
+JF1F0=b2/(1.0+exp((p14-Psim)/p15))
+JHatp=3*JF1F0
+FRT=96480/(310.16*8315)
+Jant=p19*(RATm/(RATm+p20))/exp(-0.5*FRT*Psim)
+atp = atot-adp
+Jhyd=(khyd*c+JhydSS)*ATP 
+mgadp = 0.165*adp
+adp3m = 0.135*adp
+atp4m = 0.05*atp
+ampfactor=factor*JO^2
+r3 = bas_r3 + amplify*ampfactor*r30*c/(c + Kp)
+r2 = r20*c/(c + Kp2)
+
+#equations alpha cell
+mcalinfa=1/(1+exp(-(va-vcalma)/scalma))
+hcalinfa=1/(1+exp(-(va-vcalha)/scalha))
+taucalma=(1/(exp(-(va+23)/20)+exp((va+23)/20)))+0.05
+taucalha=(tcalh1a/(exp(-(va+0)/20)+exp((va+0)/20)))+tcalh2a
+Icala=gcala*mcala^2*hcala*(va-vcaa)
+mcatinfa=1/(1+exp(-(va-vcatma)/scatma))
+hcatinfa=1/(1+exp(-(va-vcatha)/scatha))
+taucatma=(tcatm1a/(exp(-(va+50)/12)+exp((va+50)/12)))+tcatm2a
+taucatha=(tcath1a/(exp(-(va+50)/15)+exp((va+50)/15)))+tcath2a
+Icata=gcata*mcata^3*hcata*(va-vcaa)
+mcapqinfa=1/(1+exp(-(va-vcapqma)/scapqma))
+hcapqinfa=1/(1+exp(-(va-vcapqha)/scapqha))
+taucapqma=(1/(exp(-(va+23)/20)+exp((va+23)/20)))+0.05
+taucapqha=(tcapqh1a/(exp(-(va+0)/20)+exp((va+0)/20)))+tcapqh2a
+Icapqa=gcapqa*mcapqa*hcapqa*(va-vcaa)
+mnainfa=1/(1+exp(-(va-vnama)/snama))
+hnainfa=1/(1+exp(-(va-vnaha)/snaha))
+taunama=(6/(exp(-(va+50)/10)+exp((va+50)/10)))+0.05
+taunaha=(tnah1a/(exp(-(va+50)/8)+exp((va+50)/8)))+tnah2a
+Inaa=gnaa*mnaa^3*hnaa*(va-vnaa)
+mkainfa=1/(1+exp(-(va-vkama)/skama))
+hkainfa=1/(1+exp(-(va-vkaha)/skaha))
+taukaha=(tkah1a/(exp(-(va-5)/20)+exp((va-5)/20)))+tkah2a
+Ikaa=gkaa*mkaa*hkaa*(va-vka)
+mkdrinfa=1/(1+exp(-(va-vkdrma)/skdrma))
+taukdrma=(1.5/(exp(-(va+10)/25)+exp((va+10)/25)))+15
+Ikdra=gkdra*mkdra^4*(va-vka)
+Ila=gla*(va-vla)
+cinfa = 1/(1+exp(-(cera-caerbara)/ssoca))
+Isoca = gsocbara*cinfa*(va-vsoca)
+JLa=-alphaa*ICala/vcella
+JPQa=-alphaa*ICapqa/vmdpqa
+JTa=-alphaa*ICata/vcella
+Jmema = JTa+JLa+fVpqa*Ba*(cmdpqa-ca)-kpmcaa*ca
+Jsercaa = ksercaa*ca
+Jleaka = pleaka*(cera - ca)
+Jera = Jleaka - Jsercaa
+r2a=r20a*ca/(ca+kp2a)
+r3a=GlucFacta*r30a*ca/(ca+kpa)
+
+#equations delta cell
+mcalinfd=1/(1+exp(-(vd-vcalmd)/scalmd))
+hcalinfd=1/(1+exp(-(vd-vcalhd)/scalhd))
+taucalmd=(1/(exp(-(vd+23)/20)+exp((vd+23)/20)))+0.05
+taucalhd=(tcalh1d/(exp(-(vd+0)/20)+exp((vd+0)/20)))+tcalh2d
+Icald=gcald*mcald^2*hcald*(vd-vcad)
+mcapqinfd=1/(1+exp(-(vd-vcapqmd)/scapqmd))
+hcapqinfd=1/(1+exp(-(vd-vcapqhd)/scapqhd))
+taucapqmd=(1/(exp(-(vd+23)/20)+exp((vd+23)/20)))+0.05
+taucapqhd=(tcapqh1d/(exp(-(vd+0)/20)+exp((vd+0)/20)))+tcapqh2d
+Icapqd=gcapqd*mcapqd*hcapqd*(vd-vcad)
+mnainfd=1/(1+exp(-(vd-vnamd)/snamd))
+hnainfd=1/(1+exp(-(vd-vnahd)/snahd))
+taunamd=(6/(exp(-(vd+50)/10)+exp((vd+50)/10)))+0.05
+taunahd=(tnah1d/(exp(-(vd+50)/8)+exp((vd+50)/8)))+tnah2d
+Inad=gnad*mnad^3*hnad*(vd-vnad)
+mkainfd=1/(1+exp(-(vd-vkamd)/skamd))
+hkainfd=1/(1+exp(-(vd-vkahd)/skahd))
+taukahd=(tkah1d/(exp(-(vd-5)/20)+exp((vd-5)/20)))+tkah2d
+Ikad=gkad*mkad*hkad*(vd-vkd)
+mkdrinfd=1/(1+exp(-(vd-vkdrmd)/skdrmd))
+taukdrmd=(1.5/(exp(-(vd+10)/25)+exp((vd+10)/25)))+15
+Ikdrd=gkdrd*mkdrd^4*(vd-vkd)
+Ikatpd=gkatpbard*(vd-vkd)
+Ild=gld*(vd-vld)
+JLd=-alphad*ICald/vmdld
+JPQd=-alphad*ICapqd/vmdpqd
+Jmemd = fVld*Bd*(cmdld-cd)+fVpqd*Bd*(cmdpqd-cd)-kpmcad*cd
+Jsercad = ksercad*cd
+Jleakd = pleakd*(cerd - cd)
+Jerd = (Jleakd - Jsercad)
+y=(cmdpqd/200)^4/(0.2^4+(cmdpqd/200)^4)
+Som=(200*mcapqd*hcapqd*(y)/tausom)+bas
+par bas=0.0009
+
+#ODE's
+v' = -(Ik + Ica + Ikca + Ikatp+IGIRKb)/cm 
+n' = (ninf-n)/taun
+c' = fcyt*(Jmem + Jer + delta*Jmito)
+cer' = -fer*sigmav*Jer
+cmd' = fmd*(JL-B*(cmd-c)) 
+g6p' = Jgk_ms - pfk_ms
+fbp' = pfk_ms - 0.5*Jgpdh 
+adpm'= gamma*(JANT-JF1F0)
+cam' = -fmito*Jmito
+nadhm' = gamma*(Jpdh-JO)
+Psim'=(JHres-JHatp-JANT-JHleak-JNaCa-2*Juni)/Cmito
+adp' = (-delta*JANT + Jhyd)/taua
+N1' = tmsb*(-(3*exo_k1*mod_cmd + rm1)*N1 + km1*N2 + r1*N5)
+N2' = tmsb*(3*exo_k1*mod_cmd*N1 -(2*exo_k1*mod_cmd + km1)*N2 + 2*km1*N3)
+N3' = tmsb*(2*exo_k1*mod_cmd*N2 -(2*km1 + exo_k1*mod_cmd)*N3 + 3*km1*N4)
+N4' = tmsb*(exo_k1*mod_cmd*N3 - (3*km1 + u1)*N4)
+N5' = tmsb*(rm1*N1 - (r1 + rm2b)*N5 + r2*N6)
+N6' = tmsb*(r3 + rm2b*N5 - (rm3 + r2)*N6)
+NF' = tmsb*(u1*N4 - u2*NF)
+NR' = tmsb*(u2*NF - u3*NR)
+
+va'=-(Icala+Icata+Icapqa+Inaa+Ikdra+Ikatpa+Ikaa+Ila+Isoca+IGIRKa)/cma
+mcala'=(mcalinfa-mcala)/taucalma
+hcala'=(hcalinfa-hcala)/taucalha
+mcata'=(mcatinfa-mcata)/taucatma
+hcata'=(hcatinfa-hcata)/taucatha
+mcapqa'=(mcapqinfa-mcapqa)/taucapqma
+hcapqa'=(hcapqinfa-hcapqa)/taucapqha
+mnaa'=(mnainfa-mnaa)/taunama
+hnaa'=(hnainfa-hnaa)/taunaha
+mkaa'=(mkainfa-mkaa)/taukama
+hkaa'=(hkainfa-hkaa)/taukaha
+mkdra'=(mkdrinfa-mkdra)/taukdrma
+ca'= fcyta*(Jmema+Jera)
+cmdpqa'=fmda*JPQa-fmda*Ba*(cmdpqa-ca)
+cera'= -fera*sigmava*Jera
+N1a' = tmsb*(-(3*k1a*Cmdpqa + rm1a)*N1a + km1a*N2a + r1a*N5a)
+N2a' = tmsb*(3*k1a*Cmdpqa*N1a -(2*k1a*Cmdpqa + km1a)*N2a + 2*km1a*N3a)
+N3a' = tmsb*(2*k1a*Cmdpqa*N2a -(2*km1a + k1a*Cmdpqa)*N3a + 3*km1a*N4a)
+N4a' = tmsb*(k1a*Cmdpqa*N3a - (3*km1a + u1a)*N4a)
+N5a' = tmsb*(rm1a*N1a - (r1a + rm2a)*N5a + r2a*N6a)
+N6a' = tmsb*(r3a + rm2a*N5a - (rm3a + r2a)*N6a)
+NFa' = tmsb*(u1a*N4a - u2a*NFa)
+NRa' = tmsb*(u2a*NFa - u3a*NRa)
+
+vd'=-(Icald+Icapqd+Inad+Ikdrd+Ikatpd+Ikad+Ild+IGABA)/cma
+mcald'=(mcalinfd-mcald)/taucalmd
+hcald'=(hcalinfd-hcald)/taucalhd
+mcapqd'=(mcapqinfd-mcapqd)/taucapqmd
+hcapqd'=(hcapqinfd-hcapqd)/taucapqhd
+mnad'=(mnainfd-mnad)/taunamd
+hnad'=(hnainfd-hnad)/taunahd
+mkad'=(mkainfd-mkad)/taukamd
+hkad'=(hkainfd-hkad)/taukahd
+mkdrd'=(mkdrinfd-mkdrd)/taukdrmd
+cd' = fcytd*(Jmemd+Jerd) 
+cmdld'=fmdd*JLd-fmdd*Bd*(cmdld-cd)
+cmdpqd'=fmdd*JPQd-fmdd*Bd*(cmdpqd-cd)
+cerd' = -ferd*sigmavd*Jerd
+
+JIS=tmsb*u3*NR*0.0016
+JGS=tmsb*u3a*NRa*0.0000988
+JSS=tmsb*som*con
+
+I'=JIS/vc-fb*I
+G'=JGS/vc-fa*G
+S'=JSS/vc-fd*S
+
+num tau=15000
+meansom'=S
+meassom=(meansom-delay(meansom,tau))/tau
+aux measuredsom=meassom
+
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=2, total=480000,
+@ maxstor=3000000,bounds=900000000000000
+@ xp=tmin, yp=I
+@ xlo=0, xhi=15, ylo=0, yhi=3500
+@ delay=900000
+
+aux tsec=t/1000
+tmin=t/60000
+aux tmin=tmin
+aux gkatpa=gkatpa
+aux gsoc=gsocbara*cinfa
+aux ggirk=gGIRKbara*EffSa
+aux gkatpd=gkatpbard
+aux gkatpb=gkatpb
+done
+
