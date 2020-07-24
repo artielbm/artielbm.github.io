@@ -1,0 +1,236 @@
+# Model of corticotroph electrical activity (including ER calcium) described in:
+# "Modeling the diversity of spontaneous and agonist-induced electrical activity in anterior pituitary corticotrophs"
+# Patrick Allen Fletcher, Hana Zemkova, Stanko S. Stojilkovic, Arthur Sherman
+# Journal of Neurophysiology, Published 22 February 2017, Vol. no. , DOI: 10.1152/jn.00948.2016 
+#
+# Notes:
+# - make sure the system is at steady state before running a pulse simulation. The initial condition is set to the hyperpolarized state used for Fig. 7B top
+# - Set parameters to following to obtain the trajectory of interest from Figure 7
+# - to see the pulse profiles, plot the auxiliary variable "g1" or "g2"
+
+#figure 8B top (diamond)   - gnab=0.14, gbk=1, gavppulse=0.07, prelavp=0.01
+#figure 8B middle (circle) - gnab=0.18, gbk=0.85, gavppulse=0.055, prelavp=0.0025
+#figure 8B bottom (square) - gnab=0.17, gbk=0.35, gavppulse=0.04, prelavp=0.001
+
+par gnab=0.14
+par gbk=1
+par gkir=1.5
+par gkleak=0.1
+par kcabk=1.5
+par vmca=-12
+
+#steady state (when no pulse is desired)
+par gcrh=0
+par gavp=0
+par prel=0.0001
+
+#the following are the maximal desired change during a pulse simulation
+par gavppulse=0.07
+par prelavp=0.01
+
+par gCRHpulse=0
+par gkirpulse=0
+par gkleakp=0.0
+par CRHkcabk=0
+par CRHvmca=0
+
+# Pulse profiles.  Time to peak is 2*tau, peak value is 1. 
+# g1 affects gAVP, while g2 affects prel
+par kp1=1
+par kp2=10
+num tau1=12500
+num tau2=1000
+num tpulse=5000
+delpulse=t-tpulse
+pnorm1=4*tau1*tau1*exp(-2)
+pnorm2=4*tau2*tau2*exp(-2)
+pulsea=delpulse*delpulse/pnorm1*exp(-delpulse/tau1)*heav(delpulse)
+pulseb=delpulse*delpulse/pnorm2*exp(-delpulse/tau2)*heav(delpulse)
+g1=pulsea/(pulsea+kp1) * (1+kp1)
+g2=pulseb/(pulseb+kp2) * (1+kp2)
+
+
+num Ek=-75
+num Eca=60
+num Ena=75
+num Ens=0
+num Cm=6.000
+
+vkdrive=v-Ek
+vnadrive=v-Ena
+vcadrive=v-Eca
+vnsdrive=v-Ens
+
+###### sodium #########################
+
+# inav
+par gnav=10
+num tauhna=2
+num vmna=-15
+num smna=5
+num vhna=-60
+num shna=-10 
+mnainf = 1/(1+exp((vmna-v)/smna))
+hnainf = 1/(1+exp((vhna-v)/shna))
+inav = gnav*mnainf*mnainf*mnainf*hna*vnadrive
+
+
+###### calcium ########################
+
+# ICa
+par gca=1.4
+num smca=10
+mcainf = 1/(1+exp(((vmca+CRHvmca*g1)-v)/smca))
+ical = gca*mcainf*vcadrive
+
+# Ica,leak
+par gcaleak=0.05
+icaleak=gcaleak*vcadrive
+
+ica = ical+icaleak
+
+
+###### potassium ######################
+
+# IK
+par gk=2.2
+num vn=0
+num sn=5 
+num taun=20
+ninf = 1/(1+exp((vn-v)/sn))
+ikdr = gk*n*vkdrive
+
+
+# IK A-type
+par ga=0.5
+num tauha=20
+num vna=-20, sna=10, vha=-60, sha=-10
+nainf = 1/(1+exp((vna-v)/sna))
+hainf = 1/(1+exp((vha-v)/sha))
+ia = ga*nainf*ha*vkdrive
+
+
+# IKCa -- SK, IK, and/or BK FAR from Ca2+ channels
+par gkca=2
+num kkca=0.4
+c2=c*c
+nkcainf=c2/(c2+kkca*kkca)
+ikca = gkca*nkcainf*vkdrive
+
+
+# IBK -- due to BK channels NEAR Ca2+ channels, following domain Ca
+num taunbk=5
+num vbk0=0.1
+num snbk=5
+num A=0.11, kshift=18
+cad = -A*ical 
+vnbk   = vbk0-kshift*log(cad/(kcabk+CRHkcabk*g1)) 
+nbkinf = 1/(1+exp((vnbk-v)/snbk))
+ibk = gbk*nbk*vkdrive
+
+
+# Ikir
+num vnkir=-55
+num snkir=-10
+nkirinf = 1/(1+exp((vnkir-v)/snkir))
+ikir = (gkir+gkirpulse*g1)*nkirinf*vkdrive
+
+
+ikleak = (gkleak+gkleakp*g1)*vkdrive
+
+ik = ikca + ibk + ikdr + ikir + ia + ikleak
+
+
+######## non-specific #################
+
+
+# inab
+inab = gnab*vnsdrive
+
+icrh=(gcrh+gcrhpulse*g1)*vnsdrive
+
+iavp=(gavp+gavppulse*g1)*vnsdrive
+
+ins=inab +icrh +iavp
+
+
+###### calcium handling ###############
+
+num fcyt=0.01
+num fer=0.01
+
+# sigmav=cyt volume/er volume
+num sigmav=31
+
+num alpha=0.0015
+jin = -alpha*ica
+
+num nuc=0.03
+num kc=0.1
+jout=nuc*c2/(c2+kc*kc)
+
+num nuserca=0.1
+jref = nuserca*c
+
+jrel = (prel+prelavp*g2)*(cer - c)
+
+Jmem = Jin - jout
+Jer = jrel - jref
+
+#wiener w
+#par sig=2
+#inoise=sig*w
+
+##### Equations #######################
+v'= -(inav+ica+ik+ins)/Cm
+#v'= -(inav+ica+ik+ins+inoise)/Cm
+c' = fcyt*(Jmem + Jer)
+cer' = -fer*sigmav*Jer
+
+hna'= (hnainf-hna)/tauhna
+n'= (ninf-n)/taun
+nbk'= (nbkinf-nbk)/taunbk
+ha'= (hainf-ha)/tauha
+
+init v=-61.28
+init c=0.078
+init cer=83.16
+init hna=0.532
+init n=0.0
+init nbk=0.0
+init ha=0.532
+
+##### Auxiliary outputs ###############
+aux tsec=t/1000
+aux cad=cad
+
+aux inav=inav
+aux ical=ical
+aux icaleak=icaleak
+aux ikdr=ikdr
+aux ikir=ikir
+aux ikleak=ikleak
+aux ia=ia
+aux ikca=ikca
+aux ibk=ibk
+aux inab=inab
+
+aux jin=jin
+aux jout=jout
+aux jref=jref
+aux jrel=jrel
+aux jmem=jmem
+aux jer=jer
+
+aux g1=g1
+aux g2=g2
+
+##### Options #########################
+@ dt=0.5, method=runge
+@ total=30000
+
+@ maxstor=200000, bounds=10000000, xp=t, yp=v
+@ xlo=0, xhi=30000, ylo=-90, yhi=30, bell=0
+@ ntst=150,nmax=2000,npr=2000,ds=0.01,parmin=-1,parmax=2
+@ autoxmin=0, autoxmax=1,autoymin=-75,autoymax=25
+done

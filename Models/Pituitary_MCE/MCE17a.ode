@@ -1,0 +1,185 @@
+# Pituitary cell model using a common core of ionic currents
+#
+# Figures 2 and 6 of "Common and diverse elements of ion channels and receptors underlying electrical activity in endocrine pituitary cells" by Fletcher, Sherman, and Stojilkovic, Molecular and Cellular Endocrinology, 2017
+#
+#
+# Figure 2 time courses: change (gBK, gNaV) as follows
+#  top - (0.9, 15)
+#  middle - (0.6, 1)
+#  bottom - (0.02, 12)
+#
+# Figure 6 time courses. Make sure the system is at steady state before applying a pulse stimulus to exactly recreate the figure
+#  All panels - gBK=1
+#  top - gNav=1, ggsp=0.15
+#  middle - gNav=15, ggsp=0.15
+#  bottom - gNab=0.2, ggirk=2
+
+par gnav=0
+par gbk=0
+par gca=1.2
+par gk=3
+par gkca=2.5
+par gnab=0.11
+par gkir=0.9
+
+par ggs=0
+par ggsp=0
+par ggirk=0
+par ggirkp=0
+
+par ek=-75
+par eca=60
+par ena=75
+par ens=0
+
+
+vkdrive=v-ek
+vnadrive=v-ena
+vcadrive=v-eca
+vnsdrive=v-ens
+
+
+
+###### cell geometry ############
+par alpha=0.0015
+par cm=6
+
+####### smooth pulse profile ############
+# time to peak is 2*tau, peak value is 1. 
+par kp=1
+par tau=12500
+par tpulse=5000
+delpulse=t-tpulse
+pnorm=4*tau*tau*exp(-2)
+pulse=delpulse*delpulse/pnorm*exp(-delpulse/tau)*heav(delpulse)
+g=pulse/(pulse+kp) * (1+kp)
+
+
+###### sodium #########################
+
+# ina -- ttx-sensitive
+par tauhna=2
+par vmna=-15
+par smna=5
+par vhna=-55
+par shna=-10
+mnainf = 1/(1+exp((vmna-v)/smna))
+hnainf = 1/(1+exp((vhna-v)/shna))
+inav = gnav*mnainf*mnainf*mnainf*hna*vnadrive
+
+
+###### calcium ########################
+
+# ica
+par vmca=-12
+par smca=12
+mcainf = 1/(1+exp((vmca-v)/smca))
+ical = gca*mcainf*vcadrive
+
+ica = ical
+
+
+###### potassium ######################
+
+# ik
+par vn=0
+par sn=5
+par taun=20
+ninf = 1/(1+exp((vn-v)/sn))
+ikdr = gk*n*vkdrive
+
+
+# ikca -- sk, ik, and/or bk far from ca2+ channels
+par kkca=0.4
+c2=c*c
+nkcainf=c2/(c2+kkca*kkca)
+ikca = gkca*nkcainf*vkdrive
+
+
+# ibk -- due to bk channels near ca2+ channels, following domain ca
+par taunbk=5
+par vbk0=0.1
+par snbk=10
+par a=0.11, kshift=18
+par kcabk=1.5
+cad = -a*ical 
+vnbk   = vbk0-kshift*log(cad/kcabk) 
+nbkinf = 1/(1+exp((vnbk-v)/snbk))
+ibk = gbk*nbk*vkdrive
+
+
+# ikir and GIRK
+par vnkir=-55
+par snkir=-10
+nkirinf = 1/(1+exp((vnkir-v)/snkir))
+ikir = gkir*nkirinf*vkdrive
+igirk = (ggirk+ggirkp*g)*nkirinf*vkdrive
+
+
+ik = ikca + ibk + ikdr  + ikir + igirk
+
+
+######## non-specific #################
+
+# inab
+inab = gnab*vnsdrive
+
+igs=(ggs+ggsp*g)*vnsdrive
+
+ins=inab +igs
+
+
+###### calcium handling ###############
+
+par fcyt=0.01
+jin = -alpha*ica
+
+par nuc=0.03
+par kc=0.1
+jout=nuc*c2/(c2+kc*kc)
+
+jmem = jin - jout
+
+
+par autoca=0
+par cpar=0.25
+
+##### Equations #######################
+v'= -(inav+ica+ik+ins)/Cm
+c' = (1-autoca)*fcyt*jmem + autoca*(cpar-c)
+hna'= (hnainf-hna)/tauhna
+n'= (ninf-n)/taun
+nbk'= (nbkinf-nbk)/taunbk
+
+init v=-60
+init c=0.1
+init hna=0.3
+init n=0.05
+init nbk=0.05
+
+##### Auxiliary outputs ###############
+aux tsec=t/1000
+aux cad=cad
+
+aux inav=inav
+aux ical=ical
+aux ikdr=ikdr
+aux ikca=ikca
+aux ibk=ibk
+aux inab=inab
+
+aux jin=jin
+aux jout=jout
+aux jmem=jmem
+
+aux pulse=g
+
+##### Options #########################
+@ dt=1
+@ total=60000
+
+@ maxstor=200000, bounds=10000000, xp=t, yp=v
+@ xlo=0, xhi=30000, ylo=-90, yhi=30, bell=0
+@ ntst=150,nmax=2000,npr=2000,ds=0.01,parmin=-1,parmax=2
+@ autoxmin=0, autoxmax=1,autoymin=-75,autoymax=25
+done
