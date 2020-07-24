@@ -145,7 +145,7 @@ New York University, Ph. D. Mathematics, October, 1986
     ### Invited Reviews
 
 1.  R. Bertram, L. S. Satin, and A. S. Sherman. 2018. _Closing in on the mechanisms of pulsatile insulin secretion._ Diabetes, **67**:351-359. [[PubMed]](https://www.ncbi.nlm.nih.gov/pubmed/29463575)
-100.  P. A. Fletcher, A. Sherman, and S. S. Stojilkovic. 2018. _Common and diverse elements of ion channels and receptors underlying electrical activity in endocrine pituitary cells._ Molecular and Cellular Endocrinology, **463**:23 - 36. [[PubMed](https://www.ncbi.nlm.nih.gov/pubmed/28652171)]
+100.  P. A. Fletcher, A. Sherman, and S. S. Stojilkovic. 2018. _Common and diverse elements of ion channels and receptors underlying electrical activity in endocrine pituitary cells._ Molecular and Cellular Endocrinology, **463**:23 - 36. [[PubMed](https://www.ncbi.nlm.nih.gov/pubmed/28652171)] [[XPP files]](https://artielbm.github.io/Models/Pituitary_MCE)
 1.  L. S. Satin, P. C. Butler, J. Ha, and A. Sherman. 2015. _Pulsatile insulin secretion, impaired glucose tolerance and type 2 diabetes_. Journal of Molecular Aspects of Medicine, **42**:61-77. [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/25637831)]
 1.  V. Matveev, R. Bertram, and A. Sherman, 2011. _Calcium cooperativity of exocytosis as a measure of Ca<sup>2+</sup> channel domain overlap._ Brain Research Reviews, **1398**:126-128. [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/21621748)]
 1.  A. Sherman, 2010. _Lessons from Models of Pancreatic beta Cells for Engineering Glucose-sensing Cells._ Math. Biosci., **227**:12-19. [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/20580727)]
