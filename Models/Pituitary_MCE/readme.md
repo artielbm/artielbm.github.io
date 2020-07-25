@@ -4,7 +4,7 @@ Two XPP files, described below, reproduce model trajectories described in:
 
 "Common and diverse elements of ion channels and receptors underlying electrical activity in endocrine pituitary cells" by Fletcher, Sherman, and Stojilkovic, Molecular and Cellular Endocrinology, 463:23–36, 2018. [10.1016/j.mce.2017.06.022](http://dx.doi.org/10.1016/j.mce.2017.06.022)
 
-The ODE files can be can be downloaded [here](https://artielbm.github.io/Models/Pituitary_MCE/) and run using Bard Ermentrout's [XPPAUT simulation tool](http://www.math.pitt.edu/~bard/xpp/xpp.html)
+The ODE files below can be downloaded and run using Bard Ermentrout's [XPPAUT simulation tool](http://www.math.pitt.edu/~bard/xpp/xpp.html)
 
 ## [MCE17a.ode](https://artielbm.github.io/Models/Pituitary_MCE/MCE17a.ode)
 
