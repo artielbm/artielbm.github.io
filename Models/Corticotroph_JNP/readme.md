@@ -6,7 +6,7 @@
  Patrick Allen Fletcher, Hana Zemkova, Stanko S. Stojilkovic, Arthur Sherman
  Journal of Neurophysiology, Published 22 February 2017, Vol. no. , DOI: [10.1152/jn.00948.2016](http://dx.doi.org/10.1152/jn.00948.2016)
 
-The ODE files can be can be downloaded [here](https://artielbm.github.io/Models/Corticotroph_JNP/) and run using Bard Ermentrout's [XPPAUT simulation tool](http://www.math.pitt.edu/~bard/xpp/xpp.html)
+The ODE files below can be downloaded and run using Bard Ermentrout's [XPPAUT simulation tool](http://www.math.pitt.edu/~bard/xpp/xpp.html)
 
 ## [JNP17.ode](https://artielbm.github.io/Models/Corticotroph_JNP/JNP17.ode)
 
