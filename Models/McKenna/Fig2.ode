@@ -1,0 +1,299 @@
+# This program was used to make Figure 2 in "Calcium Effects
+# on ATP Production and Consumption Have Regulatory Roles on Oscillatory Islet
+# Activity", by J. P. McKenna, J. Ha, M. J. Merrins, L. S. Satin, A. Sherman,
+# and R. Bertram, Biophysical Journal, 110:733-742, 2016.
+
+# Variables:
+#    v -- membrane potential
+#    n -- activation of a delayed rectifier K channel
+#    c -- free cytosolic calcium concentration
+#    cer -- free ER calcium concentration
+#    g6p -- concentration of glucose 6-phosphate
+#    fbp -- concentration of fructose 1,6-bisphosphate
+#    atp -- concentration of ATP
+#    F26BP -- concentration of fructose 2,6-bisphosphate
+#
+# Important auxilliary variables:
+#    F26BP -- concentration of fructose 2,6-bisphosphate
+#    pkar = the PKAR fluorescence
+#    perceval = the Perceval-HR fluorescence
+#
+
+v(0)=-68.41204
+n(0)=2.80242e-5
+c(0)=0.0444945
+cer(0)=96.8978
+f6p(0)=78.19606
+fbp(0)=.04890646
+atp(0)=917.8969
+
+#
+# Membrane and Ca components
+
+#BIFrat-ratio of VPFK2 to VFBPase2
+par BIFrat=0.5
+
+# sigmav=cyt volume/ER volume
+num pleak=0.0002, sigmav=31
+num kserca=0.4
+num lambdaer=1, epser=1
+num vm=-20,sm=12,vn=-16,sn=5,taun=20
+
+# where
+minf = 1/(1+exp((vm-v)/sm))
+ninf = 1/(1+exp((vn-v)/sn))
+
+# speed of glycolytic oscillations
+par speed=3
+
+num vk=-75, vca=25
+num gk=2700, cm=5300
+num gca=1000
+num kd=0.5, nh=2
+
+par gkca=200
+
+# Ikca
+ikca = gkca/(1+(kd/c)^nh)*(v-vk)
+
+# Calcium Handling
+num alpha=4.50e-6, fcyt=0.01, fer=0.01
+par kpmca=0.2
+
+# Ikatp
+par gkatpbar=17000
+
+# ICa
+ica = gca*minf*(v-vca)
+
+# Ik
+ik = gk*n*(v-vk)
+
+# Ca fluxes
+Jmem = -(alpha*ica + kpmca*c)
+
+Jserca = kserca*c
+Jleak = pleak*(cer - c)
+Jer = epser*(Jleak - Jserca)/lambdaer
+
+# -----------------------------------------------------
+# Glycolytic and Keizer-Magnus components
+
+# g6p -- glucose 6-phosphate
+# fbp -- fructose 1,6-bisphosphate
+
+# Parameters
+#  Jgk--glucokinase rate
+#  atot--total adenine nucleotide concentration (micromolar)
+#  k1--Kd for AMP binding
+#  k2--Kd for FBP binding
+#  k3--Kd for F6P binding
+#  k4--Kd for ATP binding
+#  famp,etc--Kd amplification factors for heterotropic binding
+#  Jgpdh--glyceraldehyde phosphate dehydrogenase rate
+#  convert--converts time from sec to msec
+
+# Glycolytic parameters
+par Jgk=0.22
+num k1=30, k2=1, k3=50000
+par k4=220
+par kfbp=1.0, kf26bp=0.15
+num famp=0.02, fatp=20, ffbp=0.2, fbt=20, fmt=20, pfkbas=0.06
+num cat=2
+par katpase=0.0003
+num convert=0.001
+num kappa=0.2
+
+# Glycolytic expressions
+#f6p = 0.3*g6p
+g6p = f6p/0.3
+Jgpdh = kappa*sqrt(fbp)
+
+# AMP expressions restored - Pranay/Artie 4/12/08
+p oloop=0, adpstar=1800
+adppfk=(1-oloop)*adp+oloop*(adpstar)
+atppfk=atot-adppfk
+amppfk=500
+
+# Iterative calculation of PFK
+# alpha=1 -- AMP bound
+# beta=1 -- FBP bound
+# gamma=1 -- F6P bound
+# delta=1 -- ATP bound
+
+# (alpha,beta,gamma,delta)
+# (0,0,0,0)
+weight1=1
+topa1=0
+bottom1=1
+
+# (0,0,0,1)gkca/(1+(kd/c)^nh)*(v-vk)
+weight2=atppfk^2/k4
+topa2=topa1
+bottom2=bottom1+weight2
+
+# (0,0,1,0)
+weight3=f6p^2/k3
+topa3=topa2+weight3
+bottom3=bottom2+weight3
+
+# (0,0,1,1)
+weight4=(f6p*atppfk)^2/(fatp*k3*k4)
+topa4=topa3+weight4
+bottom4=bottom3+weight4
+
+# (0,1,0,0)
+#weight5=fbp/k2
+weight5=(fbp/kfbp)
+topa5=topa4
+bottom5=bottom4+weight5
+
+# (0,1,0,1)
+#weight6=(fbp*atp^2)/(k2*k4*f42)
+weight6=((fbp/kfbp))*(atppfk^2)/(k4*fbt)
+topa6=topa5
+bottom6=bottom5+weight6
+
+# (0,1,1,0)
+#weight7=(fbp*f6p^2)/(k2*k3*f23)
+weight7=((fbp/kfbp))*(f6p^2)/(k3*ffbp)
+topa7=topa6+weight7
+bottom7=bottom6+weight7
+
+# (0,1,1,1)
+#weight8=(fbp*f6p^2*atppfk^2)/(k2*k3*k4*ffbp*fbt*fatp)
+weight8=((fbp/kfbp))*(f6p^2*atppfk^2)/(k3*k4*ffbp*fbt*fatp)
+topa8=topa7+weight8
+bottom8=bottom7+weight8
+
+# (1,0,0,0)
+weight9=amppfk/k1
+topa9=topa8
+bottom9=bottom8+weight9
+
+# (1,0,0,1)
+weight10=(amppfk*atppfk^2)/(k1*k4*fmt)
+topa10=topa9
+bottom10=bottom9+weight10
+
+# (1,0,1,0)
+weight11=(amppfk*f6p^2)/(k1*k3*famp)
+topa11=topa10+weight11
+bottom11=bottom10+weight11
+
+# (1,0,1,1)
+weight12=(amppfk*f6p^2*atppfk^2)/(k1*k3*k4*famp*fmt*fatp)
+topa12=topa11+weight12
+bottom12=bottom11+weight12
+
+# (1,1,0,0)
+#weight13=(amppfk*fbp)/(k1*k2)
+weight13=(amppfk/k1)*((fbp/kfbp))
+topa13=topa12
+bottom13=bottom12+weight13
+
+# (1,1,0,1)gkca/(1+(kd/c)^nh)*(v-vk)
+#weight14=(amppfk*fbp*atppfk^2)/(k1*k2*k4*fbt*fmt)
+weight14=((fbp/kfbp))*(amppfk*atppfk^2)/(k1*k4*fbt*fmt)
+topa14=topa13
+bottom14=bottom13+weight14
+
+# (1,1,1,0) -- the most active state of the enzyme
+#weight15=(amppfk*fbp*f6p^2)/(k1*k2*k3*ffbp*famp)
+weight15=((fbp/kfbp))*(amppfk*f6p^2)/(k1*k3*ffbp*famp)
+topa15=topa14
+topb=weight15
+bottom15=bottom14+weight15
+
+# (1,1,1,1)
+#weight16=(amppfk*fbp*f6p^2*atppfk^2)/(k1*k2*k3*k4*ffbp*famp*fbt*fmt*fatp)
+weight16=((fbp/kfbp))*(amppfk*f6p^2*atppfk^2)/(k1*k3*k4*ffbp*famp*fbt*fmt*fatp)
+topa16=topa15+weight16
+bottom16=bottom15+weight16
+
+# Phosphofructokinase rate
+pfk=(pfkbas*cat*topa16 + cat*topb)/bottom16
+
+#PFK2 and FBPase2 rates
+par Vpfk2=0, Kmf6p=50, Kmfbpase2=0.1
+Vfbpase2=Vpfk2/BIFrat
+Jpfk2=Vpfk2*(f6p/(Kmf6p+f6p))
+Jfbpase2=Vfbpase2*(0/(Kmfbpase2+0))
+
+# Mitochondrial nucleotide concentrations (uM)
+par Amtot=15000
+par taua=10
+# Parameter units: uM, uM, uM/s
+# q1 is the Magnus-Keizer param. Increasing it increases the effect.
+# q3 is the influence of glycolytic input. Decreasing it increases the effect.
+
+par q1=3000,q2=12500,q3=5     
+ATPm=Amtot-ADPm
+RATm=ATPm/ADPm
+ADPmss=q1*c+q2*exp(-Jgpdh/q3)
+ADPm=ADPmss
+
+# Nucleotide translocator (in um/ms)
+num FRT=0.037
+num Psim=164
+num p19=0.35,p20=2
+Jant=p19*(RATm/(RATm+p20))/exp(-0.5*FRT*Psim)
+#aux JANT=Jant
+
+# Functions
+
+# Cytosolic nucleotide concentrations.
+# delta transforms  (mito volume) -> (cyto volume)/ms
+!delta=3.9/53.2
+par khyd=0.00005, JhydSS=0.00005
+
+# AMP expressions restored - Pranay/Artie 4/12/08
+par amp=500
+par atot=2500
+#atp = atot-adp
+adp = atot-atp
+
+Jhyd=(khyd*c+JhydSS)*ATP
+#aux Jhyd=Jhyd
+
+# KATP channel open probability (from Magnus and Keizer, 1998, ref. 1264)
+num kdd=17, ktd=26, ktt=1
+par Dz=0
+tmin=t/60000
+#global 1 {tmin-10} {Dz=1}
+mgadp = 0.165*adp
+adp3m = 0.135*adp
+atp4m = 0.05*atp
+topo = 0.08*(1+2*mgadp/kdd) + 0.89*(mgadp/kdd)^2
+bottomo = (1+mgadp/kdd)^2 * (1+adp3m/ktd+atp4m/ktt)
+katpo = topo/bottomo
+ikatp = (1-Dz)*gkatpbar*katpo*(v-vk)+Dz*gkatpbar*(v-vk) 
+
+# ------------------------------------------------------
+# Differential equations
+
+v' = -(Ik + Ica + Ikca + Ikatp)/cm
+n' = (ninf-n)/taun
+c' = fcyt*(Jmem + Jer)
+cer' = -fer*sigmav*Jer
+f6p' = .3*speed*convert*(Jgk - pfk)
+fbp' = speed*convert*(pfk - 0.5*Jgpdh)
+atp' = delta*Jant-Jhyd
+aux cam=5*c
+aux pkar=fbp/(2+fbp)
+aux perceval=(atp/adp)/(1+atp/adp)
+aux fbpflux1=speed*convert*pfk
+aux fbpflux2=speed*convert*0.5*Jgpdh
+aux atpcflux1=delta*Jant
+aux atpcflux2=jhyd
+aux tmin=tmin
+
+# steady state bursting
+@ xp=tmin, yp=perceval
+@ total=1500000, xlo=0, xhi=25, ylo=0, yhi=0.5
+
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=20.0
+@ maxstor=9999999,bounds=10000000, bell=0
+@ BUT=QUIT:fq
+
+done

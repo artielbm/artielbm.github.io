@@ -1,0 +1,197 @@
+# This program was used to make Figures 3 in "Calcium Effects
+# on ATP Production and Consumption Have Regulatory Roles on Oscillatory Islet
+# Activity", by J. P. McKenna, J. Ha, M. J. Merrins, L. S. Satin, A. Sherman,
+# and R. Bertram, Biophysical Journal, 110:733-742, 2016.
+#
+# Variables:
+#    v = membrane potential
+#    skv = activation variable for the delayed rectifier
+#    cac = free cytosolic calcium concentration
+#    caer = free ER calcium concentration
+#    f6p = F6P concentration
+#    fbp = F16BP concentration
+#    atpc = cytosolic ATP concentration
+#
+# Important auxilliary variables:
+#    PKAR = the PKAR fluorescence
+#    Perceval = the Perceval-HR fluorescence
+#
+
+########################
+# Glycolytic component #
+########################
+
+## glucokinase (GK)
+p jgk=9.45e-5
+
+## glucose 6-phosphate isomerase (GPI)
+!kgpi=19/3
+
+## phosphofructokinase (PFK), adapted from Smolen 1995
+p fpfkm=1
+
+p kpfkbas=.06, kpfkamp=.03, kpfkf6p=5e4
+p famp=.02, fmt=20, ffbp=.2, fbt=20, fatp=20
+
+### PFK-M
+p vpfkm=9e-4
+p kpfkfbp=1, kpfkatp=2.5e-4
+pow[0..63]=mod(flr(flr([j]/4)*2^(mod([j],4)-3)),2)
+w[0..15]=\
+(amp/kpfkamp)^shift(pow0,4*[j])*\
+(fbp/kpfkfbp)^shift(pow0,4*[j]+1)*\
+(f6p^2/kpfkf6p)^shift(pow0,4*[j]+2)*\
+(atpc^2/kpfkatp)^shift(pow0,4*[j]+3)/\
+famp^(shift(pow0,4*[j])*shift(pow0,4*[j]+2))/\
+fmt^(shift(pow0,4*[j])*shift(pow0,4*[j]+3))/\
+ffbp^(shift(pow0,4*[j]+1)*shift(pow0,4*[j]+2))/\
+fbt^(shift(pow0,4*[j]+1)*shift(pow0,4*[j]+3))/\
+fatp^(shift(pow0,4*[j]+2)*shift(pow0,4*[j]+3))
+jpfkm=vpfkm*((1-kpfkbas)*w14 + \
+kpfkbas*(w2+w3+w6+w7+w10+w11+w14+w15)) \
+/ (sum(0,15)of(shift(w0,i')))
+
+### PFK-C
+p vpfkc=.00144
+p kpfkcfbp=10, kpfkcatp=.0001136360
+wc[0..15]=\
+(amp/kpfkamp)^shift(pow0,4*[j])*\
+(fbp/kpfkcfbp)^shift(pow0,4*[j]+1)*\
+(f6p^2/kpfkf6p)^shift(pow0,4*[j]+2)*\
+(atpc^2/kpfkcatp)^shift(pow0,4*[j]+3)/\
+famp^(shift(pow0,4*[j])*shift(pow0,4*[j]+2))/\
+fmt^(shift(pow0,4*[j])*shift(pow0,4*[j]+3))/\
+ffbp^(shift(pow0,4*[j]+1)*shift(pow0,4*[j]+2))/\
+fbt^(shift(pow0,4*[j]+1)*shift(pow0,4*[j]+3))/\
+fatp^(shift(pow0,4*[j]+2)*shift(pow0,4*[j]+3))
+jpfkc=vpfkc*((1-kpfkbas)*wc14 + \
+kpfkbas*(wc2+wc3+wc6+wc7+wc10+wc11+wc14+wc15)) \
+/ (sum(0,15)of(shift(wc0,i')))
+
+jpfk=fpfkm*jpfkm+(1-fpfkm)*jpfkc
+
+## lower glycolysis (LG)
+p sumkp=.5
+klg=.5*sumkp
+
+## pyruvate dehydrogenase (PDH)
+p vpdh=3.7e-4, kpdhcam=.1, kca=5
+cam=kca*cac
+jpdh=vpdh/(1+kpdhcam/cam)*sqrt(fbp)
+
+#######################################
+# ATP production/hydrolysis component #
+#######################################
+p kic=0
+
+p actot=2.5, amtot=15
+p amp=.5
+#p amp=500
+adpc=actot-atpc
+atpm=amtot-adpm
+
+## adenine nucleotide translocator (ANT)
+!volmtoc=39/532
+p kadpm=12.5, kadpmpdh=.0047, vant=7.245e-5, fjant=.11, kantam=2, psim=164, FRT=.037
+adpm=kadpm/exp(jpdh/kadpmpdh)
+jant=volmtoc*vant*(kic*fjant+(1-kic)/(1+kantam*adpm/atpm))*exp(FRT/2*psim)
+
+## hydrolysis (hyd)
+p khyd=2.34e-5, khydbas=8.1e-6
+jhyd=(khyd*cac+khydbas)*atpc
+
+###########################
+# Ionic current component #
+###########################
+
+p cm=5300
+
+## Ca channels/pumps
+!fc=1/115
+p vca=25
+
+### voltage-activated Ca (Ca(V)) current
+p gcav=180, vcav=-20 
+!hcav=1/12
+scavinf=1/(1+exp(vcav-v)^hcav)
+icav=gcav*scavinf*(v-vca)
+
+### plasma membrane Ca ATPase (PMCA) flux 
+!F=20000000/207
+p kpmca=.0414
+jmem=-(icav/2/F + kpmca*cac)
+
+### endoplasmic reticulum (ER) flux
+!volctoer=620/23
+p fer=.01
+p kerout=4.14e-5, kerin=.0828
+jerout=kerout*(caer-cac)
+jerin=kerin*cac
+jer=jerout-jerin
+
+## K channels
+p vk=-75
+
+### voltage-activated K (K(V)) current
+p gkv=486, vkv=-16, hkv=.2
+#!taukv=1000/9
+taukv=111.
+skvinf=1/(1+exp(vkv-v)^hkv)
+ikv=gkv*skv*(v-vk)
+
+### Ca-activated K (K(Ca)) current
+p gkca=18, kkcaca=.5, hkcaca=2
+skcainf=1/(1+(kkcaca/cac)^hkcaca)
+ikca=gkca*skcainf*(v-vk)
+
+### K(ATP), adapted from Magnus and Keizer, 1998
+p dz=0
+p gkatp=2960
+p kdd=17, ktd=26, ktt=1
+mgadp=165*adpc
+adp3m=135*adpc
+atp4m=50*atpc
+skatpinf=\
+(.08*(1+2*mgadp/kdd) + .89*(mgadp/kdd)^2)/\
+((1+mgadp/kdd)^2 * (1+adp3m/ktd+atp4m/ktt))
+ikatp=(1-dz)*gkatp*skatpinf*(v-vk)+dz*gkatp*(v-vk)
+
+##########################
+# Differential Equations #
+##########################
+v'=-(ikv+icav+ikca+ikatp)/cm
+skv'=(skvinf-skv)/taukv
+cac'=fc*(jmem+jer)
+caer'=-fer*volctoer*jer
+f6p'=1/(1+kgpi)*(jgk-jpfk)
+fbp'=1/(1+klg)*(jpfk-.5*jpdh)
+atpc'=jant-jhyd
+
+##################
+# XPP parameters #
+##################
+
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=20.0
+@ maxstor=9999999,bounds=10000000, bell=0
+
+# Fig 3: slow oscillations
+v(0)=-66.1141887342
+skv(0)=.0000443655
+cac(0)=.1092530273
+caer(0)=284.1574308548
+f6p(0)=248.3759439254
+fbp(0)=0.1741876845
+atpc(0)=1.0579152042
+@ xp=tmin, yp=pkar
+@ total=1020000, xlo=0, xhi=17, ylo=0, yhi=.4
+
+aux cam=cam
+aux pkar=fbp/(2+fbp)
+aux perceval=(atpc/adpc)/(1+atpc/adpc)
+aux fbpflux1=jpfk
+aux fbpflux2=jpdh/2
+aux atpcflux1=jant
+aux atpcflux2=jhyd
+aux tmin=t/60000
+
+done
