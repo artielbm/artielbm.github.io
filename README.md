@@ -22,7 +22,7 @@ fax: (301) 402 - 0535<br>
 
 * * *
 
-[Lab Webpage](https://www.niddk.nih.gov/about-niddk/staff-directory/biography/sherman-arthur)
+[Lab Webpage at NIDDK](https://www.niddk.nih.gov/about-niddk/staff-directory/biography/sherman-arthur)
 
 [Brief CV](https://artielbm.github.io/CV/CV.html)
 
