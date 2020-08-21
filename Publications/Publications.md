@@ -1,7 +1,8 @@
 
 ### *Publication List of Arthur Sherman*
 
-[Lab Website](https://www.niddk.nih.gov/about-niddk/staff-directory/biography/sherman-arthur0
+[Lab Website](https://www.niddk.nih.gov/about-niddk/staff-directory/biography/sherman-arthur)
+
 [email: arthurs@niddk.nih.gov](mailto:arthurs@niddk.nih.gov)
 
    ### Journal Articles
