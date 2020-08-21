@@ -5,6 +5,8 @@
 
 [email: arthurs@niddk.nih.gov](mailto:arthurs@niddk.nih.gov)
 
+* * *
+
    ### Journal Articles
    
 1. A. F. Hobabagabo, N. H. Oseu-Tutu, T. Hormenu, E. M. Shoup, C. W. DuBose, L. S. Mabundo, J. Ha, A. Sherman, S. T. Chung, D. B. Sacks, and A. E. Sumner. 2020. Improved Detection of Abnormal Glucose Tolerance in Africans: The Value of Combining Hemoglobin A 1c With Glycated Albumin. Diabetes Care, in press. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/32801129/)
