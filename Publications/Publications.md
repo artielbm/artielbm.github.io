@@ -1,6 +1,5 @@
 
-### *Publication List of Arthur Sherman*
-#### with links to PubMed and supplementary material
+### *Publication List of Arthur Sherman (with links to PubMed and supplementary material)*
 
 [Lab Website](https://www.niddk.nih.gov/about-niddk/staff-directory/biography/sherman-arthur)
 
