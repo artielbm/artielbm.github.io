@@ -6,7 +6,7 @@ This paper describes intrinsic mechanisms for glucose to control glucagon secret
 
 Source files by figure:
 
-* Spiking (Figure 1)[Fig1.ode]
+* Spiking (Figure 1)(Fig1.ode)
 *	Suppression of glucagon secretion by reducing K(ATP) conductance [Figure 2](Fig2.ode)
 *	Suppression of glucagon secretion by reducing SOC conductance [Figure 4](Fig4.ode)
 *	At low glucose, tolbutamide decreases glucagon secretion [Figure 9a](Fig9a.ode)
