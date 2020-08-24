@@ -14,12 +14,12 @@ The files are human-readable ASCII text and may be easily adapted to other softw
 
 There are two files:
 
-[nofeedback.ode (2K)](nofeedback.ode).
+[nofeedback.ode (2K)](nofeedback.ode)
 
 Which describes the basic model without negative feedback.
 This file was used to produce Figures 6 and 7, the curves labeled "without feedback" in Figures 10 and 11, and Figure 12 in the paper.
 
-[feedback.ode (2K)](feedback.ode).
+[feedback.ode (2K)](feedback.ode)
 
 Which describes the basic model with negative feedback.
 This file was used to produce Figures 8 and 9, and the curves labeled "with feedback" in Figures 10 and 11 in the paper.
@@ -43,4 +43,4 @@ A CellML version of the model is available at: [CellML](http://models.cellml.org
 Questions and comments about the ode files can be sent to:
 
 Arthur Sherman
-[[mailto:arthurs@niddk.nih.gov]](arthurs@niddk.nih.gov)
+[arthurs@niddk.nih.gov](mailto:arthurs@niddk.nih.gov)
