@@ -1,0 +1,209 @@
+#Alpha-Cell
+#Fig. 2
+#M. Watts, and A. Sherman. 2014. Modeling the pancreatic alpha-cell: Dual mechanisms of glucose suppression of glucagon secretion, Biophys. J., 106:741-751. 
+
+#initial conditions
+v(0)=-40
+mcal(0)=0.15
+hcal(0)=0.5
+mcat(0)=0
+hcat(0)=0
+mcan(0)=0
+hcan(0)=0
+mna(0)=0
+hna(0)=0.1
+mka(0)=0
+hka(0)=0
+mkdr(0)=0.4
+c(0)=0.06753834
+cmdl(0)=20
+cmdn(0)=10
+cer(0)=150 
+glumean(0)=0
+cmdlmean(0)=0
+cmdnmean(0)=0
+
+#parameters
+par vna=70
+par vk=-75
+par vca=65
+par vl=-20
+par cm=5
+par gcal=0.7
+par gcat=0.4
+par gcan=0.6
+par gna=11
+par gka=1
+par gkdr=4.5
+par gkatp0=0.265
+par on=0
+par gl=0.2
+par vcell=0.624e-12 
+par vmdl=2.12e-15
+par vmdn=1.41e-15
+par fVl=0.00340
+par fVn=0.00226
+par fmd=0.01
+par B=1 
+par alpha=5.18e-15 
+par kpmca=0.3, fcyt=0.01, fer=0.01
+par pleak=0.0003, sigmav=31
+par kserca=0.4, p=0.0009
+par lambdaer=1, epser=1
+param osc=0
+param atp0=50
+param periodM=4
+param durM=2
+par a=0.055
+par a1=0
+
+par vcalm=-30
+par scalm=10
+par vcalh=-33
+par scalh=-5
+par tcalh1=60
+par tcalh2=51
+
+par vcatm=-49
+par scatm=4
+par vcath=-52
+par scath=-5
+par tcatm1=15
+par tcatm2=0
+par tcath1=20
+par tcath2=5
+
+par vcanm=-5
+par scanm=10
+par vcanh=-33
+par scanh=-5
+par tcanh1=60
+par tcanh2=51
+
+par vnam=-30
+par vnah=-52
+par snam=4
+par snah=-8
+par tnah1=120
+par tnah2=0.5
+
+par vkam=-45
+par skam=10
+par vkah=-68
+par skah=-10
+par taukam=0.1
+par tkah1=60
+par tkah2=5
+
+par vkdrm=-25
+par skdrm=23
+
+par gsocbar=0.2,caerbar=70, ssoc=-20
+par vsoc=0
+
+#functions
+period=periodM*(60000)
+dur=durM*(60000)
+gkatp = gkatp0+a*(heav(mod(t,period))-heav(mod(t,period)-dur))
+aux gkatp=gkatp
+
+mcalinf=1/(1+exp(-(v-vcalm)/scalm))
+hcalinf=1/(1+exp(-(v-vcalh)/scalh))
+taucalm=(1/(exp(-(v+23)/20)+exp((v+23)/20)))+0.05
+taucalh=(tcalh1/(exp(-(v+0)/20)+exp((v+0)/20)))+tcalh2
+Ical=gcal*mcal^2*hcal*(v-vca)
+aux Ical=ical
+
+mcatinf=1/(1+exp(-(v-vcatm)/scatm))
+hcatinf=1/(1+exp(-(v-vcath)/scath))
+taucatm=(tcatm1/(exp(-(v+50)/12)+exp((v+50)/12)))+tcatm2
+taucath=(tcath1/(exp(-(v+50)/15)+exp((v+50)/15)))+tcath2
+Icat=gcat*mcat^3*hcat*(v-vca)
+aux Icat=icat
+
+mcaninf=1/(1+exp(-(v-vcanm)/scanm))
+hcaninf=1/(1+exp(-(v-vcanh)/scanh))
+taucanm=(1/(exp(-(v+23)/20)+exp((v+23)/20)))+0.05
+taucanh=(tcanh1/(exp(-(v+0)/20)+exp((v+0)/20)))+tcanh2
+Ican=gcan*mcan*hcan*(v-vca)
+aux Ican=ican
+
+mnainf=1/(1+exp(-(v-vnam)/snam))
+hnainf=1/(1+exp(-(v-vnah)/snah))
+taunam=(6/(exp(-(v+50)/10)+exp((v+50)/10)))+0.05
+taunah=(tnah1/(exp(-(v+50)/8)+exp((v+50)/8)))+tnah2
+Ina=gna*mna^3*hna*(v-vna)
+aux Ina=ina
+
+mkainf=1/(1+exp(-(v-vkam)/skam))
+hkainf=1/(1+exp(-(v-vkah)/skah))
+taukah=(tkah1/(exp(-(v-5)/20)+exp((v-5)/20)))+tkah2
+Ika=gka*mka*hka*(v-vk)
+aux Ika=ika
+
+mkdrinf=1/(1+exp(-(v-vkdrm)/skdrm))
+taukdrm=(1.5/(exp(-(v+10)/25)+exp((v+10)/25)))+15
+Ikdr=gkdr*mkdr^4*(v-vk)
+aux Ikdr=ikdr
+
+Ikatp=gkatp*(v-vk)
+
+Il=gl*(v-vl)
+
+cinf = 1/(1+exp(-(cer-caerbar)/ssoc))
+isoc=gsocbar*(v-vsoc)
+aux isoc=isoc
+
+JL=-alpha*ICal/vmdl
+Jn=-alpha*ICan/vmdn
+JT=-alpha*ICat/vcell
+Jmem = JT+fVl*B*(cmdl-c)+fVn*B*(cmdn-c)-kpmca*c
+Jserca = kserca*c
+Jleak = pleak*(cer - c)
+Jer = epser*(Jleak - Jserca)/lambdaer
+
+y=(cmdn/200)^4/(0.05^4+(cmdn/200)^4)
+Glu=200*mcan*hcan*(y)
+
+par tau=15000
+par rate=1
+aux GSR=rate*(glumean-delay(glumean,tau))/tau
+
+#odes
+v'=-(Ical+Icat+Ican+Ina+Ikdr+Ikatp+Ika+Il+Isoc)/cm
+mcal'=(mcalinf-mcal)/taucalm
+hcal'=(hcalinf-hcal)/taucalh
+mcat'=(mcatinf-mcat)/taucatm
+hcat'=(hcatinf-hcat)/taucath
+mcan'=(mcaninf-mcan)/taucanm
+hcan'=(hcaninf-hcan)/taucanh
+mna'=(mnainf-mna)/taunam
+hna'=(hnainf-hna)/taunah
+mka'=(mkainf-mka)/taukam
+hka'=(hkainf-hka)/taukah
+mkdr'=(mkdrinf-mkdr)/taukdrm
+c' = fcyt*(Jmem+Jer) 
+cmdl'=fmd*JL-fmd*B*(cmdl-c)
+cmdn'=fmd*Jn-fmd*B*(cmdn-c)
+cer' = -fer*sigmav*Jer
+glumean'=glu
+cmdlmean'=cmdl
+cmdnmean'=cmdn
+
+aux glum=glumean/t
+aux glu=glu
+aux gkatp=gkatp
+aux kserca=kserca
+aux gsoc=gsocbar*cinf
+aux cmdlm=cmdlmean/t
+aux cmdnm=cmdnmean/t
+
+
+aux tsec=t/1000
+aux tmin=t/60000
+
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=1, total=360000
+@ maxstor=20000001,bounds=10000000, bell=0, xp=tmin, yp=v
+@ xlo=0, xhi=6, ylo=-60, yhi=20, delay=15000
+
+done
