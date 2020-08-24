@@ -1,0 +1,29 @@
+# The Morris-Lecar model as in Rinzel and Ermentrout chapter in Koch & Segev
+# Parameters as in Figs. 4, 5, 6
+#
+params v1=-0.01,v2=0.15,v3=0.1,v4=0.145,gca=1.0,phi=.333
+params vk=-0.7,vl=-0.5,iapp=0.07,gk=2.0,gl=0.5
+minf(v)=.5*(1+tanh((v-v1)/v2))
+winf(v)=.5*(1+tanh((v-v3)/v4))
+lamn(v)= phi*cosh((v-v3)/(2*v4))
+ica=gca*minf(v)*(v-1)
+v'=  (iapp+gl*(vl-v)+gk*w*(vk-v)-ica)
+w'= (lamn(v)*(winf(v)-w))
+aux I_ca=ica
+aux I_k=gk*w*(vk-v)
+b v-v'
+b w-w'
+@ TOTAL=30,DT=.05,xlo=-.6,xhi=.5,ylo=-.25,yhi=.75
+@ xplot=v,yplot=w
+done
+
+
+
+
+
+
+
+
+
+
+
