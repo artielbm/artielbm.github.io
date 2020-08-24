@@ -32,7 +32,7 @@ Using nofeedback.ode, integrating with the default view, parameters and initial 
 
 Using feedback.ode, integrating with the default view, parameters and initial conditions will produce Fig. 8A (x2 vs. time). The other variables displayed in Figs. 8 and 9 in the paper can be displayed by changing the graphical view. Fig. 10 again requires a separate integration of the equations for each value of Insulin (insstep).  
 
-__Important:__ This model has a delay equation, so the *delay* numerical parameter has to be set to a number greater than or equal to the delay used.  Consult the XPP documentation for more information.
+__Important:__ The model with feedback has a delay equation, so the *delay* numerical parameter has to be set to a number greater than or equal to the delay used.  Consult the XPP documentation for more information.
 
 
 ### CellML Version of Model
