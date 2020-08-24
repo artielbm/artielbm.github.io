@@ -1,0 +1,117 @@
+# Model Without Feedback
+
+# Integrating with the default view, parameters and initial conditions 
+# will produce Fig. 6A (x2 vs. time).  The other variables displayed in Figs.
+# 6 and 7 in the paper can be displayed by changing the graphical view (no need to
+# reintegrate).  Likewise to make the curve labeled "without feedback" in Fig. 11.
+#
+# Fig. 10 requires a separate integration of the equations for each value of 
+# Insulin (insstep).
+#
+# Fig. 12 illustrates the effect of increasing phosphatase activity by
+# raising the parameter PTP to 1.5.  Insulin concentration (insstep)
+# must also be adjusted as indicated in the figure.
+
+#ODEs:
+
+dx2/dt =  km1*x3 + km3*PTP*x5 - k1*x1*x2 + km4*x6 - k4*x2
+dx3/dt =  k1*x1*x2 - km1*x3 - k3*x3
+dx4/dt =  k2*x1*x5 - km2*x4 + km4p*x7 - k4p*x4
+dx5/dt =  k3*x3 + km2*x4 - k2*x1*x5 - km3*PTP*x5 + km4p*x8 - k4p*x5
+dx6/dt =  k5 - km5*x6 + k6*PTP*(x7 + x8) + k4*x2 - km4*x6
+dx7/dt =  k4p*x4 - km4p*x7 - k6*PTP*x7
+dx8/dt =  k4p*x5 - km4p*x8 - k6*PTP*x8
+dx9/dt =  km7*PTP*x10 - k7*x9*(x4 + x5)/IRp
+dx10/dt = k7*x9*(x4 + x5)/IRp + km8*x12 - (km7*PTP + k8*x11)*x10
+dx11/dt = km8*x12 - k8*x10*x11
+dx12/dt = k8*x10*x11 - km8*x12
+dx13/dt = k9*x14 + k10*x15 - (km9*PTEN + km10*SHIP)*x13
+dx14/dt = km9*PTEN*x13 - k9*x14
+dx15/dt = km10*SHIP*x13 - k10*x15
+dx16/dt = km11*x17 - k11*x16
+dx17/dt = k11*x16 - km11*x17
+dx18/dt = km12*x19 - k12*x18
+dx19/dt = k12*x18 - km12*x19
+dx20/dt = km13*x21 - (k13 + k13p)*x20 + k14 - km14*x20
+dx21/dt = (k13+k13p)*x20 - km13*x21
+
+
+#Auxiliary Expressions:
+
+aux surf_recep=x2+x3+x4+x5
+aux insulin_step=x1
+# aux surf_phosph=x4+x5
+aux phos=x4+x5
+aux eff=effect
+aux tot_recep=x2+x3+x4+x5+x6+x7+x8
+# aux intra_recep=x6+x7+x8
+
+
+#Expressions:
+
+#Step input of Insulin for first stepdur (usually 15) minutes:
+x1 = insstep - heav(t - stepdur)*insstep
+
+k2=k1
+km2=100*km1
+k4=km4/9
+k5=if((x6+x7+x8)>1e-13)then(10*km5)else(60*km5)
+km3=km1
+k7=4.16
+km7=(2.5/7.45)*k7
+k8=5.00e-15/(7.45e-13*9.5e-14)*km8
+k9stim=1.39
+km9=(94/3.1)*k9stim
+k9basal=(0.31/99.4)*km9
+k9=(k9stim - k9basal)*(x12/PI3K) + k9basal
+k10=km10*(3.1/2.9)
+k11=0.1*km11*((x13-0.31)/2.79)
+k12=0.1*km12*((x13-0.31)/2.79)
+k13=(4/96)*km13
+k13p=(40/60 - 4/96)*km13*effect
+k14=96*km14
+APequil=100/11
+effect=min( (0.2*x17+0.8*x19)/APequil, 1)
+PI3K=5.0e-15
+
+
+
+#Parameters:
+
+param insstep=1.0e-7, stepdur=15.0
+param k1=6e7, km1=0.20, km4=0.003, km5=1.66667e-18
+param k3=2500.00, k4p=2.1e-3, km4p=2.1e-4, k6=0.461
+param km8=10.0
+param km10=2.77
+param km11=6.93, km12=6.93
+param km13=0.167, km14=0.001155
+param PTEN=1, SHIP=1, PTP=1.0, IRp=8.97e-13
+
+#Initial Conditions:
+
+x2(0)=9e-13
+x3(0)=0
+x4(0)=0
+x5(0)=0
+x6(0)=1e-13
+x7(0)=0
+x8(0)=0
+x9(0)=1e-12
+x10(0)=0
+x11(0)=1e-13
+x12(0)=0
+x13(0)=0.31
+x14(0)=99.4
+x15(0)=0.29
+x16(0)=100
+x17(0)=0
+x18(0)=100
+x19(0)=0
+x20(0)=96
+x21(0)=4
+
+@maxstor=1e5,njmp=20,meth=rungekutta,DT=0.001
+@bound=100000,total=60,yp=x2
+@xlo=0,xhi=60,ylo=0,yhi=1e-12
+
+done
