@@ -1,0 +1,279 @@
+## Set file for cleanup_fig_A_M_P_ISR_gamma_sigma_ISR_M_k_700_BV_10mL.ode on Wed Apr 29 13:00:34 2015
+17   Number of equations and auxiliaries
+41   Number of parameters
+# Numerical stuff
+1    nout
+40    nullcline mesh
+10   CVode
+42  total
+0.053  DeltaT
+0  T0
+0  Transient
+100000000000  Bound
+1e-12  DtMin
+1  DtMax
+1e-10  Tolerance
+1e-10  Abs. Tolerance
+0  Max Delay
+100   Eigenvector iterates
+0.001  Eigenvector tolerance
+0.001  Newton tolerance
+0  Poincare plane
+1e-05  Boundary value tolerance
+1e-05  Boundary value epsilon
+20   Boundary value iterates
+0   Poincare None
+1   Poincare variable
+1   Poincare sign
+0   Stop on Section
+0   Delay flag
+41.976  Current time
+41.976  Last Time
+0   MyStart
+1   INFLAG
+# Delays
+99.7664  
+9.025   
+2.00069    
+-0.006666   
+536.7163   
+0.8   
+# Bndry conds
+0
+0
+0
+0
+0
+0
+# Old ICs
+99.7664  G
+9.025  I
+2.00069  B
+-0.006666  GAMMA
+536.7163  SIGMA
+0.8  SI
+# Ending  ICs
+412.175412507858  G
+27.68987041198062  I
+5.649472027767093  B
+0.09999999907744307  GAMMA
+85.41635755531173  SIGMA
+0.02220792673818889  SI
+# Parameters
+1.44  Eg0
+700  k
+864  R0_init
+0.01  BV
+1  Mmax
+150  alpha_M
+2  kM
+1.2  alpha_ISR
+2  kISR
+4.55  Pmax
+4  kP
+41.77  alpha_P
+3.11  Amax
+0.44  alpha_A
+6  kA
+0.8  A_b
+42.85  tau_b
+0.2  G_bar
+99.90000000000001  Gs
+1  Gn
+0.1  Gshft
+2.14  tau_g
+75  sigma_Gsh
+867.6  ISRI_bar
+0.1  ISRI_s
+0.1  ISRI_n
+1  ISRI_k
+3  sigma_b
+1  MI_bar
+0.2  MI_k
+0.2  MI_s
+0.02  MI_n
+10.71  tau_sigma
+0.196  t_si
+0.022  target_si
+0.4  Si_tar
+864  R0_tar
+90  sigma_tar
+14000000  tonsi
+14000000  tonsigma
+14000000  tonR0
+# Graphics
+0.7071097251469876  rm
+-0.4999999999826661  rm
+0.4999958366025516  rm
+0.7071038372138505  rm
+0.5000041633974484  rm
+-0.4999999999826661  rm
+0  rm
+0.7071038372138505  rm
+0.7071097251469876  rm
+0    
+6    
+1    
+1    
+0    
+1    
+5    
+1    
+1    
+0    
+1    
+5    
+1    
+1    
+0    
+1    
+5    
+1    
+1    
+0    
+1    
+5    
+1    
+1    
+0    
+1    
+5    
+1    
+1    
+0    
+1    
+5    
+1    
+1    
+0    
+1    
+5    
+1    
+1    
+0    
+1    
+5    
+1    
+1    
+0    
+1    
+5    
+1    
+1    
+0    
+-1000   
+1000   
+0    
+0   3DFlag
+1   Timeflag
+0   Colorflag
+0   Type
+1  color scale
+0   minscale
+42   xmax
+0   xmin
+0.8   ymax
+0   ymin
+12   zmax
+-12   zmin
+21   
+0.04761904761904762   
+0.4   
+2.5   
+0   
+0.08333333333333333   
+45   Theta
+45   Phi
+0    xshft
+0    yshft
+0    zshft
+0   xlo
+0   ylo
+0   
+-100   
+42   xhi
+0.8   yhi
+300   
+200   
+# Transpose variables etc
+G
+2   n columns
+1   n rows
+1   row skip
+1   col skip
+1   row 0
+# Coupling stuff for H funs
+0
+0
+0
+0
+0
+0
+# Array plot stuff
+
+1   NCols
+0   Row 1
+50   NRows
+8   RowSkip
+0  Zmin
+1  Zmax
+# Torus information 
+0    Torus flag 1=ON
+6.283185307179586  Torus period
+# Range information
+Eg0
+-1   eq-range stab col
+0   shoot flag 1=on
+10   eq-range steps
+0  eq_range low
+1  eq_range high
+G
+G
+20   Range steps
+0   Cycle color 1=on
+1   Reset data 1=on
+1   Use old I.C.s 1=yes
+0  Par1 low
+0  Par2 low
+1  Par1 high
+1  Par2 high
+Eg0
+0   BVP side
+0   color cycle flag 1=on
+10   BVP range steps
+0  BVP range low
+1  BVP range high
+RHS etc ...
+dG/dT=R0-(EG0+SI*I)*G
+dI/dT=B*ISR/BV-K*I
+dB/dT=(P-A)*B/TAU_B
+dGAMMA/dT=(GAMMA_INF-GAMMA)/TAU_G
+dSIGMA/dT=(SIGMA_INF-SIGMA)/TAU_SIGMA
+dSI/dT=(HEAV(T)-HEAV(T-TONSI))*(-T_SI*(SI-TARGET_SI))
+PROL_R=P/TAU_B
+APOP_R=A/TAU_B
+PLOT_M=M
+PLOT_P=P
+PLOT_A=A
+PLOT_ISR=ISR
+PLOT_SI=SI
+PLOT_SIG=SIGMA
+PLOT_R0=R0
+THOUR=T*24
+TMIN=T*24*60
+
+where ...
+M =  MMAX*G^KM/(ALPHA_M^KM + G^KM)   
+ISR =  SIGMA*(M+GAMMA)^KISR/(ALPHA_ISR^KISR + (M+GAMMA)^KISR)   
+P_ISR = PMAX*ISR^KP/(ALPHA_P^KP + ISR^KP)   
+A_M = AMAX*M^KA/(ALPHA_A^KA + M^KA) + A_B   
+P =  P_ISR   
+A =  A_M   
+G_INF = G_BAR/(1+ EXP(-(G-GS)/GN)) - GSHFT   
+GAMMA_INF = G_INF   
+M_GSH =  MMAX*(G-SIGMA_GSH)^KM/(ALPHA_M^KM + (G-SIGMA_GSH)^KM)   
+ISR_GSH =  SIGMA*(M_GSH+GAMMA)^KISR/(ALPHA_ISR^KISR + (M_GSH+GAMMA)^KISR)   
+SIGMA_ISRI = ISRI_BAR/(1+ ISRI_K*EXP(-(ISR_GSH-ISRI_S)/ISRI_N))   
+SIGMA_MI =  1 - MI_BAR/(1 + MI_K*EXP(-(M_GSH-MI_S)/MI_N))   
+SIGMA_INF = SIGMA_MI*SIGMA_ISRI + SIGMA_B    
+R0 = R0_INIT*(HEAV(T)-HEAV(T-TONR0)) + R0_TAR*HEAV(T-TONR0)   
