@@ -1,0 +1,49 @@
+# Adapted from J. Keizer and G. Magnus. Biophys J. 1989 56(2):229-42.
+# Morris-Lecar beta-cell (based on Utah model with kca instead of s)
+
+init v=-65.0, n=0.00016, c=0.2, d=0.5
+
+# equations
+dv/dt=(i+gl*(vl-v)+gk*n*(vk-v)- Ica(v) - Ikca(v,c) + gkatp*(vk-v))/cm
+dn/dt=(ninf(v)-n)/tau(v)
+dc/dt=f*(-alpha*ica(v) - kc*c)
+dd/dt = ka*((tot-d)-d*exp(r*(1.0-(c/r1))))
+
+# where
+minf(v)=.5*(1+tanh((v-v1)/v2))
+ninf(v)=.5*(1+tanh((v-v3)/v4))
+%lamn(v)=phi*cosh((v-v3)/(2*v4))
+tau(v)=1/(phi*cosh((v-v3)/(2*v4)))
+#
+param gkcastar=100.0, auto=0
+param vk=-75, vl=-60, vca=25
+param i=0, gk=2700, gl=0, gca=1000, cm=5300
+param v1=-20.0, v2=24, v3=-16, v4=11.2, phi=0.035
+# param gkca=2000.0, kd=5.0
+param gkca=0.0, kd=5.0
+# Ikca
+ikca(v,c) = auto*gkcastar*(v-vk) + (1-auto)*gkca/(1+(kd/c))*(v-vk)
+# Calcium Handling
+# par alpha=4.50e-6, kc=0.15, f=0.001
+par alpha=4.50e-6, kc=0.15, f=0.01
+# Ikatp
+par gkatpbar=6000.0
+# ADP parameters (from Smolen-Keizer)
+p kone=0.45,ktwo=0.012,ka=5.0e-5,r=0.9,r1=0.35,tot=1.0
+
+ica(v) = gca*minf(v)*(v-vca)
+gkatp = gkatpbar*(1.0+d/kone)/(1.0+d/kone+(tot-d)/ktwo)
+
+
+# track some currents
+aux Condkca=gkca/(1+(kd/c))
+aux Ica=gca*minf(V)*(V-Vca)
+aux Ik=gk*n*(V-Vk)
+aux Curkca=Ikca(v,c)
+aux gkatpact = gkatpbar*(1.0+d/kone)/(1.0+d/kone+(tot-d)/ktwo)
+
+@ meth=cvode, atol=1.0e-6, tol=1.0e-6, dt=10.0, total=40000, maxstor=10000
+@ xp=t, yp=v, bound=100000000
+@ xlo=0, xhi=40000, ylo=-70, yhi=-10
+
+done
