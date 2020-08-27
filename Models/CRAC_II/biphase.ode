@@ -1,0 +1,70 @@
+#
+% Ref: Mears et al., J. Membr. Biol. in press
+% Beta-cell model with I_crac (Version 2). 
+%
+% jm = 1 - j
+%
+% Changes from 1st CRAC model:
+% membrane pump made non-linear
+% perl=0.003, caerbar=40, sloper=3, dact=0.35, sigmaer=1.0
+% old values:
+% perl=0.02,  caerbar=3,  sloper=1, dact=0.10, sigmaer=5.0
+% Results in 7x larger ER calcium concentration
+
+init v=-61, n=0.0005, jm=0.12, c=0.11, cer=60
+
+params gi=810.0,gs=510.0,gk=3900.0,gcrac=75.0,gkca=1200.0,gkatp=150.0
+params gleak=0.0
+params ip3=0.0,gamma=.000003607,cm=6157.521,lambda=1.85,f=0.01,kca=0.07
+params lambdaer=250.0,perl=0.003,sigmaer=1.0,verp=0.24,kerp=0.09,nerp=2.0
+params caerbar=40,sloper=3.0,vcrac=0.0,kdkca=0.55,hil=5
+params dact=0.35,dip3=0.2,dinh=0.4
+params vmp=0.08, nmp=2, kmp=0.35
+
+% current functions
+sinf = 1.0/(1.0+exp((-16.0-v)/10.0))
+minf = 1.0/(1.0+exp((-20.0-v)/7.5))
+ninf = 1.0/(1.0+exp((-15.0-v)/6.0))
+jminf = 1.0 - 1.0/(1.0+exp((v+53.0)/2.0))
+cinf = 1.0/(1.0+exp((cer-caerbar)/sloper))
+taun = 9.09/(1.0+exp((v+15.0)/6.0))
+tauj = 50000.0/(exp((v+53.0)/4.0)+exp((-53.0-v)/4.0))+1500.0
+
+% currents
+iin = gi*minf*(v-100.0)
+is = gs*sinf*(1.0-jm)*(v-100.0)
+icrac = gcrac*cinf*(v-vcrac)
+ik = gk*n*(v+70.0)
+ikatp = gkatp*(v+70.0)
+ica = iin + is
+ileak = gleak*(v-vcrac)
+ikca = gkca*((c^hil)/(c^hil + kdkca^hil))*(v+70.0)
+
+% ER functions
+
+% ER parameters
+ainf = 1/(1 + dact/c)
+hinfer = 1/(1 + c/dinh)
+jerp = verp*(c^nerp)/(c^nerp + kerp^nerp)
+binf = ip3/(ip3 + dip3)
+o = ainf^3*binf^3*hinfer^3
+
+% Ca fluxes
+% jmemtot = -f*(gamma*ica + kca*c)
+jmp = vmp*(c^nmp)/(c^nmp + kmp^nmp)
+jmemtot = -f*( gamma*ica + jmp )
+jerleak = perl*(cer - c)
+jerip3 = o*(cer - c)
+jertot = jerleak + jerip3 - jerp
+
+
+# regular variables
+v' = -(ica + icrac + ik + ikatp + ileak + ikca)/cm
+n' = lambda*(ninf - n)/taun
+jm' = (jminf - jm)/tauj
+c' = jertot/lambdaer + jmemtot
+cer' = -jertot/(lambdaer*sigmaer)
+
+@ meth=gear, dt=2, toler=1.0e-6, maxstor=10000, total=20000, xhi=20000, ylo=-70, yhi=-10
+
+done
