@@ -1,0 +1,40 @@
+# Phase-independent resetting illustrated with a Fitzhugh-Nagumo-like model
+# See P. Smolen and A. Sherman, J. Theor. Biol. (1994) 169:339-348
+# Eqs. 4 - 14, Fig. 3
+
+# initial conditions
+init v=0.1, j=0.1, s=0.1
+
+# parameters
+par vj=0.0, slopej=0.05, vm=0.0
+par slopem=0.05, vs=0.0, slopes=0.05
+par vjt=0.0, slpjt=0.05, vst=0.0, slpst=0.05
+par tjmax=1000.0, tsmax=1000.0
+par tjmin=20.0, tsmin=20.0
+par gin=1.0, gout=1.0, curbas=0.5
+par tstart=5000.0, duration=100.0, amp=-0.5
+
+#odes
+v' = -cubic+curin-curout+iapp
+j' = (phij-j)/tauj
+s' = (phis-s)/taus
+
+# fixed variables
+cubic =  (v+1)*v*(v-1)
+phij =  1.0/(1.0+exp((v+vj)/slopej))
+phim =  1.0/(1.0+exp((vm-v)/slopem))
+phis =  1.0/(1.0+exp((vs-v)/slopes))
+tauj =  tjmax/(1.0+exp((vjt-v)/slpjt))+tjmin
+taus =  tsmax/(1.0+exp((v+vst)/slpst))+tsmin
+curin =  gin*phim*j
+curout =  gout*s
+iapp =  curbas+amp*(heav(t-tstart)-heav(t-tstart-duration))
+
+# auxiliaries for plotting (optional)
+aux w =  -gin*phim*j+gout*s
+aux iapp =  iapp
+
+@ meth=cvode, total=20000, dt=10, atoler=1.0e-6, toler=1.0e-6
+@ ylo=-1.5, yhi=1.5, xlo=0, xhi=20000
+
+done
