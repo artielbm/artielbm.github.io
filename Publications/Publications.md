@@ -108,8 +108,8 @@
 1.  A. Sherman, J. Keizer, and J. Rinzel. 1990\. _Domain model for Ca<sup>2+</sup> inactivation of Ca<sup>2+</sup> channels at low channel density._ Biophys. J. **58**:985-995.  [[PubMed]](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=2174274&dopt=Abstract) [[XPP File]](http://mrb.niddk.nih.gov/sherman/gallery/beta/skr)
 1.  P. B. Carroll, A. Sherman, R. Ferrer, A. C. Boschero, J. Rinzel, and I. Atwater. 1990\. _Modulation of the frequency of glucose-dependent bursts of electrical activity by HCO3/CO2 in rodent pancreatic beta-cells. Experimental and theoretical results._ Eur. Biophys. J. **18**:71-77.  [[PubMed]](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=2108857&dopt=Abstract)
 1.  A. Sherman, J. Rinzel, and J. Keizer. 1988\. _Emergence of organized bursting in clusters of pancreatic beta-cells by channel sharing._ Biophys. J. **54**:411-425.   [[PubMed]](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=2850029&dopt=Abstract) [[XPP File]](http://lbm.niddk.nih.gov/sherman/gallery/beta/srk)
-1.  A. S. Sherman and C. S. Peskin. 1988\. _Solving the Hodgkin-Huxley equations by a random walk method._ SIAM J. Sci. and Stat. Comput. **9**:170-190.  [[The Journal]](https://epubs.siam.org/doi/abs/10.1137/0909012)
-1.  A. S. Sherman and C. S. Peskin. 1986\. _A Monte Carlo method for scalar reaction diffusion equations._ SIAM J. Sci. and Stat. Comput. **7**:1360-1372.  [[The Journal]](https://epubs.siam.org/doi/abs/10.1137/0907090)
+1.  A. S. Sherman and C. S. Peskin. 1988\. _Solving the Hodgkin-Huxley equations by a random walk method._ SIAM J. Sci. and Stat. Comput. **9**:170-190.  [[doi]](https://doi.org/10.1137/0909012)
+1.  A. S. Sherman and C. S. Peskin. 1986\. _A Monte Carlo method for scalar reaction diffusion equations._ SIAM J. Sci. and Stat. Comput. **7**:1360-1372. [[doi]](https://doi.org/10.1137/0907090)
 
     ### Invited Reviews
 
@@ -127,7 +127,7 @@
 
     ### Book Chapters & Other Reviews
 
-1.  A. Sherman. 2016. _Endoplasmic reticulum- and plasma membrane-driven calcium oscillations_, in "Computational Neuroendocrinology" (Wiley-INF Masterclass in Neuroendocrinology Series), D. J. MacGregor and G. Leng, eds., John Wiley & Sons, Chichester, UK, p. 112-141. [[The Book](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1119951690.html)]
+1.  A. Sherman. 2016. _Endoplasmic reticulum- and plasma membrane-driven calcium oscillations_, in "Computational Neuroendocrinology" (Wiley-INF Masterclass in Neuroendocrinology Series), D. J. MacGregor and G. Leng, eds., John Wiley & Sons, Chichester, UK, p. 112-141. [[The Book]](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1119951690.html) [[doi]](https://doi.org/10.1002/9781119159438.ch3)
 1.  R. Bertram, A. Sherman, and L. S. Satin. 2013. _Electrical, Calcium, and Metabolic Oscillations in Pancreatic Islets,_ in "The Islets of Langerhans", 2nd edition, M. S. Islam, ed., Springer-Verlag, Berlin, p. 453-474. [[doi]](https://doi.org/10.1007/978-94-007-6686-0_10) [[The Book]](https://www.springer.com/gp/book/9789400766853)
 1.  R. Bertram, A. Sherman, and L. S. Satin. 2010. _Electrical Bursting, Calcium Oscillations, and Synchronization of Pancreatic Islets,_ in "The Islets of Langerhans", M. S. Islam, ed., Springer-Verlag, Berlin, (Adv Exp Med Biol, **654**:261-79). [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/20217502)] [[doi]](https://doi.org/10.1007/978-90-481-3271-3_12) 
 1.  R. Bertram, K. Wierschem, M. Zhang, P. Goforth, A. Sherman, and L. S. Satin. 2002. _Phantom bursting in pancreatic islets: A potential role for insulin feedback,_ in "Recent Research Developments in Biophysics", S. G. Pandalai, ed., Transworld Research Network, Vol. 1, pp. 31-51.
