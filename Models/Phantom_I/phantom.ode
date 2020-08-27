@@ -1,0 +1,53 @@
+# Phantom bursting model, with 2 fast and 2 slow variables. 
+# Bertram et al, Biophys. J. 79:2880-2892, 2001. 
+# For Fig. 2, set gs1=20.
+# For Fig. 3, set gs1=7, set v(0)=0.6, set total integration time = 120000.
+# For Fig. 4, set gs1=3, set v(0)=0.6, set total integration time = 300000.
+
+# Units: V = mV; t = ms; g = pS; I = fA
+
+
+# Initial conditions
+v(0)=-43.0
+n(0)=0.03
+s1(0)=0.1
+s2(0)=0.434
+
+# Parameters
+
+param lambda=1.1, gca=280, gk=1300
+param gl=25, vs1=-40, taus1=1000, vs2=-42, taus2=120000, gs2=32
+param gs1=20, vl=-40
+
+param vca=100, vk=-80, cm=4524
+param tnbar=9.09, vm=-22, vn=-9, sm=7.5, sn=10
+
+param ss1=0.5, ss2=0.4
+
+# activation and time-constant functions
+minf(v) = 1.0/(1.0+exp((vm-v)/sm))
+ninf(v) = 1.0/(1.0+exp((vn-v)/sn))
+taun(v) = tnbar/(1.0+exp((v-vn)/sn))
+s1inf(v) = 1.0/(1.0+exp((vs1-v)/ss1))
+s2inf(v) = 1.0/(1.0+exp((vs2-v)/ss2))
+
+# ionic currents
+ica(v) = gca*minf(v)*(v-vca)
+ik(v) = gk*n*(v-vk)
+il(v) = gl*(v-vl)
+is1(v) = gs1*s1*(v-vk)
+is2(v) = gs2*s2*(v-vk)
+
+
+# differential equations
+v' = -( ica(v) + ik(v) + il(v) + is1(v) + is2(v) )/cm
+n' = lambda*(ninf(v) - n)/taun(v)
+s1' = (s1inf(v) - s1)/taus1
+s2' = (s2inf(v) - s2)/taus2
+
+# XPP parameters
+@ meth=cvode, dtmax=1, dt=5, total=30000, maxstor=100000
+@ bounds=100000000, xp=t,  yp=v, toler=1.0e-6, atoler=1.0e-6
+@ xlo=0, xhi=30000, ylo=-70, yhi=-10
+
+done
