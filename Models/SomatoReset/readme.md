@@ -1,3 +1,5 @@
+[Under Construction]
+
 This is supplementary material for:
 
 J. V. Stern, H. M. Osinga, A. LeBeau, and A. Sherman. 2007. Resetting behavior in a model of bursting in secretory pituitary cells: Distinguishing plateaus from pseudo-plateaus. Bull. Math. Biol., __70__(1):68-88 [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/17703340/)
