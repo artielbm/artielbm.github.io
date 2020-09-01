@@ -3,14 +3,14 @@ These files are supplementary material for "An introduction to beta cell electro
 Files by figure:
 
 * [Figure 5]
-    *[ode file](mlneuron2d.ode)
+    * [ode file](mlneuron2d.ode)
 
 * [Figure 6]
-    *[ode file](mlbeta-alt.ode)
+    * [ode file](mlbeta-alt.ode)
 
 * [Figure 7]
-    *[ode file](mlbeta-alt.ode)
-    *[set file](figure.set)
+    * [ode file](mlbeta-alt.ode)
+    * [set file](figure.set)
 
 * [Figure 8]
     * [ode file](Biophan-mod.ode)
