@@ -1,4 +1,4 @@
-These files are supplementary material for "An introduction to beta cell electrophysiology and modeling", by L. S. Satin, M. Watts, and A. S. Sherman, in *Diabetes Systems Biology", A. Khadra, editor.
+These files are supplementary material for *An introduction to beta cell electrophysiology and modeling*, by L. S. Satin, M. Watts, and A. S. Sherman, in "Diabetes Systems Biology", A. Khadra, editor.
 
 Files by figure:
 
