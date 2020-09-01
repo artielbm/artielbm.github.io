@@ -13,13 +13,13 @@ Files by figure:
     *[set file](figure.set)
 
 * [Figure 8]
-    *[ode file](Biophan-mod.ode)
-    *[panel A set file](panelA.set)
-    *[panel B set file](panelB.set)
+    * [ode file](Biophan-mod.ode)
+    * [panel A set file](panelA.set)
+    * [panel B set file](panelB.set)
 
-* [Figure A1]()
-    *[ode file](linear.ode)
-    *[set file](alpha-negative.set)
+* [Figure A1]
+    * [ode file](linear.ode)
+    * [set file](alpha-negative.set)
 
 * [Figure A2]
-    *[ode file](glass.ode)
+    * [ode file](glass.ode)
