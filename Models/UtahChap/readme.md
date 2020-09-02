@@ -1,8 +1,8 @@
-### Chapter in "Case Studies in Mathematical Modeling---Ecology, Physiology, and Cell Biology," H. G. Othmer, F. R. Adler, M. A. Lewis, and J. C. Dallon, eds. Prentice Hall,1997. 
+#### Chapter in "Case Studies in Mathematical Modeling---Ecology, Physiology, and Cell Biology," H. G. Othmer, F. R. Adler, M. A. Lewis, and J. C. Dallon, eds. Prentice Hall,1997. 
 
 [Web page for the book](http://www.math.utah.edu/books/csmmepcb/index.html)
 
-The chapter, *Calcium and Membrane Potential Oscillations in Pancreatic beta-Cells*: Unofficial [PDF Version](chapter.pdf) with Exercises (314K).
+The chapter, *Calcium and Membrane Potential Oscillations in Pancreatic beta-Cells*: Unofficial [PDF Version](Utahchap.pdf) with Exercises (314K).
 
 The figures in the chapter can be reproduced using the files below, which are inputs for the ODE solver [xpp](http://www.math.pitt.edu/~bard/xpp/xpp.html).
 
