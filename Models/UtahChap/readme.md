@@ -24,4 +24,4 @@ The figures in the chapter can be reproduced using the files below, which are in
 
 * Two Parameter Diagram (Fig. 8) and phase plane sketches (Fig. 4) are taken from R. Bertram, M. Butte, T. Kiemel, and A. Sherman. 1995. Topological and phenomenological classification of bursting mechanisms. Bull. Math. Biol. 57:413-439.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/7728115/)
 
-* Example of a bursting model with a [Non-Planar Fast Subsystem](skr.ode) (Ex. 10).
+* Example of a bursting model with a [Non-Planar Fast Subsystem](skr.ode) from A. Sherman, J. Keizer, and J. Rinzel. 1990. *Domain model for Ca2+ inactivation of Ca2+ channels at low channel density*. Biophys. J. 58:985-995.  [PubMed](https://pubmed.ncbi.nlm.nih.gov/2174274/)  (Ex. 10).
