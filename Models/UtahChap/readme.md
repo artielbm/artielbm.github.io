@@ -8,13 +8,13 @@ The figures in the chapter can be reproduced using the files below, which are in
 
 * Basic Model (Figs. 1 - 7, 11)
 
-    * Two variable (fast subsystem)[vn.ode] (Figs. 2 - 3, 7).
+    * Two variable (fast subsystem)[vn.ode](vn.ode) (Figs. 2 - 3, 7).
 
-    * Two variable (for IV curves only)[ivcurves.ode] (Fig. 1).
+    * Two variable (for IV curves only)[ivcurves.ode](ivcurves.ode) (Fig. 1).
 
     * Three variable [bursting model](burst.ode) (Figs. 5, 6).
     
-    * v-s pseudo-phase plane for Z-curves and slow nullclines [[zeecurves.ode]] (Figs. 5, 7).
+    * v-s pseudo-phase plane for Z-curves and slow nullclines [zeecurves.ode](zeecurves.ode) (Figs. 5, 7).
     
     * Bursting Model with Electrical Coupling [Two Cells](twocells.ode) (Fig. 11).
 
@@ -24,4 +24,4 @@ The figures in the chapter can be reproduced using the files below, which are in
 
 * Two Parameter Diagram (Fig. 8) and phase plane sketches (Fig. 4) are taken from R. Bertram, M. Butte, T. Kiemel, and A. Sherman. 1995. Topological and phenomenological classification of bursting mechanisms. Bull. Math. Biol. 57:413-439.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/7728115/)
 
-* Example of a bursting model with a Non-Planar Fast Subsystem (Ex. 10).
+* Example of a bursting model with a [Non-Planar Fast Subsystem](skr.ode) (Ex. 10).
