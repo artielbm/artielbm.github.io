@@ -8,15 +8,15 @@ The figures in the chapter can be reproduced using the files below, which are in
 
 * Basic Model (Figs. 1 - 7, 11)
 
-    * Two variable (fast subsystem)[vn.ode](vn.ode) (Figs. 2 - 3, 7).
+    * Two variable (fast subsystem) [vn.ode](vn.ode) (Figs. 2 - 3, 7).
 
-    * Two variable (for IV curves only)[ivcurves.ode](ivcurves.ode) (Fig. 1).
+    * Two variable (for IV curves only) [ivcurves.ode](ivcurves.ode) (Fig. 1).
 
     * Three variable [bursting model](burst.ode) (Figs. 5, 6).
     
     * v-s pseudo-phase plane for Z-curves and slow nullclines [zeecurves.ode](zeecurves.ode) (Figs. 5, 7).
     
-    * Bursting Model with Electrical Coupling [Two Cells](twocells.ode) (Fig. 11).
+    * Bursting Model with Electrical Coupling of [Two Cells](twocells.ode) (Fig. 11).
 
 * Extended Model with Endoplasmic Reticulum for [muscarinic bursting](ach.ode) (Fig. 9).
 
