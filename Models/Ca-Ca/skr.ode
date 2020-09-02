@@ -1,0 +1,60 @@
+% Source: Sherman, Keizer, and Rinzel, Domain model for 
+% calcium-inactivation of calcium channels at low 
+% channel density, Biophysical Journal 58:985-995, 1990.
+% (implemented for xpp by Gerda de Vries, 12/21/95)
+
+%
+% Initial values of the variables.
+%
+init v=-64, pc=1, po=0, n=0.0, cai=0.9
+
+%
+% Values of the model parameters.
+%
+params cm=5310, vcell=1150, kca=0.03, f=0.001
+params r=6.5, farad=96.487
+%%%%%% for ica:
+params gca=7, vm=-5, sm=10, taumbar=1.25
+params kminus=0.018, kplus=0.036, a=-0.0007
+params cao=10, cain=0, p=14, nca=200, ratio=13.35
+%%%%%% for ik:
+params gk=2500, vk=-75, vn=-10, sn=5.6
+params c=60, lambda=2.4, vbar=-75, sa=65, sb=20
+%%%%%% for ikca:
+params gkca=30000, kd=100
+
+%
+% Activation functions.
+%
+minf(v)   = 1/(1+exp((vm-v)/sm))
+alpham(v) = minf(v)/taumbar
+betam(v)  = (1-minf(v))/taumbar
+ninf(v)   = 1/(1+exp((vn-v)/sn))
+taun(v)   = c/lambda/(exp((v-vbar)/sa)+exp((vbar-v)/sb))
+
+%
+% Currents.
+%
+i(v)        = gca*p*v/ratio*(cao-cain*exp(v/ratio))/(1-exp(v/ratio))
+ica(v,po)   = nca*po*i(v)
+ik(v,n)     = gk*n*(v-vk)
+ikca(v,cai) = gkca*cai*(v-vk)/(kd+cai)
+
+%
+% Differential equations.
+%
+v'   = -(ica(v,po)+ik(v,n)+ikca(v,cai))/cm
+pc'  = -alpham(v)*pc + betam(v)*po
+po'  = kminus*(1-po-pc) - kplus*a*i(v)*po + alpham(v)*pc - betam(v)*po
+n'   = (ninf(v)-n)/taun(v)
+cai' = f*(-ica(v,po)/2/vcell/farad - kca*cai)
+
+%
+% Check the instantaneous fraction of calcium channels 
+% that are inactivated, pb.  
+%
+aux pb = 1-po-pc
+
+@ meth=cvode, dt=2, total=20000, maxstor=200000, atol=1e-7, rtol=1e-7
+@ xlo=0, xhi=20000,ylo=-80, yhi=10, yp=v
+done
