@@ -1,0 +1,65 @@
+# Extended model with ER: Acetylcholine response/Muscarinic Bursting (Fig. 9)
+# Integrate for 20000 ms with IP3=0, then raise IP3 to 0.6 uM.
+init v=-60, n=0.0001, s=0.4, c=0.1, cer=10.0
+# Conductances in pS; currents in fA; Ca, IP3 concentrations in uM; time in ms
+
+par lambda=1.0, iapp=0
+# Ik
+par gk=2700.0, vn=-16, sn=5.6, vk=-75, 
+par taun=20
+# Is
+par gs=200, vs=-52, ss=10, taus=20000
+# Ikatp
+par gkatp=120.0
+# Ica
+par gca=1000, vca=25, vm=-20, sm=12
+# Ikca
+par gkca=1000.0, kd=0.6, nh=5
+# Icrac
+par vcrac=-30.0, cerbar=4.0, gcracbar=40.0, sloper=1
+# Miscellaneous
+par cm=5300
+# Plasma Membrane Calcium Fluxes
+par alpha=4.50e-6, kc=0.12, f=0.01
+# ER Calcium Fluxes
+par sigma=5.0, mu=250.0, kerp=0.1, verp=0.24, perl=0.02
+par ip3=0.0, dip3=0.2, dinh=0.4, nerp=2, dact=0.1
+
+# Functions
+
+ninf(v) = 1/(1+exp((vn-v)/sn))
+minf(v) = 1/(1+exp((vm-v)/sm))
+sinf(v) = 1/(1+exp((vs-v)/ss))
+ica(v) = gca*minf(v)*(v-vca)
+ikca(v,c) = gkca/(1+(kd/c)^nh)*(v-vk)
+ikatp(v) = gkatp*(v-vk)
+icrac(v) = gcrac*(v-vcrac)
+ik(v,n) = gk*n*(v-vk)
+is(v,s) = gs*s*(v-vk)
+
+# Expressions
+
+gcrac = gcracbar/(1.0+exp((cer-cerbar)/sloper))
+jmem = f*(-alpha*ica(v) - kc*c)
+ainf = 1/(1 + dact/c)
+binf = ip3/(ip3 + dip3)
+hinf = 1/(1 + c/dinh)
+o = ainf^3 * binf^3 * hinf^3
+jip3 = o*(cer-c)
+jerp = verp/(1 + (kerp/c)^nerp)
+jerleak = perl*(cer-c)
+jer = jerleak + jip3 - jerp
+
+# Equations
+
+v' = (-ica(v) - ik(v,n) - is(v,s) - ikatp(v)  - ikca(v, c) - icrac(v) + iapp)/cm
+n' =  lambda*(ninf(v) - n)/taun
+s' =  (sinf(v) - s)/taus
+c' = jmem + jer/mu
+cer' = -jer/(sigma*mu)
+
+@ meth=gear, dtmax=1.0, dt=10.0, total=20000, maxstor=10000
+@ xp=t, yp=v
+@ xlo=0, xhi=20000, ylo=-80, yhi=-10
+
+done

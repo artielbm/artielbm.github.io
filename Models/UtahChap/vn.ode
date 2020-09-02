@@ -1,0 +1,47 @@
+# v-n fast subsystem for phase plane analysis and bifurcation diagrams
+init v=-60, n=0.0001
+# Conductances in pS; currents in fA; Ca concentrations in uM; time in ms
+
+par s=0.4, lambda=1.0, iapp=0, c=0.1, cer=10
+# Ik
+par gk=2700.0, vn=-16, sn=5.6, vk=-75, 
+par taun=20
+# Is
+par gs=200, vs=-52, ss=5
+# Ikatp
+par gkatp=120.0
+# Ica
+par gca=1000, vca=25, vm=-20, sm=12
+# Ikca
+par gkca=0.0, kd=0.6, nh=5
+# Icrac
+par vcrac=-30.0, cerbar=4.0, gcracbar=0.0, sloper=1
+# Miscellaneous
+par cm=5300
+
+# Functions
+
+ninf(v) = 1/(1+exp((vn-v)/sn))
+minf(v) = 1/(1+exp((vm-v)/sm))
+sinf(v) = 1/(1+exp((vs-v)/ss))
+ica(v) = gca*minf(v)*(v-vca)
+ikca(v,c) = gkca/(1+(kd/c)^nh)*(v-vk)
+ikatp(v) = gkatp*(v-vk)
+icrac(v) = gcrac*(v-vcrac)
+ik(v,n) = gk*n*(v-vk)
+is(v,s) = gs*s*(v-vk)
+
+# Expressions
+
+gcrac = gcracbar/(1.0+exp((cer-cerbar)/sloper))
+
+# Equations
+
+v' = (-ica(v) - ik(v,n) - is(v,s) - ikatp(v)  - ikca(v, c) - icrac(v) + iapp)/cm
+n' =  lambda*(ninf(v)-n)/taun
+
+@ meth=gear, dt=1.0, total=500
+@ xp=v, yp=n
+@ xlo=-75, xhi=-15, ylo=-0.05, yhi=0.15
+
+done
