@@ -1,0 +1,31 @@
+% Classical Hodgkin-Huxley parameters for Squid Giant Axon
+% Except: v polarity reversed and rest potential shifted to -65
+% (cf. Hansel, Mato, and Meunier, Europhys. Lett. 23:367-372, 1993)
+
+init v=-65.0, h=0.9, n=0.1, m=0.1
+
+p iapp=0, cm=1, gnabar=120, gkbar=36, gl=0.3, vna=50, vk=-77, vl=-54.4
+
+alpham(v) = 0.1*(v+40)/( 1 - exp(-(v+40)/10) )
+betam(v) =  4*exp(-(v+65)/18)
+minf(v) = 1/(1+betam(v)/alpham(v))
+taum(v) = 1/(alpham(v) + betam(v))
+
+alphah(v) =  0.07*exp(-(v+65)/20)
+betah(v) = 1/( 1 + exp(-(v+35)/10) )
+hinf(v) = 1/(1+betah(v)/alphah(v))
+tauh(v) = 1/(alphah(v) + betah(v))
+
+alphan(v) = 0.01*(v + 55)/(1 - exp(-(V + 55)/10))
+betan(v) = 0.125*exp(-(V + 65)/80)
+ninf(v) = 1/(1+betan(v)/alphan(v))
+taun(v) = 1/(alphan(v) + betan(v))
+
+% variables
+
+v' =  -(gnabar*m^3*h*(v-vna) + gkbar*n^4*(v-vk) + gl*(v-vl) - iapp)/cm
+h' =  (hinf(v) - h)/tauh(v)
+n' =  (ninf(v) - n)/taun(v)
+m' =  (minf(v) - m)/taum(v)
+
+d

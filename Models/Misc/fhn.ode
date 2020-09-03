@@ -1,0 +1,7 @@
+# Fitzhugh-Nagumo 
+dv/dt = -f(v) - w + Iapp
+dw/dt = eps*(v-gamma*w)
+f(v) = v*(v-1)*(v-a)
+param a=0.14, eps=0.01, gamma=2.54, Iapp=0.08
+@ total=100, dt=.2, xhi=100
+done

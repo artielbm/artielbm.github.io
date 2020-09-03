@@ -1,0 +1,45 @@
+6
+% A minimal model of the dopamine neuron, from Li etal, Neuroscience, 
+% 71:397-410, 1996. 
+variables Vs=-64.0,h=1.0,n=0.002,r=0.12,Vd=-77.0,Na=5.09
+params vl=-50.0,cm=1.0,vk=-85.0
+params gna=3.2,gk=3.2,gh=0.1,gc=0.1,p=0.5,rd=1.0,iap=0.0,kna=15.0,Nass=8.0,gnmdab=1.25,gnmdanab=1.0
+
+% Dendrite functions
+user gnmda 1 gnmdab*(p/(1-p))
+user gnmdana 1 gnmdanab*(p/(1-p))
+user gl 1 0.18*(p/(1-p))
+user ipumpmx 1 18.0*(p/(1-p))
+user fd 1 0.173
+user fnmda 1 1.0/(1.0+0.14*exp(-arg1/12.5))  
+
+% Current functions
+user minf 1 1.0/(1.0+exp((-35.0-arg1)/6.2))
+user ninf 1 1.0/(1.0+exp((-31.0-arg1)/5.3))
+user hinf 1 1.0/(1.0+exp((arg1+30.0)/8.3))
+user rinf 1 1.0/(1.0+exp((arg1+80.0)/8.0))
+user tauh 1 0.43 + 0.86/(1.0+exp((arg1+25.0)/5.0))
+user taun 1 (0.8+1.6/(1.0+exp(0.1*(arg1+25.0)))) / (1.0+exp(-0.1*(arg1+70.0)))
+%user taun 1 (0.43+1.075/(1.0+exp(0.1*(arg1+25.0)))) * (exp(0.1*(arg1+70.0))/(1.0+exp(0.1*(arg1+70.0))))
+user taur 1 190.0
+
+% Currents
+user ina 2 gna*(minf(arg1)^3)*arg2*(arg1-55.0) 
+user ik 2 gk*(arg2^2)*(arg1-vk)
+user ih 2 gh*arg2*(arg1+30.0) 
+user inmda 1 gnmda(arg1)*fnmda(arg1)*arg1  
+user inmdana 1 gnmdana(arg1)*fnmda(arg1)*(arg1-55.0) 
+user ipump 1 ipumpmx(arg1)*((arg1+Nass)^3 / (kna^3+(arg1+Nass)^3))
+user ipumpss 1 ipumpmx(arg1)*(Nass^3 / (kna^3+Nass^3))
+user il 1 gl(arg1)*(arg1-vl) 
+user isoma 4 ina(arg1,arg2) + ik(arg1,arg3) + ih(arg1,arg4) 
+user iden 2 inmda(arg1) + ipump(arg2) - ipumpss(arg1) + il(arg1) 
+
+% Differential equations
+odeVs  (iap-isoma(Vs,h,n,r)+(gc/p)*(Vd-Vs))/cm
+odeh   (hinf(Vs)-h)/tauh(Vs)
+oden   (ninf(Vs)-n)/taun(Vs)
+oder   (rinf(Vs)-r)/taur(Vs)
+odeVd  (-iden(Vd,Na)+(gc/(1-p))*(Vs-Vd))/cm
+odeNa  -fd(Vd)*(inmdana(Vd)+3.0*(ipump(Na)-ipumpss(Vd)))
+done

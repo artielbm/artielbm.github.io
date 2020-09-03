@@ -1,0 +1,22 @@
+# Yeast glycolytic oscillator based on MWC allostery
+# Goldbeter and Lefever, BJ 12:1302-1315, 1972
+
+# alpha interpreted as substrate, ATP (or possibly F6P, per Smolen)
+# gamma interpreted as product, ADP
+
+# Parameters
+par sigma1=4.0e-8, sigma2=2.0e-8, L=7.5e6, c=0.01, D0=5e-4, eps=0.1, a=1e7
+
+# PFK activity, an increasing function of alpha and gamma
+mwc = (2*D0*eps/(eps + 1)*alpha*(1 + gamma)^2*(1 + alpha/(eps + 1)))/(L*(1 + alpha*c)^2 + (1 + gamma)^2*(1 + alpha/(eps + 1)^2))
+
+# Initial conditions
+init alpha=30, gamma=1.0
+
+# ODEs
+alpha' = a*(sigma1 - mwc)
+gamma' = a*(mwc - sigma2*gamma)
+
+@ nout=10, total=500, yp=alpha, ylo=0, yhi=35, xlo=0, xhi=500
+
+d

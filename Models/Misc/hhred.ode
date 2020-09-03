@@ -1,0 +1,23 @@
+% Hodgkin-Huxley for Squid Giant Axon
+% Except: v polarity reversed and rest potential shifted to -65
+% And: m -> minf(v); n -> 0.85 - h
+
+init v=-65.0, h=0.9
+
+p iapp=0, cm=1, gnabar=120, gkbar=36, gl=0.3, vna=50, vk=-77, vl=-54
+
+alpham(v) = 0.1*(v+40)/( 1 - exp(-(v+40)/10) )
+betam(v) =  4*exp(-(v+65)/18)
+minf(v) = 1/(1+betam(v)/alpham(v))
+
+alphah(v) =  0.07*exp(-(v+65)/20)
+betah(v) = 1/( 1 + exp(-(v+35)/10) )
+hinf(v) = 1/(1+betah(v)/alphah(v))
+tauh(v) = 1/(alphah(v) + betah(v))
+
+% variables
+
+v' =  -(gnabar*minf(v)^3*h*(v-vna) + gkbar*(0.85-h)^4*(v-vk) + gl*(v-vl) - iapp)/cm
+h' =  (hinf(v) - h)/tauh(v)
+
+d

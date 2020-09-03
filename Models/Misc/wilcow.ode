@@ -1,0 +1,11 @@
+# Refs: Wilson and Cowan,1972, BJ 12:2-24
+#       Borisyuk and Kirillov, 1992, Biol. Cyb. 66:319-325
+# fixed parameters:
+p thetae=4, be=1.3, thetai=3.7, bi=2, re=1, ri=1, q=0, c1=16, c2=12, c4=3
+p ke=1.0, ki=1.0
+# varying parameters:
+p c3=15, p=1.5
+s(arg1,arg2,arg3) =  1/(1+exp(-arg2*(arg1-arg3)))-1/(1+exp(arg2*arg3))
+exc' = -exc + (ke - re*exc)*s(c1*exc - c2*inh + p, be, thetae)
+inh' = -inh + (ki - ri*inh)*s(c3*exc - c4*inh + q, bi, thetai)
+d

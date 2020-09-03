@@ -1,0 +1,4 @@
+p x=2,thresh=1
+global 1 {v-thresh} {v=0} 
+v' =  x-v
+d

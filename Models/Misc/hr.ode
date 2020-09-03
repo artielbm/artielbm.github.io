@@ -1,0 +1,8 @@
+# standard params:
+init x=-0.95,y=-3.85,z=1.76
+p a=1,b=3,c=1,d=5,r=.001,s=4,x1=-1.618,i=2,e=0.0,h=0.0,lambda=1.0
+# p a=1,b=7,c=1,d=4,r=.001,s=4,x1=-1.618,i=2,e=-0.4,h=-0.7,lambda=14.0
+x' = y+x*x*(b-a*x)+e*x+i-z
+y' = lambda*(c-d*x*x+h*x-y)
+z' = r*(s*(x-x1)-z)
+d
