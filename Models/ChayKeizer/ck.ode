@@ -1,0 +1,46 @@
+#  Filename: ck.ode
+#  Original Chay-Keizer beta cell, Biophys. J. 42:181-190 '83
+
+# Initial values:
+v(0)    = -54.774  
+ca(0)   = 0.10749  
+mca(0)  = 0.027532  
+hca(0)  = 0.086321  
+n(0)    = 0.00044035  
+
+
+# Parameters:
+# conductances in mS/cm^2, ca in uM, v in mV, t in msec, radius in cm
+p iapp=0 cm=1 gca=6.5 gk=12 gl=0.04 gkca=0.09
+p vca=100 vk=-75 vl=-40
+p vprime=50 vstar=30 temp=20
+p r=8.9e-4 f=0.004 fara=96487 
+p kdiss=1 kca=0.04 
+
+# Gating functions:
+alphamca(v)   = -0.1*((v+vprime)-25)/(exp(-((v+vprime)-25)/10)-1)
+betamca(v)    = 4*exp(-(v+vprime)/18)
+alphahca(v)   = 0.07*exp(-(v+vprime)/20)
+betahca(v)    = 1/(exp(-((v+vprime)-30)/10)+1)
+alphan(v)     = -0.01*((v+vstar)-10)/(exp(-((v+vstar)-10)/10)-1)
+betan(v)      = 0.125*exp(-(v+vstar)/80)
+phi = 3^((temp-6.3)/10)
+
+# Ionic currents:
+i_ca  = gca*mca^3*hca*(vca-v)
+i_k   = gk*n^4*(vk-v)
+i_kca = gkca*ca/(ca+kdiss)*(vk-v)
+i_l   = gl*(vl-v)
+
+# The differential equations:
+v'    = 1/cm*(iapp+2*i_ca+i_k+i_kca+i_l) 
+mca'  = phi*(alphamca(v)*(1-mca)-betamca(v)*mca)
+hca'  = phi*(alphahca(v)*(1-hca)-betahca(v)*hca) 
+n'    = phi*(alphan(v)*(1-n)-betan(v)*n)  
+ca'   = f*(3/(r*fara)*i_ca-kca*ca)
+
+# Numerical and plotting parameters for xpp:
+@ maxstor=1000000, meth=cvode, toler=1e-6, atoler=1e-6
+@ xlo=0, xhi=20000, ylo=-70, yhi=-10, total=20000, bounds=100000, dt=1
+
+done
