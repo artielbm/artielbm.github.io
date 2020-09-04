@@ -1,0 +1,47 @@
+% The Chay-Cook model, modified from Chay and Cook, Math. Biosci. 90:139-153, 1988.
+% Used in "Topological and Phenomenological 
+% Classification of Bursting Oscillations", by R. Bertram, M. J. Butte, 
+% T. Kiemel, and A. Sherman. Bull. Math. biol., 57:413-439, 1995. 
+% Parameter values for the various types of bursting are listed below.
+
+% Initial conditions
+v(0)=-52.72
+n(0)=0.0125
+s(0)=0.1197
+c(0)=0.2295
+
+par gi=250,gs=10,gk=1300,gl=50,vca=100,vk=-80,vl=-60,cmtot=4524
+par vm=-22,vn=-9,sm=7.5,sn=10,vs=-22,ss=10,tnbar=9.09,lambda=0.95,tsbar=0.1
+par alpha=5.727e-06,kca=0.027,f=0.002
+
+% Actions for bursting types
+" {tsbar=0.1, f=0.002, lambda=0.95, kca=0.027} type 1a
+" {tsbar=0.1, f=5e-05, lambda=0.17, kca=0.027} type 1b
+" {tsbar=0.1, f=0.002, lambda=0.1, kca=0.022} type 3
+" {tsbar=1000, f=5e-04, lambda=0.6, kca=0.027} type 1a (3,1)
+" {tsbar=10000, f=0.0015, lambda=0.6, kca=0.03} type 2 (2,2)
+
+minf = 1/(1+exp((vm-v)/sm))
+ninf = 1/(1+exp((vn-v)/sn))
+a = (vs+ss*ln(c)-v)/(2*ss)
+sinf = 1/(1+exp(2*a))
+taun = tnbar/(1+exp((v-vn)/sn))
+taus = tsbar/(2*cosh(a))
+iin = gi*minf*(vca-v)
+is = gs*s*(vca-v)
+ik = gk*n*(vk-v)
+il = gl*(vl-v)
+ica = iin+is
+
+v' = (iin+is+ik+il)/cmtot
+n' = lambda*(ninf-n)/taun
+s' = (sinf-s)/taus 
+c' = f*(alpha*ica-kca*c)
+
+aux tsec=t/1000
+@ meth=cvode, dt=10.0, toler=1.0e-9, atoler=1.0e-9, total=120000,
+@ maxstor=200000,bounds=10000000, xp=tsec, yp=v
+@ xlo=0, xhi=120, ylo=-70, yhi=-10, bell=off
+@ BUT=QUIT:fq, BUT=AUTO:fa
+
+done
