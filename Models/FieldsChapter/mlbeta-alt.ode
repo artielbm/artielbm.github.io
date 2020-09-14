@@ -1,0 +1,44 @@
+# Morris-Lecar-like beta-cell
+# make cstar a bifurcation parameter
+
+init v=-65.0, n=0.00016, c=0.2
+
+# equations
+dv/dt=(i+gl*(vl-v)+gk*n*(vk-v)- Ica(v) - Ikca(v,c) + gkatp*(vk-v))/cm
+dn/dt=(ninf(v)-n)/tau(v)
+dc/dt=f*(-alpha*ica(v) - kc*c)
+# where
+minf(v)=.5*(1+tanh((v-v1)/v2))
+ninf(v)=.5*(1+tanh((v-v3)/v4))
+tau(v)=1/(phi*cosh((v-v3)/(2*v4)))
+#
+# For bifurcation diagram, set auto=1 and use gkcastar as the bifurcation
+# parameter:
+# param gkcastar=100.0, auto=0
+param cstar=0.5, auto=0
+#
+param vk=-75, vl=-52, vca=25
+param i=0, gk=2700, gl=125, gca=1000, cm=5300
+param v1=-20.0, v2=24, v3=-16, v4=11.2, phi=0.01
+# c0 renamed from Kca to match chapter
+param gkca=3000.0, c0=5.0
+# Ikca
+# ikca(v,c) = auto*gkcastar*(v-vk) + (1-auto)*gkca/(1+(c0/c))*(v-vk)
+ikca(v,c) = auto*gkca/(1+(c0/cstar))*(v-vk) + (1-auto)*gkca/(1+(c0/c))*(v-vk)
+# Calcium Handling
+par alpha=4.50e-6, kc=0.1, f=0.001
+# Ikatp
+par gkatp=0.0
+ica(v) = gca*minf(v)*(v-vca)
+
+# track some currents
+aux Condkca=gkca/(1+(c0/c))
+aux Ica=gca*minf(V)*(V-Vca)
+aux Ik=gk*n*(V-Vk)
+aux Curkca=Ikca(v,c)
+
+@ meth=cvode, atol=1.0e-6, tol=1.0e-6, dt=10.0, total=40000, maxstor=10000
+@ xp=t, yp=v, bound=100000000
+@ xlo=0, xhi=40000, ylo=-70, yhi=-10
+
+done

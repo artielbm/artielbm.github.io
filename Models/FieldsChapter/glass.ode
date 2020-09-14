@@ -1,0 +1,17 @@
+# Strogatz, p. 250
+# Similar to Glass and Mackey, p. 85, eq. 5.1
+
+r(0)=1
+theta(0)=0
+
+r' = r*(c - r^2)
+theta' = a + b*r^2
+par c=1.0, a=1, b=1
+
+x = r*cos(theta)
+y = r*sin(theta)
+
+aux X=x
+aux Y=y
+
+done
