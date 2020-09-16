@@ -2,24 +2,24 @@ These files are supplementary material for *An introduction to beta cell electro
 
 Files by figure:
 
-* [Figure 5]
+* [Figure 2.8]
     * [ode file](mlneuron2d.ode)
 
-* [Figure 6]
+* [Figure 2.9]
     * [ode file](mlbeta-alt.ode)
 
-* [Figure 7]
+* [Figure 2.10]
     * [ode file](mlbeta-alt.ode)
     * [set file](figure.set)
 
-* [Figure 8]
+* [Figure 2.11]
     * [ode file](Biophan-mod.ode)
     * [panel A set file](PanelA.set)
     * [panel B set file](PanelB.set)
 
-* [Figure A1]
+* [Figure A2.1]
     * [ode file](linear.ode)
     * [set file](alpha-negative.set)
 
-* [Figure A2]
+* [Figure A2.2]
     * [ode file](glass.ode)
