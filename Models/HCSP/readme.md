@@ -7,4 +7,5 @@ This is supplementary material for M. G. Pedersen and A. Sherman. 2009. *Newcome
 
 [hcsp_PNAS09](hcsp_PNAS09.ode)
 
+Period of "burst" is 30 sec; change parameter per to 360 for 6 minute bursts.
 
