@@ -16,8 +16,7 @@ Effects of increasing glucose and external Ca are also reproduced, and the effec
 
 * Two-Compartment Model (with CICR) (Figures 9, 10; see ode file for details of how to produce each figure) [[cicr.ode]](cicr.ode)
    * *Key Finding:* If CICR is strong enough to produce net emptying of the ER during the active phase of a burst, then dumping the stores with Tg reduces Ca amplitude, in contradiction to the experiments.
-
-*Note:* kserca3=0.05, kserca2b=0.002 ms^{-1}; incorrect in Table 1 of paper.
+   * *Note:* kserca3=0.05, kserca2b=0.002 ms^{-1}; incorrect in Table 1 of paper.
 
 * Three-Compartment (Subspace) Model (Figure 11) [[three-cmpt.ode]](three-cmpt.ode)
    * Adapted from subspace model (model 2) in M. Zhang, P. Goforth, A. Sherman, R. Bertram, and L. S. Satin. 2003, Biophys. J. 84:2852-2870. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/12719219/) [[XPP Files]](../Subspace)
