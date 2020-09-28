@@ -12,7 +12,7 @@ XPP files by figure:
 
 * ER Model - Addition of ACh (Figure 9; Store dumped but no ROC or SOC) [[figure9.ode]](figure9.ode)
 
-* ER Model - Muscarinic Bursting (Figure 11; Store dumped and ROC activated)[[figure11.ode]](figure11.ode)
+* ER Model - Muscarinic Bursting (Figure 11; Store dumped and ROC activated) [[figure11.ode]](figure11.ode)
 
 * ER/ATP Model - Slow Mode (Figure 13; c, cer, and a included) [[figure13.ode]](figure13.ode)
 
