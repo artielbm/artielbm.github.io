@@ -10,7 +10,7 @@ and coupled by diffusion of metabolites:
 
 K. Tsaneva-Atanasova, C. L. Zimliki, R. Bertram, and A. Sherman, 2006. Diffusion of calcium and metabolites in pancreatic islets: Killing oscillat ions with a pitchfork, Biophys. J., 90:3434--3446. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/16500973/)
 
-*** XPP files by figure:
+### XPP files by figure:
 
 * Stand-Alone Glycolysis Model (Figures 2, 10) (Adapted from Smolen, JTB, 174:137-148 1995, [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/7643610/)) [[glyconly.ode]](glyconly.ode)
 
@@ -24,14 +24,12 @@ K. Tsaneva-Atanasova, C. L. Zimliki, R. Bertram, and A. Sherman, 2006. Diffusion
 
 * Subthreshold Glycolytic Oscillations (Figure 8) [[Fig8.ode]](Fig8.ode)
 
-*** Master file 
-
-[[glycophan.ode]](glycophan.ode)
+### Master file 
 
 Combined Model (Choose File/Get set to get all the above patterns.)
 
+[[glycophan.ode]](glycophan.ode)
 
-*** Errors in Parameters in the Paper
-
+### Errors in Parameters in the Paper
 
 [[Errata file]](errata.pdf)
