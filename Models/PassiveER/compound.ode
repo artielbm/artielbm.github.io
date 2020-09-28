@@ -1,0 +1,73 @@
+# compound.ode
+ 
+# The two-compartment model as described in Bertram and Sherman, Biophys. J.
+# 87:3775-3785, December 2004.
+# Protocol gives bursts of bursts, as in Fig. 7 of above paper and Fig. 6 
+# of experimental paper of Arredouani et al. (2002).
+
+# For Fig. 7, run with defaults for solid curve.
+#             Run with tg=1 for dashed curve; rerun with last IC's until
+#             steady behavior is obtained (In particular, ER has to empty)
+
+# For Fig. 8, start with defaults
+#             Set fer to 0.1 for solid curve, 0.0002 for dashed curve.
+
+v(0)=-61
+c(0)=0.044
+cer(0)=254
+
+# conductance in pS
+# currents in fA
+# Ca concentrations in uM
+# time in ms
+# capacitance in fF
+
+# Parameters
+
+# For Thapsigargin, set tg to 1, otherwise 0
+par tg=0
+
+#Ica
+par gca=1200, vca=30, vm=-15, sm=8
+# Ca fluxes (in uM ms^(_1))
+par per=0.0001, kpmca=0.08, fcyt=0.01, fer=0.01
+par vcyt_er=25
+par kserca3=0.08  
+par kserca2b=0.02
+# Miscellaneous
+number alpha=4.5e-06
+# pulse protocol
+par toff=600000, vhold=-61, thyp=16000
+par tpulse=120000, period=24000, tchange=420000, tend=600000
+par nspike=5
+par vfirst=29, vpulse=29, changeG=0, changeCa=0
+active=nspike*period
+par rest=240000
+bperiod=active + rest
+
+# Functions
+minf = 1/(1+exp((vm-v)/sm))
+gcatot = gca + gca*heav(t-tchange)*changeCa
+ica = gcatot*minf*(v-vca)
+Jpmca = kpmca*c
+Jserca = (1 - tg)*(kserca2b + kserca3*c)
+Jrelease = per*(cer-c)
+
+# Apply the pulse protocol
+ts = t-tpulse
+burstenv = (heav(mod(ts,bperiod)) - heav(mod(ts,bperiod) - active))
+vprotocol= vhold + vpulse*(heav(mod(ts,period))-heav(mod(ts,period)-thyp))*burstenv
+
+# Equations
+v' = 10.0*(vprotocol - v)
+c' = -fcyt*(alpha*ica+Jpmca+Jserca-Jrelease)
+cer' = fer*vcyt_er*(Jserca-Jrelease)
+
+# itot in pA
+aux tsec=t/1000
+aux tmin=t/60000
+
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=20.0, total=720000, maxstor=200000
+@ bounds=10000000, xp=tmin, yp=c
+@ xlo=0, xhi=12, ylo=0.0, yhi=0.5
+done

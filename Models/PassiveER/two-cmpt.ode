@@ -1,0 +1,85 @@
+# two-cmpt.ode
+ 
+# The two compartment model, without CICR (Eqs. 1 - 5), as described
+# in Bertram and Sherman, Biophys. J. 87:3775 - 3785, December 2004.
+
+# Fig. 2: with default parameters, gives solid (control) curve
+#         For Tg, set tg to 1 (dashed curve); rerun with last IC's 
+#         until steady behavior is obtained
+
+# Fig. 3: For dashed curve, starting with defaults, double per to 0.0002 ms^{-1}
+#         rerun until steady behavior 
+
+# Fig. 4: For dashed curve, starting with defaults, halve kpmca to 0.04 ms^{-1}
+
+# Fig. 5:  Change x-axis max to 10
+           Starting with defaults, set changeG to 1;
+           For tg (dashed curve), set tg to 1.
+
+# Fig. 6:  Change x-axis max to 10
+           Starting with defaults, set changeCa to 1;
+           For tg (dashed curve), set tg to 1.
+
+
+v(0)=-71
+c(0)=0.0
+cer(0)=200
+
+# conductance in pS
+# currents in fA
+# Ca concentrations in uM
+# time in ms
+# capacitance in fF
+
+# Parameters
+
+# Run control parameters:
+# set tg=1 for thapsigargin, otherwise 0:
+par tg=0
+par changeG=0, changeCa=0
+
+# Other pulse protocol parameters:
+number toff=6000000, tend=6000000
+par vhold=-71, tfirst=5000
+par tpulse=65000, period=24000, tchange=300000
+par vfirst=39, vpulse=-29
+
+#Ica
+par gca=1200, vca=30, vm=-15, sm=8
+
+# Ca fluxes (in uM ms^(_1))
+par per=0.0001, kpmca=0.08, fcyt=0.01, fer=0.01
+# vcyt_er = v_cyt/v_er; only ratio is needed
+par vcyt_er=25
+par kserca3=0.08, kserca2b=0.02
+# Miscellaneous
+number alpha=4.5e-06
+
+# Functions
+minf = 1/(1+exp((vm-v)/sm))
+gcatot = gca + gca*heav(t-tchange)*changeCa
+ica = gcatot*minf*(v-vca)
+Jpmca = kpmca*c
+Jserca = (1 - tg)*(kserca2b + kserca3*c)
+Jrelease = per*(cer-c)
+
+# Apply the pulse protocol
+ts = t-tpulse
+thyp = 16000-4000*heav(t-tchange)*changeG
+von=vhold+vfirst*(heav(t-tfirst))
+voff=vfirst*(heav(t-toff))
+vprotocol=von+vpulse*(heav(mod(ts,period))-heav(mod(ts,period)-thyp))*(heav(t-tpulse)-heav(t-tend))-voff
+
+# Equations
+v' = 10.0*(vprotocol - v)
+c' = -fcyt*(alpha*ica+Jpmca+Jserca-Jrelease)
+cer' = fer*vcyt_er*(Jserca-Jrelease)
+
+# itot in pA
+aux tsec=t/1000
+aux tmin=t/60000
+
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=20.0, total=600000, maxstor=200000
+@ bounds=10000000, xp=tmin, yp=c
+@ xlo=0, xhi=5, ylo=0.0, yhi=0.5
+done

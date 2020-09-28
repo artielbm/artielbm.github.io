@@ -1,0 +1,90 @@
+# three-cmpt.ode
+ 
+# The three compartment model, including the sub-plasma membrane ER
+# subspace (Eqs. 1 - 3, 7-13), as described
+# in Bertram and Sherman, Biophys. J. 87:3775 - 3785, December 2004.
+
+# Modified from  subspace model (model 2) as described in Goforth et al,
+# J. Gen. Physiol. 114:759-769, 2002.
+# Only components needed for calcium compartments are
+# retained.
+# Note: vcyt_ss increased from 2.5 to 4 
+# and release from ER to cytosol added
+# to agree with Tg experiments.
+
+# Last update: 07/07/05.
+
+# Fig. 11: Run with defaults for solid curves.
+#          Set tg to 1; rerun with initial cer, css, and c set to 0 for
+#          dashed curves.
+
+# Change tfirst to 65000 ms to explore response to standard oscillating
+# Vm protocol (not shown in paper).
+
+
+v(0)=-65
+c(0)=0.027
+cer(0)=60
+css(0)=0.01
+
+# conductance in pS
+# currents in fA
+# Ca concentrations in uM
+# time in ms
+
+# Parameters
+
+par tg=0
+
+#Ica
+par gca=1450, vca=30, vm=-13, sm=8
+# Ca fluxes (in uM ms^(_1))
+par px=0.045 
+par per=0.0015, kpmca=0.12, fcyt=0.01, fer=0.01, fss=0.01
+par kserca3=0.3, kserca2b=0.02, percyt=0.00005
+# can't choose all three independently:
+# par ver_ss=0.1, vcyt_ss=4, vcyt_er=25
+par vcyt_ss=4, vcyt_er=8
+ver_ss=vcyt_ss/vcyt_er
+par Vss=0.8
+# Miscellaneous
+number alpha=0.0000045
+# pulse protocol
+par vhold=-71, tfirst=5000
+par tpulse=900000, period=24000, tchange=420000
+par vfirst=39, vpulse=-29, changeG=0, changeCa=0
+number toff=900000, tend=900000
+
+# Functions
+Vcyt=vcyt_ss*Vss
+minf = 1/(1+exp((vm-v)/sm))
+gcatot = gca + gca*heav(t-tchange)*changeCa
+ica = gcatot*minf*(v-vca)
+Jpmca = kpmca*c
+Jserca = (1 - tg)*(kserca2b + kserca3*c)
+Jrelease = per*(cer-css)
+Jercyt = percyt*(cer-c)
+Jx = px*(css-c)
+
+# Apply the pulse protocol
+ts = t-tpulse
+thyp = 16000-4000*heav(t-tchange)*changeG
+von=vhold+vfirst*(heav(t-tfirst))
+voff=vfirst*(heav(t-toff))
+vprotocol=von+vpulse*(heav(mod(ts,period))-heav(mod(ts,period)-thyp))*(heav(t-tpulse)-heav(t-tend))-voff
+
+# Equations
+v' = 10.0*(vprotocol - v)
+c' = -fcyt*(alpha*ica + Jpmca + Jserca - Jx - Jercyt)
+cer' = fer*(vcyt_er*Jserca - Jrelease - vcyt_er*Jercyt)
+css' = fss*(ver_ss*Jrelease - vcyt_ss*Jx)
+
+# itot in pA
+aux tsec=t/1000
+aux tmin=t/60000
+aux cavg=(Vss*css+Vcyt*c)/(Vss+Vcyt)
+
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=5.0, total=900000, maxstor=200000
+@ bounds=10000000, xp=tmin, yp=cavg
+@ xlo=0, xhi=14, ylo=0, yhi=0.8
+done

@@ -1,0 +1,78 @@
+# cicr.ode
+ 
+# The two compartment model, with CICR (Eqs. 1 - 6), as described
+# in Bertram and Sherman, Biophys. J. 87:3775 - 3785, December 2004.
+
+# Fig. 10: with default parameters, gives solid (control) curve
+#          For Tg, set tg to 1 (dashed curve); rerun with last IC's 
+#          until steady behavior is obtained
+#          Note: kserca3=0.05, kserca2b=0.002 ms^{-1}; incorrect
+#          in Table 1 of paper.
+
+# Fig. 9: Look at last 60 sec of Fig. 10 calculation.
+ 
+
+v(0)=-71
+c(0)=0.007
+cer(0)=210
+
+# conductance in pS
+# currents in fA
+# Ca concentrations in uM
+# time in ms
+
+# Parameters
+
+# For Tg, set tg=1, otherwise 0
+par tg=0
+
+#Ica
+par gca=1200 
+number vca=30, vm=-15, sm=8
+# Ca fluxes (in uM ms^(_1))
+par pmin=0.00001, pmax=0.0003, kcicr=0.5, ncicr=2, kpmca=0.08 
+par fcyt=0.01, fer=0.01
+par vcyt_er=25
+par kserca3=0.05, kserca2b=0.002  
+# Miscellaneous
+number alpha=4.5e-06
+# pulse protocol
+number toff=6000000, tend=6000000
+par vhold=-71, tfirst=5000
+par tpulse=65000, period=24000, tchange=420000
+par vfirst=39, vpulse=-29, changeG=0, changeCa=0
+
+# Leak out is an increasing function of Ca.
+per = pmin + (pmax - pmin)*1/(1 + (kcicr/c)^ncicr)
+
+# Functions
+minf = 1/(1+exp((vm-v)/sm))
+gcatot = gca + gca*heav(t-tchange)*changeCa
+ica = gcatot*minf*(v-vca)
+Jpmca = kpmca*c
+Jserca = (1 - tg)*(kserca2b + kserca3*c)
+Jrelease = per*(cer-c)
+par Jconst=0.0
+
+# Apply the pulse protocol
+ts = t-tpulse
+thyp = 16000-4000*heav(t-tchange)*changeG
+von=vhold+vfirst*(heav(t-tfirst))
+voff=vfirst*(heav(t-toff))
+vprotocol=von+vpulse*(heav(mod(ts,period))-heav(mod(ts,period)-thyp))*(heav(t-tpulse)-heav(t-tend))-voff
+
+# Equations
+v' = 10*(vprotocol - v)
+c' = -fcyt*(alpha*ica+Jpmca+Jserca-Jrelease-Jconst)
+cer' = fer*vcyt_er*(Jconst + Jserca-Jrelease)
+
+aux tsec=t/1000
+aux tmin=t/60000
+
+aux efflux=Jrelease
+aux uptake=Jserca
+
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=20.0, total=600000, maxstor=200000
+@ bounds=10000000, xp=tmin, yp=c
+@ xlo=0, xhi=5, ylo=0, yhi=0.6
+done
