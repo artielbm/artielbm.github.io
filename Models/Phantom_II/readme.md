@@ -4,9 +4,9 @@ XPP files by figure:
 
 * Basic Model (Figure 1; like Chay-Keizer negative feedback through cytosolic calcium only) [[figure1.ode]](figure1.ode)
 
-* Basic Model with Slow Calcium (Figure 3; Chay-Keizer with slow cytosolic calcium) [[figure1.ode]](figure3.ode)
+* Basic Model with Slow Calcium (Figure 3; Chay-Keizer with slow cytosolic calcium) [[figure3.ode]](figure3.ode)
 
-* ER Model - Fast Mode (Figure 6; model with cytosolic and ER calcium) [[figure1.ode]](figure6.ode)
+* ER Model - Fast Mode (Figure 6; model with cytosolic and ER calcium) [[figure6.ode]](figure6.ode)
 
 * ER Model - Medium Mode (Figure 8; model with cytosolic and ER calcium) [[figure8.ode]](figure8.ode)
 
@@ -39,4 +39,4 @@ Animation script file  [[biophan.ani]](biophan.ani)
 
 With these files you can view the moving slow manifold and nullcline in the V-w (omega) plane. By default, the two files are set to produce slow bursting with the ER/ATP model (Figure 13, above). To see the animation choose View/Toons and read in the animation file from the animator File menu. File/Get set can be used to visualize other burst modes. You will need to adjust the parameters ttotal, wmin, and wmax to get the right scaling.
 
-See the xpp documentation for information on how to make animations.
+See the xpp documentation for further information on how to make animations.
