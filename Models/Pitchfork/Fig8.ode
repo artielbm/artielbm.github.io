@@ -1,0 +1,440 @@
+# Simulates Fig. 8 in Tsaneva-Atanosova et al, Biophys. J. 90:3434-3446, May 2006
+# Glucose removal and readdition converts slow oscillations to fast ones
+#
+#
+#
+# A Keizer-Magnus type model coupled with a glycolytic oscillator.
+# The glycolytic model is from Paul's JTB paper. Kinetic rates based on 
+# data from skeletal muscle extracts (8/24/01). Simplified by RB,
+# removing non-essential features (10/10/01).
+# Includes a first-order equation for insulin secretion.
+# Spike currents were modified to have the same form as skphanall.ode.
+# Vgk is now inhibited by insulin. This provides a way for the glucokinase
+# rate (and thus external glucose) to feel the cell activity. 
+
+v1(0)=-60
+n1(0)=0
+c1(0)=0.1
+adp1(0)=782
+cer1(0)=175
+g6p1(0)=160
+fbp1(0)=12
+
+v2(0)=-60
+n2(0)=0
+c2(0)=0.1
+adp2(0)=782
+cer2(0)=175
+g6p2(0)=160
+fbp2(0)=12
+
+# Parameter vlaues for various behaviors:
+#
+# Compound bursting: vgk=0.3, gkatp=25000, gkca=600
+# Glycolytic bursting: vgk=0.3, gkatp=27000, gkca=150
+# Regular bursting: vgk=0.6, gkatp=25000, gkca=600
+# Subthreshold oscillations: vgk=0.3, gkatp=30000, gkca=600
+# Accordion bursting: vgk=0.3, gkatp=23000, gkca=600
+# Conversion from spiking to glyc. osc. through depletion: flow=0.1
+
+par Rgkamp1=0.30, tstart1=900000, duration1=600000
+par Rgkamp2=0.15, tstart2=900000, duration2=600000
+par gcamp1=75.0, gcamp2=75.0
+par pg6pamp1=0.0025, pg6pamp2=0.0025
+par permfbp1=0.0, permfbp2=0.0
+
+par downfrac=0.8
+par downfracg=1.0
+
+Rgk1 = Rgkamp1 - downfrac*Rgkamp1*heav(t-tstart1)*heav(tstart1+duration1-t)
+Rgk2 = Rgkamp2 - downfrac*Rgkamp2*heav(t-tstart2)*heav(tstart2+duration2-t)
+
+gc1 = gcamp1 - downfracg*gcamp1*heav(t-tstart1)*heav(tstart1+duration1-t)
+gc2 = gcamp2 - downfracg*gcamp2*heav(t-tstart2)*heav(tstart2+duration2-t)
+
+permg6p1 = pg6pamp1 - downfracg*pg6pamp1*heav(t-tstart1)*heav(tstart1+duration1-t)
+permg6p2 = pg6pamp2 - downfracg*pg6pamp2*heav(t-tstart2)*heav(tstart2+duration2-t)
+
+
+# ----------------------------------------------------------------
+# Membrane and Ca components
+
+# sigmav=cyt volume/ER volume
+num pleak=0.0002, sigmav=31
+num kserca=0.4
+num lambdaer=1, epser=1
+num vm=-20,sm=12,vn=-16,sn=5,taun=20
+
+# where
+minf1 = 1/(1+exp((vm-v1)/sm))
+ninf1 = 1/(1+exp((vn-v1)/sn))
+
+minf2 = 1/(1+exp((vm-v2)/sm))
+ninf2 = 1/(1+exp((vn-v2)/sn))
+
+# speed of glycolytic oscillations
+num speed=5
+
+num vk=-75, vca=25
+num gk=2700, cm=5300
+num gca=1000
+num kd=0.5, nh=2
+
+param gkca1=700, gkca2=700
+
+# Ikca
+ikca1 = gkca1/(1+(kd/c1)^nh)*(v1-vk)
+
+ikca2 = gkca2/(1+(kd/c2)^nh)*(v2-vk)
+
+# Calcium Handling
+num alpha=4.50e-6, kpmca=0.2, fcyt=0.01, fer=0.01
+
+# Ikatp
+par gkatpbar1=25000, gkatpbar2=25000
+
+# ICa
+ica1 = gca*minf1*(v1-vca)
+
+ica2 = gca*minf2*(v2-vca)
+
+# Ik
+Ik1 = gk*n1*(v1-vk)
+
+Ik2 = gk*n2*(v2-vk)
+
+#noise term (white noise)
+wiener w1, w2
+par noise=0.
+
+# IKATP
+# ikatp = freezeatp*gkatpstar*(v-vk) +
+# (1-freezeatp)*gkatpbar*(v-vk)*(1.0+d/kone)/(1.0+d/kone+(tot-d)/ktwo)
+
+# Ca fluxes
+Jmem1 = -(alpha*Ica1 + kpmca*c1)
+Jserca1 = kserca*c1
+Jleak1 = pleak*(cer1 - c1)
+Jer1 = epser*(Jleak1 - Jserca1)/lambdaer
+
+Jmem2 = -(alpha*Ica2 + kpmca*c2)
+Jserca2 = kserca*c2
+Jleak2 = pleak*(cer2 - c2)
+Jer2 = epser*(Jleak2 - Jserca2)/lambdaer
+
+# -----------------------------------------------------
+# Glycolytic and Keizer-Magnus components
+
+# g6p -- glucose 6-phosphate
+# fbp -- fructose 1,6-bisphosphate
+
+# Parameters
+#  Vgk--maximum glucokinase rate
+#  atot--total adenine nucleotide concentration (micromolar)
+#  k1--Kd for AMP binding
+#  k2--Kd for FBP binding
+#  k3--Kd for F6P binding
+#  k4--Kd for ATP binding
+#  famp,etc--Kd amplification factors for heterotropic binding
+#  Rgpdh--glyceraldehyde phosphate dehydrogenase rate
+#  convert--converts time from sec to msec
+
+# Glycolytic parameters
+num kg=10
+num atot=3000
+num k1=30, k2=1, k3=50000, k4=1000
+num famp=0.02, fatp=20, ffbp=0.2, fbt=20, fmt=20, pfkbas=0.06
+number cat=2
+num katpase=0.0003
+num convert=0.001
+
+# Glycolytic expressions
+f6p1 = 0.3*g6p1
+Rgpdh1 = 0.2*sqrt(fbp1)
+
+f6p2 = 0.3*g6p2
+Rgpdh2 = 0.2*sqrt(fbp2)
+
+# Iterative calculation of PFK
+# alpha=1 -- AMP bound
+# beta=1 -- FBP bound
+# gamma=1 -- F6P bound
+# delta=1 -- ATP bound
+
+# (alpha,beta,gamma,delta)
+# (0,0,0,0)
+weight11=1.
+topa11=0.
+bottom11=1.
+
+weight12=1.
+topa12=0.
+bottom12=1.
+
+# (0,0,0,1)
+weight21=atp1^2/k4
+topa21=topa11
+bottom21=bottom11+weight21
+
+weight22=atp2^2/k4
+topa22=topa12
+bottom22=bottom12+weight22
+
+
+# (0,0,1,0)
+weight31=f6p1^2/k3
+topa31=topa21+weight31
+bottom31=bottom21+weight31
+
+weight32=f6p2^2/k3
+topa32=topa22+weight32
+bottom32=bottom22+weight32
+
+# (0,0,1,1)
+weight41=(f6p1*atp1)^2/(fatp*k3*k4)
+topa41=topa31+weight41
+bottom41=bottom31+weight41
+
+weight42=(f6p2*atp2)^2/(fatp*k3*k4)
+topa42=topa32+weight42
+bottom42=bottom32+weight42
+
+# (0,1,0,0)
+weight51=fbp1/k2
+topa51=topa41
+bottom51=bottom41+weight51
+
+weight52=fbp2/k2
+topa52=topa42
+bottom52=bottom42+weight52
+
+# (0,1,0,1)
+weight61=(fbp1*atp1^2)/(k2*k4*fbt)
+topa61=topa51
+bottom61=bottom51+weight61
+
+weight62=(fbp2*atp2^2)/(k2*k4*fbt)
+topa62=topa52
+bottom62=bottom52+weight62
+
+# (0,1,1,0)
+weight71=(fbp1*f6p1^2)/(k2*k3*ffbp)
+topa71=topa61+weight71
+bottom71=bottom61+weight71
+
+weight72=(fbp2*f6p2^2)/(k2*k3*ffbp)
+topa72=topa62+weight72
+bottom72=bottom62+weight72
+
+# (0,1,1,1)
+weight81=(fbp1*f6p1^2*atp1^2)/(k2*k3*k4*ffbp*fbt*fatp)
+topa81=topa71+weight81
+bottom81=bottom71+weight81
+
+weight82=(fbp2*f6p2^2*atp2^2)/(k2*k3*k4*ffbp*fbt*fatp)
+topa82=topa72+weight82
+bottom82=bottom72+weight82
+
+# (1,0,0,0)
+weight91=amp1/k1
+topa91=topa81
+bottom91=bottom81+weight91
+
+weight92=amp2/k1
+topa92=topa82
+bottom92=bottom82+weight92
+
+# (1,0,0,1)
+weight101=(amp1*atp1^2)/(k1*k4*fmt)
+topa101=topa91
+bottom101=bottom91+weight101
+
+weight102=(amp2*atp2^2)/(k1*k4*fmt)
+topa102=topa92
+bottom102=bottom92+weight102
+
+# (1,0,1,0)
+weight111=(amp1*f6p1^2)/(k1*k3*famp)
+topa111=topa101+weight111
+bottom111=bottom101+weight111
+
+weight112=(amp2*f6p2^2)/(k1*k3*famp)
+topa112=topa102+weight112
+bottom112=bottom102+weight112
+
+# (1,0,1,1)
+weight121=(amp1*f6p1^2*atp1^2)/(k1*k3*k4*famp*fmt*fatp)
+topa121=topa111+weight121
+bottom121=bottom111+weight121
+
+weight122=(amp2*f6p2^2*atp2^2)/(k1*k3*k4*famp*fmt*fatp)
+topa122=topa112+weight122
+bottom122=bottom112+weight122
+
+# (1,1,0,0)
+weight131=(amp1*fbp1)/(k1*k2)
+topa131=topa121
+bottom131=bottom121+weight131
+
+weight132=(amp2*fbp2)/(k1*k2)
+topa132=topa122
+bottom132=bottom122+weight132
+
+# (1,1,0,1)
+weight141=(amp1*fbp1*atp1^2)/(k1*k2*k4*fbt*fmt)
+topa141=topa131
+bottom141=bottom131+weight141
+
+weight142=(amp2*fbp2*atp2^2)/(k1*k2*k4*fbt*fmt)
+topa142=topa132
+bottom142=bottom132+weight142
+
+# (1,1,1,0) -- the most active state of the enzyme
+weight151=(amp1*fbp1*f6p1^2)/(k1*k2*k3*ffbp*famp)
+topa151=topa141
+topb1=weight151
+bottom151=bottom141+weight151
+
+weight152=(amp2*fbp2*f6p2^2)/(k1*k2*k3*ffbp*famp)
+topa152=topa142
+topb2=weight152
+bottom152=bottom142+weight152
+
+# (1,1,1,1)
+weight161=(amp1*fbp1*f6p1^2*atp1^2)/(k1*k2*k3*k4*ffbp*famp*fbt*fmt*fatp)
+topa161=topa151+weight161
+bottom161=bottom151+weight161
+
+weight162=(amp2*fbp2*f6p2^2*atp2^2)/(k1*k2*k3*k4*ffbp*famp*fbt*fmt*fatp)
+topa162=topa152+weight162
+bottom162=bottom152+weight162
+
+# Phosphofructokinase rate
+% rate=(pfkbas*cat*topa16 + cat*topb)/bottom16
+% pfk=rate*(atp/(atp+2))    atp saturates
+
+pfk1=(pfkbas*cat*topa161 + cat*topb1)/bottom161
+
+pfk2=(pfkbas*cat*topa162 + cat*topb2)/bottom162
+
+# KATP channel
+# Dissociation constants (from Magnus and Keizer, 1998, ref.
+# 1264)
+num kdd=17, ktd=26, ktt=1
+par vg1=2.2, vg2=2.2
+par r=1.
+num taua=300000, r1=0.35
+
+# Functions
+
+# nucleotide concentrations, based on eqs. 14 and 15 from Smolen, ref. 1265.
+rad1 = sqrt((adp1-atot)^2-4.*adp1^2)
+rad2 = sqrt((adp2-atot)^2-4.*adp2^2)
+
+atp1 = 0.5*(atot-adp1+rad1)
+atp2 = 0.5*(atot-adp2+rad2)
+
+amp1 = adp1^2/atp1
+amp2 = adp2^2/atp2
+
+ratio1 = atp1/adp1
+ratio2 = atp2/adp2
+
+% KATP channel open probability (from Magnus and Keizer, 1998, ref. 1264)
+mgadp1 = 0.165*adp1
+mgadp2 = 0.165*adp2
+
+adp3m1 = 0.135*adp1
+adp3m2 = 0.135*adp2
+
+atp4m1 = 0.05*atp1
+atp4m2 = 0.05*atp2
+
+topo1 = 0.08*(1+2*mgadp1/kdd) + 0.89*(mgadp1/kdd)^2
+bottomo1 = (1+mgadp1/kdd)^2 * (1+adp3m1/ktd+atp4m1/ktt)
+katpo1 = topo1/bottomo1
+ikatp1 = gkatpbar1*katpo1*(v1-vk)
+
+topo2 = 0.08*(1+2*mgadp2/kdd) + 0.89*(mgadp2/kdd)^2
+bottomo2 = (1+mgadp2/kdd)^2 * (1+adp3m2/ktd+atp4m2/ktt)
+katpo2 = topo2/bottomo2
+ikatp2 = gkatpbar2*katpo2*(v2-vk)
+
+# glycolytic feedback onto adp
+y1 = vg1*(Rgpdh1/(kg+Rgpdh1))
+fback1 = r+y1
+
+y2 = vg2*(Rgpdh2/(kg+Rgpdh2))
+fback2 = r+y2
+
+# ----------------------------------------------------
+# Insulin secretion component
+
+# insulin secretion (data from Barg show that taui .leq. 1 s)
+num taui=1000
+num ki=0.15
+num delta=8
+
+Iinf1 = (c1^delta)/(ki^delta + c1^delta)
+
+Iinf2 = (c2^delta)/(ki^delta + c2^delta)
+
+# Set autoadp=1 for AUTO bifurcation diagram with respect to ADP (adpstar):
+num autoadp=0, adpstar=800
+
+# ----------------------------------------------------
+# Intracellular glucose component
+
+# Equilibrium extracellular glucose concentration (mM), flow rate, and
+# ratio of cytoplasm to extracullular shell compartment.
+par flow1=0.4, flow2=0.4, Geinf=10, sigmaG=2
+
+# Glut-2 transporter parameters (mM msec-1 and mM)
+num Kglut=7
+num Vglut=8
+
+# Glucokinase parameters (mM msec-1, mM, and dimsionless). The GK rate
+# is assumed to be a decreasing function of cell activity, as measured 
+# by the insulin secretion.
+par Kgki=0.1
+num Kgk=7
+
+# GLUT-2 and glucokinase functions
+# Rglut1 = Vglut*((Ge1-Gi1)*Kglut)/((Kglut+Ge1)*(Kglut+Gi1))
+# Rgk1 = Vgk1*(Gi1^4/(Kgk^4+Gi1^4))
+
+# Rglut2 = Vglut*((Ge2-Gi2)*Kglut)/((Kglut+Ge2)*(Kglut+Gi2))
+# Rgk2 = Vgk2*(Gi2^4/(Kgk^4+Gi2^4))
+
+# ------------------------------------------------------
+# Differential equations
+
+fbp1' = speed*convert*(pfk1 - 0.5*Rgpdh1 + permfbp1*(fbp2-fbp1))
+v1' = -(Ik1 + Ica1 + Ikca1 + Ikatp1 + noise*w1 - gc1*(v2-v1))/cm
+n1' = (ninf1-n1)/taun
+c1' = fcyt*(Jmem1 + Jer1)
+adp1' = (1 - autoadp)*((atp1-adp1*exp(fback1*(1-c1/r1)))/taua) + autoadp*(adpstar-adp1)
+cer1' = -fer*sigmav*Jer1
+g6p1' = speed*convert*(Rgk1 - pfk1 + permg6p1*(g6p2-g6p1))
+
+fbp2' = speed*convert*(pfk2 - 0.5*Rgpdh2 + permfbp2*(fbp1-fbp2))
+v2' = -(Ik2 + Ica2 + Ikca2 + Ikatp2 + noise*w2 - gc2*(v1-v2))/cm
+n2' = (ninf2-n2)/taun
+c2' = fcyt*(Jmem2 + Jer2)
+adp2' = (1 - autoadp)*((atp2-adp2*exp(fback2*(1-c2/r1)))/taua) + autoadp*(adpstar-adp2)
+cer2' = -fer*sigmav*Jer2
+g6p2' = speed*convert*(Rgk2 - pfk2 + permg6p2*(g6p1-g6p2))
+
+# Numerical and plotting parameters
+
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=120.0, total=2400000,
+@ maxstor=30000,bounds=10000000
+@ nplot=2, xp=tmin, yp=fbp1, xp2=tmin, yp2=fbp2
+@ xlo=0, xhi=40, ylo=0, yhi=45
+
+# Auxiliary plotting variables
+
+aux tsec=t/1000
+aux tmin=t/60000
+
+done

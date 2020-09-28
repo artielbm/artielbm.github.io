@@ -1,0 +1,63 @@
+# Simulates Fig. 1 in Tsaneva-Atanosova et al, Biophys. J. 90:3434-3446, May 2006
+# Morris-Lecar-like beta-cell shows that adding coupling through calcium
+# diffusion enhances synchrony, but adding more kills the oscillations
+
+init v1=-65.0, n1=0.00016, c1=0.02, v2=-65.0, n2=0.00016, c2=0.02
+
+# Step up calcium coupling:
+
+gcal = gcalamp*heav(t-tstart) + gcalamp*heav(t - (tstart+duration))
+
+# equations
+dv1/dt=(i+gl*(vl-v1)+gk*n1*(vk-v1)- Ica(v1) - Ikca(gkca1,v1,c1) + gkatp*(vk-v1) - gc*(v1 - v2))/cm
+dn1/dt=(ninf(v1)-n1)/tau(v1)
+dc1/dt=f*(-alpha*ica(v1) - kc1*c1 + gcal*(c2 - c1))
+dv2/dt=(i+gl*(vl-v2)+gk*n2*(vk-v2)- Ica(v2) - Ikca(gkca2,v2,c2) + gkatp*(vk-v2) - gc*(v2 - v1))/cm
+dn2/dt=(ninf(v2)-n2)/tau(v2)
+dc2/dt=f*(-alpha*ica(v2) - kc2*c2 + gcal*(c1 - c2))
+
+# Perturbation applied at t = 200 + epsilon sec to kick into PFOD solution
+# (epsilon to make integrator catch the event)
+par treset=200000.13
+global 1 {t-treset} {c1=0.05}
+global 1 {t-treset} {v1=-65.}
+global 1 {t-treset} {v2=-25.}
+global 1 {t-treset} {c2=0.25}
+# where
+minf(v)=.5*(1+tanh((v-v11)/v22))
+ninf(v)=.5*(1+tanh((v-v3)/v4))
+tau(v)=1/(phi*cosh((v-v3)/(2*v4)))
+
+
+param gc=10, gcalamp=0.5, kc1=0.15, kc2=0.18
+param tstart=100000, duration=100000
+param vk=-75, vl=-75, vca=25 
+param i=0, gk=2700, gl=150, gca=1000, cm=5300
+param v11=-20.0, v22=24, v3=-16, v4=11.2
+param gkca1=2000.0, gkca2=2000.0, Kca=5.0
+par phi=0.035
+#par phi=0.02  (gives spiking neurons with adaptation)
+# Ikca
+Ikca(gkca,v,c) = gkca/(1+(Kca/c))*(v-vk)
+# Calcium Handling
+par alpha=4.50e-6, f=0.001
+# Ikatp
+par gkatp=0.0
+ica(v) = gca*minf(v)*(v-vca)
+
+# track some currents
+aux tsec=t/1000
+aux Condkca1=gkca1/(1+(Kca/c1))
+aux Condkca2=gkca2/(1+(Kca/c2))
+aux Ica=gca*minf(V1)*(V1-Vca)
+aux Ik=gk*n1*(V1-Vk)
+aux Curkca1=Ikca(gkca1,v1,c1)
+aux Curkca2=Ikca(gkca2,v2,c2)
+aux gcalc=gcal
+
+@ meth=cvode, atol=1.0e-6, tol=1.0e-6, dt=50.0, total=300000, maxstor=10000
+@ xp=tsec, yp=v1, bound=100000
+@ nplot=2, xp=tsec, yp=c1, xp2=tsec, yp2=c2
+@ xlo=0, xhi=300, ylo=0.05, yhi=0.35
+
+done

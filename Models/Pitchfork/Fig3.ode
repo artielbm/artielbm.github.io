@@ -1,0 +1,60 @@
+# Simulates Fig. 3 in Tsaneva-Atanosova et al, Biophys. J. 90:3434-3446, May 2006
+# Morris-Lecar-like beta-cell is bistable with coupling through calcium
+# diffusion; a brief current pulse switches from oscillating to steady
+
+# init v1=-65.0, n1=0.00016, c1=0.14, v2=-65.0, n2=0.00016, c2=0.14
+init v1=-67.0, n1=0.00011, c1=0.19, v2=-66.9, n2=0.00011, c2=0.19
+
+# equations
+dv1/dt=(i1 + gl*(vl-v1) + gk*n1*(vk-v1) - Ica(v1) - Ikca(gkca1,v1,c1) + gkatp*(vk-v1) - gc*(v1 - v2))/cm
+dn1/dt=(ninf(v1) - n1)/tau(v1)
+dc1/dt=f*(-alpha*ica(v1) - kc1*c1 + gcal*(c2 - c1))
+dv2/dt=(i2 + gl*(vl-v2) + gk*n2*(vk-v2) - Ica(v2) - Ikca(gkca2,v2,c2) + gkatp*(vk-v2) - gc*(v2 - v1))/cm
+dn2/dt=(ninf(v2) - n2)/tau(v2)
+dc2/dt=f*(-alpha*ica(v2) - kc2*c2 + gcal*(c1 - c2))
+# where
+minf(v)=.5*(1+tanh((v-v11)/v22))
+ninf(v)=.5*(1+tanh((v-v3)/v4))
+tau(v)=1/(phi*cosh((v-v3)/(2*v4)))
+#
+#
+par amp1=-250.0, tstart1=50000.0, duration1=50000.0
+par amp2=250.0, tstart2=50000.0, duration2=50000.0
+param gc=5.0, gcal=0.5, kc1=0.15, kc2=0.15
+param vk=-75, vl=-75, vca=25 
+param gk=2700, gl=150, gca=1000, cm=5300
+param v11=-20.0, v22=24, v3=-16, v4=11.2
+param gkca1=2000.0, gkca2=2000.0, Kca=5.0
+par phi=0.035
+#par phi=0.02 - spiking
+
+# For bifurcation diagram, set auto=1 and use gkcastar as the bifurcation
+# parameter:
+param gkcastar=100.0, auto=0
+
+# Ikca
+Ikca(gkca,v,c) = auto*gkcastar*(v-vk) + (1-auto)*gkca/(1+(Kca/c))*(v-vk)
+# Calcium Handling
+par alpha=4.50e-6, f=0.001
+# Ikatp
+par gkatp=0.0
+ica(v) = gca*minf(v)*(v-vca)
+# Iapp
+i1 = amp1*heav(t-tstart1)*heav(tstart1+duration1-t)
+i2 = amp2*heav(t-tstart2)*heav(tstart2+duration2-t)
+
+# track some currents
+aux tsec=t/1000
+aux Condkca1=gkca1/(1+(Kca/c1))
+aux Condkca2=gkca2/(1+(Kca/c2))
+aux Ica=gca*minf(V1)*(V1-Vca)
+aux Ik=gk*n1*(V1-Vk)
+aux Curkca1=Ikca(gkca1,v1,c1)
+aux Curkca2=Ikca(gkca2,v2,c2)
+
+@ meth=cvode, atol=1.0e-6, tol=1.0e-6, dt=20.0, total=100000, maxstor=10000
+@ xp=tsec, yp=v1, bound=100000
+@ nplot=2, xp=tsec, yp=v1, xp2=tsec, yp2=v2
+@ xlo=0, xhi=100, ylo=-75, yhi=-15
+
+done
