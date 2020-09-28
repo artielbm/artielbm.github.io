@@ -1,0 +1,65 @@
+# The Keizer-Smolen model,
+# PNAS, Vol. 88, pp. 3897-3901, 1991.
+
+#
+# Initial values of the variables.
+#
+init v=-64, pc=1, po=0, j=0.86, n=0, cai=0.1
+
+#
+# Values of the model parameters.
+#
+params cm=5310, kca=0.24, f=0.015, xf=0.45, gamma=0.0000045
+###### for the goldman-hodgkin-katz equation:
+params gca=1470, rt2f=13.35, cao=8
+###### for icaf:
+params vmf=-8, smf=10, kminus=0.002, kstar=-0.000047, taumbar=1.2820513
+###### for icas:
+params vms=2, sms=14, vj=-40, sj=7, taujbar=30000
+###### for ik:
+params gk=2500, vk=-75, vn=-13, sn=5.6, taunbar=20, vbar=-75, sa=65, sb=20
+###### for ikatp:
+params gkatp=380
+
+#
+# Activation and inactivation functions.
+#
+minff(v) = 1/(1+exp((vmf-v)/smf))
+alpha(v) = minff(v)/taumbar
+beta(v)  = (1-minff(v))/taumbar
+minfs(v) = 1/(1+exp((vms-v)/sms))
+jinf(v)  = 1/(1+exp((v-vj)/sj))
+tauj(v)  = taujbar/(exp((v-vj)/(2*sj))+exp((vj-v)/(2*sj)))
+ninf(v)  = 1/(1+exp((vn-v)/sn))
+taun(v)  = taunbar/(exp((v-vbar)/sa)+exp((vbar-v)/sb))
+
+#
+# Currents.
+#
+ghk(v) = cao*v/(1-exp(v/rt2f))
+icaf(v,po) = gca*po*xf * ghk(v)
+icas(v,j) = gca*minfs(v)*j*(1-xf) * ghk(v)
+icatot(v,po,j) = icaf(v,po) +  icas(v,j)
+ik(v,n)   = gk*n*(v-vk)
+ikatp(v ) = gkatp*(v-vk)
+
+#
+# Differential equations.
+#
+v'   = -(icatot(v,po,j)+ik(v,n)+ikatp(v))/cm
+pc'  = -alpha(v)*pc + beta(v)*po
+po'  = kminus*(1-po-pc) - kstar*ghk(v)*po + alpha(v)*pc - beta(v)*po
+j'   = (jinf(v)-j)/tauj(v)
+n'   = (ninf(v)-n)/taun(v)
+cai' = f*( -icatot(v,po,j)*gamma - kca*cai )
+
+#
+# Specify some internal XPP parameters.
+#
+@ maxstor=12000
+@ total=20000, dt=2, bounds=10000
+@ method=gear, toler=0.000001, dtmin=0.0001, dtmax=10
+@ xlo=0, xhi=20000, ylo=-70, yhi=0
+
+done
+
