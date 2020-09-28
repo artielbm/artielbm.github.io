@@ -1,0 +1,19 @@
+# cker.ani
+SPEED 1
+PERMANENT
+line 0.0;0.5;1.0;0.5;$BLACK;2
+TRANSIENT
+# w nullcline:
+line null[1..50];0.5*vee[j];null[j+1];0.5*vee[j+1];$BLUE;3
+# Time counter:
+settext 2;rom;$PURPLE
+vtext 0.8;0.95;T=;flr(t/100)/10
+# v-c z-curve:
+line zvec[1..50];0.5*vee[j];zvec[j+1];0.5*vee[j+1];$BLACK;3
+# phase point:
+fcirc wscale;0.5*vscale;0.02;$ORANGE
+comet wscale;0.5*vscale;1;100;$RED
+# comet:
+comet tscale;0.5+0.5*vscale;2;20000;$PURPLE
+fcirc tscale;0.5+0.5*vscale;0.015;$GREEN
+END

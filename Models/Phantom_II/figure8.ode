@@ -1,0 +1,67 @@
+#bursting with two slow variable
+
+#units: V=mV; t=ms; g=pS; I=fA
+#Reference:  Bertram and Sherman. 
+#Calcium-based model for pancreatic islets
+#Figure 8A...medium bursting produced through the 
+#      		phantom bursting mechanism
+#Ica- calcium current
+#Ik- delayed rectifier K+ current
+#Ik(Ca)- Ca2+ dependent K+ current
+#Ik(ATP)- nucleotide-sensitive K+ current
+#c - cytosolic free Ca2+ concentration
+#cer - ER Ca2+ concentration
+
+#initial conditions
+init v=-61.5, c=0.11, n=0.0001, cer=103
+
+#parameters
+par gca=1200, gkca=700, gk=3000, gkatp=230
+par vca=25, vk=-75, cm=5300
+par taun=16, alpha=4.5e-6
+par fcyt=0.01, kpmca=0.2, kd=0.3
+par vn=-16, vm=-20, sn=5, sm=12
+par kserca=0.4, dact=0.35, dinact=0.4
+par fer=0.01, pleak=0.0005, dip3=0.5, vcytver=5, ip3=0
+
+# ionic currents
+ica(v)=gca*minf(v)*(v-vca)
+ik(v)=gk*n*(v-vk)
+ikca(v)=gkca*w*(v-vk)
+ikatp(v)=gkatp*(v-vk)
+
+#activation functions
+minf(v)=1.0/(1.0+exp((vm-v)/sm))
+ninf(v)=1.0/(1.0+exp((vn-v)/sn))
+
+#fraction of K(Ca) channels activated by cytosolic Ca2+
+w=c^5/(c^5+kd^5)
+
+#flux of Ca2+ through the membrane
+jmem=-(alpha*Ica(v)+kpmca*c)
+
+#Ca2+ influx into the ER via SERCA 
+jserca=kserca*c
+
+#efflux out of the ER has two components
+# 1. Ca2+ leak is proportional to gradient between Ca2+ and ER
+jleak=pleak*(cer-c)
+
+oinf=(c/(dact+c))*(ip3/(dip3+ip3))*(dinact/(dinact+c))
+jip3=oinf*(cer-c)
+
+#net Ca2+ efflux from the ER
+jer=jleak-jserca
+
+#differential equations
+v'=-(ica(v)+ik(v)+ikca(v)+ikatp(v))/cm
+n'=(ninf(v)-n)/taun
+c'=fcyt*(jmem+jer)
+cer'=-fer*(vcytver)*jer
+
+
+@ meth=cvode, dtmax=1, dt=5, total=170000, maxstor=100000
+@ bounds=100000000, xp=t,  yp=v, toler=1.0e-6, atoler=1.0e-6
+@ xlo=0, xhi=170000, ylo=-80, yhi=-20
+
+done

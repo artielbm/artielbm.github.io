@@ -1,0 +1,88 @@
+#bursting with two slow variable
+
+#units: V=mV; t=ms; g=pS; I=fA
+#Reference:  Bertram and Sherman. 
+#Calcium-based model for pancreatic islets
+#Figure 11A...medium bursting produced through the 
+#      		phantom burting mechanism converted to fast 
+#		bursting
+# muscarinic bursting is sped up and the silent phase is depolarized.
+#Ica- calcium current
+#Ik- delayed rectifier K+ current
+#Ik(Ca)- Ca2+ dependent K+ current
+#Ik(ATP)- nucleotide-sensitive K+ current
+#IACh - depolarizing ACh current
+#c - cytosolic free Ca2+ concentration
+#cer - ER Ca2+ concentration
+#
+
+#initial conditions
+init v=-60.0, c=0.10, n=0.03, cer=95
+
+#parameters
+par gca=1200, gkca=700, gk=3000, gkatp=230
+par vca=25, vk=-75, cm=5300
+par taun=16, alpha=4.5e-6
+par fcyt=0.01, kpmca=0.2, kd=0.3
+par vn=-16, vm=-20, sn=5, sm=12
+par kserca=0.4, dact=0.35, dinact=0.4 
+par fer=0.01, pleak=0.0005, dip3=0.5, vcytver=5, tip3=1e5
+
+ip3=if(t<tip3)then(0.0)else(0.3)
+
+par gach=15.0, vach=0
+
+
+# ionic currents
+ica(v)=gca*minf(v)*(v-vca)
+ik(v)=gk*n*(v-vk)
+ikca(v)=gkca*w*(v-vk)
+ikatp(v)=gkatp*(v-vk)
+iach(v)=gach*(v-vach)
+
+
+#activation functions
+minf(v)=1.0/(1.0+exp((vm-v)/sm))
+ninf(v)=1.0/(1.0+exp((vn-v)/sn))
+
+#fraction of K(Ca) channels activated by cytosolic Ca2+
+w=c^5/(c^5+kd^5)
+
+#flux of Ca2+ through the membrane
+jmem=-(alpha*Ica(v)+kpmca*c)
+
+#Ca2+ influx into the ER via SERCA 
+jserca=kserca*c
+
+#efflux out of the ER has two components
+# 1. Ca2+ leak is proportional to gradient between Ca2+ and ER
+jleak=pleak*(cer-c)
+
+# 2. Ca2+ efflux through the IP3R
+jip3=oinf*(cer-c)
+
+#fraction of open channels
+oinf=((c/(dact+c))^3)*((ip3/(dip3+ip3))^3)*(dinact/(dinact+c))^3
+
+#net Ca2+ efflux from the ER
+jer=jleak+jip3-jserca
+
+It=-(ica(v)+ik(v)+ikca(v)+ikatp(v))/cm
+Ith=-(ica(v)+ik(v)+ikca(v)+ikatp(v)+iach(v))/cm
+
+#differential equations
+v'=if(t<tip3)then(It)else(Ith)
+n'=(ninf(v)-n)/taun
+c'=fcyt*(jmem+jer)
+cer'=-fer*(vcytver)*jer
+
+aux ex=gkca*w
+aux omega=w
+aux tsec=t/1000.0
+
+@ meth=cvode, dtmax=1, dt=2, total=250000, maxstor=1000000
+@ bounds=1e10, xp=tsec,  yp=v, toler=1.0e-10, atoler=1.0e-10
+@ xlo=0, xhi=250, ylo=-80, yhi=-20
+
+done
+
