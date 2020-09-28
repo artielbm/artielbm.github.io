@@ -1,0 +1,106 @@
+# Fig. 8, Goforth et al, J. Gen. Physiol., in  press.
+
+v(0)=-56.0
+n(0)=0.0006
+c(0)=0.044
+cer(0)=60.0
+css(0)=0.33
+
+# Units: conductances in pS; currents in fA; Ca concentrations in uM; time in ms
+
+# Ca parameters
+ 
+# To simulate Tg, set tthap=60000 (assuming 60-second episodes)
+# To do successive pulses with Tg, decrement tthap by length of episode (60000)
+# each time
+
+# Calcium Handling: cytosol 
+par alpha=4.5e-06, kpmca=0.12
+
+# Calcium Handling: ER
+par ksercamax=0.1, tauserca=30000, tthap=1e6
+# Slow decay of kserca when thapsigargin applied:
+kserca = if(t>tthap)then( ksercamax*exp(-(t-tthap)/tauserca) )else(ksercamax)
+
+par per=0.003
+
+# volume and buffer parameters (*10^-6 ul)
+par vcyt=5.0, ver=0.2, vss=2.0
+par fcyt=0.01, fer=0.005, fss=0.04
+par px=0.025
+
+
+# Parameters for Currents
+# IKv
+par vn=-15, sn=5.6, vk=-70, taun=10.8, gkv=2500
+# ICa
+par vca=30, vm=-13, sm=8, gca=1450
+# IKCa
+par kd=0.7, nh=8, gkca=1200
+# ILeak
+par gleak=14, vleak=-30
+# IKatp
+par gkatp=63
+
+# Miscellaneous
+par cm=5300
+
+# Functions
+
+vervss=ver/vss
+vcytvss=vcyt/vss
+vcytver=vcyt/ver
+
+ninf = 1/(1+exp((vn-v)/sn))
+minf = 1/(1+exp((vm-v)/sm))
+omega = 1/(1+(kd/css)^nh)
+
+ICa = gca*minf*(v-vca)
+IKCa = gkca*omega*(v-vk)
+IKatp = gkatp*(v-vk)
+IKv = gkv*n*(v-vk)
+ILeak = gleak*(v-vleak)
+
+# ER fluxes
+Jserca = kserca*c
+Jrelease = per*(cer - css)
+
+# Subspace fluxes
+Jx = px*(css-c)
+
+# pulse protocol parameters:
+par vclamp=0
+par toff=25000
+par vhold=-65,tfirst=500
+par tpulse=5500,period=200,tend=10500
+par vfirst=25,vpulse=40
+
+# Apply the pulse protocol
+ts = t-tpulse
+von=vhold+vfirst*(heav(t-tfirst))
+voff=vfirst*(heav(t-toff))
+vprotocol=von+vpulse*(heav(mod(ts,period))-heav(mod(ts,period)-100))*(heav(t-tpulse)-heav(t-tend))-voff
+
+# Equations
+
+v' = (1-vclamp)*(-ICa - IKv - IKatp  - IKCa - ILeak)/cm + 10.0*vclamp*(vprotocol - v)
+n' =  (ninf - n)/taun
+c' =   fcyt*(Jx  - kpmca*c - Jserca - alpha*ICa)
+cer' = fer*(vcytver*Jserca - Jrelease)
+css' = fss*(vervss*Jrelease - vcytvss*Jx)
+
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=5.0, total=180000, 
+@ maxstor=1000000, bounds=10000000, xp=t, yp=v
+@ xlo=0, xhi=180000, ylo=-80, yhi=-10
+
+# Auxiliary quantities to plot:  
+aux Itot=(ICa+IKv+IKatp+IKCa+ILeak)*0.001
+# average cytosolic Ca2+ (weighted average of css and c):
+aux cavg = (vss*css+vcyt*c)/(vss+vcyt)
+# steady-state version of css (weighted average of cer and c):
+aux ss=(ver*per*cer + vcyt*px*c)/(ver*per + vcyt*px)
+aux V=v
+aux Ikca=ikca*0.001
+aux w=omega
+
+done

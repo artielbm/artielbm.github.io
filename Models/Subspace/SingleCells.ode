@@ -1,0 +1,101 @@
+# Approximates Fig. 8C, Zhang et al, Biophys. J. 84(5):2852-2870, 2003.
+# For Fig. 8B, set gca=1400 and allow 60 seconds or so transient for cer to
+# adjust.
+# For Fig. 8A, set gca=1500 and again allow transient time for cer to adjust.
+# Erratum: kpmca=0.2, not 0.18 as stated in paper.
+# Note: noise in xpp only works with method set to euler.
+# It is instructive to run without noise as well (set noise=0)
+
+# Initial conditions:
+
+v(0)=-35.49333408418444
+n(0)=0.02481242802796614
+c(0)=0.0583644954932078
+cer(0)=214.7617740022606
+css(0)=0.3944351683781516
+s(0)=0.1394364248612375
+
+wiener w
+
+# Conductances in pS; currents in fA; Ca concentrations in uM; time in ms
+
+# conductances
+par gkatpbar=300, s0=0.14
+par gkca=1200
+# leak
+par gleak=14, vleak=-30
+
+
+# Ca parameters  
+
+par kserca=0.2
+par per=0.001
+
+# volume and buffer parameters (*10^-6 ul)
+par vcyt=5.0, ver=0.2, vss=2.0
+par fcyt=0.01, fer=0.005, fss=0.04
+# transfer rate from subspace to cytosol
+par px=0.025
+
+# Ik
+par vn=-15, sn=5.6, vk=-70, taun=20, gk=2500
+# Ica
+par vca=30, vm=-13, sm=8
+par gca=1050
+# Ikca
+par kd=0.7, q=8
+
+# Miscellaneous
+par cm=5300, lambda=1.85
+# Calcium Handling: cytosol 
+par alpha=4.5e-06, kpmca=0.2
+# Calcium Handling: ER
+
+# Functions
+
+vervss=ver/vss
+vcytvss=vcyt/vss
+vcytver=vcyt/ver
+
+ninf = 1/(1+exp((vn-v)/sn))
+minf = 1/(1+exp((vm-v)/sm))
+omega = 1/(1+(kd/css)^q)
+
+ica = gca*minf*(v-vca)
+ikca = gkca*omega*(v-vk)
+ikatp = gkatpbar*s*(v-vk)
+ik = gk*n*(v-vk)
+ileak = gleak*(v-vleak)
+
+# ER fluxes
+jerp = kserca*c
+jrelease = per*(cer - css)
+
+# Subspace fluxes
+jxfer = px*(css-c)
+
+
+# Stochastics (following Fox, R. F., Biophys. J. 72:2068-2074 1997.)
+
+par alphas=1, taus=100, nkatp=500, noise=1
+betas = alphas*(1/s0 - 1)
+
+varnoise=sqrt((alphas*(1-s)+betas*s)/(taus*nkatp))
+
+# Equations
+
+v' = (-ica - ik - ikatp  - ikca - ileak)/cm
+n' =  lambda*(ninf - n)/taun
+c' =   fcyt*(jxfer - kpmca*c - jerp - alpha*ica)
+cer' = fer*(vcytver*jerp - jrelease)
+css' = fss*(vervss*jrelease - vcytvss*jxfer)
+s' = (alphas*(1-s)-betas*s)/taus + noise*w*varnoise
+
+@ meth=euler, toler=1.0e-10, atoler=1.0e-10, dt=0.1, total=30000, 
+@ maxstor=1000000, bounds=10000000, xp=tsec, yp=v
+@ xlo=0, xhi=30, ylo=-70, yhi=-10
+
+aux tsec = t/1000.0
+aux cavg = (vss*css+vcyt*c)/(vss+vcyt)
+
+done

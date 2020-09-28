@@ -1,0 +1,95 @@
+# Fig. 6, Goforth et al, J. Gen. Physiol., in press.
+# Default shows V-clamp protocol.  Plot itot to see total current.
+
+# Initial Conditions:
+
+v(0)=-65.0
+n(0)=0.0001
+c(0)=0.014
+cer(0)=110
+
+# Units: conductances in pS; currents in fA; Ca concentrations in uM; time in ms
+
+
+# Ca parameters  
+
+# To simulate Tg, set tthap=60000 (assuming 60-second episodes)
+# To do successive pulses with Tg, decrement tthap by length of episode (60000)
+# each time
+
+par alpha=4.5e-06, kpmca=0.08
+par ksercamax=0.08, tauserca=60000, tthap=1e6
+# Slow decay of kserca when thapsigargin applied:
+kserca = if(t>tthap)then( ksercamax*exp(-(t-tthap)/tauserca) )else(ksercamax)
+
+par per=0.0001
+# volume and buffer parameters (*10^-6 ul)
+par vcyt=5.0, ver=0.2, vss=2.0
+par fcyt=0.01, fer=0.005
+
+# Parameters for Currents
+# IKv
+par vn=-15, sn=5.6, vk=-70, taun=11.1, gkv=2500
+# ICa
+par vca=30, vm=-15, sm=8, gca=1200
+# IKCa
+par gkca=800, kd=0.6, q=5
+# ILeak
+par gleak=15, vleak=-30
+# IKatp
+par gkatp=60
+
+# Miscellaneous
+par cm=5300
+
+# Functions
+
+vcytver=vcyt/ver
+
+ninf = 1/(1+exp((vn-v)/sn))
+minf = 1/(1+exp((vm-v)/sm))
+omega = 1/(1+(kd/c)^q)
+
+ICa = gca*minf*(v-vca)
+IKCa = gkca*omega*(v-vk)
+IKatp = gkatp*(v-vk)
+IKv = gkv*n*(v-vk)
+ILeak = gleak*(v-vleak)
+
+# ER fluxes
+Jserca = kserca*c
+Jrelease = per*(cer - c)
+
+# pulse protocol parameters:
+par vclamp=1
+par toff=25000
+par vhold=-65,tfirst=500
+par tpulse=5500,period=200,tend=10500
+par vfirst=25,vpulse=40
+
+# Apply the pulse protocol
+ts = t-tpulse
+von=vhold+vfirst*(heav(t-tfirst))
+voff=vfirst*(heav(t-toff))
+vprotocol=von+vpulse*(heav(mod(ts,period))-heav(mod(ts,period)-100))*(heav(t-tpulse)-heav(t-tend))-voff
+
+# Equations
+
+v' = (1-vclamp)*(-ICa - IKv - IKatp  - IKCa - ILeak)/cm + 10.0*vclamp*(vprotocol - v)
+n' =  (ninf - n)/taun
+c' =   fcyt*(Jrelease - kpmca*c - Jserca - alpha*ica)
+cer' = fer*vcytver*(Jserca - Jrelease)
+
+# Numerical integration control parameters
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=5.0, total=60000, maxstor=200000
+@ bounds=10000000, xp=t, yp=v
+@ xlo=0, xhi=60000, ylo=-80, yhi=-10
+
+# Auxiliary quantities to plot
+aux V=v
+aux Ik=IKv*0.001
+aux Ikca=IKCa*0.001
+aux Itot=(ICa+IKv+IKatp+IKCa+ILeak)*0.001
+aux w=omega
+
+done
