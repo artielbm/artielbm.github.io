@@ -1,0 +1,57 @@
+# From P. Smolen and J. Keizer, J. Membr. Biol. 127:9-19, 1992
+# Supplied by Gerda de Vries, 8/4/99
+
+# dependent variables
+init v=-53  n=0.002  ca=0.15  d=0.42  pc=0.9  pot=0.02  i=0.98  j=0.47  
+
+# parameters
+par farada=96487  cm=1  a=65  b=20  c=60  
+# note: captot inconsistent with alpha, but consistent with paper
+par captot=5309  
+par vk=-75  cao=7  
+par akca=0.12  fr=0.03  rad=7  
+par alambda=1.2  lambdam=0.78  
+par lambdai=1  lambdaj=1  lambdak=1  
+par vn=-20  slopen=5.3  vm=-15  slopem=6.2  vmj=-11  slopemj=3.6  
+par vi=36  slopei=4.5  taui=2600  
+par vj=50  slopej=6.3  tj=50000  tjmin=1500  
+par gk=5000  gatpbar=6000  gcam=1470  x=0.27  gcal=6.3  
+par kone=0.45  ktwo=0.012  ka=2e-05  r=0.9  r1=0.35  tot=1  
+par k2m=65  k2s=1.512  k3m=0.005  k3p=0.02  
+par damp=0  hill=3  akdamp=0.6  
+
+# fixed variables
+alpha=3.0e+03/(8.0e0*pi*farada*rad**3)
+phij=1.0/(1.0+exp((v+vj)/slopej))
+phii=1.0/(1.0+exp((v+vi)/slopei))
+phik=1.0/(1.0+exp((vn-v)/slopen))
+phica=1.0/(1.0+exp((vm-v)/slopem))
+phicaj=1.0/(1.0+exp((vmj-v)/slopemj))
+tauj=tjmin+tj/(exp((v+vj)/(2*slopej))+exp(-(v+vj)/(2*slopej)))
+gcab=gcam*(x*pot+(1.0-x)*phicaj*j)+gcal
+alphan=exp((v+75.0)/a)
+betan=exp((-v-75.0)/b)
+taun=c/(alphan+betan)
+ghk=cao*v/(1.0-exp(v/13.35))
+k2p=-k2s*ghk
+f2inf=k2p/(k2m+k2p)
+k1m=lambdam*phica
+k1p=lambdam*(1.0-phica)
+gatp=gatpbar*(1.0+d/kone)/(1.0+d/kone+(tot-d)/ktwo)
+ica=gcab*ghk
+ikv=gk*i*n*(v-vk)
+ikatp=gatp*(v-vk)
+
+# equations
+v'=-(ica+ikv+ikatp)/captot
+n'=alambda*(phik-n)/taun
+ca'=fr*(-alpha*ica-akca*ca-damp*ca**hill/(akdamp**hill+ca**hill))
+d'=ka*((tot-d)-d*exp(r*(1.0-(ca/r1))))
+pc'=k1p*pot*(1.0-f2inf)-k1m*pc
+pot'=-(k1p*pot*(1.0-f2inf)-k1m*pc)-lambdak*(k3p*f2inf*pot-k3m*(1.0-pot-pc))
+i'=lambdai*(phii-i)/taui
+j'=lambdaj*(phij-j)/tauj
+
+@ meth=cvode, atoler=1.0e-6, toler=1.0e-6, dt=10, total=40000
+
+done
