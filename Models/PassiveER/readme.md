@@ -1,6 +1,8 @@
 The xpp files below were used in R. Bertram and A. Sherman. 2004. *Filtering of calcium transients by the endoplasmic reticulum in pancreatic beta-cells*, Biophys. J., 87:3775-3785.[[PubMed]](https://pubmed.ncbi.nlm.nih.gov/15465863/)
 
-Cartoons of Two-Compartment (Left) and Three-Compartment (Right) Models [[cartoons.jpeg]](cartoons.jpeg)
+Cartoons of Two-Compartment (Left) and Three-Compartment (Right) Models 
+
+![cartoons.jpeg](cartoons.jpeg)
 
 The model reproduces the experiments in Arredouani et al, Am. J. Physiol. __282__:E982-E991, 2002 [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/12401716/)
 
