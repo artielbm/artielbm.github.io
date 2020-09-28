@@ -1,0 +1,13 @@
+# Ref: Sherman and Rinzel, PNAS 89:2471--2474, 1992.
+# two variable fast subsystem only
+init v=-47.0,n=0.05
+params s=0.15,vca=25,vk=-75
+params gk=10.0,gca=3.6,gs=4.0
+params vn=-16,sn=5.6,vm=-20,sm=12
+params lambda=0.9,taun=20
+phik(v) =  1/(1+exp((vn-v)/sn))
+phica(v) = 1/(1+exp((vm-v)/sm))
+v' = (gca*phica(v)*(vca-v)+gk*n*(vk-v)+gs*s*(vk-v))/taun
+n' = lambda*(phik(v)-n)/taun
+o qbc.opt
+done

@@ -1,0 +1,17 @@
+% Generic Beta-Cell model with slow V-dependent K+ current
+% Ref: Sherman and Rinzel, PNAS 89:2471--2474, 1992.
+% (3 variable bursting version)
+init v=-60  n=0.001  s=0.18  
+par vca=25  vk=-75  
+par gk=10  gca=3.6  gs=4  
+par vn=-16  sn=5.6  vm=-20  sm=12  
+par taun=20  lambda=0.9  
+par taus=20000  vs=-40  ss=10  
+phik(arg1)=1/(1+exp((vn-arg1)/sn))
+phica(arg1)=1/(1+exp((vm-arg1)/sm))
+phis(arg1)=1/(1+exp((vs-arg1)/ss))
+v'= (gca*phica(v)*(vca-v)+gk*n*(vk-v)+gs*s*(vk-v))/taun
+n'= lambda*(phik(v)-n)/taun
+s'= (phis(v)-s)/taus
+option burst.opt
+done

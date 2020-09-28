@@ -1,0 +1,15 @@
+4
+%qbc = Quasi-Beta-Cell ref: Sherman and Rinzel, PNAS 89:2471--2474, 1992.
+% Two cells coupled by gap junctions
+variables v=-47.0,n=0.05,v2=-47.0,n2=0.05
+params s=0.15,vca=25,vk=-75
+params gk=10.0,gca=3.6,gs=4.0,gc=0.05
+params vn=-16,sn=5.6,vm=-20,sm=12
+params taun=20,lambda=0.9
+user phik 1 1/(1+exp((vn-arg1)/sn))
+user phica 1 1/(1+exp((vm-arg1)/sm))
+odev  (gca*phica(v)*(vca-v)+gk*n*(vk-v)+gs*s*(vk-v)-gc*(v-v2))/taun
+oden  lambda*(phik(v)-n)/taun
+odev2 (gca*phica(v2)*(vca-v2)+gk*n2*(vk-v2)+gs*s*(vk-v2)-gc*(v2-v))/taun
+oden2 lambda*(phik(v2)-n2)/taun
+done
