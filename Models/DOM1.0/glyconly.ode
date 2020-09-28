@@ -1,0 +1,171 @@
+# glyconly.ode
+#
+# This file contains the program for just glycolysis with nucleotide 
+# concentrations fixed.
+# It is a two-variable, simplified version of the model in 
+# Smolen, JTB, 174:137-148 1995 as used in  Bertram et al 
+# Biophys. J., 87:3074-3087 2004. 
+
+# State variables:
+#    G6P  -- glucose 6-phosphate concentration
+#    FBP  -- fructose 1,6-bisphosphate concentration
+
+# Initial conditions:
+G6P(0)=200
+FBP(0)=40
+
+# Parameter sets for various behaviors (use File/Get Set to select):
+
+# -----------------------------------------------------
+
+# Parameters
+#  R_GK--glucokinase rate
+#  Atot--total adenine nucleotide concentration (micromolar)
+#  K1--Kd for AMP binding
+#  K2--Kd for FBP binding
+#  K3--Kd for F6P binding
+#  K4--Kd for ATP binding
+#  famp, etc--Kd amplification factors for heterotropic binding
+#  famp corresponds to f13 in paper
+#  fmt  corresponds to f41
+#  ffbp corresponds to f23
+#  fbt  corresponds to f42
+#  fatp corresponds to f43
+#  R_GPDH--glyceraldehyde phosphate dehydrogenase rate
+
+# Glycolytic parameters
+num K1=30, K2=1, K3=50000, K4=1000
+num famp=0.02, fmt=20, ffbp=0.2, fbt=20, fatp=20
+
+# Glycolytic expressions
+F6P = 0.3*G6P
+
+# nucleotide concentrations used for R_PFK
+par Atot=3000
+par ATP=2000
+# rad = sqrt((ADP-Atot)^2-4*ADP^2)
+# ATP = 0.5*(Atot-ADP+rad)
+AMP = ADP^2/ATP
+ADP = (-ATP + sqrt(ATP^2 - 4*ATP*(ATP - ATOT)) )/2
+
+# Iterative calculation of R_PFK (cf. Smolen95, Eq. 12)
+# alpha=1 -- AMP bound
+# beta=1 -- FBP bound
+# gamma=1 -- F6P bound
+# delta=1 -- ATP bound
+
+# (alpha,beta,gamma,delta)
+# (0,0,0,0)
+weight1=1
+topa1=0
+bottom1=1
+
+# (0,0,0,1)
+weight2=ATP^2/K4
+topa2=topa1
+bottom2=bottom1+weight2
+
+# (0,0,1,0)
+weight3=F6P^2/K3
+topa3=topa2+weight3
+bottom3=bottom2+weight3
+
+# (0,0,1,1)
+weight4=(F6P*ATP)^2/(fatp*K3*K4)
+topa4=topa3+weight4
+bottom4=bottom3+weight4
+
+# (0,1,0,0)
+weight5=FBP/K2
+topa5=topa4
+bottom5=bottom4+weight5
+
+# (0,1,0,1)
+weight6=(FBP*ATP^2)/(K2*K4*fbt)
+topa6=topa5
+bottom6=bottom5+weight6
+
+# (0,1,1,0)
+weight7=(FBP*F6P^2)/(K2*K3*ffbp)
+topa7=topa6+weight7
+bottom7=bottom6+weight7
+
+# (0,1,1,1)
+weight8=(FBP*F6P^2*ATP^2)/(K2*K3*K4*ffbp*fbt*fatp)
+topa8=topa7+weight8
+bottom8=bottom7+weight8
+
+# (1,0,0,0)
+weight9=AMP/K1
+topa9=topa8
+bottom9=bottom8+weight9
+
+# (1,0,0,1)
+weight10=(AMP*ATP^2)/(K1*K4*fmt)
+topa10=topa9
+bottom10=bottom9+weight10
+
+# (1,0,1,0)
+weight11=(AMP*F6P^2)/(K1*K3*famp)
+topa11=topa10+weight11
+bottom11=bottom10+weight11
+
+# (1,0,1,1)
+weight12=(AMP*F6P^2*ATP^2)/(K1*K3*K4*famp*fmt*fatp)
+topa12=topa11+weight12
+bottom12=bottom11+weight12
+
+# (1,1,0,0)
+weight13=(AMP*FBP)/(K1*K2)
+topa13=topa12
+bottom13=bottom12+weight13
+
+# (1,1,0,1)
+weight14=(AMP*FBP*ATP^2)/(K1*K2*K4*fbt*fmt)
+topa14=topa13
+bottom14=bottom13+weight14
+
+# (1,1,1,0) -- the most active state of the enzyme
+weight15=(AMP*FBP*F6P^2)/(K1*K2*K3*ffbp*famp)
+topa15=topa14
+topb=weight15
+bottom15=bottom14+weight15
+
+# (1,1,1,1)
+weight16=(AMP*FBP*F6P^2*ATP^2)/(K1*K2*K3*K4*ffbp*famp*fbt*fmt*fatp)
+topa16=topa15+weight16
+bottom16=bottom15+weight16
+
+# Phosphofructokinase rate
+# lambda, Vmax as in Smolen95, Eq. 3
+num lambda=0.06, Vmax=2
+R_PFK=Vmax*(lambda*topa16 + topb)/bottom16
+
+# GPDH flux:
+R_GPDH = 0.2*sqrt(FBP)
+
+
+# conversion parameter for glycolytic subsystem
+# kappa erroneously called lambda in paper; renamed kappa for
+# consistency with Smolen, JTB, 1995 and Pedersen et al, 2005.
+num kappa=0.005
+par R_GK=0.2
+
+
+# Differential equations
+
+G6P' = kappa*(R_GK - R_PFK)
+FBP' = kappa*(R_PFK - 0.5*R_GPDH)
+
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=20.0, total=1800000,
+@ maxstor=100000,bounds=10000000, xp=tmin, yp=FBP
+@ xlo=0, xhi=30, ylo=0, yhi=40
+
+# Auxiliary quantities for plotting:
+aux tsec=t/1000
+aux tmin=t/60000
+aux Adp=ADP
+aux ratio=ATP/ADP
+aux f6p=F6P
+
+done
