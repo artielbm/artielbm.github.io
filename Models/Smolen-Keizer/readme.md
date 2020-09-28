@@ -1,5 +1,7 @@
 
-xpp file for the Smolen-Keier model, J. Keizer and P. Smolen. 1992. *Slow voltage inactivation of Ca2+ currents and bursting mechanisms for the mouse pancreatic beta-cell*. J. Membr. Biol. __127__(1):9 – 19. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/1328645/).
+Supplementary material for the Smolen-Keier model, J. Keizer and P. Smolen. 1992. *Slow voltage inactivation of Ca2+ currents and bursting mechanisms for the mouse pancreatic beta-cell*. J. Membr. Biol. __127__(1):9 – 19. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/1328645/).
+
+xpp file:
 
 [[sk.ode]](sk.ode)
 
