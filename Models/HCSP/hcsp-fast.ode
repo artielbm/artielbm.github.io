@@ -1,0 +1,218 @@
+### MGP Oct 8, 08: Changed fusion N1-NF to one step, Hill-fcn of Cmd
+### MGP Oct 22, 08: Added low affinity fusion to N5& N6(docked but no MD)
+
+# -> NA -> ND -> N6 -> N5 -> N1 -> NF -> NR ->
+#          |      \    |
+#          V	   \   V
+#      	  NFH 	    -> NF5
+#	   |            |
+# 	   V	        V
+#         NRH ->       NR5 ->
+
+
+# Calcium compartments:
+
+# Units:
+# time: sec
+# volume: l
+# conductance: pS
+# V: mV
+# I: fA
+# J: uM/s
+# alpha: umol/sec/fA
+
+# pm influx:
+
+# V protocol:
+
+par Vrest=-70, Vburst=+20
+# par tstep=0.0, tstim=60.0, tgap=10.0, tmax=2.0
+
+par Grest=1.0, Gburst=1.0
+
+#par step1=1, step2=0.75, step3=0.25, step4=0.25
+#par gstep1=1.0, gstep2=0.50, gstep3=0.25, gstep4=0.25
+par t1=.1, t2=.2, t3=.3, t4=10.0, duration=0.01
+
+
+#V = Vrest + (Vburst - Vrest)*(step1*heav(t - t1) + step2*heav(t - t2) + step3*heav(t - t3) + step4*heav(t - t4))
+
+### HCSP protocol, Yang & Gillis 2004, fig 3
+V= Vrest + (Vburst - Vrest)*(heav(t-t1)*heav(t1+duration-t) + heav(t-t2)*heav(t2+duration-t) + heav(t-t3)*heav(t3+duration-t) + heav(t-t4))
+
+### flash release of Ca2+
+par tflash=0.5, cflash=2
+global 1{t-tflash} {ci=cflash}
+
+
+
+GlucFact = Grest + (Gburst - Grest)*heav(t-t4)
+#*(gstep1*heav(t - t1) + gstep2*heav(t - t2) + gstep3*heav(t - t3) + gstep4*heav(t - t4))
+
+par ts=1
+
+
+
+par fmd=0.01, fi=0.01, B=17250, 
+!fv=vmd/vcell
+#fv=0.00365
+par alpha=5.18e-15, vcell=1.15e-12 , vmd=0.00385e-15
+#vmd=4.2e-15,  
+#----------- MGP: md radius=20 nm, 115 domains, vmd=115*4/3*pi*(mdrad)^3
+#-----------      diff const=230 um^2/s, B=fmd*3*230/(0.01)^2=17250
+
+# Vikman et al.:
+# control conditions, the values of Gtot, sm, VCa and Vm (see
+# Materials and methods section) averaged 1·5 0·1 nS,
+# 8·7 0·4 mV, 64 3 mV and -11 2 mV respectively...
+
+### L-type 50-60 % of total Ca2+ current 
+### (Mears & Rojas 2006, Schulla 2003, Gilon et al 1997)
+
+
+
+#       pS      pS      mV      mV     mV
+par gL=150, gR=150, Vm=-20, Vca=25, sm=5
+
+minf(v) = 1/(1 + exp((Vm-V)/sm))
+
+
+# Rates are in seconds, following Yi-der,  I multiply ODE RHS's by ts to get in minutes
+IL=gL*minf(V)*(V - Vca)
+IR=gR*minf(V)*(V - Vca)
+
+# Molar fluxes:
+JL = alpha*IL/vmd
+JR = alpha*IR/vcell
+
+# pumps and stores:
+
+par Jsercamax=41.0, Kserca=0.27, Jpmcamax=21.0, Kpmca=0.5, Jleak=-0.94, Jncx0=18.67
+
+Jserca = Jsercamax*Ci^2/(Kserca^2 + Ci^2)
+Jpmca = Jpmcamax*Ci/(Kpmca + Ci)
+Jncx = Jncx0*(Ci - 0.25)
+
+L=Jserca + Jpmca + Jncx + Jleak
+
+Cmd(0)=0.0674
+Ci(0)=0.06274
+
+
+
+Cmd' = ts*(-fmd*JL - fmd*B*(Cmd - Ci))
+ci' = ts*(-fi*JR + fv*fi*B*(Cmd - Ci) - fi*L)
+
+
+
+
+aux Vout=V
+aux Gout=GlucFact
+
+# Vesicles:
+
+N1(0)=7.69
+N5(0)=38.45
+N6(0)=297.17
+NF(0)=1.5e-7
+NR(0)=2.3e-5
+NA(0)=964.8
+ND(0)=12.06
+NFH(0)=8e-5
+NRH(0)=0.012
+
+par k1=20, km1=100, r1=0.005, rm1=0.025, r20=0.00015, rm2=0.001
+par r30=0.002, rm3=0.00007, u1=2000, u2=3, u3=0.02
+par ra0=0.224, rma=0.0002
+par Kp=0.01, Kp2=0.01
+
+# almost docked, docked*=HCSP
+par rd=0.002, rmd=0.16
+
+r2 = r20*Ci/(Ci + Kp2)
+r3 = r30*Ci/(Ci + Kp)
+ra = GlucFact*ra0*Ci/(Ci + Kp)
+
+
+# slow HCSP fusion
+par Fmax=30, Kf=2.5, nfu=4
+fusion = Fmax*Ci^nfu/(Kf^nfu + Ci^nfu)
+
+aux fushcsp=fusion
+
+# low affinity MD fusion
+par fffmax=30, Kfff=22, nfff=4
+fff = fffmax*Cmd^nfff/(Kfff^nfff + Cmd^nfff)
+
+# low affinity cyto fusion
+fff5= factor5*fffmax*Ci^nfff/(Kfff^nfff + Ci^nfff)
+fff6= factor6*fffmax*Ci^nfff/(Kfff^nfff + Ci^nfff)
+
+par factor5=0.1, factor6=0
+
+N1' = ts*(r1*N5-rm1*N1-fff*N1)
+N5' = ts*(rm1*N1 - (r1 + rm2)*N5 + r2*N6 - fff5*N5)
+N6' = ts*(r3*ND + rm2*N5 - (rm3 + r2)*N6 - fff6*N6)
+NA' = ts*(ra - rma*NA - rd*NA + rmd*ND)
+ND' = ts*(rd*NA - rmd*ND - r3*ND + rm3*N6 - fusion*ND)
+NF' = ts*(fff*N1-u2*NF)
+NR' = ts*(u2*NF - u3*NR)
+SE' = ts*(u3*NR)
+cumcap' = ts*fff*N1*3.5
+cumhcsp' = ts*fusion*ND*3.5
+cum5'= ts*(fff5*N5+fff6*N6)*3.5
+aux totcap=cumcap+cumhcsp+cum5
+
+global 0 t {cumcap=0;cumhcsp=0;cum5=0;se=0;seh=0}
+
+NFH' = ts*(fusion*ND - u2*NFH)
+NRH' = ts*(u2*NFH - u3*NRH)
+SEH' = ts*(u3*NRH)
+
+NF5' = ts*((fff5*N5+fff6*N6) - u2*NF5)
+NR5' = ts*(u2*NF5 - u3*NR5)
+SE5' = ts*(u3*NR5)
+
+
+
+totSE'=ts*u3*(NR+NRH+NR5)
+
+aux docked = n6 + n5 + n1
+aux primed = n5 + n1
+aux JF = fff*N1
+aux JR = u3*NR
+aux JFHCSP = fusion*ND
+aux jsec_Math = u2*NF
+aux R3=r3
+aux R2=r2
+
+# samples collected every 2 minutes
+par tau=120.0
+
+# instantaneous secretion - "measured" is 2 min average
+aux secr =     4.5*u3*NR
+aux secrhcsp = 4.5*u3*NRH
+aux secr5    = 4.5*u3*NR5
+aux totsecr  = 4.5*u3*(NR+NRH+NR5)
+
+aux measured=4.5*(totSE - delay(totSE, tau))
+aux measMD=4.5*(SE - delay(SE, tau))
+aux meashcsp=4.5*(SEH - delay(SEH, tau))
+aux meas5=4.5*(SE5 - delay(SE5, tau))
+
+#aux N1prime=-(3*k1*Cmd + rm1)*N1 + km1*N2 + r1*N5
+#aux N6prime = r3 + rm2*N5 - (rm3 + r2)*N6
+# aux R3_Math = r3*ts
+
+@ meth=cvode, tol=1e-9, atol=1e-9, dt=0.0001, total=1
+@ xp=t, xlo=0, xhi=1, yp=cumcap, xp2=t, yp2=cumhcsp
+@ yhi=100, bounds=1e6, maxstor=10000000
+@ delay=125
+
+aux tmin=t/60
+
+" {dt=0.0001,total=1,duration=0.01,tflash=0.5,vburst=20,xp=t,yp=cumcap,xp2=t,yp2=cumhcsp,yhi=100,xhi=1,ylo=0} Short HCSP protocol
+" {dt=1,total=3600,duration=0,tflash=10000,vburst=-20,xp=tmin,yp=secr,xp2=tmin,yp2=secrhcsp,xhi=60,yhi=3,ylo=0} Long protocol with newcomers
+
+done
+ 
