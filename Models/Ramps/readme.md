@@ -10,8 +10,8 @@ J. Ren, A. Sherman, R. Bertram, P. B. Goforth, L. S. Satin, C. Waters and C. Nun
 
 *	V and gKATP in Keizer-Magnus Mode (XPP) (Figure 8A, C)  [[Fig8AC.ode]](Fig8AC.ode)
 
-*	V and gKATP in Keizer-Magnus Mode (Matlab) (Figure 8A, C) [Fig8AC.m]](Fig8AC.m)
+*	V and gKATP in Keizer-Magnus Mode (Matlab) (Figure 8A, C) [[Fig8AC.m]](Fig8AC.m)
 
-*	V and gKATP in Glycolytic Oscillation Mode (XPP) (Figure 8B, D) [Fig8BD.ode]](Fig8BD.ode)
+*	V and gKATP in Glycolytic Oscillation Mode (XPP) (Figure 8B, D) [[Fig8BD.ode]](Fig8BD.ode)
 
-*	V and gKATP in Glycolytic Oscillation Mode (Matlab) (Figure 8B, D) [Fig8BD.m]](Fig8BD.m)
+*	V and gKATP in Glycolytic Oscillation Mode (Matlab) (Figure 8B, D) [[Fig8BD.m]](Fig8BD.m)
