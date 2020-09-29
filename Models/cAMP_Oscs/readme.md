@@ -3,7 +3,7 @@ This is supplementary material for:
 
 B. E. Peercy, A. S. Sherman and R. Bertram. 2015. *Modeling of glucose-induced cAMP oscillations in pancreatic β-cells: cAMP rocks when metabolism rolls*. Biophys. J., __109__(2):439-49. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/26200880/)
 
-[The files are also available at the journal website.]
+The files are also available at the journal website: [[doi]](https://www.cell.com/biophysj/fulltext/S0006-3495(15)00607-4)
 
 Readme File [[Readme.txt]](Readme.txt)
 
