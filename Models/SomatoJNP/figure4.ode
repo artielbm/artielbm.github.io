@@ -1,0 +1,117 @@
+# 01/05/07: can make Figs. 3, 4, 5 in the Tsaneva-Atanasova et al, J. Neurophysiol. 98:131-144, 2007- AS
+#
+# NB: Times are in s
+#
+#
+# Declare the parameters
+param  gcal=0.74, gcat=0.105
+param  gkdr=3.85, A=0.11
+param  taundr=0.09, g_bk=0.55, g_bkfar=10
+param  gcng=0.1245, gleak=0.0, g_kir=15.75
+param  nu_er=0.025, nu_mp=28.0, per=0.00015
+param  vbk0=0.1, xx=18, kcabk=1.5, kbk=10.0
+param  bkblock=0.0
+param  ca0=4.0, eleak=-40.0
+param  dcell=10.0, f=0.01, eca=60.0, ekir=-83.0, ek=-80.0, ecng=-20.0
+
+param  vml=-25.0,   kml=12.0
+param  vmt=-45.0,   kmt=8.0,  vht=-56.0,  kht=5.0
+param  vndr=0.0,    kndr=8.0
+
+param  km_mp=0.08
+param  tau=1.0,     caeq=0.1
+param  ph=0.0,      s0=0.0,    wid=0.25
+param  autoca=0
+
+#noise term (white noise)
+wiener w
+par noise=0.0
+
+# for resetting:
+param iappbar=4.8, treset=2000.0, width=0.05
+#
+iapp = iappbar*(heav(t - treset) - heav(t - treset - width))
+#
+#      stimulus
+s(t) = s0*heav(t-ph)*heav(ph+wid-t)
+#
+#
+acell = pi*dcell^2
+vcell = pi/6000.0*dcell^3
+cm    = acell/1e5
+alpha = 1e5/(2*9.65*acell)
+beta  = acell/(1000*vcell)
+betaer = acell/(100*vcell)
+#
+# Define some functions
+mlinf(v)  = 1/(1+exp(-(v-vml)/kml))
+mtinf(v)  = 1/(1+exp(-(v-vmt)/kmt))
+htinf(v)  = 1/(1+exp((v-vht)/kht))
+ndrinf(v) = 1/(1+exp(-(v-vndr)/kndr))
+#j_eff(ca) = nu_mp*ca
+j_eff(ca) = nu_mp*ca^2/(ca^2+km_mp^2)
+alphakir = 0.1/(1+exp(0.06*(v-ekir-200.)))
+betakir = (3*exp(0.0002*(v-ekir+100.))+exp(0.1*(v-ekir-10)))/(1+exp(-0.5*(v-ekir)))
+Kirinf = alphakir/(alphakir+betakir)
+#
+# Define the right-hand sides
+dv/dt   = 1/cm*(iapp-i_cal-i_cat-i_kdr-i_cng-i_kir-i_bk-i_bkfar-i_leak-noise*w)
+dca/dt  = (1-autoca)*( f*beta*(-alpha*(i_cal+i_cat)-j_eff(ca)) - (1/vcell)*(nu_er*ca - per*(caer-ca))) + autoca*(ca0 - ca)
+dcaer/dt = f*0.1*vcell*(nu_er*ca-per*(caer-ca))
+dndr/dt = (ndrinf(v)-ndr)/taundr
+#
+# Define the fixed variables
+i_cal  = gcal*(mlinf(v))^2*(v-eca)
+i_cat  = gcat*(mtinf(v))^2*(htinf(v))*(v-eca)
+cad = -A*(i_cal + i_cat)
+vbk    = vbk0-xx*ln(cad/kcabk) 
+bk_inf(v) = 1/(1+exp(-(v-vbk)/kbk)) 
+i_bk   = (1 - bkblock)*g_bk*bk_inf(v)*(v - ek)
+i_kdr  = gkdr*ndr*(v-ek)
+vbkfar   = vbk0-xx*ln(ca/kcabk) 
+bkfar_inf(v) = 1/(1+exp(-(v-vbkfar)/kbk)) 
+i_bkfar = (1 - bkblock)*g_bkfar*bkfar_inf(v)*(v - ek)
+i_cng    = gcng*(v-ecng)
+i_kir    = g_kir*Kirinf*(v-ekir)
+i_leak = gleak*(v-eleak)
+gbkfar = g_bkfar*bkfar_inf(v)
+gbknear = g_bk*bk_inf(v)
+gkir = g_kir*Kirinf
+ginr = gkir + gcng + gleak
+
+
+i_all  = i_cal+i_cat+i_kdr+i_cng+i_kir
+#
+# Now we keep the fixed variables
+#
+aux ikir = i_kir
+aux ica = i_cat + i_cal
+aux ibk = i_bk
+aux ibkfar = i_bkfar
+aux ibktot = i_bk + i_bkfar
+aux ikdr = i_kdr
+aux icng = i_cng
+aux gbkf = gbkfar
+aux gbkn = gbknear
+aux gir = gkir
+aux gr = ginr
+aux cadom = cad
+aux pump= j_eff(ca)
+aux pumprat = j_eff(ca)/ca
+#
+# Initial conditions
+init  v=-61.1
+init  ca=0.973
+init  caer=100.0
+init  ndr=0.000231
+#
+#
+@ meth=qualrk, toler=1.0e-10, atoler=1.0e-10, dt=0.01, total=20
+@ maxstore=10000000, bounds=10000000, noutput=10
+@ xp=t, yp=v, xlo=0, xhi=10, ylo=-70, yhi=-10
+
+@ ntst=50.,nmax=20000.,npr=20000.,dsmin=0.000001,dsmax=0.1,ds=0.01,parmin=-1,parmax=10.
+@ epsl=1e-08, epsu=1e-08, epss=1e-06
+@ autoxmin=0.,autoxmax=2.5.,autoymin=-80.,autoymax=0.
+
+done
