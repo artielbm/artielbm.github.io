@@ -5,7 +5,7 @@ B. E. Peercy, A. S. Sherman and R. Bertram. 2015. *Modeling of glucose-induced c
 
 [The files are also available at the journal website.]
 
-Readme File. [[Readme.txt]]
+Readme File [[Readme.txt]](Readme.txt)
 
 Zip archive of all files. [[ODEs.zip]](ODEs.zip)
 
