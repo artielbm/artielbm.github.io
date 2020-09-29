@@ -1,0 +1,65 @@
+# Pituitary model used in:  Stern et al, Resetting Behavior in a Model of Bursting in Secretory
+# Pituitary Cells: Distinguishing Plateaus from
+# Pseudo-Plateaus, Bull. Math. Biol., in press.
+#
+# Reproduces Fig. 2(b).  To obtain Fig. 9, vary treset, iappbar, and width
+#
+# Times are in s
+#
+init v=-57.31515986286935, ca=0.4861280925831973, ml=0.06191856353928273, ndr=0.0003852853926905176
+#
+#
+# Declare the parameters
+p ca0=1.0
+p dcell=10  f=0.01 eca=60 ek=-80
+p gcal=1.366 gcat=.001 gkdr=4.1
+p gkca=.25 kmkca=.5 gleak=0.3 eleak=-50
+p vml=-25  kml=12
+p vmt=-45 kmt=8 vht=-52 kht=5
+p vndr=5 kndr=8
+p vtau=-60 ktau=22
+p taumlss=0.027 taundr=0.020
+p nu_mp=40 km_mp=0.08
+p tau=0.5 caeq=0.1
+p autoca=0
+p ifixed=0, iappbar=5, treset=1000.0, width=0.120
+#
+iapp = iappbar*(heav(t - treset) - heav(t - treset - width))
+#
+acell = pi*dcell^2
+vcell = pi/6000*dcell^3
+cm    = acell/1e5
+alpha = 1e5/(2*9.65*acell)
+beta  = acell/(1000*vcell)
+#
+# Define some functions
+mlinf(v) = 1/(1+exp(-(v-vml)/kml))
+mtinf(v) = 1/(1+exp(-(v-vmt)/kmt))
+#
+htinf(v) = 1/(1+exp((v-vht)/kht))
+ndrinf(v) = 1/(1+exp(-(v-vndr)/kndr))
+tauml(v) = taumlss*1/(exp((v-vtau)/ktau)+2*exp(-2*(v-vtau)/ktau))
+j_eff(ca) = nu_mp*ca^2/(ca^2+km_mp^2)
+#
+# Define the right-hand sides
+v'   = 1/cm*(ifixed + iapp-i_cal-i_cat-i_kdr-i_kca-i_leak)
+ca'  = (1 - autoca)*( (caeq-ca)/tau+f*beta*(-alpha*(i_cal+i_cat)-j_eff(ca)) ) + autoca*(ca0 - ca)
+ml'  = (mlinf(v)-ml)/tauml(v)
+ndr' = (ndrinf(v)-ndr)/taundr
+#
+# Ionic currents
+i_cal = gcal*ml^2*(v-eca)
+i_cat = gcat*(mtinf(v))^2*(htinf(v))*(v-eca)
+i_kdr = gkdr*ndr*(v-ek)
+i_kca = gkca*(ca^4)/((ca^4)+(kmkca^4))*(v-ek)
+i_leak = gleak*(v-eleak)
+i_all = i_cal+i_cat+i_kdr+i_kca+i_leak
+#
+# Extra quantities to plot
+aux al   = alpha
+aux be   = beta
+aux area = acell
+aux vol  = vcell
+#
+@ maxstor=1000000, meth=cvode, xlo=0, xhi=10, ylo=-80, yhi=20, total=10
+@ bounds=10000, toler=1e-9, atoler=1e-9, dt=0.001

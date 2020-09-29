@@ -1,0 +1,91 @@
+# 6/21/00 Reduced 3 variable model
+# Written by: A. LeBeau
+# Modified by:  J. Stern
+# Filename:     som0.2.ode
+# Date:         5/7/99
+# Previous filename:    som0.1.ode
+#
+# The first bursting version of a somatotroph model
+# NB: Times are in s
+#
+#
+#
+# Declare the parameters
+param  ca0=4.0
+param  dcell=10.0,  f=0.01,   eca=60.0,   ek=-80.0
+param  gcal=2.2,    gcat=0.5, gkdr=4.1,   gkca=0.5,  kmkca=1.0
+param  gd=0.15,     ed=-20.0, gh=0.15,    gleak=0.0, eleak=-65.0
+param  vml=-25.0,   kml=12.0, vhl=-32.0,  khl=6.0
+param  vmt=-45.0,   kmt=8.0,  vht=-52.0,  kht=5.0
+param  vndr=5.0,    kndr=8.0, vtau=-60.0, ktau=22.0
+param  tauhl=2.0,   taundr=0.020
+param  nu_mp=40.0,  km_mp=0.08
+param  tau=0.5,     caeq=0.1
+param  ph=0.0,      s0=0.0,    wid=0.25
+param  autoca=0
+# for resetting:
+param iappbar=4.8, treset=2.0, width=0.05
+#
+iapp = iappbar*(heav(t - treset) - heav(t - treset - width))
+#
+#      stimulus
+s(t) = s0*heav(t-ph)*heav(ph+wid-t)
+#
+#
+acell = pi*dcell^2
+vcell = pi/6000.0*dcell^3
+cm    = acell/1e5
+alpha = 1e5/(2*9.65*acell)
+beta  = acell/(1000*vcell)
+#
+# Define some functions
+mlinf(v)  = 1/(1+exp(-(v-vml)/kml))
+hlinf(v)  = 1/(1+exp((v-vhl)/khl))
+mtinf(v)  = 1/(1+exp(-(v-vmt)/kmt))
+htinf(v)  = 1/(1+exp((v-vht)/kht))
+ndrinf(v) = 1/(1+exp(-(v-vndr)/kndr))
+j_eff(ca) = nu_mp*ca^2/(ca^2+km_mp^2)
+#
+# Define the right-hand sides
+dv/dt   = 1/cm*(iapp-i_cal-i_cat-i_kdr-i_kca-i_d-i_h-i_leak)
+dca/dt  = (1-autoca)*( (caeq-ca)/tau+f*beta*(-alpha*(i_cal+i_cat)-j_eff(ca)) ) + autoca*(ca0 - ca)
+dndr/dt = (ndrinf(v)-ndr)/taundr
+#
+# Define the fixed variables
+i_cal  = gcal*(mlinf(v))^2*(v-eca)
+i_cat  = gcat*(mtinf(v))^2*(htinf(v))*(v-eca)
+i_kdr  = gkdr*ndr*(v-ek)
+i_kca  = gkca*(ca^4)/((ca^4)+(kmkca^4))*(v-ek)
+i_d    = gd*(v-ed)
+i_h    = gh*(v-ek)
+i_leak = gleak*(v-eleak)
+i_all  = i_cal+i_cat+i_kdr+i_kca+i_d+i_h+i_leak
+#
+# Now we keep the fixed variables
+aux ical = i_cal
+aux icat = i_cat
+aux ikdr = i_kdr
+# aux ika  = i_ka
+aux ikca = i_kca
+aux id   = i_d
+aux ih   = i_h
+aux uleak = i_leak
+aux scca = ca*100.0
+aux jeff = j_eff(ca)
+aux ikcaact=(ca^4)/((ca^4)+(kmkca^4))
+aux al   = alpha
+aux be   = beta
+aux area = acell
+aux vol  = vcell
+aux iall = i_all
+#
+#
+# Initial conditions
+init  v=-61.1
+init  ca=0.973
+init  ndr=0.000231
+#
+#
+@ maxstor=1000000, meth=cvode, xlo=0, xhi=10, ylo=-80, yhi=20, total=5 \
+bounds=10000.0, toler=1e-9, atoler=1e-9, dt=0.001, xhi=5
+done

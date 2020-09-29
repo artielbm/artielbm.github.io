@@ -1,0 +1,30 @@
+# Reference: 
+# A. Sherman and J. Rinzel and J. Keizer, 1988, Biophys. J.,54:411-425
+
+init v=-65, n=0.001, ca=0.5
+params gkcabar=30000,lambda=1.6,vca=110,vk=-75
+params gk=2500,gca=1400,captot=5309.3,vbar=-75
+params vn=-15,sn=5.6,vm=4,sm=14,vh=-10,sh=10,a=65,b=20,c=60
+params f=0.001, alpha=4.506e-6, kca=0.03, kd=100.0
+phik(v) = 1/(1+exp((vn-v)/sn))
+phica(v) = 1/(1+exp((vm-v)/sm))
+phih(v) = 1/(1+exp((v-vh)/sh))
+ica(v) = gca*phica(v)*phih(v)*(v-vca)
+taun(v) = c/(exp((v-vbar)/a)+exp((vbar-v)/b))
+
+p iappbar=5000.0, treset=1000000.0, width=100.0
+
+iapp = iappbar*(heav(t - treset) - heav(t - treset - width))
+
+gkca = gkcabar*ca/(kd + ca)
+v' =  (-ica(v) + gk*n*(vk-v) + gkca*(vk-v) + iapp)/captot
+n' =  lambda*(phik(v)-n)/taun(v)
+ca' = f*(-alpha*ica(v) - kca*ca)
+
+@ total=20000, meth=cvode, toler=1e-6, atoler=1e-6, dt=5
+@ xhi=20000, ylo=-70, yhi=-10, maxstor=200000, bound=1e4
+
+aux Iapp=iapp
+
+
+done
