@@ -1,5 +1,5 @@
 % Source: Bertram and Sherman, "Population Dynamics of Synaptic Release Sites",
-% SIAM J. App. Math, 1998.
+% SIAM J. App. Math, 1998. 58(1), 142–169. 
 % This file corresponds to Fig. 2.4
 % It is also approximately the deterministic limit of the Monte Carlo
 % simulation in Bertram et al, J. Neurophysiol. 75:1919 '96.
