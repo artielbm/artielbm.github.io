@@ -5,5 +5,5 @@ K. Tsaneva-Atanasova, A. Sherman, F. van Goor, and S. S. Stojilkovic. 2007. Mech
 The model in this paper accounts for the natural variation and responses to ion substition and modulation by GHRH and somatostatin seen in pituitary somatotrophs.
 This XPP file reproduces figure 4 and, with parameter variations as described in the figure legends, the other figures in the paper:
 
-*	Natural variation in period reproduced by block of BK channels (Figure 4)
+*	Natural variation in period reproduced by block of BK channels (Figure 4). [[figure4.ode]](figure4.ode)
 
