@@ -1,0 +1,116 @@
+% Source: Bertram and Sherman, "Population Dynamics of Synaptic Release Sites",
+% SIAM J. App. Math, 1998.
+% This file corresponds to Fig. 2.4
+% It is also approximately the deterministic limit of the Monte Carlo
+% simulation in Bertram et al, J. Neurophysiol. 75:1919 '96.
+
+% Note: Calcium is driven by voltage-clamp pulses here.  Any Hodgin-Huxley
+% type model can be used instead, as v is just a time-dependent input to
+% the calcium-binding machinery.
+
+% Initial conditions corresponding to steady-state when clamped to V = -65 mV:
+
+S10(0)=0.0315223799311045
+S20(0)=0.008656853406975746
+S30(0)=1.688118507831646e-05
+S40(0)=4.893490632336555e-07
+S11(0)=1.71152378201683e-05
+S21(0)=6.974767960659078e-06
+S31(0)=7.459818038161751e-07
+S41(0)=2.144637869515973e-06
+S120(0)=0.0004539384242494251
+S130(0)=1.023747182962976e-06
+S140(0)=2.415669647732489e-08
+S230(0)=4.81980750256657e-07
+S240(0)=1.022219300275049e-08
+S340(0)=1.162656942957113e-09
+S121(0)=4.453586579189168e-07
+S131(0)=4.541907908156824e-08
+S141(0)=1.058741980895989e-07
+S231(0)=2.1510009989597e-08
+S241(0)=4.480461081253255e-08
+S341(0)=5.146450639729767e-09
+S1230(0)=3.683180589735748e-08
+S1240(0)=6.667393397771453e-10
+S1340(0)=7.178703389141581e-11
+S2340(0)=3.421080969461169e-11
+S1231(0)=1.650202191475863e-09
+S1241(0)=2.922483654095563e-09
+S1341(0)=3.177747892991811e-10
+S2341(0)=1.514476606032472e-10
+S12340(0)=2.637287191832911e-12
+S12341(0)=1.167545584067243e-11
+M(0)=0.0003673315370276691
+
+
+p k1p=3.75e-3, k1m=4e-4, k2p=2.5e-3, k2m=1e-3
+p k3p=5e-4, k3m=1e-1, k4p=7.5e-3, k4m=1e1
+% v-clamp parameters (singularity if vpulse=0):
+p vpulse=10, vhold=-65, tp=2.0, period=33.3, tfire=31.0
+% ghk/domain ca parameters:
+% rtdf = RT/F at 37 deg C (310 deg K) in mV
+p a=0.02, gcahat=7, p=14, rtdf=26.7, cao=1
+p lambda=1.0
+
+% variables
+
+s10' = -k1m*s10 - alpha*s10 + beta*s11
+s20' = -k2m*s20 - alpha*s20 + beta*s21
+s30' = -k3m*s30 - alpha*s30 + beta*s31
+s40' = -k4m*s40 - alpha*s40 + beta*s41
+
+s11' = k1p*ca*m - (k1m+k1p*ca)*s11 + alpha*s10 - beta*s11
+s21' = k2p*ca*m - (k2m+k2p*ca)*s21 + alpha*s20 - beta*s21
+s31' = k3p*ca*m - (k3m+k3p*ca)*s31 + alpha*s30 - beta*s31
+s41' = k4p*ca*m - (k4m+k4p*ca)*s41 + alpha*s40 - beta*s41
+
+s120' = -(k1m+k2m)*s120 - alpha*s120 + beta*s121
+s130' = -(k1m+k3m)*s130 - alpha*s130 + beta*s131
+s140' = -(k1m+k4m)*s140 - alpha*s140 + beta*s141
+s230' = -(k2m+k3m)*s230 - alpha*s230 + beta*s231
+s240' = -(k2m+k4m)*s240 - alpha*s240 + beta*s241
+s340' = -(k3m+k4m)*s340 - alpha*s340 + beta*s341
+
+s121' = k1p*ca*s21+k2p*ca*s11 - (k1m+k2m+k1p*ca+k2p*ca)*s121 + alpha*s120 - beta*s121
+s131' = k1p*ca*s31+k3p*ca*s11 - (k1m+k3m+k1p*ca+k3p*ca)*s131 + alpha*s130 - beta*s131
+s141' = k1p*ca*s41+k4p*ca*s11 - (k1m+k4m+k1p*ca+k4p*ca)*s141 + alpha*s140 - beta*s141
+s231' = k2p*ca*s31+k3p*ca*s21 - (k2m+k3m+k2p*ca+k3p*ca)*s231 + alpha*s230 - beta*s231
+s241' = k2p*ca*s41+k4p*ca*s21 - (k2m+k4m+k2p*ca+k4p*ca)*s241 + alpha*s240 - beta*s241
+s341' = k3p*ca*s41+k4p*ca*s31 - (k3m+k4m+k3p*ca+k4p*ca)*s341 + alpha*s340 - beta*s341
+
+s1230' = -(k1m+k2m+k3m)*s1230 - alpha*s1230 + beta*s1231
+s1240' = -(k1m+k2m+k4m)*s1240 - alpha*s1240 + beta*s1241
+s1340' = -(k1m+k3m+k4m)*s1340 - alpha*s1340 + beta*s1341
+s2340' = -(k2m+k3m+k4m)*s2340 - alpha*s2340 + beta*s2341
+
+s1231' = k1p*ca*s231+k2p*ca*s131+k3p*ca*s121 - (k1m+k2m+k3m+k1p*ca+k2p*ca+k3p*ca)*s1231 + alpha*s1230 - beta*s1231
+s1241' = k1p*ca*s241+k2p*ca*s141+k4p*ca*s121 - (k1m+k2m+k4m+k1p*ca+k2p*ca+k4p*ca)*s1241 + alpha*s1240 - beta*s1241
+s1341' = k1p*ca*s341+k3p*ca*s141+k4p*ca*s131 - (k1m+k3m+k4m+k1p*ca+k3p*ca+k4p*ca)*s1341 + alpha*s1340 - beta*s1341
+s2341' = k2p*ca*s341+k3p*ca*s241+k4p*ca*s231 - (k2m+k3m+k4m+k2p*ca+k3p*ca+k4p*ca)*s2341 + alpha*s2340 - beta*s2341
+
+s12340' = -(k1m+k2m+k3m+k4m)*s12340 - alpha*s12340 + beta*s12341
+s12341' = k1p*ca*s2341+k2p*ca*s1341+k3p*ca*s1241+k4p*ca*s1231 - (k1m+k2m+k3m+k4m+k1p*ca+k2p*ca+k3p*ca+k4p*ca)*s12341 + alpha*s12340 - beta*s12341
+
+m' = alpha*(1-m)-beta*m
+
+% fixed variables
+
+v = (vpulse - vhold)*(heav(mod(t,period)-tfire)-heav(mod(t,period)-(tfire+tp))) + vhold
+% J. Neurophysiol. paper used 1.45 in alpha instead of 2.7
+alpha = lambda*0.6*exp(2.7*v/rtdf)
+beta = lambda*0.2*exp(-v/rtdf)
+ca = -a*gcahat*p*cao*2*v/(rtdf*(1 - exp(2*v/rtdf)))
+
+% output
+
+aux vout = v
+aux caout = ca
+aux s1 = s10 + s11
+aux s2 = s20 + s21
+aux s3 = s30 + s31
+aux s4 = s40 + s41
+aux release = s12340 + s12341
+
+@ total=197, meth=rungekutta, dt=0.1, yp=release, yhi=1.2e-07, ylo=0, xhi=200
+
+done
