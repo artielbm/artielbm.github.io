@@ -1,0 +1,114 @@
+# Calcium compartments:
+
+# Units:
+# time: sec
+# volume: l
+# conductance: pS
+# V: mV
+# I: fA
+# J: uM/s
+# alpha: umol/sec/fA
+
+# pm influx:
+
+# V protocol:
+
+par Vrest=-70, Vburst=-20
+par tstep=0.0, tstim=60.0, tgap=10.0
+
+par Grest=1.0, Gburst=3.0
+
+V = Vrest + (Vburst - Vrest)*(heav(t - tstep) - heav(t - (tstep + tstim)) + heav(t - (tstep + tstim + tgap)))
+GlucFact = Grest + (Gburst - Grest)*(heav(t - tstep) - heav(t - (tstep + tstim)) + heav(t - (tstep + tstim + tgap)))
+
+par ts=60
+
+
+par fmd=0.01, fi=0.01, B=200, fv=0.00365
+par alpha=5.18e-15, vmd=4.2e-15, vcell=1.15e-12
+par gL=250, Vm=-20, Vca=25, sm=5
+
+minf(v) = 1/(1 + exp((Vm-V)/sm))
+
+
+# Rates are in seconds, following Yi-der,  I multiply ODE RHS's by ts to get in minutes
+IL=gL*minf(V)*(V- Vca)
+IR=0.25*IL
+
+# Molar fluxes:
+JL = alpha*IL/vmd
+JR = alpha*IR/vcell
+
+# pumps and stores:
+
+par Jsercamax=41.0, Kserca=0.27, Jpmcamax=21.0, Kpmca=0.5, Jleak=-0.94, Jncx0=18.67
+
+Jserca = Jsercamax*Ci^2/(Kserca^2 + Ci^2)
+Jpmca = Jpmcamax*Ci/(Kpmca + Ci)
+Jncx = Jncx0*(Ci - 0.25)
+
+L=Jserca + Jpmca + Jncx + Jleak
+
+Cmd(0)=0.0674
+Ci(0)=0.06274
+
+
+
+Cmd' = ts*(-fmd*JL - fmd*B*(Cmd - Ci))
+ci' = ts*(-fi*JR + fv*fi*B*(Cmd - Ci) - fi*L)
+
+aux Vout=V
+
+# Vesicles:
+
+N1(0)=14.71376
+N2(0)=0.612519
+N3(0)=0.0084499
+N4(0)=5.098857e-6
+N5(0)=24.539936
+N6(0)=218.017777
+NF(0)=0.003399
+NR(0)=0.50988575
+SE(0)=0.0
+
+par k1=20, km1=100, r1=0.6, rm1=1, r20=0.006, rm2=0.001
+par r30=1.205, rm3=0.0001, u1=2000, u2=3, u3=0.02
+par Kp=2.3, Kp2=2.3
+
+r2 = r20*Ci/(Ci + Kp2)
+r3 = GlucFact*r30*Ci/(Ci + Kp)
+
+N1' = ts*(-(3*k1*Cmd + rm1)*N1 + km1*N2 + r1*N5)
+N2' = ts*(3*k1*Cmd*N1 -(2*k1*Cmd + km1)*N2 + 2*km1*N3)
+N3' = ts*(2*k1*Cmd*N2 -(2*km1 + k1*Cmd)*N3 + 3*km1*N4)
+N4' = ts*(k1*Cmd*N3 - (3*km1 + u1)*N4)
+N5' = ts*(rm1*N1 - (r1 + rm2)*N5 + r2*N6)
+N6' = ts*(r3 + rm2*N5 - (rm3 + r2)*N6)
+NF' = ts*(u1*N4 - u2*NF)
+NR' = ts*(u2*NF - u3*NR)
+SE' = ts*(u3*NR)
+
+aux docked = n6 + n5 + n1
+aux primed = n5 + n1
+aux JF = u1*N4
+aux JR = u3*NR
+aux jsec_Math = u2*NF
+aux R3=r3
+aux R2=r2
+
+# samples collected every 2 minutes
+par tau=2.0
+
+# 4.5 is for 9 fg/granule*1000 cells/islet to give pg/islet/min.
+# Derived from Rorsman and Rentrom, 2004, p.1032.  Also used by Bertuzzi.
+aux measured=4.5*(SE - delay(SE, tau))
+
+aux N1prime=-(3*k1*Cmd + rm1)*N1 + km1*N2 + r1*N5
+aux N6prime = r3 + rm2*N5 - (rm3 + r2)*N6
+# aux R3_Math = r3*ts
+
+@ meth=cvode, tol=1e-9, atol=1e-9, dt=2.0, t0=-2, total=102
+@ xp=t, xlo=0, xhi=100, yp=measured, yhi=350.0, bounds=1e6
+@ delay=2.0
+
+done
