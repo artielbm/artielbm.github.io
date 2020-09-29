@@ -1,4 +1,3 @@
-[Under Construction]
 
 This is supplementary material for:
 
