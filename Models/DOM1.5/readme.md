@@ -13,7 +13,9 @@ Forced GO Phase portrait of the glycolityc oscillator forced by Ca (Figure 5). [
 
 Dual Phase Plane Model Ca-dependent metabolic oscillations in the dual phase-plane model (Figure 6).  [[Fig6.ode]](Fig6.ode)
 
-Animation Files for the following are available at the journal: [[doi]](https://epubs.siam.org/doi/abs/10.1137/130920198)
+### Animation Files 
+
+Files for the following are available at the journal: [[doi]](https://epubs.siam.org/doi/abs/10.1137/130920198)
 
 Reduced DOM (Figures 2, 3, 4, 7, 8, 9)
 
