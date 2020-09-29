@@ -1,0 +1,31 @@
+% Model for synaptic release and facilitation
+% Source: "Single-Domain/Bound Calcium Hypothesis of Transmitter Release
+% and Facilitation", Bertram et al, J. Neurophysiol. 75:1919-1931. 1996.
+% This is the deterministic, four-gate model with parameters set to correspond
+% to Fig. 2.
+% The two-gate model (Fig. 1) is obtained by setting period=10 and redefining
+% release = o3*o4
+% Domain calcium is a given square-wave function of time.
+
+init o1=0,o2=0,o3=0,o4=0
+params k1=0.00375, k_1=0.0004, k2=0.0025, k_2=0.001
+params k3=0.0005,  k_3=0.1,    k4=0.0075, k_4=10
+params capulse=100, tfire=1.0, tp=1.0, period=100.0, residual=0.0
+
+% variables
+
+o1' =  k1*Ca-(k1*Ca+k_1)*o1
+o2' =  k2*Ca-(k2*Ca+k_2)*o2
+o3' =  k3*Ca-(k3*Ca+k_3)*o3
+o4' =  k4*Ca-(k4*Ca+k_4)*o4
+
+Ca = (capulse - residual)*(heav(mod(t,period)-tfire)-heav(mod(t,period)-(tfire+tp))) + residual
+
+% output
+
+aux Caout = Ca
+aux release = o1*o2*o3*o4  
+
+@ total=325, njmp=2, xhi=325, ylo=0, yhi=0.001, yp=release, meth=rungekutta
+
+done
