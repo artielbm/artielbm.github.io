@@ -1,0 +1,303 @@
+# Filename: Fig4B.ode
+# Adapted from reduced_amp_camp.ode
+#
+# The DOM from the 2004 BJ paper, with the nucleotide equations modified
+# to fit those from the mitochondrial model (2007 BJ) and with adp set to steady state.
+# In addition, AMP is dynamic and inhibited is inhibited by AMP
+
+# Fig 4 B fast bursting: cAMP and Ca in phase
+
+
+v(0)=-59.90542087212177
+n(0)=0.0001535482519664983
+c(0)=0.07383912276733551
+cer(0)=155.2558426574225
+G6P(0)=229.4098520341097
+FBP(0)=4.308373636351894
+cAMP(0)=0.8606031783115629 
+
+
+# ----------------------------------------------------------------
+# Membrane and Ca components
+
+#BIFrat-ratio of VPFK2 to VFBPase2
+num BIFrat=0.1
+
+# sigmav=cyt volume/ER volume
+num pleak=0.0002, sigmav=31
+num kserca=0.4
+num lambdaer=1, epser=1
+num vm=-20,sm=12,vn=-16,sn=5,taun=20
+
+# where
+minf = 1/(1+exp((vm-v)/sm))
+ninf = 1/(1+exp((vn-v)/sn))
+
+# speed of glycolytic oscillations
+num speed=3
+
+par vk=-75
+num vca=25
+num gk=2700, cm=5300
+num gca=1000
+num nh=2, kd=0.5
+
+par gkca=450
+
+# Ikca
+ikca = gkca/(1+(kd/c)^nh)*(v-vk)
+
+# Calcium Handling
+par kpmca=0.2
+num alpha=4.50e-6, fcyt=0.01, fer=0.01
+
+# Ikatp
+par gkatpbar=18000
+
+# ICa
+ica = gca*minf*(v-vca)
+
+# Ik
+ik = gk*n*(v-vk)
+
+# Ca fluxes
+Jmem = -(alpha*ica + kpmca*c)
+
+Jserca = kserca*c
+Jleak = pleak*(cer - c)
+Jer = epser*(Jleak - Jserca)/lambdaer
+
+# -----------------------------------------------------
+# Glycolytic and Keizer-Magnus components
+
+# g6p -- glucose 6-phosphate
+# fbp -- fructose 1,6-bisphosphate
+
+# Parameters
+#  Jgk--glucokinase rate
+#  atot--total adenine nucleotide concentration (micromolar)
+#  k1--Kd for AMP binding
+#  k2--Kd for FBP binding
+#  k3--Kd for F6P binding
+#  k4--Kd for ATP binding
+#  famp,etc--Kd amplification factors for heterotropic binding
+#  Jgpdh--glyceraldehyde phosphate dehydrogenase rate
+#  convert--converts time from sec to msec
+
+# Glycolytic parameters
+par Jgk=0.21
+num k1=30, k2=1, k3=50000
+#par k4=1000
+par k4=220
+num kfbp=1.0
+num famp=0.02, fatp=20, ffbp=0.2, fbt=20, fmt=20, pfkbas=0.06
+num cat=2
+num katpase=0.0003
+num convert=0.001
+num kappa=0.2
+
+# Glycolytic expressions
+f6p = 0.3*g6p
+Jgpdh = kappa*sqrt(fbp)
+aux Jgpdh=Jgpdh
+
+# AMP expressions restored - Pranay/Artie 4/12/08
+adppfk=adp
+atppfk=atp
+amppfk=amp
+#amppfk=500   used in reduced mitophan
+
+# Iterative calculation of PFK
+# alpha=1 -- AMP bound
+# beta=1 -- FBP bound
+# gamma=1 -- F6P bound
+# delta=1 -- ATP bound
+
+# (alpha,beta,gamma,delta)
+# (0,0,0,0)
+weight1=1
+topa1=0
+bottom1=1
+
+# (0,0,0,1)gkca/(1+(kd/c)^nh)*(v-vk)
+weight2=atppfk^2/k4
+topa2=topa1
+bottom2=bottom1+weight2
+
+# (0,0,1,0)
+weight3=f6p^2/k3
+topa3=topa2+weight3
+bottom3=bottom2+weight3
+
+# (0,0,1,1)
+weight4=(f6p*atppfk)^2/(fatp*k3*k4)
+topa4=topa3+weight4
+bottom4=bottom3+weight4
+
+# (0,1,0,0)
+#weight5=fbp/k2
+weight5=(fbp/kfbp)
+topa5=topa4
+bottom5=bottom4+weight5
+
+# (0,1,0,1)
+#weight6=(fbp*atp^2)/(k2*k4*f42)
+weight6=(fbp/kfbp)*(atppfk^2)/(k4*fbt)
+topa6=topa5
+bottom6=bottom5+weight6
+
+# (0,1,1,0)
+#weight7=(fbp*f6p^2)/(k2*k3*f23)
+weight7=(fbp/kfbp)*(f6p^2)/(k3*ffbp)
+topa7=topa6+weight7
+bottom7=bottom6+weight7
+
+# (0,1,1,1)
+#weight8=(fbp*f6p^2*atppfk^2)/(k2*k3*k4*ffbp*fbt*fatp)
+weight8=(fbp/kfbp)*(f6p^2*atppfk^2)/(k3*k4*ffbp*fbt*fatp)
+topa8=topa7+weight8
+bottom8=bottom7+weight8
+
+# (1,0,0,0)
+weight9=amppfk/k1
+topa9=topa8
+bottom9=bottom8+weight9
+
+# (1,0,0,1)
+weight10=(amppfk*atppfk^2)/(k1*k4*fmt)
+topa10=topa9
+bottom10=bottom9+weight10
+
+# (1,0,1,0)
+weight11=(amppfk*f6p^2)/(k1*k3*famp)
+topa11=topa10+weight11
+bottom11=bottom10+weight11
+
+# (1,0,1,1)
+weight12=(amppfk*f6p^2*atppfk^2)/(k1*k3*k4*famp*fmt*fatp)
+topa12=topa11+weight12
+bottom12=bottom11+weight12
+
+# (1,1,0,0)
+#weight13=(amppfk*fbp)/(k1*k2)
+weight13=(amppfk/k1)*(fbp/kfbp)
+topa13=topa12
+bottom13=bottom12+weight13
+
+# (1,1,0,1)gkca/(1+(kd/c)^nh)*(v-vk)
+#weight14=(amppfk*fbp*atppfk^2)/(k1*k2*k4*fbt*fmt)
+weight14=(fbp/kfbp)*(amppfk*atppfk^2)/(k1*k4*fbt*fmt)
+topa14=topa13
+bottom14=bottom13+weight14
+
+# (1,1,1,0) -- the most active state of the enzyme
+#weight15=(amppfk*fbp*f6p^2)/(k1*k2*k3*ffbp*famp)
+weight15=(fbp/kfbp)*(amppfk*f6p^2)/(k1*k3*ffbp*famp)
+topa15=topa14
+topb=weight15
+bottom15=bottom14+weight15
+
+# (1,1,1,1)
+#weight16=(amppfk*fbp*f6p^2*atppfk^2)/(k1*k2*k3*k4*ffbp*famp*fbt*fmt*fatp)
+weight16=(fbp/kfbp)*(amppfk*f6p^2*atppfk^2)/(k1*k3*k4*ffbp*famp*fbt*fmt*fatp)
+topa16=topa15+weight16
+bottom16=bottom15+weight16
+
+# Phosphofructokinase rate
+pfk=(pfkbas*cat*topa16 + cat*topb)/bottom16
+
+# Mitochondrial nucleotide concentrations (uM)
+par Amtot=15000
+
+# Parameter units: uM, uM, uM/s
+# q1 is the Magnus-Keizer param. Increasing it increases the effect.
+# q3 is the influence of glycolytic input. Decreasing it increases the effect.
+
+par q1=0,q2=12700,q3=5
+ADPmss=q1*c+q2*exp(-Jgpdh/q3)
+ADPm=ADPmss
+ATPm=Amtot-ADPm
+RATm=ATPm/ADPm
+aux ratm=ratm
+
+# Nucleotide translocator (in um/ms)
+num FRT=0.037
+num Psim=164
+num p19=0.35,p20=2
+Jant=p19*(RATm/(RATm+p20))/exp(-0.5*FRT*Psim)
+aux JANT=Jant
+
+# Functions
+
+# Cytosolic nucleotide concentrations.
+# delta transforms  (mito volume) -> (cyto volume)/ms
+!delta=3.9/53.2
+par khyd=0.00005, JhydSS=0.00005, Ka=2.0
+
+par atot=2500
+atp=(delta*Jant)/(khyd*c+JhydSS)
+discrim=1-4*Ka*(1-Atot/atp)
+adp=(atp/(2*Ka))*(sqrt(discrim)-1)
+amp=Ka*adp^2/atp
+aux amp=amp
+aux adp=adp
+aux atp=atp
+aux at=amp+adp+atp
+
+Jhyd=(khyd*c+JhydSS)*ATP
+aux Jhyd=Jhyd
+
+# KATP channel open probability (from Magnus and Keizer, 1998, ref. 1264)
+num kdd=17, ktd=26, ktt=1
+par Dz=0
+tmin=t/60000
+mgadp = 0.165*adp
+adp3m = 0.135*adp
+atp4m = 0.05*atp
+topo = 0.08*(1+2*mgadp/kdd) + 0.89*(mgadp/kdd)^2
+bottomo = (1+mgadp/kdd)^2 * (1+adp3m/ktd+atp4m/ktt)
+katpo = topo/bottomo
+ikatp = (1-Dz)*gkatpbar*katpo*(v-vk)+Dz*gkatpbar*(v-vk) 
+
+# ------------------------------------------------------
+# cAMP component (uM and uM/ms)
+
+# reduced from Yu et al.
+par beta_ac=3.0
+num p=3
+par Kacca=0.05
+par Kpdeca=0.1
+num Kacatp=1400
+par vacbar=0.0006 alpha_ac=0.5
+#par beta_ac=1.0  original 
+par vpdebar=0.0024 alpha_pde=0.4 beta_pde=1.2 Kpdecamp=3
+par fixATP=1
+par Kacamp=200
+
+# Adenylyl kinase is inhibited by AMP
+
+vac=vacbar*(alpha_ac+beta_ac*c^p/(c^p+Kacca^p))*1/(1+AMP/Kacamp)
+vpde=vpdebar*(alpha_pde+beta_pde*c^p/(c^p+Kpdeca^p))*cAMP/(cAMP+Kpdecamp)
+
+
+# ------------------------------------------------------
+# Differential equations
+
+v' = -(Ik + Ica + Ikca + Ikatp)/cm
+n' = (ninf-n)/taun
+c' = fcyt*(Jmem + Jer)
+cer' = -fer*sigmav*Jer
+g6p' = speed*convert*(Jgk - pfk)
+fbp' = speed*convert*(pfk - 0.5*Jgpdh)
+camp'=vac*((1-fixATP)*2*ATP/(ATP+Kacatp)+fixATP)-vpde
+aux atpfac=2*ATP/(ATP+Kacatp)
+
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=20.0, total=150000
+@ maxstor=20000001,bounds=10000000, bell=0, 
+@ nplot=2 xp1=tsec, yp1=camp, xp2=tsec, yp2=c
+@ xlo=0, xhi=150, ylo=0, yhi=1.0
+@ BUT=QUIT:fq
+
+aux tsec=t/1000
+aux tmin=t/60000
+done
