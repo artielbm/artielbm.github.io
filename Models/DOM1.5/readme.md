@@ -15,7 +15,7 @@ Dual Phase Plane Model Ca-dependent metabolic oscillations in the dual phase-pla
 
 ### Animation Files 
 
-Files for the following are available at the journal: [[doi]](https://epubs.siam.org/doi/abs/10.1137/130920198)
+Files for the following are available under Supplemental Material at the journal: [[doi]](https://epubs.siam.org/doi/abs/10.1137/130920198)
 
 Reduced DOM (Figures 2, 3, 4, 7, 8, 9)
 
