@@ -1,0 +1,87 @@
+# Reduced model
+# approximating the solution of x'=-ep(x-(X(tau)-A))
+# where ep = delta/omega (Dc*S1/(V1*rh1)/omega)
+#          = diffusion into nucleus time constant (1/30min)/
+#            IBMX stimulation time constant (1/4min)
+#          ~ 2/15
+# X(tau) = C_lo*(mod(tau(i),1)<=gam*1)+C_hi*(mod(tau(i),1)>gam*1)
+# A     = gam*C_lo+(1-gam)*C_hi
+#
+# cm'=-V1/Vm(cm-Xtau)Dc*Sm2/V1/rhm2*sigma/omega
+#     +V1/Vm(c-cm)Dc*Sm1/V1/rhm1*sigma/omega
+#     (-kf*cm*b+kb(BT-b))/omega
+# b'=(-kf*cm*b+kb(BT-b))/omega
+# c'=-(c-cm)Dc*Sm1/V1/rhm1*sigma/omega
+# where 
+#
+#  Sm2=4*Pi*(1.05um)^2 surface area between V2 and Vm
+#  Sm1=4*Pi*(0.95um)^2 surface area between Vm and V1
+#  rhm2=(rho2+rhom)/2 distance between V2 and Vm domains
+#  rhm1=(rhom+rho1)/2 distance between Vm and V1 domains
+#
+set rapid_dense_buffer {kf=100, kb=100, BT=2000}
+set rapid_sparse_buffer {kf=100, kb=100, BT=20}
+set slow_dense_buffer {kf=0.01, kb=0.01, BT=2000}
+set slow_sparse_buffer {kf=0.01, kb=0.01, BT=20}
+
+par C_lo=0.05
+par C_hi=0.22
+par gam=0.75
+par kf=1 kb=1
+par BT=2000
+# 1/4min = 1/240s = 0.0042/s
+#par omega=0.0042 
+par omega=1
+#um^2/s
+par Dc=30 
+par sigma=0.073
+par per=240
+
+# Cell radii
+par rho1=1.0, rho2=5.9, rho3=0.1, rhom=0.1
+
+V1=4/3*pi*rho1^3
+S1=4*pi*rho1^2
+rh1=(rho2+rho1)/2
+Vm=4/3*pi*((rho1+rhom/2)^2-(rho1-rhom/2)^2)
+Sm1=4*pi*(rho1+rhom/2)^2
+rhm1=(rhom+rho1)/2
+Sm2=4*pi*(rho1-rhom/2)^2
+rhm2=(rho2+rhom)/2
+
+
+par tp=1, fac=1, fac2=1
+
+thetax=BT*(kb/kf)/(kb/kf+x)^2
+theta=BT/(kb/kf)
+DN=sigma*Dc/(1+theta*tp+(1-tp)*thetax)
+ep=S1/V1/rh1*DN/omega
+#ep2m=Sm2/Vm/rhm2*Dc/omega
+ep2m=fac2*Sm2/Vm/rhm2*sigma*Dc/omega
+epm1=fac*Sm1/V1/rhm1*Dc/omega
+#epm1=Sm1/Vm/rhm1*sigma*Dc/omega
+
+x(0)=0.1
+cm(0)=0.1
+c(0)=0.1
+b(0)=1820
+
+Xtau = C_lo*(mod(t,per)<=(gam*per))+C_hi*(mod(t,per)>(gam*per))
+A     = gam*C_lo+(1-gam)*C_hi
+
+x'=-ep*(x-(Xtau-0*A))
+
+cm'=-ep2m*(cm-(Xtau-0*A))+epm1*(c-cm)-kf/omega*cm*b+kb/omega*(BT-b)
+b'=-kf/omega*cm*b+kb/omega*(BT-b)
+c'=-epm1*(c-cm)
+
+aux xt=xtau
+aux ep=ep
+aux ep2m=ep2m
+aux epm1=epm1
+
+@ method=stiff, total=1500, maxstor=1000000 bound=10000001
+@ nplot=4, xp1=t, yp1=cm, xp2=t, yp2=c, xp3=t, yp3=x, xp4=t yp4=xt
+@ xlo=0 xhi=1500 ylo=0.02 yhi=0.24
+
+done

@@ -1,0 +1,152 @@
+# 1) in TRIF experiment rPKA-CFP-CAAX(x) is monomeric and 
+#    thus can only bind one cPKA-YFP(y)
+#  - we change the c^2r to cr (i.e. x+y<->PKA_xy)
+#
+# 2) Include cross over between cPKA and rPKA-CFP-CAAX, but not between
+#    cPKA-YFP and rPKA (assume cPKA-YFP too bulky to bind dimeric rPKA)
+#    (i.e. c+x<->PKA_xc)
+#
+# PKA activation - 3 compartment model with dynamic cAMP
+# adjust for rPKA + 2 cPKA <-> PKA and Lindskog cAMP to PKA model
+# adjust for 2 cAMP diffusion coefficients - in line with Rich et al.2000
+# units: r=um; t=s; [ ]=uM
+# March 24, 2008
+#
+# Update from cPKA3a_new.ode to remove "labeling"
+# ALL cPKA AND rPKA IS LABELED
+# compare with spatial model ccNL.m
+#
+# C1 - Nuclear free cPKA concentration
+# C2 - Cytosolic free cPKA concentration
+# C3 - Membrane envelope free cPKA concentration
+# P2  - PKA holoenzyme in cytosol
+# P3 - PKA holoenzyme in membrane envelope labeled by CFP
+# R2 - unbound rPKA in cytosol
+# R3 - unbound rPKA in membrane envelope
+# a1,2,3 - cAMP
+# X3 - Membrane envelope free rPKA-CFP-CAAX
+# X2 - Cytosolic free rPKA-CFP-CAAX
+# Y3 - Membrane envelope free cPKA-YFP
+# Y2 - Cytosolic free cPKA-YFP
+# Y1 - Nuclear free cPKA-YFP
+# Pxy2 - x:y PKA holoenzyme in cytosol
+# Pxy3 - x:y PKA holoenzyme in membrane envelope
+
+#
+# S1,2: Surface areas between compartments
+# D1,2: cPKA Coupling/Diffusion coefficients
+# Da: cAMP Diffusion coefficient
+# rh1: (r1+r2)/2 
+# rh2: (r2+r3)/2 
+# r1:  radius of nuclear compartment; 
+# r2:  radius of cytoplasm; 
+# r3:  submembrane thickness;
+# V1:  volume of nucleus;
+# V2:  volume of cytosol;
+# V3:  volume of submembrane;
+#
+# ka/kb: forward/backward rate constants for 
+# R + 2C <-> P=R:2C (kb depends on cAMP) 
+# kb(a)=ga*a^2/(a^2+Keq^2)
+#
+#Conservation rPKA
+# R2T = (R2 + P2) (total [] of cytosolic rPKA)
+# R3T = (R3 + P3) (total [] of boundary rPKA)
+# V*RTT = V3*R3T+V2*R2T (Total # of rPKA in cell)
+#Conservation of cPKA
+# V*CT =V1C1 +V2C2 +V3C3 +2*V2P2 +2*V3P3 +V2Pxc2 +V3Pxc3 (total # unlabeled cPKA)
+#
+#Conservation rPKA-CFP-CAAX (can now bind c as well)
+# X2T = (X2 + Pxy2 + Pxc2) (total [] of cytosolic rPKA-CFP-CAAX)
+# X3T = (X3 + Pxy3 + Pxc3) (total [] of boundary rPKA-CFP-CAAX)
+# V*XTT = V3*X3T+V2*X2T (Total # of rPKA-CFP-CAAX in cell)
+#Conservation of cPKA-YFP
+# V*YT  = V2Y2 + V3Y3 +V2Pxy2 +V3Pxy3  (total # labeled cPKA-YFP)
+
+init C1=0.02, R2=0.8, X2=0.086, Pxc2=0.06, C3=0.02, R3=1, Y3=0.47, X3=0.28, Pxc3=0.19
+init a1=0.01, a2=0.01, a3=0.01
+
+set basal {ton=1800}
+set oscillations {ton=180, tper=240}
+set constant elevation {tper=2400}
+
+# cPKA diffusion parameters
+par D2=100, D1=0.01, 
+# Cell radii
+par rho1=1.0, rho2=5.9, rho3=0.1, 
+# Periodic forcing
+par tper=240, ton=180
+# cAMP diffusion parameters
+par Da2=100, Da1=100
+# IBMX insensitive PDE
+par kpa=0.01, kpb=0.01,
+# IBMX Sensitive PDE values (klow=IBMX, khi=basal)
+par klow=1, khi=100
+par AC=1, ka=1
+#Parameters fit 
+par CT=0.1107, R3T=1, RTT=0.8208,  Keq=0.1336, ga=5.9975
+par YT=1.8490, X3T=4.3798, XTT=1.4834
+
+# if stimulus then kb is high (unbound), else kb low (bound)
+kb(a)=ga*a^2/(a^2+Keq^2)
+kPDE=if(mod(t,tper)>ton)then(klow)else(khi)
+
+#Volumes/Surface Area
+V1=4/3*pi*rho1^3
+V2=4/3*pi*((rho2+rho1)^3-rho1^3)
+V3=4/3*pi*((rho3+rho2+rho1)^3-(rho2+rho1)^3)
+V=V3+V2+V1
+S1=4*pi*rho1^2
+S2=4*pi*(rho2+rho1)^2
+rh1=(rho2+rho1)/2
+rh2=(rho3+rho2)/2
+
+#Mol Constraint for TIRF or EPI
+R2T=(V*RTT-V3*R3T)/V2
+X2T=(V*XTT-V3*X3T)/V2
+
+#Constraints
+C2=(V*CT-V1*C1-V3*C3-2*V2*(R2T-R2)-2*V3*(R3T-R3)-V2*Pxc2-V3*Pxc3)/V2
+Y2=(V*YT-V3*Y3-V2*(X2T-X2)-V3*(X3T-X3)+V3*Pxc3)/V2
+# Nucleus
+C1' = S1/V1*D1/rh1*(C2-C1)
+
+# Cytosolic
+#C2' = S2/V2*D2/rh2*(C3-C2)-S1/V2*D1/rh1*(C2-C1)-2*ka*C2^2*R2+2*kb(a2)*(R2T-R2)-ka*C2*X2+kb(a2)*Pxc2
+R2' = -ka*C2^2*R2+kb(a2)*(R2T-R2)
+X2' = -ka*Y2*X2+kb(a2)*(X2T-X2-Pxc2)-ka*C2*X2+kb(a2)*Pxc2
+Pxc2' = ka*C2*X2-kb(a2)*Pxc2
+
+# Boundary
+C3' = -S2/V3*D2/rh2*(C3-C2)-2*ka*C3^2*R3+2*kb(a3)*(R3T-R3)-ka*C3*X3+kb(a3)*Pxc3
+R3' = -ka*C3^2*R3+kb(a3)*(R3T-R3)
+Y3' = -S2/V3*D2/rh2*(Y3-Y2)-ka*Y3*X3+kb(a3)*(X3T-X3-Pxc3)
+X3' = -ka*Y3*X3+kb(a3)*(X3T-X3-Pxc3)-ka*C3*X3+kb(a3)*Pxc3
+Pxc3' = ka*C3*X3-kb(a3)*Pxc3
+
+# cAMP
+a1'=-kpb*a1+S1/V1*Da1*(a2-a1)/rh1
+a2'=-kpb*a2+S2/V2*Da2*(a3-a2)/rh2-S1/V2*Da1*(a2-a1)/rh1
+a3'=AC-kPDE*a3-kpa*a3-S2/V3*Da2*(a3-a2)/rh2
+
+
+# Labeled Free and Bound rPKA at boundary
+# X3+Pxy3+Pxc3
+CFP=X3T
+# Labeled Free and Bound cPKA at boundary
+# Y3+Pxy3
+YFP=Y3+(X3T-X3-Pxc3)
+
+aux C2=C2
+aux Y2=Y2
+aux yfp = yfp
+aux cfp = cfp
+aux ratTIRF=CFP/YFP
+aux tmin=t/60
+
+@ meth=cvode, dtmax=1, dt=0.01, 
+@ total=1680, maxstor=1000000, bounds=100000, 
+@ nplot=1, xp1=tmin, yp1=rattirf
+@ toler=1.0e-7, atoler=1.0e-7
+@ xlo=0, xhi=27, ylo=0.8, yhi=2
+

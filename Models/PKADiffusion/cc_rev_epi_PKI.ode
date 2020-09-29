@@ -1,0 +1,168 @@
+# Add in a saturating hill type pump function for PKI
+#
+# vpki*cPKA^2/cPKA^2+Kpki^2
+#
+# where Kpki is a value between the peak cPKA during oscillations 
+# and elevated levels during sustained IBMX
+#
+# Adjusted to accommodate reviewers comments (EPI only)
+#
+# 1) in EPI experiment only cPKA-cys(z) is over expressed
+#  - we assume dimeric binding and cross binding
+#     (i.e. r+2z<->Pr2z, r+2c<->Pr2c, r+z+c<->Przc, r+c+z<->Prcz)
+#
+# PKA activation - 3 compartment model with dynamic cAMP
+# adjust for rPKA + 2 cPKA <-> PKA and Lindskog cAMP to PKA model
+# adjust for 2 cAMP diffusion coefficients - in line with Rich et al.2000
+# units: r=um; t=s; [ ]=uM
+# March 24, 2008
+#
+# Update from cPKA3a_new.ode to remove "labeling"
+# ALL cPKA AND rPKA IS LABELED
+# compare with spatial model ccNL.m
+#
+# C1 - Nuclear free cPKA concentration
+# C2 - Cytosolic free cPKA concentration
+# C3 - Membrane envelope free cPKA concentration
+# P2  - PKA holoenzyme in cytosol
+# P3 - PKA holoenzyme in membrane envelope labeled by CFP
+# R2 - unbound rPKA in cytosol
+# R3 - unbound rPKA in membrane envelope
+# a1,2,3 - cAMP
+# Z3 - Membrane envelope free cPKA-cys
+# Z2 - Cytosolic free cPKA-cys
+# Z1 - Nuclear free cPKA-cys
+# Pr2c2 - r:2c PKA holoenzyme in cytosol
+# Pr2c3 - r:2c PKA holoenzyme in membrane envelope
+# Pr2z2 - r:2z PKA holoenzyme in cytosol
+# Pr2z3 - r:2z PKA holoenzyme in membrane envelope
+# Prcz2 - r:c:z PKA holoenzyme in cytosol
+# Prcz3 - r:c:z PKA holoenzyme in membrane envelope
+# Przc2 - r:z:c PKA holoenzyme in cytosol
+# Przc3 - r:z:c PKA holoenzyme in membrane envelope
+
+#Assume Prcz_j=Przc_j (but twice as much)
+
+#
+# S1,2: Surface areas between compartments
+# D1,2: cPKA Coupling/Diffusion coefficients
+# Da: cAMP Diffusion coefficient
+# rh1: (r1+r2)/2 
+# rh2: (r2+r3)/2 
+# r1:  radius of nuclear compartment; 
+# r2:  radius of cytoplasm; 
+# r3:  submembrane thickness;
+# V1:  volume of nucleus;
+# V2:  volume of cytosol;
+# V3:  volume of submembrane;
+#
+# ka/kb: forward/backward rate constants for 
+# R + 2C <-> P=R:2C (kb depends on cAMP) 
+# kb(a)=ga*a^2/(a^2+Keq^2)
+#
+#Conservation rPKA
+# R2T = (R2 + Pr2c2 + Przc2 + Prcz2 + Pr2z2) (total [] of cytosolic rPKA)
+# R3T = (R3 + Pr2c3 + Przc3 + Prcz3 + Pr2z3) (total [] of boundary rPKA)
+# V*RTT = V3*R3T+V2*R2T (Total # of rPKA in cell)
+#Conservation of cPKA
+# V*CT =V1C1 +V2C2 +V3C3 +2*V2Pr2c2 +2*V3Pr2c3+ V2Przc2 + V2Prcz2 + V3Przc3 + V3Prcz3(total # unlabeled cPKA)
+#
+#Conservation of cPKA-cys
+# V*ZT  = V1Z1+V2Z2 + V3Z3 +2*V2Pr2z2 +2*V3Pr2z3+ V2Przc2 + V2Prcz2 + V3Przc3 + V3Prcz3 (total # labeled cPKA-YFP)
+
+init C1=0.003, Z1=0.027, 
+init R2=2.50, Pr2c2=0.0007, Pr2z2=0.055, 
+init C3=0.003, Z3=0.027, R3=1.265, Pr2c3=0.0004, Pr2z3=0.0278
+init a1=0.01, a2=0.01, a3=0.01
+
+set basal {ton=1800}
+set oscillations {ton=180, tper=240}
+set constant elevation {tper=2400}
+
+# cPKA diffusion parameters
+par D2=100, D1=0.01, 
+# Cell radii
+par rho1=1.0, rho2=5.9, rho3=0.1, 
+# Periodic forcing
+par tper=240, ton=180
+# cAMP diffusion parameters
+par Da2=100, Da1=100
+# IBMX insensitive PDE
+par kpa=0.01, kpb=0.01,
+# IBMX Sensitive PDE values (klow=IBMX, khi=basal)
+par klow=1, khi=100
+par AC=1, ka=1
+#Parameters fit 
+par CT=0.017, R3T=1.30, RTT=2.5072, ZT=0.1468, Keq=0.1336, ga=5.9975
+#PKI parameters
+par vpki=1, Kpki=0.0022
+
+# if stimulus then kb is high (unbound), else kb low (bound)
+kb(a)=ga*a^2/(a^2+Keq^2)
+kPDE=if(mod(t,tper)>ton)then(klow)else(khi)
+
+#Volumes/Surface Area
+V1=4/3*pi*rho1^3
+V2=4/3*pi*((rho2+rho1)^3-rho1^3)
+V3=4/3*pi*((rho3+rho2+rho1)^3-(rho2+rho1)^3)
+V=V3+V2+V1
+S1=4*pi*rho1^2
+S2=4*pi*(rho2+rho1)^2
+rh1=(rho2+rho1)/2
+rh2=(rho3+rho2)/2
+
+
+#Mol Constraint for TIRF or EPI
+R2T=(V*RTT-V3*R3T)/V2
+
+#Constraints
+Z2 = (V*ZT-V1*Z1-V3*Z3-V2*Pr2z2-V3*Pr2z3-V*RTT+R2*V2+V2*Pr2c2+V3*R3+V3*Pr2c3)/V2 
+C2 = (V*CT-V1*C1-V3*C3-V2*Pr2c2-V3*Pr2c3-V*RTT+R2*V2+V2*Pr2z2+V3*R3+V3*Pr2z3)/V2 
+
+Prcz2 = (1/2)*(V*RTT-V3*R3T-R2*V2-V2*Pr2c2-V2*Pr2z2)/V2
+Prcz3 = (1/2)*R3T-(1/2)*R3-(1/2)*Pr2c3-(1/2)*Pr2z3
+
+# Nucleus
+C1' = S1/V1*D1/rh1*(C2-C1)-vpki*Kpki^2*C1/(C1^2+Kpki^2)
+Z1' = S1/V1*D1/rh1*(Z2-Z1)-vpki*Kpki^2*Z1/(Z1^2+Kpki^2)
+
+# Cytosolic
+#C2' = S2/V2*D2/rh2*(C3-C2)-S1/V2*D1/rh1*(C2-C1)-2*ka*(C2^2+C2*Z2)*R2+2*kb(a2)*(Pr2c2+Prcz2)+vpki*C1^2/C1^2+Kpki^2
+#Z2' = S2/V2*D2/rh2*(Z3-Z2)-S1/V2*D1/rh1*(Z2-Z1)-2*ka*(Z2^2+C2*Z2)*R2+2*kb(a2)*(Pr2z2+Prcz2)+vpki*Z1^2/Z1^2+Kpki^2
+R2' = -ka*(C2^2+2*C2*Z2+Z2^2)*R2+kb(a2)*(Pr2c2+2*Prcz2+Pr2z2)
+Pr2c2' =   ka*(C2^2)*R2- kb(a2)*(Pr2c2)
+#Prcz2' =  ka*(C2*Z2)*R2-kb(a2)*(Prcz2)
+Pr2z2' =   ka*(Z2^2)*R2- kb(a2)*(Pr2z2)
+
+# Boundary
+C3' = -S2/V3*D2/rh2*(C3-C2)-2*ka*(C3^2+C3*Z3)*R3+2*kb(a3)*(Pr2c3+Prcz3)
+Z3' = -S2/V3*D2/rh2*(Z3-Z2)-2*ka*(Z3^2+C3*Z3)*R3+2*kb(a3)*(Pr2z3+Prcz3)
+R3' = -ka*(C3^2+2*C3*Z3+Z3^2)*R3+kb(a3)*(Pr2c3+2*Prcz3+Pr2z3)
+Pr2c3' =  ka*(C3^2)*R3- kb(a3)*(Pr2c3)
+#Prcz3' = ka*(C3*Z3)*R3-kb(a3)*(Prcz3)
+Pr2z3' =  ka*(Z3^2)*R3- kb(a3)*(Pr2z3)
+
+# cAMP
+a1'=-kpb*a1+S1/V1*Da1*(a2-a1)/rh1
+a2'=-kpb*a2+S2/V2*Da2*(a3-a2)/rh2-S1/V2*Da1*(a2-a1)/rh1
+a3'=AC-kPDE*a3-kpa*a3-S2/V3*Da2*(a3-a2)/rh2
+
+#radius of cytosolic domain for imaging cyto
+par g1n=1,g2n=1,g3n=0.1,g1c=1,g2c=1,g3c=0.1
+
+nuc=(g1n*Z1+g2n*(Z2+2*Pr2z2+2*Prcz2)+g3n*(Z3+2*Pr2z3+2*Prcz3))/(g1n+g2n+g3n)
+cyto=((g1c+g2c)*(Z2+2*Pr2z2+2*Prcz2)+g3c*(Z3+2*Pr2z3+2*Prcz3))/(g1c+g2c+g3c)
+
+aux C2=C2
+aux Z2=Z2
+aux nuc=nuc
+aux cyto=cyto
+aux ratEPI=nuc/cyto
+aux tmin=t/60
+
+@ meth=cvode, dtmax=1, dt=0.01, 
+@ total=1680, maxstor=1000000, bounds=100000, 
+@ nplot=1, xp1=tmin, yp1=ratepi
+@ toler=1.0e-7, atoler=1.0e-7
+@ xlo=0, xhi=28, ylo=0.5, yhi=1
+
