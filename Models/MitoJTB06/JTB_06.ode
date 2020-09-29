@@ -1,0 +1,188 @@
+# JTB_06.ode
+#
+# This XPPAUT file contains the program for simplified mitochondrial
+# metabolism: R. Bertram, M. G. Pedersen, D. S. Luciani, and
+# A. Sherman, "A Simplified Model for Mitochondrial ATP Production",
+# J. Theor. Biol., 243:575-586, 2006.
+
+# Variables:
+#   FBP -- fructose 1,6-bisphosphase concentration. Pulsed input to model (uM).
+#   c -- cytoplasmic calcium concentration. Pulsed input to the model (uM).
+#   adpm -- mitochondrial ADP concentration (mM).
+#   nadhm -- mitochondrial NADH concentration (mM).
+#   cam -- mitochondrial calcium concentration (uM).
+#   psim -- mitochondrial inner membrane potential (mV).
+#   adp -- cytosolic ADP concentration (uM).
+
+# Actions or parameter settings to pulse FBP, Ca or both
+
+" {Fhold=0.5,Ftest=10,Chold=0.1,Ctest=0.1} Pulse FBP
+" {Fhold=5,Ftest=5,Chold=0.1,Ctest=0.3} Pulse Ca
+" {Fhold=0.5,Ftest=10,Chold=0.1,Ctest=0.3} Pulse Both
+
+# Note: To see the pure Keizer-Magnus effect on psi and atp set p3=0. This 
+# gives downward teeth during Ca pulses. The default, p3=0.01, gives upward
+# teeth, since the dehydrogenase overpowers the K-M effect.
+#
+
+# Initial conditions
+
+# FBP input - uM
+FBP(0)=0.5
+
+# Cyto Ca input - uM
+c(0)=0.1
+
+# Mito variables - mM
+adpm(0)=7.4
+nadhm(0)=0.6
+
+# Mito calcium - uM
+cam(0)=0.1
+
+# Mito inner membrane potential - mV
+psim(0)=93
+
+# Cytosolic ADP concentration - uM
+adp(0)=1850
+
+# Parameters -----------------------------------------------------
+
+# FBP Clamp parameters 
+par Fhold=1,Ftest=5,Fton=90000,Ftoff=330000
+
+# Ca Clamp parameters
+par Chold=0.1,Ctest=0.1
+
+# Mitochondrial input
+par KGPDH=0.0005
+Jgpdh=kGPDH*sqrt(fbp)
+
+# ----------------------------------------------------------------
+###### Mitochondrial Ca2+ handling #######
+# delta transforms  (mito volume) -> (cyto volume)
+# gamma transforms from uM to mM
+
+num fmito=0.01
+# delta=3.9/53.2 
+par delta=0.07
+num gamma=0.001
+
+### Uniporter [uM/ms]
+par p21=0.01,p22=1.1
+Juni=(p21*psim-p22)*c^2
+aux juni=Juni
+
+### Na/Ca exchanger [uM/ms]
+par p23=0.001,p24=0.016
+JNaCa=p23*(cam/c)*exp(p24*Psim)
+aux jnaca=JNaCa
+
+# [uM/ms] , mito -> cyto
+Jmito=JNaCa-Juni
+
+# Mitochondrial adenine and pyridine nucleotide conservation. All in [mM].
+par Amtot=15, NADmtot=10
+NADm=NADmtot-NADHm
+ATPm=Amtot-ADPm
+RATm=ATPm/ADPm
+
+# Pyruvate dehydrogenase (PDH) 
+par p1=400,p2=1
+par p3=0.01
+JPDH=(p1/(p2+NADHm/NADm))*(Cam/(p3+Cam))*Jgpdh
+aux jpdh=JPDH
+
+# Mitochondrial Inner membrane capacitance
+num Cmito=1.8
+
+#H+ leakage through mitochondrial inner membrane (uM/ms)
+par p17=0.002,p18=-0.03
+JHleak=p17*Psim+p18
+aux jhleak=JHleak
+
+# Respiration (uM/ms)
+par p4=0.6
+par p5=0.1,p6=177,p7=5
+MM1=p4*NADHm/(p5+NADHm)
+JO=MM1/(1+exp((Psim-p6)/p7))
+aux jo=JO
+
+# Proton pumping due to respiration (uM/ms)
+par p8=7,p9=0.1,p10=177,p11=5
+MM2=p8*NADHm/(p9+NADHm)
+JHres=MM2/(1+exp((Psim-p10)/p11))
+aux jhres=JHres
+
+#proton flux due to ATPase (uM/ms)
+par p12=120
+par p13=10,p14=190,p15=8.5
+b13=(p12*p13)/(p13+ATPm)
+JHatp=b13/(1.0+exp((p14-Psim)/p15))
+aux jhatp=JHatp
+
+# Phosphorylation (uM/ms)
+par p16=35
+b2=(p16*p13)/(p13+ATPm)
+JF1F0=b2/(1.0+exp((p14-Psim)/p15))
+aux jf1f0=JF1F0
+
+# ADP/ATP translocator (uM/ms)
+par p19=0.35, p20=2
+FRT=96480/(310.16*8315)
+Jant=p19*(RATm/(RATm+p20))/exp(-0.5*FRT*Psim)
+aux JANT=Jant
+aux ATPm=ATPm
+aux RATm=RATm
+
+# Cytosolic nucleotide concentrations #
+num khyd=0.00005, Jhydbas=0.00005
+num amp=500,atot=2500
+atp = atot-adp
+Jhyd=(khyd*c+Jhydbas)*ATP
+
+# ----------------------------------------------------
+###### Differential equations ######
+
+# FBP clamp protocol
+
+Fproto=Fhold + (Ftest-Fhold)*(heav(t-Fton)-heav(t-Ftoff))
+FBP' = (Fproto-FBP)/0.1
+
+# Ca clamp protocol
+num Cton1=120000,Ctoff1=150000
+num Cton2=180000,Ctoff2=210000
+num Cton3=240000,Ctoff3=270000
+
+pulse1 = (Ctest-Chold)*(heav(t-Cton1)-heav(t-Ctoff1))
+pulse2 = (Ctest-Chold)*(heav(t-Cton2)-heav(t-Ctoff2))
+pulse3 = (Ctest-Chold)*(heav(t-Cton3)-heav(t-Ctoff3))
+Cproto=Chold + pulse1 + pulse2 + pulse3
+c' = (Cproto-c)/0.1
+
+### Mitochondria
+adpm'= gamma*(JANT-JF1F0)
+cam' = -fmito*Jmito
+nadhm'= gamma*(Jpdh-JO)
+
+# Mitochondrial membrane potential [mV] (cyto-mito)
+Psim'=(JHres-JHatp-JANT-JHleak-JNaCa-2*Juni)/Cmito
+
+# Cytosolic ADP concentration
+adp' = -delta*JANT + Jhyd
+
+# ------------------------------------------------------
+# XPP Settings #
+@ meth=cvode, toler=1.0e-9, atoler=1.0e-9, dt=40.0, total=450000,
+@ maxstor=5000000,bounds=10000000, bell=0, xp=tmin, yp=FBP
+@ xlo=0, xhi=7, ylo=0, yhi=10
+aux tsec=t/1000
+aux tmin=t/60000
+aux JGPDH=Jgpdh
+aux Cm=cam
+aux ATPm=atpm
+aux Jhyd=Jhyd
+aux Jantc=delta*JANT
+aux atp=atp
+
+done
