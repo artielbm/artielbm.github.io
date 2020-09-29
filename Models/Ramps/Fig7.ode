@@ -1,0 +1,578 @@
+# Produces Fig. 7A (plus a plot of the unclamped cell)
+
+# Model originally published in Biophysical Journal, 92:1544-1555, 2007.
+
+# It includes components for glycolysis, mitochondrial metabolism, electrical
+# activity, and calcium handling. The mitochondrial terms are from J. Theor.
+# Biol., vol. 243, pp. 575-586, 2006.
+
+# Parameter vlaues for various behaviors:
+#
+# {Jgk=0.4, gkatpbar=16000, gkca=300, p21=0.04, p23=0.01} compound
+# {Jgk=0.4, gkatpbar=12000, gkca=100, p21=0.04, p23=0.01} slow
+# {Jgk=0.7, gkatpbar=16000, gkca=300, p21=0.04, p23=0.01} fast
+
+# Initial conditions
+
+# cell 1 (the clamped cell)
+
+# Cytosolic variables:
+
+# cell 1 (the clamped cell)
+
+# Cytosolic variables:
+
+v1(0)=-60
+n1(0)=0.0001507103580597575
+c1(0)=0.110243090570883
+cer1(0)=218.1402975430231
+g6p1(0)=118.0017713289007
+fbp1(0)=0.01388264533985927
+
+
+# Mito variables -  in mM
+
+adpm1(0)=13.07367367140502
+nadhm1(0)=0.04688739319846184
+
+# Mito Ca - in uM
+cam1(0)=0.05749827004572893
+
+# Mito membrane potential (mV)
+psim1(0)=154.3960060412839
+
+# Cytosolic ADP (uM)
+adp1(0)=1935.522139974692
+
+# cell 2 (the unclamped portion of the islet)
+
+# Cytosolic variables:
+
+v2(0)=-70.13504298435933
+n2(0)=1.98555916438691e-05
+c2(0)=0.0965914754838245
+cer2(0)=204.8231213851901
+g6p2(0)=118.001769929617
+fbp2(0)=0.01388334429652302
+
+# Mito variables -  in mM
+
+adpm2(0)=13.13457704942672
+nadhm2(0)=0.04245904622589001
+
+
+# Mito Ca - in uM
+cam2(0)=0.03888893250161966
+
+# Mito membrane potential (mV)
+psim2(0)=153.8093432048367
+
+# Cytosolic ADP (uM)
+adp2(0)=1945.723812198034
+
+# ----------------------------------------------------------------
+
+# Voltage clamp:
+
+# pulse protocol
+# doclamp=0 => pure current clamp
+# doclamp=1 & interrupt=1 => switch from current clamp to voltage clamp
+# interrupt=0 & doclamp=1 => do ramps from vhold
+par doclamp=1, interrupt=0
+par vhold=-60, vmin=-120, vmax=-50, tramp=2000, thold=0, period=20000
+
+
+clampenv = (heav(mod(t,period)) - heav(mod(t,period) - tramp - thold))
+rampenv = (heav(mod(t,period) - thold) - heav(mod(t,period) - tramp - thold))
+
+clampon = doclamp*(interrupt*clampenv + (1 - interrupt))
+
+vclamp = vhold + ((vmin - vhold) + (mod(t,period) - thold)/tramp*(vmax - vmin))*rampenv
+
+
+# iion in fA:
+iion = clampon*(Ik1 + Ica1 + Ikca1 + Ikatp1)
+
+# Coupling current:
+icoup = gc1*(v1 - v2)
+
+# capacitance current:
+icapac=cm*(vmax - vmin)/tramp
+
+# Plasma membrane capacitance
+num cm=5300
+
+# Ikca
+par gkca=100
+par kd=0.5
+ikca1 = gkca/(1+(kd/c1)^2)*(v1-vk)
+ikca2 = gkca/(1+(kd/c2)^2)*(v2-vk)
+
+# Ikatp
+par gkatpbar=10000
+
+# ICa
+par gca=1000
+par vca=25
+par vm=-16,sm=12
+
+minf1 = 1/(1+exp((vm-v1)/sm))
+ica1 = gca*minf1*(v1-vca)
+
+minf2 = 1/(1+exp((vm-v2)/sm))
+ica2 = gca*minf2*(v2-vca)
+
+# Ik
+par vk=-75, gk=2700
+par vn=-16,sn=5,taun=20
+ninf1 = 1/(1+exp((vn-v1)/sn))
+ninf2 = 1/(1+exp((vn-v2)/sn))
+Ik1 = gk*n1*(v1-vk)
+Ik2 = gk*n2*(v2-vk)
+
+
+# ----------------------------------------------------------------
+###### Cytosolic Calcium Handling ######
+# sigmav=cyt volume/ER volume 
+par alpha=4.50e-6, fcyt=0.01, fer=0.01
+par kpmca=0.15
+par per=0.0002, kserca=0.4, lambdaer=1, epser=1
+par sigmav=31
+par cbas=0.05
+
+# Ca fluxes
+Jmem1 = -(alpha*Ica1 + kpmca*(c1-cbas))
+Jserca1 = kserca*c1
+Jleak1 = per*(cer1 - c1)
+Jer1 = epser*(Jleak1 - Jserca1)/lambdaer
+
+Jmem2 = -(alpha*Ica2 + kpmca*(c2-cbas))
+Jserca2 = kserca*c2
+Jleak2 = per*(cer2 - c2)
+Jer2 = epser*(Jleak2 - Jserca2)/lambdaer
+
+# -----------------------------------------------------
+# Glycolytic components
+
+# g6p -- glucose 6-phosphate
+# fbp -- fructose 1,6-bisphosphate
+
+# Parameters
+#  Jgk--glucokinase rate (uM/s)
+#  Jgk_ms--glucokinase rate (uM/ms)
+#  atot--total adenine nucleotide concentration (micromolar)
+#  k1--Kd for AMP binding
+#  k2--Kd for FBP binding
+#  k3--Kd for F6P binding
+#  k4--Kd for ATP binding
+#  f41--ATP inhibition by weakening binding of AMP
+#  f42--ATP inhibition by weakening binding of FBP
+#  f43--ATP inhibition by weakening binding of F6P
+#  f23--FBP activation by tightening binding of F6P
+#  f13--AMP activation by tightening binding of F6P
+#  lambda--ratio of PFK activity in inactivated to non-inactivated form
+
+#  famp,etc--Kd amplification factors for heterotropic binding
+#  Jgpdh--glyceraldehyde phosphate dehydrogenase rate (uM/ms)
+#  kappa--converts from s to ms.
+#  Jgpdh_bas--basal GPDH produced by PFK that is not M-type.
+
+# Glycolytic parameters
+num phigk=0.3, KGPDH=0.0005
+par Jgk=0.18
+Jgk_ms=kappa*Jgk
+par k4=1000
+num k1=30, k2=1, k3=50000
+num f13=0.02, f43=20, f23=0.2, f42=20, f41=20, lambda=0.06
+num VmaxPFK=5
+num kappa=0.001
+num Jgpdh_bas=0.0005
+
+# Coupling parameters
+par permg6p0=0.01, permfbp0=0.02, gc0=10.0
+# proportion of cell type 1:
+par nneib=100
+# asense=0 for WT; 1 for Anti-Sense; -1 for Sense (over-expression)
+par asense=0
+permg6p1=(1 - asense)*0.5*permg6p0*(1 + nneib)
+permg6p2=(1 - asense)*0.5*permg6p0*(1 + 1/nneib)
+permfbp1=(1 - asense)*0.5*permfbp0*(1 + nneib)
+permfbp2=(1 - asense)*0.5*permfbp0*(1 + 1/nneib)
+gc1 = (1 - asense)*0.5*gc0*(1 + nneib)
+gc2 = (1 - asense)*0.5*gc0*(1 + 1/nneib)
+
+
+# Glycolytic expressions
+f6p1 = phigk*g6p1
+Jgpdh1 = KGPDH*sqrt(fbp1) 
+
+f6p2 = phigk*g6p2
+Jgpdh2 = KGPDH*sqrt(fbp2) 
+
+# Iterative calculation of PFK
+# alpha=1 -- AMP bound
+# beta=1 -- FBP bound
+# gamma=1 -- F6P bound
+# delta=1 -- ATP bound
+
+# (alpha,beta,gamma,delta)
+# (0,0,0,0)
+weight11=1
+topa11=0
+bottom11=1
+
+weight12=1
+topa12=0
+bottom12=1
+
+# (0,0,0,1)
+weight21=atp1^2/k4
+topa21=topa11
+bottom21=bottom11+weight21
+
+weight22=atp2^2/k4
+topa22=topa12
+bottom22=bottom12+weight22
+
+# (0,0,1,0)
+weight31=f6p1^2/k3
+topa31=topa21+weight31
+bottom31=bottom21+weight31
+
+weight32=f6p2^2/k3
+topa32=topa22+weight32
+bottom32=bottom22+weight32
+
+# (0,0,1,1)
+weight41=(f6p1*atp1)^2/(f43*k3*k4)
+topa41=topa31+weight41
+bottom41=bottom31+weight41
+
+weight42=(f6p2*atp2)^2/(f43*k3*k4)
+topa42=topa32+weight42
+bottom42=bottom32+weight42
+
+# (0,1,0,0)
+weight51=fbp1/k2
+topa51=topa41
+bottom51=bottom41+weight51
+
+weight52=fbp2/k2
+topa52=topa42
+bottom52=bottom42+weight52
+
+# (0,1,0,1)
+weight61=(fbp1*atp1^2)/(k2*k4*f42)
+topa61=topa51
+bottom61=bottom51+weight61
+
+weight62=(fbp2*atp2^2)/(k2*k4*f42)
+topa62=topa52
+bottom62=bottom52+weight62
+
+# (0,1,1,0)
+weight71=(fbp1*f6p1^2)/(k2*k3*f23)
+topa71=topa61+weight71
+bottom71=bottom61+weight71
+
+weight72=(fbp2*f6p2^2)/(k2*k3*f23)
+topa72=topa62+weight72
+bottom72=bottom62+weight72
+
+# (0,1,1,1)
+weight81=(fbp1*f6p1^2*atp1^2)/(k2*k3*k4*f23*f42*f43)
+topa81=topa71+weight81
+bottom81=bottom71+weight81
+
+weight82=(fbp2*f6p2^2*atp2^2)/(k2*k3*k4*f23*f42*f43)
+topa82=topa72+weight82
+bottom82=bottom72+weight82
+
+# (1,0,0,0)
+weight91=amp1/k1
+topa91=topa81
+bottom91=bottom81+weight91
+
+weight92=amp2/k1
+topa92=topa82
+bottom92=bottom82+weight92
+
+# (1,0,0,1)
+weight101=(amp1*atp1^2)/(k1*k4*f41)
+topa101=topa91
+bottom101=bottom91+weight101
+
+weight102=(amp2*atp2^2)/(k1*k4*f41)
+topa102=topa92
+bottom102=bottom92+weight102
+
+# (1,0,1,0)
+weight111=(amp1*f6p1^2)/(k1*k3*f13)
+topa111=topa101+weight111
+bottom111=bottom101+weight111
+
+weight112=(amp2*f6p2^2)/(k1*k3*f13)
+topa112=topa102+weight112
+bottom112=bottom102+weight112
+
+# (1,0,1,1)
+weight121=(amp1*f6p1^2*atp1^2)/(k1*k3*k4*f13*f41*f43)
+topa121=topa111+weight121
+bottom121=bottom111+weight121
+
+weight122=(amp2*f6p2^2*atp2^2)/(k1*k3*k4*f13*f41*f43)
+topa122=topa112+weight122
+bottom122=bottom112+weight122
+
+# (1,1,0,0)
+weight131=(amp1*fbp1)/(k1*k2)
+topa131=topa121
+bottom131=bottom121+weight131
+
+weight132=(amp2*fbp2)/(k1*k2)
+topa132=topa122
+bottom132=bottom122+weight132
+
+# (1,1,0,1)
+weight141=(amp1*fbp1*atp1^2)/(k1*k2*k4*f42*f41)
+topa141=topa131
+bottom141=bottom131+weight141
+
+weight142=(amp2*fbp2*atp2^2)/(k1*k2*k4*f42*f41)
+topa142=topa132
+bottom142=bottom132+weight142
+
+# (1,1,1,0) -- the most active state of the enzyme
+weight151=(amp1*fbp1*f6p1^2)/(k1*k2*k3*f23*f13)
+topa151=topa141
+topb1=weight151
+bottom151=bottom141+weight151
+
+weight152=(amp2*fbp2*f6p2^2)/(k1*k2*k3*f23*f13)
+topa152=topa142
+topb2=weight152
+bottom152=bottom142+weight152
+
+# (1,1,1,1)
+weight161=(amp1*fbp1*f6p1^2*atp1^2)/(k1*k2*k3*k4*f23*f13*f42*f41*f43)
+topa161=topa151+weight161
+bottom161=bottom151+weight161
+
+weight162=(amp2*fbp2*f6p2^2*atp2^2)/(k1*k2*k3*k4*f23*f13*f42*f41*f43)
+topa162=topa152+weight162
+bottom162=bottom152+weight162
+
+# Phosphofructokinase rate 
+% rate=(lambda*VmaxPFK*topa16 + VmaxPFK*topb)/bottom16
+% pfk=rate*(atp/(atp+2))    atp saturates
+pfk1=(lambda*VmaxPFK*topa161 + VmaxPFK*topb1)/bottom161
+pfk_ms1=kappa*pfk1
+
+pfk2=(lambda*VmaxPFK*topa162 + VmaxPFK*topb2)/bottom162
+pfk_ms2=kappa*pfk2
+
+# ----------------------------------------------------------------
+###### Mitochondrial Ca2+ handling #######
+# delta transforms  (mito volume) -> (cyto volume)/ms
+# gamma transforms uM to mM.
+
+num fmito=0.01
+!delta=3.9/53.2
+num gamma=0.001
+
+### Uniporter [uM/ms]
+par p21=0.04,p22=1.1
+
+Juni1=(p21*Psim1-p22)*c1^2
+Juni2=(p21*Psim2-p22)*c2^2
+
+### Na/Ca exchanger [uM/ms]
+par p23=0.01
+par p24=0.016
+
+JNaCa1=(p23/c1)*Cam1*exp(p24*Psim1)
+JNaCa2=(p23/c2)*Cam2*exp(p24*Psim2)
+
+# [uM/ms] , mito -> cyto
+Jmito1 = JNaCa1 - Juni1
+Jmito2 = JNaCa2 - Juni2
+
+# ----------------------------------------------------------------
+###### Mitochondrial fluxes (JTB, 243:575, 2006) ######
+
+# Mitochondrial adenine and pyridine nucleotide conservation. All in [mM].
+
+par Amtot=15, NADmtot=10
+NADm1 = NADmtot - NADHm1
+ATPm1 = Amtot - ADPm1
+RATm1 = ATPm1/ADPm1
+
+NADm2 = NADmtot - NADHm2
+ATPm2 = Amtot - ADPm2
+RATm2 = ATPm2/ADPm2
+
+# Pyruvate dehydrogenase (PDH) (uM/ms)
+par p1=400,p2=1,p3=0.01
+
+JPDH1=(p1/(p2+NADHm1/NADm1))*(Cam1/(p3+Cam1))*(Jgpdh1+Jgpdh_bas)
+JPDH2=(p1/(p2+NADHm2/NADm2))*(Cam2/(p3+Cam2))*(Jgpdh2+Jgpdh_bas)
+
+# ----------------------------------------------------------------
+###### Mitochondrial membrane components ######
+# Inner membrane capacitance
+num Cmito=1.8
+
+# H+ leakage through mitochondrial inner membrane (uM/ms)
+par p17=0.002,p18=-0.03
+JHleak1=p17*Psim1+p18
+JHleak2=p17*Psim2+p18
+
+# Respiration (uM/ms)
+par p4=0.6
+par p5=0.1,p6=177,p7=5
+
+MM11=p4*NADHm1/(p5+NADHm1)
+JO1=MM11/(1+exp((Psim1-p6)/p7))
+
+MM12=p4*NADHm2/(p5+NADHm2)
+JO2=MM12/(1+exp((Psim2-p6)/p7))
+
+# Proton pumping due to respiration  (uM/ms)
+par p8=7,p9=0.1,p10=177,p11=5
+
+MM21=p8*NADHm1/(p9+NADHm1)
+JHres1=MM21/(1+exp((Psim1-p10)/p11))
+
+MM22=p8*NADHm2/(p9+NADHm2)
+JHres2=MM22/(1+exp((Psim2-p10)/p11))
+
+# Phosphorylation. In uM/ms.
+par p13=10,p14=190,p15=8.5,p16=35
+
+b21=(p16*p13)/(p13+ATPm1)
+JF1F01=b21/(1.0+exp((p14-Psim1)/p15))
+
+b22=(p16*p13)/(p13+ATPm2)
+JF1F02=b22/(1.0+exp((p14-Psim2)/p15))
+
+# Proton flux due to ATPase (uM/ms)
+JHatp1=3*JF1F01
+JHatp2=3*JF1F02
+
+# ADP/ATP translocator. In uM/ms.
+par p19=0.35, p20=2
+FRT=96480/(310.16*8315)
+Jant1=p19*(RATm1/(RATm1+p20))/exp(-0.5*FRT*Psim1)
+Jant2=p19*(RATm2/(RATm2+p20))/exp(-0.5*FRT*Psim2)
+
+# ----------------------------------------------------
+
+###### Cytosolic nucleotide concentrations #####
+par khyd=0.00005, JhydSS=0.00005
+par amp1=500,amp2=500,atot=2500
+atp1 = atot-adp1
+atp2 = atot-adp2
+Jhyd1=(khyd*c1+JhydSS)*ATP1 
+Jhyd2=(khyd*c2+JhydSS)*ATP2 
+mgadp1 = 0.165*adp1
+adp3m1 = 0.135*adp1
+atp4m1 = 0.05*atp1
+mgadp2 = 0.165*adp2
+adp3m2 = 0.135*adp2
+atp4m2 = 0.05*atp2
+
+# IKATP
+# Dissociation constants (from Magnus and Keizer, 1998)
+par kdd=17, ktd=26, ktt=1
+
+% KATP channel open probability (from Magnus and Keizer, 1998)
+topo1 = 0.08*(1+2*mgadp1/kdd) + 0.89*(mgadp1/kdd)^2
+bottomo1 = (1+mgadp1/kdd)^2 * (1+adp3m1/ktd+atp4m1/ktt)
+katpo1 = (topo1/bottomo1)
+ikatp1 = gkatpbar*katpo1*(v1-vk)
+
+% KATP channel open probability (from Magnus and Keizer, 1998)
+topo2 = 0.08*(1+2*mgadp2/kdd) + 0.89*(mgadp2/kdd)^2
+bottomo2 = (1+mgadp2/kdd)^2 * (1+adp3m2/ktd+atp4m2/ktt)
+katpo2 = (topo2/bottomo2)
+ikatp2 = gkatpbar*katpo2*(v2-vk)
+
+
+# ------------------------------------------------------
+# Differential equations
+
+# add coupling later
+
+# cell 1:
+v1' = -(1 - clampon)*(Ik1 + Ica1 + Ikca1 + Ikatp1 -gc1*(v2 - v1))/cm + clampon*(vclamp-v1)
+n1' = (ninf1 - n1)/taun
+c1' = fcyt*(Jmem1 + Jer1 + delta*Jmito1)
+cer1' = -fer*sigmav*Jer1
+g6p1' = Jgk_ms - pfk_ms1 - permg6p1*(g6p1 - g6p2)
+fbp1' = pfk_ms1 - 0.5*Jgpdh1 - permfbp1*(fbp1 - fbp2)
+
+### Mitochondria 
+adpm1'= gamma*(JANT1-JF1F01)
+cam1' = -fmito*Jmito1
+nadhm1' = gamma*(Jpdh1-JO1)
+
+# Mitochondrial membrane potential [mV] (cyto-mito)
+Psim1'=(JHres1-JHatp1-JANT1-JHleak1-JNaCa1-2*Juni1)/Cmito
+
+# Cytosolic ADP concentration
+adp1' = -delta*JANT1 + Jhyd1
+
+# cell 2:
+v2' = -(Ik2 + Ica2 + Ikca2 + Ikatp2)/cm
+n2' = (ninf2-n2)/taun
+c2' = fcyt*(Jmem2 + Jer2 + delta*Jmito2)
+cer2' = -fer*sigmav*Jer2
+g6p2' = Jgk_ms - pfk_ms2 - permg6p2*(g6p2 - g6p1)
+fbp2' = pfk_ms2 - 0.5*Jgpdh2 - permfbp2*(fbp2 - fbp1)
+
+### Mitochondria 
+adpm2'= gamma*(JANT2-JF1F02)
+cam2' = -fmito*Jmito2
+nadhm2' = gamma*(Jpdh2-JO2)
+
+# Mitochondrial membrane potential [mV] (cyto-mito)
+Psim2'=(JHres2-JHatp2-JANT2-JHleak2-JNaCa2-2*Juni2)/Cmito
+
+# Cytosolic ADP concentration
+adp2' = -delta*JANT2 + Jhyd2
+
+
+@ meth=qrk, toler=1.0e-10, atoler=1.0e-10, dt=10.0, total=400000
+@ maxstor=100000,bounds=10000000
+@ nplot=2, xp=v1, yp=itot, lt=1, xp2=tscale, yp2=vscale
+@ xlo=-120, xhi=-50, ylo=-60, yhi=80
+
+# aux itot=(ica + ik + ikatp  + ikca + icrac)/1000
+aux tsec=t/1000
+aux tmin=t/60000
+aux Atp1=atp1/1000
+aux ratio1=atp1/adp1
+aux gkatp1=gkatpbar*katpo1
+
+# output clamp variables
+aux clampon=clampon
+aux vclamp=vclamp
+aux rampenv=rampenv
+aux clampenv=clampenv
+# output currents in pA
+aux iion=iion/1000
+aux ikatp=clampon*ikatp1/1000
+aux ik=clampon*ik1/1000
+aux ica=clampon*ica1/1000
+aux ikca=clampon*ikca1/1000
+aux icoup=clampon*icoup/1000
+aux icap=clampon*icapac/1000
+aux itot=clampon*(iion + icoup + icapac)/1000
+aux gkatp = gkatpbar*katpo1
+aux iwoica = clampon*(iion + icoup + icapac - ica1)/1000
+aux vscale = v2 + 100
+aux tscale = 70/400*t/1000 -120
+#
+
+
+done
