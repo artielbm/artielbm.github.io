@@ -1,0 +1,143 @@
+#Forced Glycolytic Oscillator
+
+g6p(0)=294.6752
+fbp(0)=6.9884
+
+par Jgk=0.19
+par speed=5
+par k1=30, k2=1, k3=50000
+par k4=220
+par famp=0.02, fatp=20, ffbp=0.2, fbt=20, fmt=20, pfkbas=0.06
+par cat=2
+par convert=0.001
+par FRT=0.037
+par Psim=164
+par p19=0.35,p20=2
+delta=3.9/53.2
+par khyd=0.00005, JhydSS=0.00005
+par atot=2500
+num amppfk=500
+
+par periodM=5
+par periodM2=5
+par periodM3=5
+par durM=2.5
+par vamp=0.129
+par clow=0.025
+
+period=periodM*(60000)
+dur=durM*(60000)
+period2=periodM2*(60000)
+period3=periodM3*(60000)
+
+c=clow+vamp*(heav(mod(t,period))-heav(mod(t,period)-dur))
+aux c=c
+
+f6p = 0.3*g6p
+Jgpdh = 0.2*sqrt(fbp)
+
+par q1=0
+par q2=12700
+
+adpm=q1*c+q2*exp(-Jgpdh/5)
+RATm=(15000-adpm)/adpm
+
+Jant=p19*(RATm/(RATm+p20))/exp(-0.5*FRT*Psim)
+
+adppfk=atot-((delta*Jant)/(khyd*c+JhydSS))
+atppfk=atot-(atot-((delta*Jant)/(khyd*c+JhydSS)))
+
+# (alpha,beta,gamma,delta)
+# (0,0,0,0)
+weight1=1
+topa1=0
+bottom1=1
+
+# (0,0,0,1)
+weight2=atppfk^2/k4
+topa2=topa1
+bottom2=bottom1+weight2
+
+# (0,0,1,0)
+weight3=f6p^2/k3
+topa3=topa2+weight3
+bottom3=bottom2+weight3
+
+# (0,0,1,1)
+weight4=(f6p*atppfk)^2/(fatp*k3*k4)
+topa4=topa3+weight4
+bottom4=bottom3+weight4
+
+# (0,1,0,0)
+weight5=fbp/k2
+topa5=topa4
+bottom5=bottom4+weight5
+
+# (0,1,0,1)
+weight6=(fbp*atppfk^2)/(k2*k4*fbt)
+topa6=topa5
+bottom6=bottom5+weight6
+
+# (0,1,1,0)
+weight7=(fbp*f6p^2)/(k2*k3*ffbp)
+topa7=topa6+weight7
+bottom7=bottom6+weight7
+
+# (0,1,1,1)
+weight8=(fbp*f6p^2*atppfk^2)/(k2*k3*k4*ffbp*fbt*fatp)
+topa8=topa7+weight8
+bottom8=bottom7+weight8
+
+# (1,0,0,0)
+weight9=amppfk/k1
+topa9=topa8
+bottom9=bottom8+weight9
+
+# (1,0,0,1)
+weight10=(amppfk*atppfk^2)/(k1*k4*fmt)
+topa10=topa9
+bottom10=bottom9+weight10
+
+# (1,0,1,0)
+weight11=(amppfk*f6p^2)/(k1*k3*famp)
+topa11=topa10+weight11
+bottom11=bottom10+weight11
+
+# (1,0,1,1)
+weight12=(amppfk*f6p^2*atppfk^2)/(k1*k3*k4*famp*fmt*fatp)
+topa12=topa11+weight12
+bottom12=bottom11+weight12
+
+# (1,1,0,0)
+weight13=(amppfk*fbp)/(k1*k2)
+topa13=topa12
+bottom13=bottom12+weight13
+
+# (1,1,0,1)
+weight14=(amppfk*fbp*atppfk^2)/(k1*k2*k4*fbt*fmt)
+topa14=topa13
+bottom14=bottom13+weight14
+
+# (1,1,1,0) -- the most active state of the enzyme
+weight15=(amppfk*fbp*f6p^2)/(k1*k2*k3*ffbp*famp)
+topa15=topa14
+topb=weight15
+bottom15=bottom14+weight15
+
+# (1,1,1,1)
+weight16=(amppfk*fbp*f6p^2*atppfk^2)/(k1*k2*k3*k4*ffbp*famp*fbt*fmt*fatp)
+topa16=topa15+weight16
+bottom16=bottom15+weight16
+
+pfk=(pfkbas*cat*topa16 + cat*topb)/bottom16
+
+g6p' = speed*convert*(Jgk - pfk)
+fbp' = speed*convert*(pfk - 0.5*Jgpdh)
+
+aux tmin=t/60000
+
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=1, total=1200000
+@ maxstor=20000001,bounds=10000000, bell=0, xp=G6P, yp=FBP
+@ xlo=200, xhi=350, ylo=0, yhi=12
+
+done
