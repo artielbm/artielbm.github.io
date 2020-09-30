@@ -1,0 +1,51 @@
+# Calcium based phantom bursting model as described in:
+
+# Three Roads to Islet Bursting: Emergent Oscillations in Coupled 
+# Phantom Bursters, C. L. Zimliki, D. Mears, and A. Sherman
+# Biophysical Journal, in press.
+# Corresponds to Fig. 1
+
+# Units: t = ms; V = mV; g = pS; c = uM
+
+# Equations
+
+V' = -(Ica + Ikatp + Ikca + Ik)/Cm
+n' = (ninf - n)/taun
+c' = fcyt*(Jmem + Jer)
+a' = (ainf - a)/taua
+cer' = -fer*VcytVer*Jer
+
+# Activation functions
+
+ainf = 1/(1 + exp((R - c)/sa))
+ninf = 1/(1 + exp((vn - V)/sn))
+minf = 1/(1 + exp((vm - V)/sm))
+w = c^nh/(c^nh + kD^nh)
+
+# Ionic currents
+
+Ikca = gkca*w*(V - Vk)
+Ikatp = gkatp*a*(V - Vk)
+Ik = gk*n*(V - Vk)
+Ica = gca*minf*(V - Vca)
+
+
+# Ca2+ fluxes
+
+Jmem = -(alpha*Ica + kpmca*c)
+Jer  = pleak*(cer - c) - kserca*c
+
+# Parameters
+# Fig. 1A: gkca=800 (fast); 1B: gkca=400 (slow); 1C: gkca=610 (medium)
+par gkca=610, gkatp=450, gk=3000, gca=1200, Vk=-75, Vca=25
+par kD=0.25, taun=16, taua=300000, Cm=5300, R=0.09, sa=0.2, fcyt=0.01
+par VcytVer=50, fer=0.01, pleak=4e-5, kserca=0.2, kpmca=0.1 
+par alpha=2.25e-6, vn=-16, sn=5.6, vm=-20, sm=12, nh=5
+
+# Initial conditions
+
+init v=-65, n=0.0001, c=0.1, a=0.516, cer=500
+
+@ meth=cvode, dtmax=1, dt=5, total=1.0e5, maxstor=1000000
+@ bounds=1000, xp=t,  yp=v, toler=1.0e-7, atoler=1.0e-7
+@ xlo=0, xhi=100000, ylo=-80, yhi=-20
