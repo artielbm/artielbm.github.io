@@ -4,7 +4,7 @@ Matlab files to accompany:
 
 This page contains matlab scripts that allow calculation of calcium and buffer profiles near a point source for free calcium release.
 
-Zip file with the scripts: [[EpsBetaCalciumCalculator]](EpsBetaCalciumCalculator) (44KB).
+Zip file with the scripts: [[EpsBetaCalciumCalculator.zip]](EpsBetaCalciumCalculator.zip) (44KB).
 
 How to use the files:
 For a description of each function, run matlab, and type "help ".
