@@ -1,0 +1,73 @@
+# Morris-Lecar beta-cell (based on Utah model with kca instead of s)
+# kmer rewritten using forms used in biophan 11/17/03
+
+# For increased G, raise kpmca from 0.18 to 0.19 at t=120 sec.
+
+init v=-65.0, n=0.00016, c=0.1, d=0.32, cer=250.0
+
+# equations
+dv/dt=(i+gl*(vl-v)+gk*n*(vk-v)- Ica(v) - Ikca(v,c) + gkatp*(vk-v))/cm
+dn/dt=(ninf(v)-n)/taun
+dc/dt = fcyt*(Jmem + Jer)
+# dc/dt=f*(-alpha*ica(v) - kpmca*c) + jertot/lambdaer
+dd/dt = ka*((tot-d)-d*exp(r*(1.0-(c/r1))))
+# dcer/dt = -Jer/(lambdaer*sigmaer)
+dcer/dt = -fer*vcytver*Jer
+# dcer/dt = -vcytver*Jer
+
+par lambdaer=1, per=0.0002, sigmaer=0.032, kserca=0.4, epser=1
+
+# where
+ninf(v) = 1/(1+exp((vn-v)/sn))
+minf(v) = 1/(1+exp((vm-v)/sm))
+
+param gkcastar=100, auto=0, gkatpstar=178, freezeatp=1
+param vk=-75, vl=-20, vca=25
+param i=0, gk=2700, gl=0, gca=1000, cm=5300
+num vm=-20, sm=12, vn=-16, sn=5, taun=20
+param gkca=400, kd=0.5, nh=2
+
+kpmca = 0.18 + heav(t - 120000)*0.01
+
+# Ikca
+ikca(v,c) = auto*gkcastar*(v-vk) + (1-auto)*gkca/(1+(kd/c)^nh)*(v-vk)
+
+# Calcium Handling
+# par alpha=4.50e-6, kpmca=0.18, fcyt=0.01, fer=0.01
+par alpha=4.50e-6, fcyt=0.01, fer=0.01
+
+vcytver=1/sigmaer
+
+# Ikatp
+par gkatpbar=6000
+
+# ADP parameters (from Smolen-Keizer)
+p kone=0.45,ktwo=0.012,ka=5.0e-6,r=1.2,r1=0.35,tot=1
+
+# ICa
+ica(v) = gca*minf(v)*(v-vca)
+
+# IKATP
+gkatp = freezeatp*gkatpstar + (1-freezeatp)*gkatpbar*(1.0+d/kone)/(1.0+d/kone+(tot-d)/ktwo)
+
+# Ca fluxes
+Jmem = -(alpha*Ica(v) + kpmca*c)
+
+Jserca = kserca*c
+Jleak = per*(cer - c)
+Jer = epser*(Jleak - Jserca)/lambdaer
+
+
+# track some currents
+aux tsec=t/1000
+aux Condkca=gkca/(1+(kd/c)^nh)
+aux Ica=gca*minf(V)*(V-Vca)
+aux Ik=gk*n*(V-Vk)
+aux Curkca=Ikca(v,c)
+aux gkatpact = gkatp
+
+@ meth=cvode, atol=1.0e-6, tol=1.0e-6, dt=10, total=240000, maxstor=100000
+@ xp=tsec, yp=v, bound=100000000
+@ xlo=0, xhi=240, ylo=-70, yhi=-10
+
+done
