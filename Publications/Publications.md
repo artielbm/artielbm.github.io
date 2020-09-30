@@ -241,7 +241,7 @@
 
 1.  R. Bertram, K. Wierschem, M. Zhang, P. Goforth, A. Sherman, and L. S. Satin. 2002. _Phantom bursting in pancreatic islets: A potential role for insulin feedback,_ in "Recent Research Developments in Biophysics", S. G. Pandalai, ed., Transworld Research Network, Vol. 1, pp. 31-51.
 
-1.  A. Sherman, Y.-X. Li, and J. Keizer. 2002\. _Whole Cell Models_ in "Computational Cell Biology", C. Fall, E. Marland, J. Wagner, and J. Tyson , eds., Springer-Verlag, New York, pp. 101 - 139. [[Publisher Site for the Book]](https://www.springer.com/us/book/9780387953694) [[xpp files]](https://github.com/artielbm/CCB/blob/master/readme.md)
+1.  A. Sherman, Y.-X. Li, and J. Keizer. 2002\. _Whole Cell Models_ in "Computational Cell Biology", C. Fall, E. Marland, J. Wagner, and J. Tyson , eds., Springer-Verlag, New York, pp. 101 - 139. [[Publisher Site for the Book]](https://www.springer.com/us/book/9780387953694) [[XPP Files]](https://github.com/artielbm/CCB)
 
 1.  R. Bertram and A. Sherman. 2000\. _Dynamical complexity and temporal plasticity in pancreatic beta-cells._ J. Biosc., **25**:197-209. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/10878861/)
 
@@ -249,7 +249,7 @@
 
 1.  A. Sherman and P. Smolen. 1997\. _Computer modeling of heterogeneous beta-cell populations,_ in "Physiology and Pathophysiology of the Islets of Langerhans", B. Soria, ed., Plenum Press, New York, pp. 275-284. [[PubMed](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=9544285&dopt=Abstract)] [[Abstract](Alicante/alicante.abs)]
 
-1.  A. Sherman. 1997\. _Calcium and membrane potential oscillations in pancreatic beta-cells,_ in "Case Studies in Mathematical Modeling - Ecology, Physiology, and Cell Biology", H. G. Othmer, F. R. Adler, M. A. Lewis, and J. C. Dallon, eds., Prentice-Hall, New Jersey, p. 199 - 217. [[The Book](http://www.math.utah.edu/books/csmmepcb/index.html)] [[Models and Exercises](Utah.html)]
+1.  A. Sherman. 1997\. _Calcium and membrane potential oscillations in pancreatic beta-cells,_ in "Case Studies in Mathematical Modeling - Ecology, Physiology, and Cell Biology", H. G. Othmer, F. R. Adler, M. A. Lewis, and J. C. Dallon, eds., Prentice-Hall, New Jersey, p. 199 - 217. [[The Book](http://www.math.utah.edu/books/csmmepcb/index.html)] [[Models and Exercises]](../Models/UtahChap)
 
 1.  J. Rinzel, A. Sherman, and C. L. Stokes. 1992\. _Channels, coupling, and synchronized rhythmic bursting activity._ in "Analysis and Modeling of Neural Systems", F. H. Eeckman, ed., Kluwer Academic Publishers, Boston, pp. 29-46.
 
