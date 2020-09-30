@@ -1,0 +1,852 @@
+(*^
+
+::[	Information =
+
+	"This is a Mathematica Notebook file.  It contains ASCII text, and can be
+	transferred by email, ftp, or other text-file transfer utility.  It should
+	be read or edited using a copy of Mathematica or MathReader.  If you 
+	received this as email, use your mail application or copy/paste to save 
+	everything from the line containing (*^ down to the line containing ^*)
+	into a plain text file.  On some systems you may have to give the file a 
+	name ending with ".ma" to allow Mathematica to recognize it as a Notebook.
+	The line below identifies what version of Mathematica created this file,
+	but it can be opened using any other version as well.";
+
+	FrontEndVersion = "X Window System Mathematica Notebook Front End Version 2.2";
+
+	X11StandardFontEncoding; 
+	
+	fontset = title, inactive, noPageBreakBelow, noPageBreakInGroup, nohscroll, preserveAspect, groupLikeTitle, center, M7, bold, e8,  24, fontName, "times";
+	fontset = subtitle, inactive, noPageBreakBelow, noPageBreakInGroup, nohscroll, preserveAspect, groupLikeTitle, center, M7, bold, e6,  18, fontName, "times";
+	fontset = subsubtitle, inactive, noPageBreakBelow, noPageBreakInGroup, nohscroll, preserveAspect, groupLikeTitle, center, M7, italic, e6,  14, fontName, "times";
+	fontset = section, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeSection, grayBox, M22, bold, a20,  18, fontName, "times";
+	fontset = subsection, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeSection, blackBox, M19, bold, a15,  14, fontName, "times";
+	fontset = subsubsection, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeSection, whiteBox, M18, bold, a12,  12, fontName, "times";
+	fontset = text, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";
+	fontset = smalltext, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  10, fontName, "times";
+	fontset = input, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeInput, M42, N23, bold,  12, fontName, "courier";
+	fontset = output, output, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23, L-5,  12, fontName, "courier";
+	fontset = message, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23,  12, fontName, "courier";
+	fontset = print, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23,  12, fontName, "courier";
+	fontset = info, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23,  12, fontName, "courier";
+	fontset = postscript, PostScript, formatAsPostScript, output, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeGraphics, M7, l34, w282, h287,  12, fontName, "courier";
+	fontset = name, inactive, noPageBreakInGroup, nohscroll, preserveAspect, M7, italic, B65535,  10, fontName, "times";
+	fontset = header, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7, italic,  12, fontName, "times";
+	fontset = leftheader,  12, fontName, "times";
+	fontset = footer, inactive, nohscroll, noKeepOnOnePage, preserveAspect, center, M7, italic,  12, fontName, "times";
+	fontset = leftfooter,  12, fontName, "times";
+	fontset = help, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";
+	fontset = clipboard, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";
+	fontset = completions, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "courier";
+	fontset = special1, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";
+	fontset = special2, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";
+	fontset = special3, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";
+	fontset = special4, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";
+	fontset = special5, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";paletteColors = 128; automaticGrouping; currentKernel; 
+]
+:[font = input; preserveAspect; startGroup]
+(* **************************************************
+Kuramoto reduction of a 2-dimensional system.
+Can be used only after f[x,y,z], g[x,y,z],
+yss[x], zss[x], and dcoup have been defined. 
+************************************************** *)
+   
+reduction[f_,g_,yss_,zss_,dcoup_,xguess_] := (
+
+vars = {x,y};
+jac := Outer[D,{f[x,y,z],g[x,y,z]},vars];
+m = Outer[D,jac,vars];
+n = Outer[D,m,vars];
+
+trjac = jac[[1,1]] + jac[[2,2]] /. {y->yss[x],
+                                    z->zss[x]};
+x0 = x /. FindRoot[ trjac==0, {x,xguess} ];
+y0 = yss[x0];
+z0 = zss[x0];
+
+l0 = jac /. {x->x0,y->y0,z->z0};
+m0 = m/2 /. {x->x0,y->y0,z->z0};
+n0 = n/6 /. {x->x0,y->y0,z->z0};
+
+rhs = { -D[f[x,y,z],z], -D[g[x,y,z],z] };
+{dxdz,dydz} = LinearSolve[l0,rhs];
+l1 = D[jac,x] dxdz + 
+     D[jac,y] dydz + 
+     D[jac,z] /. {x->x0,y->y0,z->z0};
+
+esystem1 = Eigensystem[l0];
+esystem2 = Eigensystem[-Transpose[l0]];
+omega = Im[ esystem1[[1,1]] ];
+u = esystem1[[2,1]];
+ustar = esystem2[[2,2]];
+ustar /= ustar.u;
+
+vplus = -LinearSolve[(l0-2 omega I IdentityMatrix[2]), 
+                     m0.u.u];
+vminus = Conjugate[vplus];
+vknot = -2 LinearSolve[l0,m0.u.Conjugate[u]];
+
+ab = ustar.l1.u;
+pq = -( 2 ustar.m0.u.vknot + 
+        2 ustar.m0.Conjugate[u].vplus + 
+        3 ustar.n0.u.u.Conjugate[u] );
+d1d2 = ustar.dcoup.u;
+
+alpha = Im[d1d2] / Re[d1d2];
+beta = Im[ab] / Re[ab];
+eta = Im[pq] / Re[pq];
+
+eta1 = - (5 + alpha^2) / (4 alpha);
+eta2 = -1 / alpha;
+eta3 = (alpha^2 - 1) / (2 alpha);
+If[ alpha < 0,
+    If[ eta > eta1, region = 1, 
+    If[ eta > eta2, region = 2, 
+    If[ eta > eta3, region = 3, region = 4 ]]],
+    If[ eta < eta1, region = 1,
+    If[ eta < eta2, region = 2,
+    If[ eta < eta3, region = 3, region = 4 ]]] ];
+   
+matrixout = { {x0,y0,z0}, 
+              {Re[ab],Re[pq],Re[d1d2]}, 
+              {Im[ab],Im[pq],Im[d1d2]},
+              {alpha,beta,eta,region} } )
+:[font = message; inactive; preserveAspect]
+General::spell1: 
+   Possible spelling error: new symbol name "dydz"
+     is similar to existing symbol "dxdz".
+:[font = message; inactive; preserveAspect; endGroup]
+General::spell1: 
+   Possible spelling error: new symbol name "beta"
+     is similar to existing symbol "Beta".
+:[font = input; preserveAspect; startGroup]
+(* **************************************************
+Reduction of the non-dimensional generic beta
+cell model from the BMB paper by Artie. 
+************************************************** *)
+   
+reductionBMB[lambda_,gca_,xguess_] := 
+Module[{minf,ninf,f,g,yss,zss,dcoup},(
+
+(* These are the equations for the first 
+   nondimensionalization, resulting in the 
+   upside-down bifurcation diagram.
+
+minf[x_] := 1/(1+Exp[(25x-45)/12]);
+ninf[x_] := 1/(1+Exp[(25x-42)/5.6]);
+
+f[x_,y_,z_] := -gca minf[x] x/lambda -
+               10 y (x-4)/lambda -
+               z (x-4);
+g[x_,y_,z_] := ninf[x] - y;
+
+yss[x_] := ninf[x];
+zss[x_] := ( -gca minf[x] x/lambda - 
+             10 ninf[x] (x-4)/lambda ) / (x-4); *)
+             
+(* And these are the equations for the second
+   nondimensionalization, resulting in a right-side-up
+   bifurcation diagram. *)
+   
+minf[x_] := 1/(1+Exp[(205-25x)/12]);
+ninf[x_] := 1/(1+Exp[(208-25x)/5.6]);
+
+f[x_,y_,z_] := -gca minf[x] (x-10)/lambda -
+               10 y (x-6)/lambda -
+               z (x-6);
+g[x_,y_,z_] := ninf[x] - y;
+
+yss[x_] := ninf[x];
+zss[x_] := ( -gca minf[x] (x-10)/lambda - 
+             10 ninf[x] (x-6)/lambda ) / (x-6);
+             
+dcoup = {{1,0},{0,0}};
+
+reduction[f,g,yss,zss,dcoup,xguess] )]
+:[font = message; inactive; preserveAspect; endGroup]
+General::spell1: 
+   Possible spelling error: new symbol name "ninf"
+     is similar to existing symbol "minf".
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionBMB[1.1,3.6,7.8] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{7.744058464688818, 0.07101723658466071, 
+ 
+    0.5350889674149802}, {0.1107687697611254, 0.87502153291277, 
+ 
+    0.5000000000000001}, {-2.608628776086968, 13.61102533811335, 
+ 
+    -0.2610074804740512}, {-0.5220149609481022, -23.55021890838471, 
+ 
+    15.55507473376684, 1}}]
+;[o]
+{7.74406, 0.0710172, 0.535089}
+
+{0.110769, 0.875022, 0.5}
+
+{-2.60863, 13.611, -0.261007}
+
+{-0.522015, -23.5502, 15.5551, 1}
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionBMB[0.9,3.6,7.9] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{7.91996203288823, 0.1435781256725733, 
+ 
+    -0.04327981017405721}, {0.1789921101354264, 0.2989275559556752, 
+ 
+    0.5}, {-1.242365149724348, 14.19355858049251, -0.1527789963160214}, 
+ 
+   {-0.3055579926320429, -6.940893365547609, 47.48159979803643, 1}}]
+;[o]
+{7.91996, 0.143578, -0.0432798}
+
+{0.178992, 0.298928, 0.5}
+
+{-1.24237, 14.1936, -0.152779}
+
+{-0.305558, -6.94089, 47.4816, 1}
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionBMB[1.1,3.6,2.2] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{2.255941535429914, 0.07101723654969118, 
+ 
+    0.5350889676648072}, {0.1107687696605401, 
+ 
+    0.875021533276641, 0.5000000000000001}, 
+ 
+   {-2.608628777355232, 13.61102533956231, 
+ 
+    -0.261007480570069}, {-0.5220149611401379, 
+ 
+    -23.55021894121951, 15.5550747289543, 1}}]
+;[o]
+{2.25594, 0.0710172, 0.535089}
+
+{0.110769, 0.875022, 0.5}
+
+{-2.60863, 13.611, -0.261007}
+
+{-0.522015, -23.5502, 15.5551, 1}
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionBMB[0.7,3.6,2.2] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{1.987376692940114, 0.2022618316862754, 
+ 
+    -0.839689222909495}, {0.1836347633873616, 
+ 
+    0.03962983468297398, 0.5000000000000001}, 
+ 
+   {-0.7928278333547194, 16.34066629029276, 
+ 
+    -0.1126214457200415}, 
+ 
+   {-0.225242891440083, -4.317416913497571, 412.3324364336331, 
+ 
+    1}}]
+;[o]
+{1.98738, 0.202262, -0.839689}
+
+{0.183635, 0.0396298, 0.5}
+
+{-0.792828, 16.3407, -0.112621}
+
+{-0.225243, -4.31742, 412.332, 1}
+:[font = input; preserveAspect]
+varylambda[lmin_,lmax_,lstep_,gca_,xguess_] := (
+
+x0 = xguess;
+temp = {};
+Do[ reduced = reductionBMB[lambda,gca,x0];
+    x0 = reduced[[1]][[1]];
+    z0 = reduced[[1]][[3]];
+    p = reduced[[2]][[2]];
+    alpha = reduced[[4]][[1]];
+    eta = reduced[[4]][[3]];
+    region = reduced[[4]][[4]];
+    temp = Append[temp,{lambda,gca,x0,z0,p,alpha,eta,region}],
+    
+    {lambda,lmin,lmax,lstep} ]; )
+:[font = input; preserveAspect]
+varygca[lambda_,gmin_,gmax_,gstep_,xguess_] := (
+
+x0 = xguess;
+temp = {};
+Do[ reduced = reductionBMB[lambda,gca,x0];
+    x0 = reduced[[1]][[1]];
+    z0 = reduced[[1]][[3]];
+    p = reduced[[2]][[2]];
+    alpha = reduced[[4]][[1]];
+    eta = reduced[[4]][[3]];
+    region = reduced[[4]][[4]];
+    temp = Append[temp,{lambda,gca,x0,z0,p,alpha,eta,region}],
+    
+    {gca,gmin,gmax,gstep} ]; )
+:[font = input; preserveAspect]
+PrintTable[table_,filename_] := (
+out = OpenWrite[filename];
+Do[ WriteString[out,ToString[Part[Part[table,i],1]], "  ",
+                    ToString[Part[Part[table,i],2]], "  ",
+                    ToString[Part[Part[table,i],3]], "  ",
+                    ToString[Part[Part[table,i],4]], "  ",
+                    ToString[Part[Part[table,i],5]], "  ",
+                    ToString[Part[Part[table,i],6]], "  ",
+                    ToString[Part[Part[table,i],7]], "  ",
+                    ToString[Part[Part[table,i],8]], "\n"],
+    {i,1,Length[table]} ];
+Close[out]; )      
+:[font = input; preserveAspect]
+PrintTable[temp,"lambda.out"]
+:[font = input; preserveAspect]
+PrintTable[temp,"gca.out"]
+:[font = input; preserveAspect]
+varylambda[1.1,0.05,-0.05,3.6,2.25]
+:[font = input; preserveAspect]
+varygca[1.1,3.6,5.5,0.1,2.25]
+:[font = input; preserveAspect; startGroup]
+MatrixForm[temp]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{1.1, 3.6, 2.255941535429393, 0.535088967663712, 0.875021533275044, -0.5220149611392964, 
+ 
+    15.55507472897548, 1}, {1.1, 3.7, 2.21112585726567, 0.4628556193914855, 0.7111692619760302, 
+ 
+    -0.4627056013029276, 18.80206440521253, 1}, 
+ 
+   {1.1, 3.8, 2.180692162574534, 0.4113877764415039, 0.6019020010645991, -0.4285356973848581, 
+ 
+    22.15526714991232, 1}, {1.1, 3.9, 2.156880469519567, 0.3704590093707647, 0.5163252768864553, 
+ 
+    -0.404650049238338, 25.87737900924149, 1}, 
+ 
+   {1.1, 4., 2.137112508338693, 0.3366311587663625, 0.4447905382661852, -0.3864933123483652, 
+ 
+    30.15528956010834, 1}, {1.1, 4.1, 2.120143140933774, 0.308205495221654, 0.382816657684526, 
+ 
+    -0.3720055093060105, 35.20336741715911, 1}, 
+ 
+   {1.1, 4.2, 2.105255734893074, 0.284171747915033, 0.3278895001760569, -0.360068098111439, 41.31215441937938, 
+ 
+    1}, {1.1, 4.299999999999999, 2.091992125597547, 0.2638569562337687, 0.278427157150599, 
+ 
+    -0.3500029169873035, 48.90979235712905, 1}, 
+ 
+   {1.1, 4.399999999999999, 2.080037967119502, 0.2467770094010554, 0.2333539644119016, -0.3413669619560485, 
+ 
+    58.66953058726078, 1}, {1.1, 4.499999999999999, 2.06916634138417, 0.2325638760215654, 0.1918963631770563, 
+ 
+    -0.3338547575478392, 71.72517305091674, 1}, 
+ 
+   {1.1, 4.599999999999998, 2.059207034397457, 0.2209260392907371, 0.1534740941183559, -0.3272468127996722, 
+ 
+    90.1549362558672, 1}, {1.1, 4.699999999999998, 2.050028478866867, 0.211625248272619, 0.1176374118452479, 
+ 
+    -0.3213802227229047, 118.2317852783205, 1}, 
+ 
+   {1.1, 4.799999999999998, 2.041526500636462, 0.2044619974917522, 0.0840285421495821, -0.3161308671273146, 
+ 
+    166.3697815876392, 1}, {1.1, 4.899999999999997, 2.033616969484287, 0.1992659972427905, 0.0523568141149271, 
+ 
+    -0.3114021041349226, 268.3589942931884, 1}, 
+ 
+   {1.1, 4.999999999999997, 2.026230812606587, 0.1958896556211866, 0.02238194436391883, -0.3071173022870565, 
+ 
+    630.8813159663957, 1}, {1.1, 5.099999999999996, 2.019310521673233, 0.1942034613289361, 
+ 
+    -0.006097591432478567, -0.3032147443191721, -2327.091911316021, 4}, 
+ 
+   {1.1, 5.199999999999996, 2.012807639223224, 0.1940926126211581, -0.0332528876018614, -0.2996440517947094, 
+ 
+    -428.7871535143056, 4}, {1.1, 5.299999999999996, 2.006680907512111, 0.1954544904953089, 
+ 
+    -0.05923072583342215, -0.296363616376361, -241.8794595062034, 4}, 
+ 
+   {1.1, 5.399999999999995, 2.000894877630911, 0.1981967205286251, -0.0841581670444915, -0.2933387158103053, 
+ 
+    -171.0421200180645, 4}, {1.1, 5.499999999999995, 1.995418845969744, 0.2022356557345433, 
+ 
+    -0.1081460644244441, -0.2905401068570563, -133.7281805921587, 4}}]
+;[o]
+1.1           3.6           2.25594       0.535089      0.875022      -0.522015     15.5551       1
+
+1.1           3.7           2.21113       0.462856      0.711169      -0.462706     18.8021       1
+
+1.1           3.8           2.18069       0.411388      0.601902      -0.428536     22.1553       1
+
+1.1           3.9           2.15688       0.370459      0.516325      -0.40465      25.8774       1
+
+1.1           4.            2.13711       0.336631      0.444791      -0.386493     30.1553       1
+
+1.1           4.1           2.12014       0.308205      0.382817      -0.372006     35.2034       1
+
+1.1           4.2           2.10526       0.284172      0.32789       -0.360068     41.3122       1
+
+1.1           4.3           2.09199       0.263857      0.278427      -0.350003     48.9098       1
+
+1.1           4.4           2.08004       0.246777      0.233354      -0.341367     58.6695       1
+
+1.1           4.5           2.06917       0.232564      0.191896      -0.333855     71.7252       1
+
+1.1           4.6           2.05921       0.220926      0.153474      -0.327247     90.1549       1
+
+1.1           4.7           2.05003       0.211625      0.117637      -0.32138      118.232       1
+
+1.1           4.8           2.04153       0.204462      0.0840285     -0.316131     166.37        1
+
+1.1           4.9           2.03362       0.199266      0.0523568     -0.311402     268.359       1
+
+1.1           5.            2.02623       0.19589       0.0223819     -0.307117     630.881       1
+
+1.1           5.1           2.01931       0.194203      -0.00609759   -0.303215     -2327.09      4
+
+1.1           5.2           2.01281       0.194093      -0.0332529    -0.299644     -428.787      4
+
+1.1           5.3           2.00668       0.195454      -0.0592307    -0.296364     -241.879      4
+
+1.1           5.4           2.00089       0.198197      -0.0841582    -0.293339     -171.042      4
+
+1.1           5.5           1.99542       0.202236      -0.108146     -0.29054      -133.728      4
+:[font = input; preserveAspect]
+pars[delta_,gamma_,z1_] := (
+
+gcoup = gamma Re[ab] (z1-z0) / Re[d1d2];
+z2 = z0 + delta (z1-z0);
+
+{gcoup,z2}
+
+)
+:[font = input; preserveAspect; startGroup]
+pars[0.98,0.5,0.56]
+:[font = output; output; inactive; preserveAspect; endGroup]
+{0.002759364402743245, 0.5595017793532962}
+;[o]
+{0.00275936, 0.559502}
+:[font = input; preserveAspect]
+(* **************************************************
+Reduction of the Morris-Lecar equations.
+Using the nondimensionalized version of Han,
+Kurrer, and Kuramoto.
+************************************************** *)
+   
+reductionML[xguess_] := 
+Module[{minf,yinf,tauy,f,g,yss,zss,dcoup},(
+
+minf[x_] := (1+Tanh[(x+0.01)/0.15]) / 2;
+yinf[x_] := (1+Tanh[(x-0.1)/0.145]) / 2;
+tauy[x_] := 1 / Cosh[(x-0.1)/(2 0.145)];
+
+f[x_,y_,z_] := z - 
+               1 minf[x] (x-1) - 
+               2 y (x+0.7) -
+               0.5 (x+0.5);
+g[x_,y_,z_] := 1.15 (yinf[x] - y) / tauy[x];
+
+yss[x_] := yinf[x];
+
+zss[x_] := 1 minf[x] (x-1) +
+           2 yinf[x] (x+0.7) +
+           0.5 (x+0.5);
+
+dcoup = {{1,0},{0,0}};
+
+reduction[f,g,yss,zss,dcoup,xguess] )]
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionML[0] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{0.03675629764065956, 0.2947703472477878, 
+ 
+    0.0756587864504239}, {-3.71952004116127, 
+ 
+    -8.23901367589728, 0.5}, 
+ 
+   {5.194932028142346, 58.22568152202149, 
+ 
+    -0.3107883779513354}, 
+ 
+   {-0.6215767559026709, -1.396667304021418, 
+ 
+    -7.067069410548142, 4}}]
+;[o]
+{0.0367563, 0.29477, 0.0756588}
+
+{-3.71952, -8.23901, 0.5}
+
+{5.19493, 58.2257, -0.310788}
+
+{-0.621577, -1.39667, -7.06707, 4}
+:[font = input; preserveAspect]
+(* **************************************************
+Reduction of the Hindmarsh-Rose model.
+************************************************** *)
+
+reductionHR[a_,b_,c_,d_,input_,lambda_,xguess_] := 
+Module[{f,g,yss,zss,dcoup},(
+
+f[x_,y_,z_] := y - a x^3 + b x^2 + input - z;
+g[x_,y_,z_] := lambda (c - d x^2 - y);
+
+yss[x_] = c - d x^2;
+zss[x_] = c - d x^2 - a x^3 + b x^2 + input;
+
+dcoup = {{1,0},{0,0}};
+
+reduction[f,g,yss,zss,dcoup,xguess] )]
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionHR[1,3,1,5,2,1,5] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{1.816496580927726, -15.49829914261059, 
+ 
+    -9.59314045377923}, {0.1427028617475771, 
+ 
+    0.02279870986955322, 0.5000000000000001}, 
+ 
+   {-0.1047519490795548, 0.0993479118683487, 
+ 
+    -0.1206836767677689}, 
+ 
+   {-0.2413673535355377, -0.7340564008088882, 
+ 
+    4.357611129611501, 2}}]
+;[o]
+{1.8165, -15.4983, -9.59314}
+
+{0.142703, 0.0227987, 0.5}
+
+{-0.104752, 0.0993479, -0.120684}
+
+{-0.241367, -0.734056, 4.35761, 2}
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionHR[1,3,1,5,2,1,0] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{0.1835034190722738, 0.831632475943927, 
+ 
+    2.926473787112566}, {-2.933400536166188, 
+ 
+    3.168098707736386, 0.5000000000000002}, 
+ 
+   {-3.342494391365168, 5.97674131637201, 
+ 
+    -0.5471644529151232}, 
+ 
+   {-1.094328905830246, 1.139460619221692, 1.886538857446902, 
+ 
+    1}}]
+;[o]
+{0.183503, 0.831632, 2.92647}
+
+{-2.9334, 3.1681, 0.5}
+
+{-3.34249, 5.97674, -0.547164}
+
+{-1.09433, 1.13946, 1.88654, 1}
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionHR[1,3,1,5,2,2,5] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{1.577350269189626, -11.44016935856292, 
+ 
+    -5.900568640723922}, 
+ 
+   {0.1257523845831855, 0.02007645711511278, 0.5}, 
+ 
+   {-0.1862497873088764, 0.05835279191802833, 
+ 
+    -0.1905297523883598}, 
+ 
+   {-0.3810595047767196, -1.481083543077243, 
+ 
+    2.906528357242005, 2}}]
+;[o]
+{1.57735, -11.4402, -5.90057}
+
+{0.125752, 0.0200765, 0.5}
+
+{-0.18625, 0.0583528, -0.19053}
+
+{-0.38106, -1.48108, 2.90653, 2}
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionHR[1,3,1,5,2,2,0] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{0.4226497308103744, 0.1068360252295906, 
+ 
+    2.567235307390589}, 
+ 
+   {-0.7779262976266637, 0.4276130242547117, 0.5}, 
+ 
+   {-1.391095776560542, 0.7513842383250519, 
+ 
+    -0.4738860397524088}, 
+ 
+   {-0.947772079504818, 1.788210246657771, 
+ 
+    1.757159384082471, 1}}]
+;[o]
+{0.42265, 0.106836, 2.56724}
+
+{-0.777926, 0.427613, 0.5}
+
+{-1.3911, 0.751384, -0.473886}
+
+{-0.947772, 1.78821, 1.75716, 1}
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionHR[1,3,1,5,2,2.5,5] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{1.408248290463863, -8.91581623797197, 
+ 
+    -3.759112748324355}, 
+ 
+   {0.1057411335268274, 0.02324983711499159, 0.5}, 
+ 
+   {-0.249683048720743, 0.05742957983299445, 
+ 
+    -0.2322946324014998}, 
+ 
+   {-0.4645892648029998, -2.361266996039874, 
+ 
+    2.470106760273328, 2}}]
+;[o]
+{1.40825, -8.91582, -3.75911}
+
+{0.105741, 0.0232498, 0.5}
+
+{-0.249683, 0.0574296, -0.232295}
+
+{-0.464589, -2.36127, 2.47011, 2}
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionHR[1,3,1,5,2,2.5,0] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{0.5917517095361371, -0.7508504286947037, 
+ 
+    2.092446081657685}, 
+ 
+   {-0.3583727124741955, 0.1806373217615058, 
+ 
+    0.5000000000000001}, 
+ 
+   {-0.944822586975315, 0.316838955476245, 
+ 
+    -0.4276462428463625}, 
+ 
+   {-0.855292485692725, 2.636424465613705, 
+ 
+    1.754006051388236, 1}}]
+;[o]
+{0.591752, -0.75085, 2.09245}
+
+{-0.358373, 0.180637, 0.5}
+
+{-0.944823, 0.316839, -0.427646}
+
+{-0.855292, 2.63642, 1.75401, 1}
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionHR[1.1,2.8,1,4,2,2,3] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{1.185925112898789, -4.625673493616019, 
+ 
+    -0.5223996031730885}, 
+ 
+   {0.1487235540027687, 0.04453081696794527, 0.5}, 
+ 
+   {-0.3529727003030485, 0.1186040278459112, 
+ 
+    -0.2584160348892976}, 
+ 
+   {-0.5168320697785954, -2.373347669572753, 
+ 
+    2.663414595139502, 1}}]
+;[o]
+{1.18593, -4.62567, -0.5224}
+
+{0.148724, 0.0445308, 0.5}
+
+{-0.352973, 0.118604, -0.258416}
+
+{-0.516832, -2.37335, 2.66341, 1}
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionHR[1,2.5,1,5,2,0.8,4] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{1.487380562344953, -10.06150468620794, 
+ 
+    -5.821285755214632}, 
+ 
+   {0.1394179896705105, 0.04103809411954862, 
+ 
+    0.5000000000000001}, 
+ 
+   {-0.1179425539951189, 0.1376731589809045, 
+ 
+    -0.1192090490453266}, 
+ 
+   {-0.2384180980906531, -0.845963668489662, 
+ 
+    3.354764930843207, 3}}]
+;[o]
+{1.48738, -10.0615, -5.82129}
+
+{0.139418, 0.0410381, 0.5}
+
+{-0.117943, 0.137673, -0.119209}
+
+{-0.238418, -0.845964, 3.35476, 3}
+:[font = input; preserveAspect]
+(* **************************************************
+Reduction of the model by Kawato, Sokabe and Suziki,
+from 
+Biol. Cybernetics, V34, 81-89, 1979.
+************************************************** *)
+
+reductionKSS[apar_,bpar_,cpar_,xguess_] := 
+Module[{f,g,yss,zss,dcoup},(
+
+f[x_,y_,z_] := cpar ( y + x - x^3/3 + z );
+g[x_,y_,z_] := -( x - apar + bpar y ) / cpar;
+
+yss[x_] := ( apar - x ) / bpar;
+zss[x_] := x^3/3 - x - ( apar - x ) / bpar;
+
+dcoup = {{1,0},{0,0}};
+
+reduction[f,g,yss,zss,dcoup,xguess] )]
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionKSS[0.7, 0.8, 1, 1 ] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{0.4472135954999956, 0.2527864045000044/bpar, 
+ 
+    -0.4173993557999908 - 0.2527864045000044/bpar}, 
+ 
+   {-0.993807989999915, 0.02777777777775336, 
+ 
+    0.4999999999999999}, {1.32507731999981, 
+ 
+    0.2716049382716644, -0.6666666666666277}, 
+ 
+   {-1.333333333333256, -1.333333333333255, 9.77777777778851, 
+ 
+    1}}]
+;[o]
+           0.252786              0.252786
+{0.447214, --------, -0.417399 - --------}
+            bpar                 bpar
+
+
+
+{-0.993808, 0.0277778, 0.5}
+
+
+
+{1.32508, 0.271605, -0.666667}
+
+
+
+{-1.33333, -1.33333, 9.77778, 1}
+:[font = input; preserveAspect; startGroup]
+(* **************************************************
+Reduction of the Pernarowski model.  Passing the
+coupling matrix as a parameter.
+************************************************** *)
+
+reductionMP[ua_,uhat_,ueta_,d_,xguess_] := 
+Module[{f,g,yss,zss,dcoup},(
+
+f[x_,y_,z_] := y;
+g[x_,y_,z_] := -( ua y ((x-uhat)^2-ueta^2) +
+                  z + x^3 - 3 (x+1) );
+
+yss[x_] := 0;
+zss[x_] := 3 (x+1) - x^3;
+
+dcoup = d;
+
+reduction[f,g,yss,zss,dcoup,xguess] )]
+:[font = message; inactive; preserveAspect; endGroup]
+General::spell1: 
+   Possible spelling error: new symbol name "reductionMP"
+     is similar to existing symbol "reductionML".
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionMP[0.25,1.6,0.7,{{1,0},{1,1}},2] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{2.3, 0, -2.266999999999998}, 
+ 
+   {0.01359751359751359, 0.002247812269441684, 1.}, 
+ 
+   {-0.1494449590533263, 0.0941735483465537, 
+ 
+    -0.1393736683345151}, 
+ 
+   {-0.1393736683345151, -10.99060927437891, 
+ 
+    41.89564654789641, 1}}]
+;[o]
+{2.3, 0, -2.267}
+
+{0.0135975, 0.00224781, 1.}
+
+{-0.149445, 0.0941735, -0.139374}
+
+{-0.139374, -10.9906, 41.8956, 1}
+:[font = input; preserveAspect]
+(* **************************************************
+Reduction of the Taylor-Kevrekidis model, from 
+Physica D 51 (1991) 274-292.
+Using B as the bifurcation parameter (z).
+************************************************** *)
+
+reductionTK[capd_,parbeta_,ysubc_,xguess_] := 
+Module[{f,g,yss,zss,dcoup},(
+
+f[x_,y_,z_] := -x + capd (1-x) Exp[y];
+g[x_,y_,z_] := -y + z capd (1-x) Exp[y] - 
+               parbeta (y-ysubc);
+
+yss[x_] := Log[x/(capd (1-x))];
+zss[x_] := (yss[x] (1+parbeta) - parbeta ysubc)/x;
+
+dcoup = {{1,0},{0,1}};
+
+reduction[f,g,yss,zss,dcoup,xguess] )]
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionTK[0.15541882,1.05,0,0.5] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{0.5638499773788231, 2.118433687374662, 
+ 
+    7.702029322243549}, {1.369384347845603, 
+ 
+    0.4275716868651309, 1.}, 
+ 
+   {1.815610090073606, -0.4702780769320412, 0.}, 
+ 
+   {0., 1.325858655336635, -1.099881239518044, 1}}]
+;[o]
+{0.56385, 2.11843, 7.70203}
+
+{1.36938, 0.427572, 1.}
+
+{1.81561, -0.470278, 0.}
+
+{0., 1.32586, -1.09988, 1}
+:[font = input; preserveAspect; startGroup]
+MatrixForm[ reductionTK[0.15541882,1.05,0,0.8] ]
+:[font = output; output; inactive; preserveAspect; endGroup]
+MatrixForm[{{0.7535280965551915, 2.979150041976335, 
+ 
+    8.10488369839328}, {-0.6966692414140667, 
+ 
+    0.5198061213526895, 1.}, 
+ 
+   {1.962097796268832, 0.5882360823785549, 
+ 
+    -(2.220446049250313*10^-16)}, 
+ 
+   {-(2.220446049250314*10^-16), -2.816397911132487, 
+ 
+    1.131645161945747, 4}}]
+;[o]
+
+{0.753528, 2.97915, 8.10488}
+
+
+{-0.696669, 0.519806, 1.}
+
+                              -16
+{1.9621, 0.588236, -2.22045 10   }
+
+            -16
+{-2.22045 10   , -2.8164, 1.13165, 4}
+^*)

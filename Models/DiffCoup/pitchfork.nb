@@ -1,0 +1,1518 @@
+(*^
+
+::[	Information =
+
+	"This is a Mathematica Notebook file.  It contains ASCII text, and can be
+	transferred by email, ftp, or other text-file transfer utility.  It should
+	be read or edited using a copy of Mathematica or MathReader.  If you 
+	received this as email, use your mail application or copy/paste to save 
+	everything from the line containing (*^ down to the line containing ^*)
+	into a plain text file.  On some systems you may have to give the file a 
+	name ending with ".ma" to allow Mathematica to recognize it as a Notebook.
+	The line below identifies what version of Mathematica created this file,
+	but it can be opened using any other version as well.";
+
+	FrontEndVersion = "X Window System Mathematica Notebook Front End Version 2.2";
+
+	X11StandardFontEncoding; 
+	
+	fontset = title, inactive, noPageBreakBelow, noPageBreakInGroup, nohscroll, preserveAspect, groupLikeTitle, center, M7, bold, e8,  24, fontName, "times";
+	fontset = subtitle, inactive, noPageBreakBelow, noPageBreakInGroup, nohscroll, preserveAspect, groupLikeTitle, center, M7, bold, e6,  18, fontName, "times";
+	fontset = subsubtitle, inactive, noPageBreakBelow, noPageBreakInGroup, nohscroll, preserveAspect, groupLikeTitle, center, M7, italic, e6,  14, fontName, "times";
+	fontset = section, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeSection, grayBox, M22, bold, a20,  18, fontName, "times";
+	fontset = subsection, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeSection, blackBox, M19, bold, a15,  14, fontName, "times";
+	fontset = subsubsection, inactive, noPageBreakBelow, nohscroll, preserveAspect, groupLikeSection, whiteBox, M18, bold, a12,  12, fontName, "times";
+	fontset = text, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";
+	fontset = smalltext, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  10, fontName, "times";
+	fontset = input, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeInput, M42, N23, bold,  12, fontName, "courier";
+	fontset = output, output, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23, L-5,  12, fontName, "courier";
+	fontset = message, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23,  12, fontName, "courier";
+	fontset = print, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23,  12, fontName, "courier";
+	fontset = info, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeOutput, M42, N23,  12, fontName, "courier";
+	fontset = postscript, PostScript, formatAsPostScript, output, inactive, noPageBreakInGroup, nowordwrap, preserveAspect, groupLikeGraphics, M7, l34, w282, h287,  12, fontName, "courier";
+	fontset = name, inactive, noPageBreakInGroup, nohscroll, preserveAspect, M7, italic, B65535,  10, fontName, "times";
+	fontset = header, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7, italic,  12, fontName, "times";
+	fontset = leftheader,  12, fontName, "times";
+	fontset = footer, inactive, nohscroll, noKeepOnOnePage, preserveAspect, center, M7, italic,  12, fontName, "times";
+	fontset = leftfooter,  12, fontName, "times";
+	fontset = help, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";
+	fontset = clipboard, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";
+	fontset = completions, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "courier";
+	fontset = special1, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";
+	fontset = special2, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";
+	fontset = special3, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";
+	fontset = special4, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";
+	fontset = special5, inactive, nohscroll, noKeepOnOnePage, preserveAspect, M7,  12, fontName, "times";paletteColors = 128; automaticGrouping; currentKernel; 
+]
+:[font = input; preserveAspect]
+PFLocation[alpha_,eta_] := (
+
+If[ 1 + alpha eta < 0.0,
+    (* the pitchfork is on the in-phase branch *)
+    gammaPF = -(1.0+alpha eta)/(1.0+alpha^2),
+    (* the pitchfork is on the anti-phase branch *)
+    gammaPF = (1.0+alpha eta)/(3.0+alpha^2+2.0 alpha eta) ];
+    
+{eta, gammaPF} )
+:[font = input; preserveAspect]
+PlotPFLocation[alpha_,etamin_,etamax_,etastep_] := (
+
+temp = Table[ PFLocation[alpha,eta], 
+              {eta,etamin,etamax,etastep} ];
+ListPlot[temp] )
+:[font = input; preserveAspect; startGroup]
+PlotPFLocation[-2,-5,5,0.1]
+:[font = postscript; PostScript; formatAsPostScript; output; inactive; preserveAspect; pictureLeft = 33; pictureWidth = 282; pictureHeight = 174.25]
+%!
+%%Creator: Mathematica
+%%AspectRatio: .61803 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.5 0.0952381 0.0147151 0.327002 [
+[(-4)] .11905 .01472 0 2 Msboxa
+[(-2)] .30952 .01472 0 2 Msboxa
+[(2)] .69048 .01472 0 2 Msboxa
+[(4)] .88095 .01472 0 2 Msboxa
+[(0.25)] .4875 .09647 1 0 Msboxa
+[(0.5)] .4875 .17822 1 0 Msboxa
+[(0.75)] .4875 .25997 1 0 Msboxa
+[(1)] .4875 .34172 1 0 Msboxa
+[(1.25)] .4875 .42347 1 0 Msboxa
+[(1.5)] .4875 .50522 1 0 Msboxa
+[(1.75)] .4875 .58697 1 0 Msboxa
+[ -0.001 -0.001 0 0 ]
+[ 1.001 .61903 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+p
+.002 w
+.11905 .01472 m
+.11905 .02097 L
+s
+P
+[(-4)] .11905 .01472 0 2 Mshowa
+p
+.002 w
+.30952 .01472 m
+.30952 .02097 L
+s
+P
+[(-2)] .30952 .01472 0 2 Mshowa
+p
+.002 w
+.69048 .01472 m
+.69048 .02097 L
+s
+P
+[(2)] .69048 .01472 0 2 Mshowa
+p
+.002 w
+.88095 .01472 m
+.88095 .02097 L
+s
+P
+[(4)] .88095 .01472 0 2 Mshowa
+p
+.001 w
+.15714 .01472 m
+.15714 .01847 L
+s
+P
+p
+.001 w
+.19524 .01472 m
+.19524 .01847 L
+s
+P
+p
+.001 w
+.23333 .01472 m
+.23333 .01847 L
+s
+P
+p
+.001 w
+.27143 .01472 m
+.27143 .01847 L
+s
+P
+p
+.001 w
+.34762 .01472 m
+.34762 .01847 L
+s
+P
+p
+.001 w
+.38571 .01472 m
+.38571 .01847 L
+s
+P
+p
+.001 w
+.42381 .01472 m
+.42381 .01847 L
+s
+P
+p
+.001 w
+.4619 .01472 m
+.4619 .01847 L
+s
+P
+p
+.001 w
+.5381 .01472 m
+.5381 .01847 L
+s
+P
+p
+.001 w
+.57619 .01472 m
+.57619 .01847 L
+s
+P
+p
+.001 w
+.61429 .01472 m
+.61429 .01847 L
+s
+P
+p
+.001 w
+.65238 .01472 m
+.65238 .01847 L
+s
+P
+p
+.001 w
+.72857 .01472 m
+.72857 .01847 L
+s
+P
+p
+.001 w
+.76667 .01472 m
+.76667 .01847 L
+s
+P
+p
+.001 w
+.80476 .01472 m
+.80476 .01847 L
+s
+P
+p
+.001 w
+.84286 .01472 m
+.84286 .01847 L
+s
+P
+p
+.001 w
+.08095 .01472 m
+.08095 .01847 L
+s
+P
+p
+.001 w
+.04286 .01472 m
+.04286 .01847 L
+s
+P
+p
+.001 w
+.00476 .01472 m
+.00476 .01847 L
+s
+P
+p
+.001 w
+.91905 .01472 m
+.91905 .01847 L
+s
+P
+p
+.001 w
+.95714 .01472 m
+.95714 .01847 L
+s
+P
+p
+.001 w
+.99524 .01472 m
+.99524 .01847 L
+s
+P
+p
+.002 w
+0 .01472 m
+1 .01472 L
+s
+P
+p
+.002 w
+.5 .09647 m
+.50625 .09647 L
+s
+P
+[(0.25)] .4875 .09647 1 0 Mshowa
+p
+.002 w
+.5 .17822 m
+.50625 .17822 L
+s
+P
+[(0.5)] .4875 .17822 1 0 Mshowa
+p
+.002 w
+.5 .25997 m
+.50625 .25997 L
+s
+P
+[(0.75)] .4875 .25997 1 0 Mshowa
+p
+.002 w
+.5 .34172 m
+.50625 .34172 L
+s
+P
+[(1)] .4875 .34172 1 0 Mshowa
+p
+.002 w
+.5 .42347 m
+.50625 .42347 L
+s
+P
+[(1.25)] .4875 .42347 1 0 Mshowa
+p
+.002 w
+.5 .50522 m
+.50625 .50522 L
+s
+P
+[(1.5)] .4875 .50522 1 0 Mshowa
+p
+.002 w
+.5 .58697 m
+.50625 .58697 L
+s
+P
+[(1.75)] .4875 .58697 1 0 Mshowa
+p
+.001 w
+.5 .03107 m
+.50375 .03107 L
+s
+P
+p
+.001 w
+.5 .04742 m
+.50375 .04742 L
+s
+P
+p
+.001 w
+.5 .06377 m
+.50375 .06377 L
+s
+P
+p
+.001 w
+.5 .08012 m
+.50375 .08012 L
+s
+P
+p
+.001 w
+.5 .11282 m
+.50375 .11282 L
+s
+P
+p
+.001 w
+.5 .12917 m
+.50375 .12917 L
+s
+P
+p
+.001 w
+.5 .14552 m
+.50375 .14552 L
+s
+P
+p
+.001 w
+.5 .16187 m
+.50375 .16187 L
+s
+P
+p
+.001 w
+.5 .19457 m
+.50375 .19457 L
+s
+P
+p
+.001 w
+.5 .21092 m
+.50375 .21092 L
+s
+P
+p
+.001 w
+.5 .22727 m
+.50375 .22727 L
+s
+P
+p
+.001 w
+.5 .24362 m
+.50375 .24362 L
+s
+P
+p
+.001 w
+.5 .27632 m
+.50375 .27632 L
+s
+P
+p
+.001 w
+.5 .29267 m
+.50375 .29267 L
+s
+P
+p
+.001 w
+.5 .30902 m
+.50375 .30902 L
+s
+P
+p
+.001 w
+.5 .32537 m
+.50375 .32537 L
+s
+P
+p
+.001 w
+.5 .35807 m
+.50375 .35807 L
+s
+P
+p
+.001 w
+.5 .37442 m
+.50375 .37442 L
+s
+P
+p
+.001 w
+.5 .39077 m
+.50375 .39077 L
+s
+P
+p
+.001 w
+.5 .40712 m
+.50375 .40712 L
+s
+P
+p
+.001 w
+.5 .43982 m
+.50375 .43982 L
+s
+P
+p
+.001 w
+.5 .45617 m
+.50375 .45617 L
+s
+P
+p
+.001 w
+.5 .47252 m
+.50375 .47252 L
+s
+P
+p
+.001 w
+.5 .48887 m
+.50375 .48887 L
+s
+P
+p
+.001 w
+.5 .52157 m
+.50375 .52157 L
+s
+P
+p
+.001 w
+.5 .53792 m
+.50375 .53792 L
+s
+P
+p
+.001 w
+.5 .55427 m
+.50375 .55427 L
+s
+P
+p
+.001 w
+.5 .57062 m
+.50375 .57062 L
+s
+P
+p
+.001 w
+.5 .60332 m
+.50375 .60332 L
+s
+P
+p
+.002 w
+.5 0 m
+.5 .61803 L
+s
+P
+P
+0 0 m
+1 0 L
+1 .61803 L
+0 .61803 L
+closepath
+clip
+newpath
+p
+.008 w
+.02381 .14794 Mdot
+.03333 .14748 Mdot
+.04286 .14701 Mdot
+.05238 .14653 Mdot
+.0619 .14603 Mdot
+.07143 .14552 Mdot
+.08095 .14498 Mdot
+.09048 .14443 Mdot
+.1 .14387 Mdot
+.10952 .14328 Mdot
+.11905 .14267 Mdot
+.12857 .14204 Mdot
+.1381 .14139 Mdot
+.14762 .14072 Mdot
+.15714 .14001 Mdot
+.16667 .13929 Mdot
+.17619 .13853 Mdot
+.18571 .13775 Mdot
+.19524 .13693 Mdot
+.20476 .13608 Mdot
+.21429 .13519 Mdot
+.22381 .13426 Mdot
+.23333 .1333 Mdot
+.24286 .13229 Mdot
+.25238 .13123 Mdot
+.2619 .13013 Mdot
+.27143 .12897 Mdot
+.28095 .12775 Mdot
+.29048 .12648 Mdot
+.3 .12513 Mdot
+.30952 .12372 Mdot
+.31905 .12222 Mdot
+.32857 .12065 Mdot
+.3381 .11898 Mdot
+.34762 .11721 Mdot
+.35714 .11533 Mdot
+.36667 .11333 Mdot
+.37619 .11121 Mdot
+.38571 .10894 Mdot
+.39524 .10651 Mdot
+.40476 .1039 Mdot
+.41429 .10109 Mdot
+.42381 .09807 Mdot
+.43333 .0948 Mdot
+.44286 .09125 Mdot
+.45238 .08738 Mdot
+.4619 .08316 Mdot
+.47143 .07852 Mdot
+.48095 .07341 Mdot
+.49048 .06774 Mdot
+.5 .06143 Mdot
+.50952 .05435 Mdot
+.51905 .04636 Mdot
+.52857 .03727 Mdot
+.5381 .02683 Mdot
+.54762 .01472 Mdot
+.55714 .0278 Mdot
+.56667 .04088 Mdot
+.57619 .05396 Mdot
+.58571 .06704 Mdot
+.59524 .08012 Mdot
+.60476 .0932 Mdot
+.61429 .10628 Mdot
+.62381 .11936 Mdot
+.63333 .13244 Mdot
+.64286 .14552 Mdot
+.65238 .1586 Mdot
+.6619 .17168 Mdot
+.67143 .18476 Mdot
+.68095 .19784 Mdot
+.69048 .21092 Mdot
+.7 .224 Mdot
+.70952 .23708 Mdot
+.71905 .25016 Mdot
+.72857 .26324 Mdot
+.7381 .27632 Mdot
+.74762 .2894 Mdot
+.75714 .30248 Mdot
+.76667 .31556 Mdot
+.77619 .32864 Mdot
+.78571 .34172 Mdot
+.79524 .3548 Mdot
+.80476 .36788 Mdot
+.81429 .38096 Mdot
+.82381 .39404 Mdot
+.83333 .40712 Mdot
+.84286 .4202 Mdot
+.85238 .43328 Mdot
+.8619 .44636 Mdot
+.87143 .45944 Mdot
+.88095 .47252 Mdot
+.89048 .4856 Mdot
+.9 .49868 Mdot
+.90952 .51176 Mdot
+.91905 .52484 Mdot
+.92857 .53792 Mdot
+.9381 .551 Mdot
+.94762 .56408 Mdot
+.95714 .57716 Mdot
+.96667 .59024 Mdot
+.97619 .60332 Mdot
+P
+% End of Graphics
+MathPictureEnd
+
+:[font = output; output; inactive; preserveAspect; endGroup]
+Graphics["<<>>"]
+;[o]
+-Graphics-
+:[font = input; preserveAspect; startGroup]
+PFCriticality[alpha_,eta_] := (
+
+(* For the given values of alpha and eta,
+   determine the criticality of the pitchfork bifurcation 
+   occurring on either the inphase or antiphase branch of
+   steady states of the reduced system (for identical cells). *)
+
+(* The reduced system at Delta=1 *)
+h1[r1_,r2_,phi_,gamma_] := r1 (1-r1^2) + 
+                           gamma (Cos[phi] - alpha Sin[phi]) r2 -
+                           gamma r1;
+h2[r1_,r2_,phi_,gamma_] := r2 (1-r2^2) +
+                           gamma (Cos[phi] + alpha Sin[phi]) r1 - 
+                           gamma r2;
+h3[r1_,r2_,phi_,gamma_] := eta (r1^2-r2^2) -
+                           gamma r2/r1 (Sin[phi] + alpha Cos[phi]) - 
+                           gamma r1/r2 (Sin[phi] - alpha Cos[phi]);
+                           
+If[ 1 + alpha eta < 0.0,
+    (* the pitchfork is on the in-phase branch *)
+    gammaPF = -(1.0+alpha eta)/(1.0+alpha^2); 
+    r10 = 1.0; 
+    r20 = 1.0; 
+    phi0 = 0.0,
+    (* the pitchfork is on the anti-phase branch *)
+    gammaPF = (1.0+alpha eta)/(3.0+alpha^2+2.0 alpha eta);
+    r10 = Sqrt[1.0-2.0 gammaPF];
+    r20 = Sqrt[1.0-2.0 gammaPF];
+    phi0 = N[Pi,10] ]; 
+    
+vars = {r1, r2, phi};
+matD[F_,X_] := Outer[D,F,X];
+
+jac = matD[ {h1[r1,r2,phi,gamma],
+             h2[r1,r2,phi,gamma],
+             h3[r1,r2,phi,gamma]}, vars ];
+l0 = jac /. {r1->r10, r2->r20, phi->phi0, gamma->gammaPF};
+l1 = D[jac,gamma] /. {r1->r10, r2->r20, phi->phi0, gamma->gammaPF};
+m = matD[jac,vars]/2;
+m0 = m /. {r1->r10, r2->r20, phi->phi0, gamma->gammaPF};
+n = matD[m,vars]/3;
+n0 = n /. {r1->r10, r2->r20, phi->phi0, gamma->gammaPF};
+
+{vals,vecs} = Eigensystem[l0];
+For[ i=1, i<=3 && Abs[vals[[i]]] > 0.0001, i++ ];
+v0 = vecs[[i]];
+indices = Complement[{1,2,3},{i}];
+v1 = vecs[[Part[indices,1]]];
+v2 = vecs[[Part[indices,2]]];
+v0 /= Sqrt[v0.v0];
+v1 /= Sqrt[v1.v1];
+v2 /= Sqrt[v2.v2];
+evalue1 = vals[[Part[indices,1]]];
+evalue2 = vals[[Part[indices,2]]];
+
+{vals,vecs} = Eigensystem[Transpose[l0]];
+For[ i=1, i<=3 && Abs[vals[[i]]] > 0.0001, i++ ];
+v0star = vecs[[i]];
+indices = Complement[{1,2,3},{i}];
+If[ vals[[Part[indices,1]]] == evalue1,
+    v1star = vecs[[Part[indices,1]]];
+    v2star = vecs[[Part[indices,2]]],
+    v1star = vecs[[Part[indices,2]]];
+    v2star = vecs[[Part[indices,1]]] ];
+v0star /= v0star.v0;
+v1star /= v1star.v1;
+v2star /= v2star.v2;
+
+u1 = v0;
+gamma1 = -m0.u1.u1.v0star / l1.u1.v0star;
+
+b = -m0.u1.u1;
+u2 = v1star.b/evalue1 v1 + v2star.b/evalue2 v2;
+gamma2 = -(2 m0.u1.u2 + n0.u1.u1.u1).v0star / (v0star.l1.u1);
+
+(* Return gamma2.  
+   If gamma2 > 0 (gamma2 < 0), the pitchfork bifurcation is 
+   subcritical (supercritical). *)
+{eta,gamma2} )
+:[font = message; inactive; preserveAspect; endGroup]
+General::spell1: 
+   Possible spelling error: new symbol name "vals"
+     is similar to existing symbol "vars".
+:[font = input; preserveAspect]
+PlotPFCriticality[alpha_,etamin_,etamax_,etastep_] := (
+
+etanum = Ceiling[ (etamax-etamin)/etastep ];
+temp = Table[ PFCriticality[alpha,etamin+etastep i], 
+              {i,0,etanum} ];
+ListPlot[temp] )
+:[font = input; preserveAspect; startGroup]
+NeutralCrit[alpha_,etamin_,etamax_,tol_] := (
+
+(* For the given value of alpha, use bisection to 
+   find the value of eta (within tolerance tol) at 
+   which the pitchfork bifurcation has neutral criticality. *)
+   
+fmid = Part[PFCriticality[alpha,etamax], 2];
+f    = Part[PFCriticality[alpha,etamin], 2];
+If[ f fmid >= 0, 
+    (* Root must be bracketed *)
+    {alpha,Null},
+    (* Go ahead with the bisection *)
+    If[ f <= 0, 
+        etabis = etamin; deta = etamax - etamin,
+        etabis = etamax; deta = etamin - etamax ];
+    While[ !(Abs[deta] < tol || fmid==0),
+           deta = deta / 2;
+           etamid = etabis + deta;
+           fmid = Part[PFCriticality[alpha,etamid],2];
+           If[ fmid <= 0, etabis = etamid ] ];
+    N[{alpha,etabis}] ] )
+:[font = message; inactive; preserveAspect]
+General::spell1: 
+   Possible spelling error: new symbol name "deta"
+     is similar to existing symbol "eta".
+:[font = message; inactive; preserveAspect; endGroup]
+General::spell1: 
+   Possible spelling error: new symbol name "etamid"
+     is similar to existing symbol "etamin".
+:[font = input; preserveAspect]
+PlotNeutralCrit[alphamin_,alphamax_,alphastep_,
+                mineta_,maxeta_,tol_] := (
+             
+(* *)
+
+temp = {};
+Do[ (* If[ region==1,
+        etamin = -1/alpha+0.05; etamax = maxeta,
+        If[ region==2,
+        etamin = (alpha^2-1)/(2 alpha); etamax = (-1/alpha-0.05),
+        etamin = mineta; etamax = (alpha^2-1)/(2 alpha) ] ]; *)
+    etamin = mineta;
+    etamax = maxeta;
+    temp = Append[temp, NeutralCrit[alpha,etamin,etamax,tol] ],
+    
+    {alpha,alphamin,alphamax,alphastep} ];
+ListPlot[temp] )
+:[font = input; preserveAspect]
+PrintTable[table_] := (
+out = OpenWrite["neutralpf.out"];
+Do[ WriteString[out, ToString[Part[Part[table,i],1]],
+                     "  ",
+                     ToString[Part[Part[table,i],2]] 
+                     "\n"], 
+    {i,1,Length[table]} ];
+Close[out]; )
+:[font = input; preserveAspect; startGroup]
+PFCriticality[-0.522,15.555]
+:[font = output; output; inactive; preserveAspect; endGroup]
+{15.555, -16.00176247994167}
+;[o]
+{15.555, -16.0018}
+:[font = input; preserveAspect; startGroup]
+PlotPFCriticality[-1.4,-5,5,0.2]
+:[font = postscript; PostScript; formatAsPostScript; output; inactive; preserveAspect; pictureLeft = 28; pictureWidth = 395.875; pictureHeight = 244.625]
+%!
+%%Creator: Mathematica
+%%AspectRatio: .61803 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.5 0.0952381 0.533753 0.135377 [
+[(-4)] .11905 .53375 0 2 Msboxa
+[(-2)] .30952 .53375 0 2 Msboxa
+[(2)] .69048 .53375 0 2 Msboxa
+[(4)] .88095 .53375 0 2 Msboxa
+[(-3)] .4875 .12762 1 0 Msboxa
+[(-2)] .4875 .263 1 0 Msboxa
+[(-1)] .4875 .39838 1 0 Msboxa
+[ -0.001 -0.001 0 0 ]
+[ 1.001 .61903 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+p
+.002 w
+.11905 .53375 m
+.11905 .54 L
+s
+P
+[(-4)] .11905 .53375 0 2 Mshowa
+p
+.002 w
+.30952 .53375 m
+.30952 .54 L
+s
+P
+[(-2)] .30952 .53375 0 2 Mshowa
+p
+.002 w
+.69048 .53375 m
+.69048 .54 L
+s
+P
+[(2)] .69048 .53375 0 2 Mshowa
+p
+.002 w
+.88095 .53375 m
+.88095 .54 L
+s
+P
+[(4)] .88095 .53375 0 2 Mshowa
+p
+.001 w
+.15714 .53375 m
+.15714 .5375 L
+s
+P
+p
+.001 w
+.19524 .53375 m
+.19524 .5375 L
+s
+P
+p
+.001 w
+.23333 .53375 m
+.23333 .5375 L
+s
+P
+p
+.001 w
+.27143 .53375 m
+.27143 .5375 L
+s
+P
+p
+.001 w
+.34762 .53375 m
+.34762 .5375 L
+s
+P
+p
+.001 w
+.38571 .53375 m
+.38571 .5375 L
+s
+P
+p
+.001 w
+.42381 .53375 m
+.42381 .5375 L
+s
+P
+p
+.001 w
+.4619 .53375 m
+.4619 .5375 L
+s
+P
+p
+.001 w
+.5381 .53375 m
+.5381 .5375 L
+s
+P
+p
+.001 w
+.57619 .53375 m
+.57619 .5375 L
+s
+P
+p
+.001 w
+.61429 .53375 m
+.61429 .5375 L
+s
+P
+p
+.001 w
+.65238 .53375 m
+.65238 .5375 L
+s
+P
+p
+.001 w
+.72857 .53375 m
+.72857 .5375 L
+s
+P
+p
+.001 w
+.76667 .53375 m
+.76667 .5375 L
+s
+P
+p
+.001 w
+.80476 .53375 m
+.80476 .5375 L
+s
+P
+p
+.001 w
+.84286 .53375 m
+.84286 .5375 L
+s
+P
+p
+.001 w
+.08095 .53375 m
+.08095 .5375 L
+s
+P
+p
+.001 w
+.04286 .53375 m
+.04286 .5375 L
+s
+P
+p
+.001 w
+.00476 .53375 m
+.00476 .5375 L
+s
+P
+p
+.001 w
+.91905 .53375 m
+.91905 .5375 L
+s
+P
+p
+.001 w
+.95714 .53375 m
+.95714 .5375 L
+s
+P
+p
+.001 w
+.99524 .53375 m
+.99524 .5375 L
+s
+P
+p
+.002 w
+0 .53375 m
+1 .53375 L
+s
+P
+p
+.002 w
+.5 .12762 m
+.50625 .12762 L
+s
+P
+[(-3)] .4875 .12762 1 0 Mshowa
+p
+.002 w
+.5 .263 m
+.50625 .263 L
+s
+P
+[(-2)] .4875 .263 1 0 Mshowa
+p
+.002 w
+.5 .39838 m
+.50625 .39838 L
+s
+P
+[(-1)] .4875 .39838 1 0 Mshowa
+p
+.001 w
+.5 .1547 m
+.50375 .1547 L
+s
+P
+p
+.001 w
+.5 .18177 m
+.50375 .18177 L
+s
+P
+p
+.001 w
+.5 .20885 m
+.50375 .20885 L
+s
+P
+p
+.001 w
+.5 .23592 m
+.50375 .23592 L
+s
+P
+p
+.001 w
+.5 .29007 m
+.50375 .29007 L
+s
+P
+p
+.001 w
+.5 .31715 m
+.50375 .31715 L
+s
+P
+p
+.001 w
+.5 .34423 m
+.50375 .34423 L
+s
+P
+p
+.001 w
+.5 .3713 m
+.50375 .3713 L
+s
+P
+p
+.001 w
+.5 .42545 m
+.50375 .42545 L
+s
+P
+p
+.001 w
+.5 .45253 m
+.50375 .45253 L
+s
+P
+p
+.001 w
+.5 .4796 m
+.50375 .4796 L
+s
+P
+p
+.001 w
+.5 .50668 m
+.50375 .50668 L
+s
+P
+p
+.001 w
+.5 .10055 m
+.50375 .10055 L
+s
+P
+p
+.001 w
+.5 .07347 m
+.50375 .07347 L
+s
+P
+p
+.001 w
+.5 .0464 m
+.50375 .0464 L
+s
+P
+p
+.001 w
+.5 .01932 m
+.50375 .01932 L
+s
+P
+p
+.001 w
+.5 .56083 m
+.50375 .56083 L
+s
+P
+p
+.001 w
+.5 .5879 m
+.50375 .5879 L
+s
+P
+p
+.001 w
+.5 .61498 m
+.50375 .61498 L
+s
+P
+p
+.002 w
+.5 0 m
+.5 .61803 L
+s
+P
+P
+0 0 m
+1 0 L
+1 .61803 L
+0 .61803 L
+closepath
+clip
+newpath
+p
+.008 w
+.02381 .60332 Mdot
+.04286 .58189 Mdot
+.0619 .55976 Mdot
+.08095 .53686 Mdot
+.1 .51305 Mdot
+.11905 .48823 Mdot
+.1381 .46226 Mdot
+.15714 .43496 Mdot
+.17619 .40618 Mdot
+.19524 .37576 Mdot
+.21429 .34353 Mdot
+.23333 .30945 Mdot
+.25238 .27361 Mdot
+.27143 .23649 Mdot
+.29048 .19919 Mdot
+.30952 .16402 Mdot
+.32857 .13515 Mdot
+.34762 .11921 Mdot
+.36667 .12486 Mdot
+.38571 .1597 Mdot
+.40476 .22427 Mdot
+.42381 .3076 Mdot
+.44286 .39128 Mdot
+.4619 .45978 Mdot
+.48095 .50671 Mdot
+.5 .53339 Mdot
+.51905 .54448 Mdot
+.5381 .54495 Mdot
+.55714 .5389 Mdot
+.57619 .53636 Mdot
+.59524 .54077 Mdot
+.61429 .54201 Mdot
+.63333 .53966 Mdot
+.65238 .53367 Mdot
+.67143 .52419 Mdot
+.69048 .51139 Mdot
+.70952 .49549 Mdot
+.72857 .47666 Mdot
+.74762 .45507 Mdot
+.76667 .43086 Mdot
+.78571 .40414 Mdot
+.80476 .37501 Mdot
+.82381 .34357 Mdot
+.84286 .30986 Mdot
+.8619 .27396 Mdot
+.88095 .23591 Mdot
+.9 .19576 Mdot
+.91905 .15353 Mdot
+.9381 .10927 Mdot
+.95714 .06299 Mdot
+.97619 .01472 Mdot
+P
+% End of Graphics
+MathPictureEnd
+
+:[font = output; output; inactive; preserveAspect; endGroup]
+Graphics["<<>>"]
+;[o]
+-Graphics-
+:[font = input; preserveAspect; startGroup]
+NeutralCrit[1.65,4,6,0.01]
+:[font = output; output; inactive; preserveAspect; endGroup]
+{1.65, 5.09375}
+;[o]
+{1.65, 5.09375}
+:[font = input; preserveAspect; startGroup]
+PlotNeutralCrit[0.05,2.05,0.1,-6,-1.2,0.01]
+:[font = postscript; PostScript; formatAsPostScript; output; inactive; preserveAspect; pictureLeft = 34; pictureWidth = 282; pictureHeight = 174.25; endGroup]
+%!
+%%Creator: Mathematica
+%%AspectRatio: .61803 
+MathPictureStart
+%% Graphics
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.0238095 0.464576 0.765523 0.131074 [
+[(0.5)] .2561 .11015 0 2 Msboxa
+[(1)] .48839 .11015 0 2 Msboxa
+[(1.5)] .72067 .11015 0 2 Msboxa
+[(2)] .95296 .11015 0 2 Msboxa
+[(-4)] .01131 .24123 1 0 Msboxa
+[(-3)] .01131 .3723 1 0 Msboxa
+[(-2)] .01131 .50338 1 0 Msboxa
+[ -0.001 -0.001 0 0 ]
+[ 1.001 .61903 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+[ ] 0 setdash
+0 g
+p
+p
+.002 w
+.2561 .11015 m
+.2561 .1164 L
+s
+P
+[(0.5)] .2561 .11015 0 2 Mshowa
+p
+.002 w
+.48839 .11015 m
+.48839 .1164 L
+s
+P
+[(1)] .48839 .11015 0 2 Mshowa
+p
+.002 w
+.72067 .11015 m
+.72067 .1164 L
+s
+P
+[(1.5)] .72067 .11015 0 2 Mshowa
+p
+.002 w
+.95296 .11015 m
+.95296 .1164 L
+s
+P
+[(2)] .95296 .11015 0 2 Mshowa
+p
+.001 w
+.07027 .11015 m
+.07027 .1139 L
+s
+P
+p
+.001 w
+.11672 .11015 m
+.11672 .1139 L
+s
+P
+p
+.001 w
+.16318 .11015 m
+.16318 .1139 L
+s
+P
+p
+.001 w
+.20964 .11015 m
+.20964 .1139 L
+s
+P
+p
+.001 w
+.30256 .11015 m
+.30256 .1139 L
+s
+P
+p
+.001 w
+.34901 .11015 m
+.34901 .1139 L
+s
+P
+p
+.001 w
+.39547 .11015 m
+.39547 .1139 L
+s
+P
+p
+.001 w
+.44193 .11015 m
+.44193 .1139 L
+s
+P
+p
+.001 w
+.53484 .11015 m
+.53484 .1139 L
+s
+P
+p
+.001 w
+.5813 .11015 m
+.5813 .1139 L
+s
+P
+p
+.001 w
+.62776 .11015 m
+.62776 .1139 L
+s
+P
+p
+.001 w
+.67422 .11015 m
+.67422 .1139 L
+s
+P
+p
+.001 w
+.76713 .11015 m
+.76713 .1139 L
+s
+P
+p
+.001 w
+.81359 .11015 m
+.81359 .1139 L
+s
+P
+p
+.001 w
+.86005 .11015 m
+.86005 .1139 L
+s
+P
+p
+.001 w
+.9065 .11015 m
+.9065 .1139 L
+s
+P
+p
+.001 w
+.99942 .11015 m
+.99942 .1139 L
+s
+P
+p
+.002 w
+0 .11015 m
+1 .11015 L
+s
+P
+p
+.002 w
+.02381 .24123 m
+.03006 .24123 L
+s
+P
+[(-4)] .01131 .24123 1 0 Mshowa
+p
+.002 w
+.02381 .3723 m
+.03006 .3723 L
+s
+P
+[(-3)] .01131 .3723 1 0 Mshowa
+p
+.002 w
+.02381 .50338 m
+.03006 .50338 L
+s
+P
+[(-2)] .01131 .50338 1 0 Mshowa
+p
+.001 w
+.02381 .13637 m
+.02756 .13637 L
+s
+P
+p
+.001 w
+.02381 .16258 m
+.02756 .16258 L
+s
+P
+p
+.001 w
+.02381 .1888 m
+.02756 .1888 L
+s
+P
+p
+.001 w
+.02381 .21501 m
+.02756 .21501 L
+s
+P
+p
+.001 w
+.02381 .26744 m
+.02756 .26744 L
+s
+P
+p
+.001 w
+.02381 .29366 m
+.02756 .29366 L
+s
+P
+p
+.001 w
+.02381 .31987 m
+.02756 .31987 L
+s
+P
+p
+.001 w
+.02381 .34609 m
+.02756 .34609 L
+s
+P
+p
+.001 w
+.02381 .39852 m
+.02756 .39852 L
+s
+P
+p
+.001 w
+.02381 .42473 m
+.02756 .42473 L
+s
+P
+p
+.001 w
+.02381 .45095 m
+.02756 .45095 L
+s
+P
+p
+.001 w
+.02381 .47716 m
+.02756 .47716 L
+s
+P
+p
+.001 w
+.02381 .08394 m
+.02756 .08394 L
+s
+P
+p
+.001 w
+.02381 .05772 m
+.02756 .05772 L
+s
+P
+p
+.001 w
+.02381 .03151 m
+.02756 .03151 L
+s
+P
+p
+.001 w
+.02381 .00529 m
+.02756 .00529 L
+s
+P
+p
+.001 w
+.02381 .52959 m
+.02756 .52959 L
+s
+P
+p
+.001 w
+.02381 .5558 m
+.02756 .5558 L
+s
+P
+p
+.001 w
+.02381 .58202 m
+.02756 .58202 L
+s
+P
+p
+.001 w
+.02381 .60823 m
+.02756 .60823 L
+s
+P
+p
+.002 w
+.02381 0 m
+.02381 .61803 L
+s
+P
+P
+0 0 m
+1 0 L
+1 .61803 L
+0 .61803 L
+closepath
+clip
+newpath
+p
+.008 w
+.18641 .01472 Mdot
+.23287 .18061 Mdot
+.27933 .28383 Mdot
+.32578 .35633 Mdot
+.37224 .40794 Mdot
+.4187 .44603 Mdot
+.46516 .47675 Mdot
+.51161 .5001 Mdot
+.55807 .51976 Mdot
+.60453 .53573 Mdot
+.65099 .54925 Mdot
+.69744 .56031 Mdot
+.7439 .57014 Mdot
+.79036 .57874 Mdot
+.83682 .58612 Mdot
+.88328 .59349 Mdot
+.92973 .5984 Mdot
+.97619 .60332 Mdot
+P
+% End of Graphics
+MathPictureEnd
+
+:[font = input; preserveAspect]
+PrintTable[temp]
+^*)
