@@ -1,0 +1,48 @@
+% Source: Bertram and Sherman, "Population Dynamics of Synaptic Release Sites",
+% SIAM J. App. Math, in press (to appear December 1997).
+% This file corresponds to dashed lines in Fig. 5.1:
+% Reduced model with average domain calcium; s4 at equilibrium
+
+% Note: Calcium is driven by voltage-clamp pulses here.  Any Hodgin-Huxley
+% type model can be used instead, as v is just a time-dependent input to
+% the calcium-binding machinery.
+
+init s1=0.03205648483927262, s2=0.008754205676975253, s3=1.766272523723579e-05, m=0.0003673315370276691
+
+p k1p=3.75e-3, k1m=4e-4, k2p=2.5e-3, k2m=1e-3
+p k3p=5e-4, k3m=1e-1, k4p=7.5e-3, k4m=1e1
+
+% v-clamp parameters (singularity if vpulse=0):
+p vpulse=10, vhold=-65, tp=2.0, period=10.0, tfire=5.0
+% ghk/domain ca parameters:
+% rtdf = RT/F at 37 deg C (310 deg K) in mV
+p a=0.02, gcahat=7, p=14, rtdf=26.7,cao=1
+
+% variables
+
+s1' = k1p*ca*m - (k1m+k1p*ca*m)*s1
+s2' = k2p*ca*m - (k2m+k2p*ca*m)*s2
+s3' = k3p*ca*m - (k3m+k3p*ca*m)*s3
+% s4' = k4p*ca*m - (k4m+k4p*ca*m)*s4
+
+m' = alpha*(1-m)-beta*m
+
+% fixed variables
+minf = alpha/(alpha+beta)
+v  = (vpulse - vhold)*(heav(mod(t,period)-tfire)-heav(mod(t,period)-(tfire+tp))) + vhold
+alpha =  0.6*exp(2.7*v/rtdf)
+beta =  0.2*exp(-v/rtdf)
+ca = -a*gcahat*p*cao*2*v/(rtdf*(1 - exp(2*v/rtdf)))
+
+s4 = k4p*ca*m/(k4m + k4p*ca*m)
+
+% output
+
+aux vout = v
+aux caout = ca
+aux s12 = s1*s2
+aux release = s1*s2*s3*s4
+
+@ total=40, meth=rungekutta, dt=0.1, yp=release, yhi=1.0e-07, ylo=0, xhi=40
+
+done
