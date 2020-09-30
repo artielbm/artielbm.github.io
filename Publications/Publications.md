@@ -99,17 +99,28 @@
 1.  R. Bertram, P. Smolen, A. Sherman, D. Mears, I. Atwater, F. Martin, and B. Soria. 1995\. _A role for calcium-release activated current (CRAC) in cholinergic modulation of electrical activity in pancreatic beta-cells._ Biophys. J. **68**:2323-2332.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/7647236/) [[XPP File]](../Models/CRAC_I) 
 1.  R. Bertram, M. Butte, T. Kiemel, and A. Sherman. 1995\. _Topological and phenomenological classification of bursting mechanisms._ Bull. Math. Biol. **57**:413-439.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/7728115/) [[XPP File]](../Models/ChayCook)
 
-1.  A. Sherman, L. Xu, and C. Stokes. 1995\. _Estimating and eliminating junctional current in coupled cell populations by leak subtraction. A computational study._ J. Membr. Biol., **143**:79-87\. [[PubMed]](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=7714890&dopt=Abstract)  (Joint with experimental paper: E. Rojas, C. Stokes, D. Mears, and I. Atwater. 1995\. _Single micro-electrode voltage-clamp measurements of pancreatic beta-cell membrane ionic currents in intact mouse islets of Langerhans._ J. Membr. Biol. **143**:65-77).  [[PubMed]](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=7714889&dopt=Abstract)
+1.  A. Sherman, L. Xu, and C. Stokes. 1995\. _Estimating and eliminating junctional current in coupled cell populations by leak subtraction. A computational study._ J. Membr. Biol., **143**:79-87\. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/7714890/)  (Joint with experimental paper: E. Rojas, C. Stokes, D. Mears, and I. Atwater. 1995\. _Single micro-electrode voltage-clamp measurements of pancreatic beta-cell membrane ionic currents in intact mouse islets of Langerhans._ J. Membr. Biol. **143**:65-77).  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/7714889/)
+
 1.  A. Sherman and M. Mascagni. 1994\. _A gradient random walk method for two-dimensional reaction-diffusion equations._ SIAM J. Sci. Comput. **15**:1280-1293. [[doi]](https://epubs.siam.org/doi/10.1137/0915078)
+
 1.  P. Smolen and A. Sherman. 1994\. _Phase-independent resetting in relaxation and burst oscillators._ J. Theor. Biol. **169**:339-348.  [[PubMed]](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=7967627&dopt=Abstract)
+
 1.  A. Sherman. 1994\. _Anti-phase, asymmetric, and aperiodic oscillations in excitable cells I. Coupled bursters._ Bull. Math. Biol. **56**:811-835.  [[PubMed]](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=7920266&dopt=Abstract)
+
 1.  P. Smolen, J. Rinzel, and A. Sherman. 1993\. _Why pancreatic islets burst but single beta-cells do not: The heterogeneity hypothesis._ Biophys. J. **64**:1668-1680.   [[PubMed]](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=8369400&dopt=Abstract)
+
 1.  A. Sherman and J. Rinzel. 1992\. _Rhythmogenic effects of weak electrotonic coupling in neuronal models._ Proc. Natl. Acad. Sci. USA. **89**:2471-2474.  [[PubMed]](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=1549611&dopt=Abstract) [[XPP Files]](http://lbm.niddk.nih.gov/sherman/gallery/beta/QBC/)
+
 1.  A. Sherman and J. Rinzel. 1991\. _Model for synchronization of pancreatic beta-cells by gap junction coupling._ Biophys. J. **59**:547-559.  [[PubMed]](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=1646657&dopt=Abstract)
+
 1.  A. Sherman, J. Keizer, and J. Rinzel. 1990\. _Domain model for Ca<sup>2+</sup> inactivation of Ca<sup>2+</sup> channels at low channel density._ Biophys. J. **58**:985-995.  [[PubMed]](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=2174274&dopt=Abstract) [[XPP File]](http://mrb.niddk.nih.gov/sherman/gallery/beta/skr)
+
 1.  P. B. Carroll, A. Sherman, R. Ferrer, A. C. Boschero, J. Rinzel, and I. Atwater. 1990\. _Modulation of the frequency of glucose-dependent bursts of electrical activity by HCO3/CO2 in rodent pancreatic beta-cells. Experimental and theoretical results._ Eur. Biophys. J. **18**:71-77.  [[PubMed]](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=2108857&dopt=Abstract)
+
 1.  A. Sherman, J. Rinzel, and J. Keizer. 1988\. _Emergence of organized bursting in clusters of pancreatic beta-cells by channel sharing._ Biophys. J. **54**:411-425.   [[PubMed]](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=2850029&dopt=Abstract) [[XPP File]](http://lbm.niddk.nih.gov/sherman/gallery/beta/srk)
+
 1.  A. S. Sherman and C. S. Peskin. 1988\. _Solving the Hodgkin-Huxley equations by a random walk method._ SIAM J. Sci. and Stat. Comput. **9**:170-190.  [[doi]](https://doi.org/10.1137/0909012)
+
 1.  A. S. Sherman and C. S. Peskin. 1986\. _A Monte Carlo method for scalar reaction diffusion equations._ SIAM J. Sci. and Stat. Comput. **7**:1360-1372. [[doi]](https://doi.org/10.1137/0907090)
 
     ### Invited Reviews
