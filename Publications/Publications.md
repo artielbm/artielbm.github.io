@@ -209,7 +209,7 @@
 
     ### Invited Reviews
 
-1.  R. Bertram, L. S. Satin, and A. S. Sherman. 2018. _Closing in on the mechanisms of pulsatile insulin secretion._ Diabetes, **67**:351-359. [[PubMed]](https://www.ncbi.nlm.nih.gov/pubmed/29463575)
+1.  R. Bertram, L. S. Satin, and A. S. Sherman. 2018. _Closing in on the mechanisms of pulsatile insulin secretion._ Diabetes, **67**:351-359. [[PubMed]](https://www.ncbi.nlm.nih.gov/pubmed/29463575). [[XPP File]](../Models/IOM1.0)
 
 1.  P. A. Fletcher, A. Sherman, and S. S. Stojilkovic. 2018. _Common and diverse elements of ion channels and receptors underlying electrical activity in endocrine pituitary cells._ Molecular and Cellular Endocrinology, **463**:23 - 36. [[PubMed](https://www.ncbi.nlm.nih.gov/pubmed/28652171)] [[XPP files]](../Models/Pituitary_MCE)
 
@@ -219,7 +219,7 @@
 
 1.  A. Sherman, 2010. _Lessons from Models of Pancreatic beta Cells for Engineering Glucose-sensing Cells._ Math. Biosci., **227**:12-19. [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/20580727)]
 
-1.  R. Bertram, A. Sherman, and L. S. Satin, 2007. _Metabolic and electrical oscillations: Partners in controlling pulsatile insulin secretion_. Am. J. Physiol. Endocrinol. Metab. **293**:890-900. [[PubMed](http://www.ncbi.nlm.nih.gov/sites/entrez?Db=pubmed&Cmd=ShowDetailView&TermToSearch=17666486&ordinalpos=1&itool=EntrezSystem2.PEntrez.Pubmed.Pubmed_ResultsPanel.Pubmed_RVDocSum)]
+1.  R. Bertram, A. Sherman, and L. S. Satin, 2007. _Metabolic and electrical oscillations: Partners in controlling pulsatile insulin secretion_. Am. J. Physiol. Endocrinol. Metab. **293**:890-900. [[PubMed](https://pubmed.ncbi.nlm.nih.gov/17666486/)]. [[XPP File]](../Models/DOM1.0)
 
 1.  G. de Vries and A. Sherman. 2005. _Beyond Synchronization: Modulatory and Emergent Effects of Coupling in Square-Wave Bursting_ in "Bursting: The Genesis of Rhythm in the Nervous System", World Scientific, London, pp. 243-272. [[Publisher's Site](https://www.worldscientific.com/worldscibooks/10.1142/5944)] [[doi]](https://doi.org/10.1142/9789812703231_0010)
 
@@ -227,13 +227,13 @@
 
 1.  A. Sherman and R. Bertram. 2005. _Integrative Modeling of the Pancreatic beta-Cell._ in "Wiley Interscience Encyclopedia of Genetics, Genomics, Proteomics, and Bioinformatics", Part 3 Proteomics, M. Dunn, ed., Section 3.8 Systems Biology, R. L. Winslow, ed., John Wiley & Sons, Ltd. DOI: 10.1002/047001153X.g308213. [[On-Line Book](http://www3.interscience.wiley.com/cgi-bin/mrwhome/109716564/HOME)] [[XPP Files](http://mrb.niddk.nih.gov/sherman/Wiley.html)]
 
-1.  A. Sherman. 1996\. _Contributions of modeling to understanding stimulus-secretion coupling in pancreatic beta-cells_. Am. J. Physiol. **271** (Endocrinol. Metab. **34**): E362-E372.  [[PubMed](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=8770032&dopt=Abstract)]
+1.  A. Sherman. 1996\. _Contributions of modeling to understanding stimulus-secretion coupling in pancreatic beta-cells_. Am. J. Physiol. **271** (Endocrinol. Metab. **34**): E362-E372.  [[PubMed](https://pubmed.ncbi.nlm.nih.gov/8770032/)] [[XPP File]](../Models/SModel)
 
 1.  A. Sherman. 1995\. _Theoretical aspects of synchronized bursting in beta-cells,_ in Pacemaker Activity and Intercellular Communication, J. D. Huizinga, ed., CRC Press, Boca Raton, pp. 323-337.
 
     ### Book Chapters & Other Reviews
 
-1.  A. Sherman. 2016. _Endoplasmic reticulum- and plasma membrane-driven calcium oscillations_, in "Computational Neuroendocrinology" (Wiley-INF Masterclass in Neuroendocrinology Series), D. J. MacGregor and G. Leng, eds., John Wiley & Sons, Chichester, UK, p. 112-141. [[The Book]](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1119951690.html) [[doi]](https://doi.org/10.1002/9781119159438.ch3)
+1.  A. Sherman. 2016. _Endoplasmic reticulum- and plasma membrane-driven calcium oscillations_, in "Computational Neuroendocrinology" (Wiley-INF Masterclass in Neuroendocrinology Series), D. J. MacGregor and G. Leng, eds., John Wiley & Sons, Chichester, UK, p. 112-141. [[The Book]](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1119951690.html) [[doi]](https://doi.org/10.1002/9781119159438.ch3) [[XPP Files]](../Models/Wiley)
 
 1.  R. Bertram, A. Sherman, and L. S. Satin. 2013. _Electrical, Calcium, and Metabolic Oscillations in Pancreatic Islets,_ in "The Islets of Langerhans", 2nd edition, M. S. Islam, ed., Springer-Verlag, Berlin, p. 453-474. [[doi]](https://doi.org/10.1007/978-94-007-6686-0_10) [[The Book]](https://www.springer.com/gp/book/9789400766853)
 
