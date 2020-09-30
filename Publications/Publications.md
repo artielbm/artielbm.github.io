@@ -225,7 +225,7 @@
 
 1.  R. Bertram and A. Sherman. 2005. _Negative Calcium Feedback: The Road from Chay-Keizer_ in "Bursting: The Genesis of Rhythm in the Nervous System", S. Coombes and P. Bressloff, eds., World Scientific, London, pp. 19-48. [[Publisher's Site](https://www.worldscientific.com/worldscibooks/10.1142/5944)][[doi]](https://doi.org/10.1142/9789812703231_0002)
 
-1.  A. Sherman and R. Bertram. 2005. _Integrative Modeling of the Pancreatic beta-Cell._ in "Wiley Interscience Encyclopedia of Genetics, Genomics, Proteomics, and Bioinformatics", Part 3 Proteomics, M. Dunn, ed., Section 3.8 Systems Biology, R. L. Winslow, ed., John Wiley & Sons, Ltd. DOI: 10.1002/047001153X.g308213. [[On-Line Book](http://www3.interscience.wiley.com/cgi-bin/mrwhome/109716564/HOME)] [[XPP Files](http://mrb.niddk.nih.gov/sherman/Wiley.html)]
+1.  A. Sherman and R. Bertram. 2005. _Integrative Modeling of the Pancreatic beta-Cell._ in "Wiley Interscience Encyclopedia of Genetics, Genomics, Proteomics, and Bioinformatics", Part 3 Proteomics, M. Dunn, ed., Section 3.8 Systems Biology, R. L. Winslow, ed., John Wiley & Sons, Ltd. DOI: 10.1002/047001153X.g308213. [[On-Line Book](http://www3.interscience.wiley.com/cgi-bin/mrwhome/109716564/HOME)] [[XPP Files]](../Models/Wiley)
 
 1.  A. Sherman. 1996\. _Contributions of modeling to understanding stimulus-secretion coupling in pancreatic beta-cells_. Am. J. Physiol. **271** (Endocrinol. Metab. **34**): E362-E372.  [[PubMed](https://pubmed.ncbi.nlm.nih.gov/8770032/)] [[XPP File]](../Models/SModel)
 
@@ -233,7 +233,7 @@
 
     ### Book Chapters & Other Reviews
 
-1.  A. Sherman. 2016. _Endoplasmic reticulum- and plasma membrane-driven calcium oscillations_, in "Computational Neuroendocrinology" (Wiley-INF Masterclass in Neuroendocrinology Series), D. J. MacGregor and G. Leng, eds., John Wiley & Sons, Chichester, UK, p. 112-141. [[The Book]](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1119951690.html) [[doi]](https://doi.org/10.1002/9781119159438.ch3) [[XPP Files]](../Models/Wiley)
+1.  A. Sherman. 2016. _Endoplasmic reticulum- and plasma membrane-driven calcium oscillations_, in "Computational Neuroendocrinology" (Wiley-INF Masterclass in Neuroendocrinology Series), D. J. MacGregor and G. Leng, eds., John Wiley & Sons, Chichester, UK, p. 112-141. [[The Book]](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1119951690.html) [[doi]](https://doi.org/10.1002/9781119159438.ch3) 
 
 1.  R. Bertram, A. Sherman, and L. S. Satin. 2013. _Electrical, Calcium, and Metabolic Oscillations in Pancreatic Islets,_ in "The Islets of Langerhans", 2nd edition, M. S. Islam, ed., Springer-Verlag, Berlin, p. 453-474. [[doi]](https://doi.org/10.1007/978-94-007-6686-0_10) [[The Book]](https://www.springer.com/gp/book/9789400766853)
 
@@ -261,4 +261,4 @@
 
 1.  L. S. Satin, J. Ha, and A. S. Sherman. 2016. _Islets Transplanted into the Eye: Do They Improve Our Insight into Islet Adaptation to Insulin Resistance?_ Diabetes, **65**(9):2470-2. [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/27555572)] [Commentary on [Chen et al, Diabetes. 2016 **65**(9):2676-85](http://www.ncbi.nlm.nih.gov/pubmed/27207518)]
 
-1.  A. Sherman. 2011. _Dynamical systems theory in physiology._ J. Gen. Physiol. **138**:13-19. [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/21708952)] [Commentary on [Cha et al, J. Gen. Physiol. 2011 **138**(1):39-4765.](http://www.ncbi.nlm.nih.gov/pubmed/21708954)] [[Cover Art](http://lbm.niddk.nih.gov/sherman/gallery/neural/Generic/JGPCoverJuly2011.pdf)]
+1.  A. Sherman. 2011. _Dynamical systems theory in physiology._ J. Gen. Physiol. **138**:13-19. [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/21708952)] [Commentary on [Cha et al, J. Gen. Physiol. 2011 **138**(1):39-4765.](http://www.ncbi.nlm.nih.gov/pubmed/21708954)] [[Cover Art]](../Models/JGP)
