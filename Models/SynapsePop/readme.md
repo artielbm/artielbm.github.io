@@ -4,3 +4,5 @@ This is supplementary material for R. Bertram and A. Sherman. 1998. *Population 
 ### xpp files
 
 Figure 2.4: [[vpulse.ode]](vpulse.ode)
+
+Figure 5.1: [[meanfield.ode]](meanfield.ode)
