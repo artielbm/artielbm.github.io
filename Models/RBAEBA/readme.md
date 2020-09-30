@@ -25,6 +25,9 @@ EXAMPLE_DIM loads buffer and source parameters and then plots calcium and buffer
 Questions and comments about the MATLAB scripts can be sent to:
 
 Gregory D. Conradi Smith
+
 The College of William and Mary
+
 Email: greg.conradi.smith@gmail.com
+
 URL: http://wmpeople.wm.edu/site/page/gdsmit/home
