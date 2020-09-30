@@ -175,11 +175,11 @@
 
 1.  R. Bertram and A. Sherman. 1998\. _Population dynamics of synaptic release sites._ SIAM J. Applied Math., **58**:142-169\. [[doi]](https://epubs.siam.org/doi/abs/10.1137/S0036139996297912)
 
-1.  D. Mears, N. F. Sheppard, Jr., I. Atwater, E. Rojas, R. Bertram, and A. Sherman. 1997\. _Evidence that calcium release-activated current mediates transient glucose-induced electrical activity in the pancreatic beta-cell._ J. Membr. Bio., **155**:47-59.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/9002424/) [[XPP File]](../Models/CRAC_II)
+1.  D. Mears, N. F. Sheppard, Jr., I. Atwater, E. Rojas, R. Bertram, and A. Sherman. 1997. _Evidence that calcium release-activated current mediates transient glucose-induced electrical activity in the pancreatic beta-cell._ J. Membr. Bio., **155**:47-59.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/9002424/) [[XPP File]](../Models/CRAC_II)
 
 1.  R. Bertram, A. Sherman, and E. Stanley. 1996\. _The single domain/bound calcium hypothesis of transmitter release and facilitation._ J. Neurophysiol., **75**:1919-1931.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/8734591/) [[XPP File]](../Models/Nanodomain)
 
-1.  R. Bertram, P. Smolen, A. Sherman, D. Mears, I. Atwater, F. Martin, and B. Soria. 1995\. _A role for calcium-release activated current (CRAC) in cholinergic modulation of electrical activity in pancreatic beta-cells._ Biophys. J. **68**:2323-2332.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/7647236/) [[XPP File]](../Models/CRAC_I) 
+1.  R. Bertram, P. Smolen, A. Sherman, D. Mears, I. Atwater, F. Martin, and B. Soria. 1995. _A role for calcium-release activated current (CRAC) in cholinergic modulation of electrical activity in pancreatic beta-cells._ Biophys. J. **68**:2323-2332.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/7647236/) [[XPP File]](../Models/CRAC_I) 
 
 1.  R. Bertram, M. Butte, T. Kiemel, and A. Sherman. 1995\. _Topological and phenomenological classification of bursting mechanisms._ Bull. Math. Biol. **57**:413-439.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/7728115/) [[XPP File]](../Models/ChayCook)
 
@@ -241,13 +241,13 @@
 
 1.  R. Bertram, K. Wierschem, M. Zhang, P. Goforth, A. Sherman, and L. S. Satin. 2002. _Phantom bursting in pancreatic islets: A potential role for insulin feedback,_ in "Recent Research Developments in Biophysics", S. G. Pandalai, ed., Transworld Research Network, Vol. 1, pp. 31-51.
 
-1.  A. Sherman, Y.-X. Li, and J. Keizer. 2002\. _Whole Cell Models_ in "Computational Cell Biology", C. Fall, E. Marland, J. Wagner, and J. Tyson , eds., Springer-Verlag, New York, pp. 101 - 139. [[Publisher Site for the Book]](https://www.springer.com/us/book/9780387953694) [[XPP Files]](https://github.com/artielbm/CCB)
+1.  A. Sherman, Y.-X. Li, and J. Keizer. 2002. _Whole Cell Models_ in "Computational Cell Biology", C. Fall, E. Marland, J. Wagner, and J. Tyson , eds., Springer-Verlag, New York, pp. 101 - 139. [[Publisher Site for the Book]](https://www.springer.com/us/book/9780387953694) [[XPP Files]](https://github.com/artielbm/CCB)
 
-1.  R. Bertram and A. Sherman. 2000\. _Dynamical complexity and temporal plasticity in pancreatic beta-cells._ J. Biosc., **25**:197-209. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/10878861/)
+1.  R. Bertram and A. Sherman. 2000. _Dynamical complexity and temporal plasticity in pancreatic beta-cells._ J. Biosc., **25**:197-209. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/10878861/)
 
-1.  M. V. Mascagni and A. S. Sherman. 1998\. _Numerical methods for neuronal modeling,_ in "Methods in Neuronal Modeling," I. Segev and C. Koch, eds., MIT Press, Cambridge, pp.569-606. [[The Book](https://mitpress.mit.edu/books/methods-neuronal-modeling-second-edition)] [[Supplementary Material](../Models/MCNS)]
+1.  M. V. Mascagni and A. S. Sherman. 1998. _Numerical methods for neuronal modeling,_ in "Methods in Neuronal Modeling," I. Segev and C. Koch, eds., MIT Press, Cambridge, pp.569-606. [[The Book](https://mitpress.mit.edu/books/methods-neuronal-modeling-second-edition)] [[Supplementary Material](../Models/MCNS)]
 
-1.  A. Sherman and P. Smolen. 1997\. _Computer modeling of heterogeneous beta-cell populations,_ in "Physiology and Pathophysiology of the Islets of Langerhans", B. Soria, ed., Plenum Press, New York, pp. 275-284. [[PubMed](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed&cmd=Retrieve&list_uids=9544285&dopt=Abstract)] [[Abstract](Alicante/alicante.abs)]
+1.  A. Sherman and P. Smolen. 1997. _Computer modeling of heterogeneous beta-cell populations,_ in "Physiology and Pathophysiology of the Islets of Langerhans", B. Soria, ed., Plenum Press, New York, pp. 275-284. [[PubMed](https://pubmed.ncbi.nlm.nih.gov/9544285/)] [[doi]](https://link.springer.com/chapter/10.1007/978-1-4899-1819-2_38)
 
 1.  A. Sherman. 1997\. _Calcium and membrane potential oscillations in pancreatic beta-cells,_ in "Case Studies in Mathematical Modeling - Ecology, Physiology, and Cell Biology", H. G. Othmer, F. R. Adler, M. A. Lewis, and J. C. Dallon, eds., Prentice-Hall, New Jersey, p. 199 - 217. [[The Book](http://www.math.utah.edu/books/csmmepcb/index.html)] [[Models and Exercises]](../Models/UtahChap)
 
