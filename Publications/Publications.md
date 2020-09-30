@@ -243,7 +243,7 @@
 
 1.  A. Sherman, Y.-X. Li, and J. Keizer. 2002\. _Whole Cell Models_ in "Computational Cell Biology", C. Fall, E. Marland, J. Wagner, and J. Tyson , eds., Springer-Verlag, New York, pp. 101 - 139. [[Publisher Site for the Book]](https://www.springer.com/us/book/9780387953694) [[xpp files]](https://github.com/artielbm/CCB/blob/master/readme.md)
 
-1.  R. Bertram and A. Sherman. 2000\. _Dynamical complexity and temporal plasticity in pancreatic beta-cells._ J. Biosc., **25**:197-209. [[PubMed](http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=10878861&dopt=Abstract)]
+1.  R. Bertram and A. Sherman. 2000\. _Dynamical complexity and temporal plasticity in pancreatic beta-cells._ J. Biosc., **25**:197-209. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/10878861/)
 
 1.  M. V. Mascagni and A. S. Sherman. 1998\. _Numerical methods for neuronal modeling,_ in "Methods in Neuronal Modeling," I. Segev and C. Koch, eds., MIT Press, Cambridge, pp.569-606. [[The Book](https://mitpress.mit.edu/books/methods-neuronal-modeling-second-edition)] [[Supplementary Material](../Models/MCNS)]
 
