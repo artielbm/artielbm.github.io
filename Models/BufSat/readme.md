@@ -2,4 +2,4 @@ Supplementary files for V. Matveev, R. S. Zucker, and A. Sherman. 2004. *Facilit
 
 Calcium Calculator Software is hosted at the site of Victor Matveev, NJIT http://web.njit.edu/~matveev
 
-[CalC Scripts]](https://web.njit.edu/~matveev/calc/BSMscripts.html)
+[CalC Scripts](https://web.njit.edu/~matveev/calc/BSMscripts.html)
