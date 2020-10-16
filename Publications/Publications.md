@@ -13,7 +13,7 @@
 *The OGTT is highly reproducible in Africans for the diagnosis of diabetes: Implications for treatment and protocol design.*
 Diabetes Research and Clinical Practice, in press.   
    
-1. A. F. Hobabagabo, N. H. Osei-Tutu, T. Hormenu, E. M. Shoup, C. W. DuBose, L. S. Mabundo, J. Ha, A. Sherman, S. T. Chung, D. B. Sacks, and A. E. Sumner. 2020. Improved Detection of Abnormal Glucose Tolerance in Africans: The Value of Combining Hemoglobin A 1c With Glycated Albumin. Diabetes Care, in press. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/32801129/)
+1. A. F. Hobabagabo, N. H. Osei-Tutu, T. Hormenu, E. M. Shoup, C. W. DuBose, L. S. Mabundo, J. Ha, A. Sherman, S. T. Chung, D. B. Sacks, and A. E. Sumner. 2020. Improved Detection of Abnormal Glucose Tolerance in Africans: The Value of Combining Hemoglobin A 1c With Glycated Albumin. Diabetes Care, **43**(10):2607-2613. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/32801129/)
 
 1. R. Muniyappa, H. Chen, M. Montagnani, A. Sherman, and M. Quon. 2020. _Endothelial dysfunction due to selective insulin resistance in vascular endothelium: insights from mechanistic modeling._ Am. J. Physiol. (Endocrinol. Metab.), in press. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/32776829/) [[Madonna and xpp files]](../Models/Vascular)
 
