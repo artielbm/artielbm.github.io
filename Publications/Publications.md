@@ -15,7 +15,7 @@ Diabetes Research and Clinical Practice, in press.
    
 1. A. F. Hobabagabo, N. H. Osei-Tutu, T. Hormenu, E. M. Shoup, C. W. DuBose, L. S. Mabundo, J. Ha, A. Sherman, S. T. Chung, D. B. Sacks, and A. E. Sumner. 2020. Improved Detection of Abnormal Glucose Tolerance in Africans: The Value of Combining Hemoglobin A 1c With Glycated Albumin. Diabetes Care, **43**(10):2607-2613. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/32801129/)
 
-1. R. Muniyappa, H. Chen, M. Montagnani, A. Sherman, and M. Quon. 2020. _Endothelial dysfunction due to selective insulin resistance in vascular endothelium: insights from mechanistic modeling._ Am. J. Physiol. (Endocrinol. Metab.), in press. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/32776829/) [[Madonna and xpp files]](../Models/Vascular)
+1. R. Muniyappa, H. Chen, M. Montagnani, A. Sherman, and M. Quon. 2020. _Endothelial dysfunction due to selective insulin resistance in vascular endothelium: insights from mechanistic modeling._ Am. J. Physiol. (Endocrinol. Metab.), **319**(3):E629-E646. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/32776829/) [[Madonna and xpp files]](../Models/Vascular)
 
 1. J. Ha and A. Sherman. 2020. _Type 2 Diabetes: One Disease, Many Pathways._ Am. J. Physiol. (Endocrinol. Metab.), **319**(2):E410-E426. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/32663101/) [[The Paper]](https://doi.org/10.1152/ajpendo.00512.2019) [[Matlab and xpp files]](https://artielbm.github.io/Models/Pathways/)[[Other supplemental material at Figshare]](https://doi.org/10.6084/m9.figshare.10792412)
 
