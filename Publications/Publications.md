@@ -11,7 +11,7 @@
    
 1. R. Jagannathan, C. W. DuBose, L. S. Mabundo, S. T. Chung, J. Ha, A. Sherman, M. Bergman, A. E Sumner. 2020.
 *The OGTT is highly reproducible in Africans for the diagnosis of diabetes: Implications for treatment and protocol design.*
-Diabetes Research and Clinical Practice, in press. [[doi]](https://doi.org/10.1016/j.diabres.2020.108523)
+Diabetes Research and Clinical Practice, 170:108523. [[doi]](https://doi.org/10.1016/j.diabres.2020.108523)
 
 1. K. Wang, K. Kretschmannova, R.M. Pr\'evide, K. Smiljanic, Q. Chen, P.A. Fletcher, A. Sherman, 
 and S.S. Stojilkovic. 2020.
