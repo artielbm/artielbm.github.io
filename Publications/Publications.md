@@ -243,7 +243,7 @@ Biophys. J., in press.
 
     ### Book Chapters & Other Reviews
 
-1. L. S. Satin, M. Watts, and A. Sherman. 2020. _An introduction to beta cell electrophysiology and modeling,_ in Diabetes System Biology: Quantitative methods for understanding beta-cell dynamics and function, A. Khadra, editor.  IOP Publishing, Bristol, UK, in press.
+1. L. S. Satin, M. Watts, and A. Sherman. 2020. _An introduction to beta cell electrophysiology and modeling,_ in Diabetes System Biology: Quantitative methods for understanding beta-cell dynamics and function, A. Khadra, editor.  IOP Publishing, Bristol, UK, in press. [[XPP Files]](https://github.com/artielbm/artielbm.github.io/blob/master/Models/FieldsChapter/readme.md)
 
 1.  A. Sherman. 2016. _Endoplasmic reticulum- and plasma membrane-driven calcium oscillations_, in "Computational Neuroendocrinology" (Wiley-INF Masterclass in Neuroendocrinology Series), D. J. MacGregor and G. Leng, eds., John Wiley & Sons, Chichester, UK, p. 112-141. [[The Book]](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1119951690.html) [[doi]](https://doi.org/10.1002/9781119159438.ch3) 
 
