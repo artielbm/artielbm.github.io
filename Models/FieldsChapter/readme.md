@@ -24,3 +24,7 @@ Files by figure:
 
 * [Figure A2.2]
     * [ode file](glass.ode)
+
+Errata:
+
+* [Errata.pdf](Errata.pdf)
