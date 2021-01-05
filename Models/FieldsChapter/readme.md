@@ -6,7 +6,8 @@ Files by figure:
     * [ode file](mlneuron2d.ode)
 
 * [Figure 2.9]
-    * [ode file](mlbeta-alt.ode)
+    * [ode file](figure2_9.ode)
+    * [m file](figure2_9.m)
 
 * [Figure 2.10]
     * [ode file](mlbeta-alt.ode)
