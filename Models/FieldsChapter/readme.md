@@ -4,6 +4,7 @@ Files by figure:
 
 * [Figure 2.8]
     * [ode file](mlneuron2d.ode)
+    * [m file](figure2_8.m)
 
 * [Figure 2.9]
     * [ode file](figure2_9.ode)
