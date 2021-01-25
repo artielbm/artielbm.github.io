@@ -11,13 +11,13 @@
    
 1. R. Jagannathan, C. W. DuBose, L. S. Mabundo, S. T. Chung, J. Ha, A. Sherman, M. Bergman, A. E Sumner. 2020.
 *The OGTT is highly reproducible in Africans for the diagnosis of diabetes: Implications for treatment and protocol design.*
-Diabetes Research and Clinical Practice, 170:108523. [[doi]](https://doi.org/10.1016/j.diabres.2020.108523)
+Diabetes Research and Clinical Practice, 170:108523. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/33153960/)[[doi]](https://doi.org/10.1016/j.diabres.2020.108523)
 
 1. K. Wang, K. Kretschmannova, R.M. Pr\'evide, K. Smiljanic, Q. Chen, P.A. Fletcher, A. Sherman, 
 and S.S. Stojilkovic. 2020.
 *Cell Type-Specific Expression Pattern of Proton Sensing Receptors and Channels 
 in Pituitary Gland.*
-Biophys. J., in press.
+Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/33098866/)
    
 1. A. F. Hobabagabo, N. H. Osei-Tutu, T. Hormenu, E. M. Shoup, C. W. DuBose, L. S. Mabundo, J. Ha, A. Sherman, S. T. Chung, D. B. Sacks, and A. E. Sumner. 2020. Improved Detection of Abnormal Glucose Tolerance in Africans: The Value of Combining Hemoglobin A 1c With Glycated Albumin. Diabetes Care, **43**(10):2607-2613. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/32801129/)
 
