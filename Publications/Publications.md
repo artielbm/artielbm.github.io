@@ -9,6 +9,10 @@
 
    ### Journal Articles
    
+1. J. Ha, R. Muniyappa, A. S. Sherman, and M. J. Quon. 2021. 
+*When MINMOD Artifactually Interprets Strong Insulin Secretion as Weak Insulin Action.* 
+Frontiers in Physiology. in press.   
+   
 1. R. Jagannathan, C. W. DuBose, L. S. Mabundo, S. T. Chung, J. Ha, A. Sherman, M. Bergman, A. E Sumner. 2020.
 *The OGTT is highly reproducible in Africans for the diagnosis of diabetes: Implications for treatment and protocol design.*
 Diabetes Research and Clinical Practice, 170:108523. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/33153960/)[[doi]](https://doi.org/10.1016/j.diabres.2020.108523)
