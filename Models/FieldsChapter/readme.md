@@ -13,6 +13,7 @@ Files by figure:
 * [Figure 2.10]
     * [ode file](mlbeta-alt.ode)
     * [set file](figure.set)
+    * [m file](figure2_10.m)
 
 * [Figure 2.11]
     * [ode file](Biophan-mod.ode)
