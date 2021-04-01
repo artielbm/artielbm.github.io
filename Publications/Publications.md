@@ -155,7 +155,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 
 1.  R. Bertram, L. Satin, M. Zhang, P. Smolen, and A. Sherman. 2004. _Calcium and glycolysis mediate multiple bursting modes in pancreatic islets_, Biophys. J., **87**:3074-3087. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/15347584/) [[XPP Files and Errata](../Models/DOM1.0)]
 
-1.  R. Bertram and A. Sherman. 2004. _A calcium based phantom bursting model for pancreatic beta-cells,_ Bull. Math. Biol., **66**:1313-1344. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/11106596/)[[XPP Files](../Models/Phantom_II)]
+1.  R. Bertram and A. Sherman. 2004. _A calcium based phantom bursting model for pancreatic beta-cells,_ Bull. Math. Biol., **66**:1313-1344. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/15294427/)[[XPP Files](../Models/Phantom_II)]
 
 1.  C. Zimliki, D. Mears, and A. Sherman. 2004. _Three roads to islet bursting: Emergent oscillations in coupled phantom bursters_, Biophys. J., **87**:193-206. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/15240457/)[[XPP file]](../Models/ThreeRoads/)
 
@@ -177,7 +177,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 
 1.  G. de Vries and A. Sherman. 2000\. _Channel sharing in pancreatic beta-cells revisited: Enhancement of emergent bursting by noise._ J. Theor. Biol., **207**:513-530. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/11093836/)
 
-1.  R. Bertram, J. Previte, A. Sherman, T. A. Kinard, and L. S. Satin. 2000\. _The phantom burster model for pancreatic beta-cells._ Biophys. J., **79**:2880-2892. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/11106596/) [[XPP File]](../Models/Phantom_I)
+1.  R. Bertram, J. Previte, A. Sherman, T. A. Kinard, and L. S. Satin. 2000. _The phantom burster model for pancreatic beta-cells._ Biophys. J., **79**:2880-2892. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/11106596/) [[XPP File]](../Models/Phantom_I)
 
 1.  F. Van Goor, A. P. LeBeau, L. Z. Krsmanovic, A. Sherman, K. J. Catt, and S. S. Stojilkovic. 2000\. _Amplitude-dependent spike-broadening in immortalized GnRH neurons._ Biophys. J., **79**:1310-1323. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/10968994/)
 
