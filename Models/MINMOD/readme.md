@@ -4,9 +4,9 @@ J. Ha, R. Muniyappa, A. S. Sherman, and M. J. Quon. 2021. When MINMOD Artifactua
 
 Files by Figure:
 
-* [Figure 2]
+* [Figure 2: IVGTT]
     * [ode file](mlneuron2d.ode)
-    * [m file](figure2_8.m)
+    * [m file](FIG2.m) calls [RHS file](IVGTT_ode.m) 
 
 * [Figure 3]
 
