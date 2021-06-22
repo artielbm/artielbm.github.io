@@ -26,7 +26,7 @@ Files by Figure:
 
 * [Figure 6: IVGTTs, varying vesicle docking rate sigma]
     * XPP: 
-    * Matlab: [FIG6.m](FIG6.m]
+    * Matlab: [FIG6.m](FIG6.m)
 
 * [Figure 7:  HIEC Estimated vs. Assumed SI corresponding to Figure 6]
     * XPP: 
@@ -34,4 +34,4 @@ Files by Figure:
 
 * [Figure 8: OGTTs, varying RRP size or vesicle docking rate sigma]
     * XPP:
-    * Matlab: [FIG8.m)[FIG8.m] calls (sic) [IVGTT_ode.m](IVGTT_ode.m) 
+    * Matlab: [FIG8.m](FIG8.m) calls (sic) [IVGTT_ode.m](IVGTT_ode.m) 
