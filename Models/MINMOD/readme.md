@@ -9,4 +9,5 @@ Files by Figure:
     * [m file](FIG2.m) calls [RHS file](IVGTT_ode.m) 
 
 * [Figure 3]
+    * Matlab: run Simulations with [FIG3_sim.m](FIG3_sim.m), plot final figure with [FIG3.m](fig3.m)
 
