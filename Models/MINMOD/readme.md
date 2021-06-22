@@ -4,5 +4,9 @@ J. Ha, R. Muniyappa, A. S. Sherman, and M. J. Quon. 2021. When MINMOD Artifactua
 
 Files by Figure:
 
+* [Figure 2]
+    * [ode file](mlneuron2d.ode)
+    * [m file](figure2_8.m)
 
+* [Figure 3]
 
