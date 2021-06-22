@@ -1,0 +1,412 @@
+## Set file for GF3_r30_2.ode on Mon Aug 17 12:02:42 2020
+34   Number of equations and auxiliaries
+102   Number of parameters
+# Numerical stuff
+1    nout
+40    nullcline mesh
+10   CVode
+240  total
+1  DeltaT
+0  T0
+0  Transient
+100000000000  Bound
+1e-12  DtMin
+1  DtMax
+1e-10  Tolerance
+1e-10  Abs. Tolerance
+0  Max Delay
+100   Eigenvector iterates
+0.001  Eigenvector tolerance
+0.001  Newton tolerance
+0  Poincare plane
+1e-05  Boundary value tolerance
+1e-05  Boundary value epsilon
+20   Boundary value iterates
+0   Poincare None
+1   Poincare variable
+1   Poincare sign
+0   Stop on Section
+0   Delay flag
+240  Current time
+240  Last Time
+0   MyStart
+1   INFLAG
+# Delays
+0  
+90.6803  
+1.119  
+4.5569  
+1153.66  
+-0.0278  
+241.00  
+0.8   
+1   
+29.6535  
+195.5889  
+# Bndry conds
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+# Old ICs
+-1.818237368683958e-18  GMEAN
+84.11655084681571  G
+0  X
+11.43714427893909  I
+1153.705401791771  B
+-0.04136896548119518  GAMMA
+481.9999631285098  SIGMA
+0.4063490316680284  SI
+1  HEPASI
+129.7579356880723  N5
+85.42436589580822  N6
+# Ending  ICs
+-1.818237379148781e-18  GMEAN
+100.0857378713074  G
+9.450804406089144  X
+93.7218108002005  I
+1153.705391412678  B
+-0.04010009173551014  GAMMA
+481.9999617434902  SIGMA
+0.4066113765099004  SI
+1  HEPASI
+22.75529537052168  N5
+99.81330608614407  N6
+# Parameters
+0.0006944  re_spX
+11.43  Ib
+0.5  Xtau
+4890  Ginj
+60000  Iinj
+0  averG
+1440  GT
+15  Eg0
+700  k
+5  BV
+1  Mmax
+150  alpha_M
+2  kM
+1.2  alpha_ISR
+2  kISR
+4.55  Pmax
+4  kP
+41.77  alpha_P
+3.11  Amax
+0.44  alpha_A
+6  kA
+0.8  A_b
+10000000  tau_b
+0.4  G_bar
+100  Gs
+5  Gn
+0.2  Gshft
+2.14  tau_g
+35  sigma_Gsh
+400  ISRI_bar
+0.1  ISRI_s
+0.1  ISRI_n
+1  ISRI_k
+5  sigma_b
+1  MI_bar
+0.2  MI_k
+0.2  MI_s
+0.02  MI_n
+24990000  tau_sigma
+250  tau_Si
+0.8  tar_Si
+0  meal
+0  OGTT
+0  IVGTT
+30  thyp
+0  tpulse
+360  period
+3  nspike
+360  rest
+11.055  mealbar
+4  mhill_k
+40  mh_alpha
+0.3  ita
+-0.015  mu
+1  OGTTbar
+15  t1
+120  t2
+240  t3
+5  a1
+3  a2
+0  a3
+12500  IVGTTbar
+0  IVGTT_sh
+1  IVGTT_a
+-10  IVGTT_b
+0  IVGTT_sp
+15.443  hepa_bar
+0.27  hepa_k
+-3.54277  hepa_b
+0.104166  HGP_b
+6  alpha_max
+0.4  alpha_k
+-0.5  alpha_b
+1  tar_hepaSi
+250000  tau_hepaSi
+0  GF_bar
+30  kGF
+260  alpha_GF
+-89  shGF
+0.001  GF_b
+2  ca_bar
+4  kca
+0.62  alpha_ca
+0.07000000000000001  ca_b
+150  cmd_factor
+0.0635  cmd_b
+4  cik
+1  cialpha
+20  k1
+100  km1
+0.6  r1
+1  rm1
+0.012  r20
+0.001  rm2
+2  r30
+0.0001  rm3
+2000  u1
+3  u2
+0.02  u3
+2.3  Kp2
+60  ts
+0.0006944400000000001  t_min
+# Graphics
+0.7071097251469876  rm
+-0.4999999999826661  rm
+0.4999958366025518  rm
+0.7071038372138506  rm
+0.5000041633974482  rm
+-0.4999999999826661  rm
+0  rm
+0.7071038372138506  rm
+0.7071097251469876  rm
+0    
+2    
+1    
+1    
+0    
+0    
+2    
+1    
+1    
+0    
+0    
+2    
+1    
+1    
+0    
+0    
+2    
+1    
+1    
+0    
+0    
+2    
+1    
+1    
+0    
+0    
+2    
+1    
+1    
+0    
+0    
+2    
+1    
+1    
+0    
+0    
+2    
+1    
+1    
+0    
+0    
+2    
+1    
+1    
+0    
+0    
+2    
+1    
+1    
+0    
+-1000   
+1000   
+0    
+0   3DFlag
+1   Timeflag
+0   Colorflag
+0   Type
+1  color scale
+0   minscale
+240   xmax
+0   xmin
+100.0857391357422   ymax
+84.11655426025391   ymin
+12   zmax
+-12   zmin
+120   
+0.008333333333333333   
+92.10114669799805   
+0.1252412077131048   
+0   
+0.08333333333333333   
+45   Theta
+45   Phi
+0    xshft
+0    yshft
+0    zshft
+0   xlo
+84.11655426025391   ylo
+0   
+100   
+240   xhi
+100.0857391357422   yhi
+5000000   
+180   
+# Transpose variables etc
+GMEAN
+2   n columns
+1   n rows
+1   row skip
+1   col skip
+1   row 0
+# Coupling stuff for H funs
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+# Array plot stuff
+
+1   NCols
+0   Row 1
+50   NRows
+8   RowSkip
+0  Zmin
+1  Zmax
+# Torus information 
+0    Torus flag 1=ON
+6.283185307179586  Torus period
+# Range information
+re_spX
+-1   eq-range stab col
+0   shoot flag 1=on
+10   eq-range steps
+0  eq_range low
+1  eq_range high
+GMEAN
+GMEAN
+20   Range steps
+0   Cycle color 1=on
+1   Reset data 1=on
+1   Use old I.C.s 1=yes
+0  Par1 low
+0  Par2 low
+1  Par1 high
+1  Par2 high
+re_spX
+0   BVP side
+0   color cycle flag 1=on
+10   BVP range steps
+0  BVP range low
+1  BVP range high
+RHS etc ...
+dGMEAN/dT=AVERG*G/GT
+dG/dT=T_MIN*GINJ+HGP+OGTT_RATE+IVGTT_RATE+MEAL_RATE-(EG0+X*IVGTT+(1-IVGTT)*SI*I)*G*T_MIN
+dX/dT=-RE_SPX*(X-SI*(I-IB))/XTAU
+dI/dT=T_MIN*(IINJ+B*ISR/BV-K*I)
+dB/dT=T_MIN*(P-A)*B/TAU_B
+dGAMMA/dT=T_MIN*(GAMMA_INF-GAMMA)/TAU_G
+dSIGMA/dT=T_MIN*(SIGMA_INF-SIGMA)/TAU_SIGMA
+dSI/dT=T_MIN*(-SI+TAR_SI)/TAU_SI
+dHEPASI/dT=T_MIN*(-HEPASI+TAR_HEPASI)/TAU_HEPASI
+dN5/dT=TS*(RM1*CN1*N5-(R1+RM2)*N5+R2*N6)
+dN6/dT=TS*(R3+RM2*N5-(RM3+R2)*N6)
+PLOT_GF=GF
+PLOT_TAUB=TAU_B
+PROL_R=P/TAU_B
+APOP_R=A/TAU_B
+PLOT_M=M
+PLOT_P=P
+PLOT_A=A
+PLOT_ISR=ISR
+PLOT_SI=SI
+PLOT_SIG=SIGMA
+MEALRATE=MEAL_RATE
+OGTTRATE=OGTT_RATE
+HEPA_SUPP=HGP
+IVGTTRATE=IVGTT_RATE
+TOTAL_GLUF=MEAL_RATE+HGP
+TESTMOD=TEST_MOD
+BENV=BURSTENV
+PLOT_CI=CI
+PLOT_CMD=CMD
+THOUR=T/60
+TDAY=T/1440
+THOUR=T*24
+TMIN=T*24*60
+
+where ...
+M =  MMAX*G^KM/(ALPHA_M^KM + G^KM)   
+P = PMAX*ISR^KP/(ALPHA_P^KP + ISR^KP)   
+A = AMAX*M^KA/(ALPHA_A^KA + M^KA) + A_B   
+G_INF = G_BAR/(1+ EXP(-(G-GS)/GN)) - GSHFT   
+GAMMA_INF = G_INF   
+M_GSH =  MMAX*(G-SIGMA_GSH)^KM/(ALPHA_M^KM + (G-SIGMA_GSH)^KM)   
+SIGMA_ISRI = ISRI_BAR/(1+ ISRI_K*EXP(-(ISR-ISRI_S)/ISRI_N))   
+SIGMA_MI =  1 - MI_BAR/(1 + MI_K*EXP(-(M_GSH-MI_S)/MI_N))   
+SIGMA_INF = SIGMA_MI*SIGMA_ISRI + SIGMA_B    
+ACTIVE = NSPIKE*PERIOD   
+BPERIOD = ACTIVE + REST    
+TD =  T-TPULSE   
+BURSTENV =  (HEAV(MOD(TD,BPERIOD)) - HEAV(MOD(T,BPERIOD) - ACTIVE) )   
+TEST_MOD = MOD(TD,PERIOD)   
+MHILL_FCN = MOD(TD,PERIOD)^MHILL_K/(MH_ALPHA^MHILL_K +MOD(TD,PERIOD)^MHILL_K)   
+MEAL_RATE =  MEAL*(MEALBAR*(MHILL_FCN)^ITA*EXP(MU*(MOD(TD,PERIOD)))*BURSTENV)   
+OGTT_FLUX = (HEAV(T)-HEAV(T-T1))*T*A1/T1 + (HEAV(T-T1)-HEAV(T-T2))*((T-T2)*(A2-A1)/(T2-T1) +A2) + (HEAV(T-T2)-HEAV(T-T3))*(T-T3)*(A3-A2)/(T3-T2)   
+OGTT_RATE = OGTT*OGTTBAR*OGTT_FLUX   
+IVGTT_RATE =  IVGTT*IVGTTBAR*(T-IVGTT_SH)^IVGTT_A*EXP(IVGTT_B*(T-IVGTT_SP))   
+HEPA_MAX =  HEPA_BAR/(HEPA_K +SI) + HEPA_B   
+ALPHA_HGP =  ALPHA_MAX/(ALPHA_K+ SI)  + ALPHA_B   
+HGP =  HEPA_MAX/(ALPHA_HGP + HEPASI*I) + HGP_B   
+GF = (GF_BAR*(G-SHGF)^KGF/(ALPHA_GF^KGF + (G-SHGF)^KGF)) + GF_B   
+CI = CA_BAR*(M + GAMMA)^KCA/(ALPHA_CA^KCA + (M + GAMMA)^KCA) + CA_B   
+CMD = CMD_FACTOR*CI^CIK/(CIALPHA^CIK+CI^CIK) + CMD_B   
+R2 =  R20*CI/(CI + KP2)   
+R3 =  SIGMA*GF*R30*CI/(CI + KP2)   
+N1_C = KM1/(3*K1*CMD + RM1)   
+N1_D = R1/(3*K1*CMD + RM1)   
+N2_E = 3*K1*CMD/(2*K1*CMD + KM1)   
+N2_F = 2*KM1/(2*K1*CMD + KM1)   
+N3_L = 2*K1*CMD/(2*KM1+K1*CMD)   
+N3_N = 3*KM1/(2*KM1+K1*CMD)   
+CN4 = (K1*CMD/(3*KM1 +U1))   
+CN3 = N3_L/(1-N3_N*CN4)   
+CN2 = N2_E/(1-N2_F*CN3)   
+CN1 = N1_D/(1-N1_C*CN2)   
+N1 = CN1*N5   
+N2 = CN2*N1   
+N3 = CN3*N2   
+N4 = CN4*N3   
+NF = U1*N4/U2   
+NR = (U2/U3)*NF   
+ISR = TS*9*(U3*NR)   
