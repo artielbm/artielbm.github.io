@@ -21,15 +21,15 @@ Files by Figure:
     * Matlab: [FIG4.m](FIG4.m) calls RHS file [IVGTT_ode.m](IVGTT_ode.m) 
 
 * Figure 5: HIEC Estimated vs. Assumed SI corresponding to Figure 4
-    * XPP: Run [IVGTT.ode](IVGTT.ode) using in turn [FIG5_control_1.set](FIG5_control_1.set), [FIG5_control_2.set](FIG5_control_2.set), [FIG3_control_5.set](FIG5_control_3.set), [FIG5_control_4.set](FIG5_control_4.set), [FIG5_Large_RRP_1.set](FIG5_Large_RRP_1.set), [FIG5_Large_RRP_2.set](FIG5_Large_RRP_2.set), [FIG5_Large_RRP_3.set](FIG5_Large_RRP_3.set), and [FIG5_Large_RRP_4.set](FIG3_Large_RRP_5.set)
+    * XPP: Run [IVGTT.ode](IVGTT.ode) using in turn [FIG5_control_1.set](FIG5_control_1.set), [FIG5_control_2.set](FIG5_control_2.set), [FIG3_control_3.set](FIG5_control_3.set), [FIG5_control_4.set](FIG5_control_4.set), [FIG5_Large_RRP_1.set](FIG5_Large_RRP_1.set), [FIG5_Large_RRP_2.set](FIG5_Large_RRP_2.set), [FIG5_Large_RRP_3.set](FIG5_Large_RRP_3.set), and [FIG5_Large_RRP_4.set](FIG3_Large_RRP_5.set)
     * Matlab: run simulations with [FIG5_sim.m](FIG5_sim.m), plot final figure with [FIG5.m](FIG5.m)
 
 * Figure 6: IVGTTs, varying vesicle docking rate sigma
-    * XPP: 
+    * XPP: Run [IVGTT.ode](IVGTT.ode) using in turn [FIG6_control.set](FIG6_control.set), [FIG6_strong_secretion.set](FIG6_strong_secretion.set), and [FIG6_very_strong_secretion.set](FIG6_very_strong_secretion.set).
     * Matlab: [FIG6.m](FIG6.m) calls RHS file [IVGTT_ode.m](IVGTT_ode.m) 
 
 * Figure 7:  HIEC Estimated vs. Assumed SI corresponding to Figure 6
-    * XPP: 
+    * XPP: Run [IVGTT.ode](IVGTT.ode) using in turn [FIG7_control_1.set](FIG7_control_1.set), [FIG7_control_2.set](FIG7_control_2.set), [FIG7_control_3.set](FIG5_control_3.set), [FIG5_control_4.set](FIG5_control_4.set), [FIG7_Large_sigma_1.set](FIG7_Large_sigma_1.set), [FIG7_Large_sigma_1.set](FIG7_Large_sigma_1.set), [FIG7_Large_sigma_2.set](FIG7_Large_sigma_2.set), [FIG7_Large_sigma_3.set](FIG7_Large_sigma_3.set), and [FIG7_Large_sigma_4.set](FIG7_Large_sigma_4.set). 
     * Matlab: run simulations with [FIG7_sim.m](FIG7_sim.m), plot final figure with [FIG7.m](FIG7.m)
 
 * Figure 8: OGTTs, varying RRP size or vesicle docking rate sigma
