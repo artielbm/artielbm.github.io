@@ -29,7 +29,7 @@ Files by Figure:
     * Matlab: [FIG6.m](FIG6.m) calls RHS file [IVGTT_ode.m](IVGTT_ode.m) 
 
 * Figure 7:  HIEC Estimated vs. Assumed SI corresponding to Figure 6
-    * XPP: Run [IVGTT.ode](IVGTT.ode) using in turn [FIG7_control_1.set](FIG7_control_1.set), [FIG7_control_2.set](FIG7_control_2.set), [FIG7_control_3.set](FIG5_control_3.set), [FIG5_control_4.set](FIG5_control_4.set), [FIG7_Large_sigma_1.set](FIG7_Large_sigma_1.set), [FIG7_Large_sigma_1.set](FIG7_Large_sigma_1.set), [FIG7_Large_sigma_2.set](FIG7_Large_sigma_2.set), [FIG7_Large_sigma_3.set](FIG7_Large_sigma_3.set), and [FIG7_Large_sigma_4.set](FIG7_Large_sigma_4.set). 
+    * XPP: Run [IVGTT.ode](IVGTT.ode) using in turn [FIG7_control_1.set](FIG7_control_1.set), [FIG7_control_2.set](FIG7_control_2.set), [FIG7_control_3.set](FIG7_control_3.set), [FIG7_control_4.set](FIG7_control_4.set), [FIG7_Large_sigma_1.set](FIG7_Large_sigma_1.set), [FIG7_Large_sigma_2.set](FIG7_Large_sigma_2.set), [FIG7_Large_sigma_3.set](FIG7_Large_sigma_3.set), and [FIG7_Large_sigma_4.set](FIG7_Large_sigma_4.set). 
     * Matlab: run simulations with [FIG7_sim.m](FIG7_sim.m), plot final figure with [FIG7.m](FIG7.m)
 
 * Figure 8: OGTTs, varying RRP size or vesicle docking rate sigma
