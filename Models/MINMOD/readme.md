@@ -10,15 +10,15 @@ Files by Figure:
 
 * [Figure 2: IVGTTs, varying RRP size]
     * XPP: Run [IVGTT.ode](IVGTT.ode) using in turn [FIG2_control.set](FIG2_control.set) and [FIG2_Large_RRP.set](FIG2_Large_RRP.set)
-    * Matlab: [FIG2.m](FIG2.m) calls [RHS file](IVGTT_ode.m) 
+    * Matlab: [FIG2.m](FIG2.m) calls RHS file [IVGTT_ode.m](IVGTT_ode.m) 
 
 * [Figure 3: MINMOD Estimated vs. Assumed SI corresponding to Figure 2]
     * XPP: Run [IVGTT.ode](IVGTT.ode) using in turn [FIG3_control_1.set](FIG3_control_1.set), [FIG3_control_2.set](FIG3_control_2.set), [FIG3_control_3.set](FIG3_control_3.set), [FIG3_control_4.set](FIG3_control_4.set), [FIG3_Large_RRP_1.set](FIG3_Large_RRP_1.set), [FIG3_Large_RRP_2.set](FIG3_Large_RRP_2.set), [FIG3_Large_RRP_3.set](FIG3_Large_RRP_3.set), and [FIG3_Large_RRP_4.set](FIG3_Large_RRP_4.set).        
     * Matlab: run simulations with [FIG3_sim.m](FIG3_sim.m), plot final figure with [FIG3.m](FIG3.m)
 
 * [Figure 4: Simulated hyperinsulinemic euglycemic clamps (HIEC)]
-    * XPP:
-    * Matlab: [FIG4.m](FIG4.m) 
+    * XPP:  Run [IVGTT.ode](IVGTT.ode) using in turn [FIG4_control.set](FIG4_control.set) and [FIG4_Large_RRP.set](FIG4_Large_RRP.set). 
+    * Matlab: [FIG4.m](FIG4.m) calls RHS file [IVGTT_ode.m](IVGTT_ode.m) 
 
 * [Figure 5: HIEC Estimated vs. Assumed SI corresponding to Figure 4]
     * XPP:
@@ -26,7 +26,7 @@ Files by Figure:
 
 * [Figure 6: IVGTTs, varying vesicle docking rate sigma]
     * XPP: 
-    * Matlab: [FIG6.m](FIG6.m)
+    * Matlab: [FIG6.m](FIG6.m) calls RHS file [IVGTT_ode.m](IVGTT_ode.m) 
 
 * [Figure 7:  HIEC Estimated vs. Assumed SI corresponding to Figure 6]
     * XPP: 
