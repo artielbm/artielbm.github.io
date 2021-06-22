@@ -2,14 +2,14 @@ XPP and Matlab files for:
 
 J. Ha, R. Muniyappa, A. S. Sherman, and M. J. Quon. 2021. When MINMOD Artifactually Interprets Strong Insulin Secretion as Weak Insulin Action. Frontiers in Physiology. 12:508. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/33967818/) [[doi]](https://www.frontiersin.org/articles/10.3389/fphys.2021.601894/full).
 
-[xpp zip file](FrontiersXPP.zip)
+xpp zip file: [FrontiersXPP.zip](FrontiersXPP.zip)
 
-[Matlab zip file](FrontiersMatlab.zip)
+Matlab zip file: [FrontiersMatlab.zip](FrontiersMatlab.zip)
 
 Files by Figure:
 
 * [Figure 2: IVGTTs, varying RRP size]
-    * XPP: [ode file](IVGTT.ode) using in turn [FIG2_control.set](FIG2_control.set) and [FIG2_Large_RRP.set](FIG2_Large_RRP.set)
+    * XPP: Run [IVGTT.ode](IVGTT.ode) using in turn [FIG2_control.set](FIG2_control.set) and [FIG2_Large_RRP.set](FIG2_Large_RRP.set)
     * Matlab: [FIG2.m](FIG2.m) calls [RHS file](IVGTT_ode.m) 
 
 * [Figure 3: MINMOD Estimated vs. Assumed SI corresponding to Figure 2]
