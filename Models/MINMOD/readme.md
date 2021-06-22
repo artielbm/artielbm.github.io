@@ -8,12 +8,30 @@ J. Ha, R. Muniyappa, A. S. Sherman, and M. J. Quon. 2021. When MINMOD Artifactua
 
 Files by Figure:
 
-* [Figure 2: IVGTT]
-    * [ode file](IVGTT.ode) using in turn [FIG2_control.set](FIG2_control.set) and [FIG2_Large_RRP.set](FIG2_Large_RRP.set)
-    * [m file](FIG2.m) calls [RHS file](IVGTT_ode.m) 
+* [Figure 2: IVGTTs, varying RRP size]
+    * XPP: [ode file](IVGTT.ode) using in turn [FIG2_control.set](FIG2_control.set) and [FIG2_Large_RRP.set](FIG2_Large_RRP.set)
+    * Matlab: [FIG2.m](FIG2.m) calls [RHS file](IVGTT_ode.m) 
 
-* [Figure 3: Estimated vs. Assumed SIs]
+* [Figure 3: MINMOD Estimated vs. Assumed SI corresponding to Figure 2]
+    * XPP: 
     * Matlab: run simulations with [FIG3_sim.m](FIG3_sim.m), plot final figure with [FIG3.m](FIG3.m)
 
 * [Figure 4: Simulated hyperinsulinemic euglycemic clamps (HIEC)]
+    * XPP:
+    * Matlab: [FIG4.m](FIG4.m) 
 
+* [Figure 5: HIEC Estimated vs. Assumed SI corresponding to Figure 4]
+    * XPP:
+    * Matlab: run simulations with [FIG5_sim.m](FIG5_sim.m), plot final figure with [FIG5.m](FIG5.m)
+
+* [Figure 6: IVGTTs, varying vesicle docking rate sigma]
+    * XPP: 
+    * Matlab: [FIG6.m](FIG6.m]
+
+* [Figure 7:  HIEC Estimated vs. Assumed SI corresponding to Figure 6]
+    * XPP: 
+    * Matlab: run simulations with [FIG7_sim.m](FIG7_sim.m), plot final figure with [FIG7.m](FIG7.m)
+
+* [Figure 8: OGTTs, varying RRP size or vesicle docking rate sigma]
+    * XPP:
+    * Matlab: [FIG8.m)[FIG8.m] calls (sic) [IVGTT_ode.m](IVGTT_ode.m) 
