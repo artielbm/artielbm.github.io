@@ -5,7 +5,7 @@ J. Ha, R. Muniyappa, A. S. Sherman, and M. J. Quon. 2021. When MINMOD Artifactua
 Files by Figure:
 
 * [Figure 2: IVGTT]
-    * [ode file](IVGTT.ode) using (FIG2_control.set) and (FIG2_Large_RRP.set)
+    * [ode file](IVGTT.ode) using [FIG2_control.set](FIG2_control.set) and [FIG2_Large_RRP.set](FIG2_Large_RRP.set)
     * [m file](FIG2.m) calls [RHS file](IVGTT_ode.m) 
 
 * [Figure 3: Estimated vs. Assumed SIs]
