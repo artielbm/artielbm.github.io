@@ -6,6 +6,8 @@ XPP zip file: [FrontiersXPP.zip](FrontiersXPP.zip)
 
 Matlab zip file: [FrontiersMatlab.zip](FrontiersMatlab.zip)
 
+**Note**: if you would like to run any of the scenarios below with different parameters, first bring the system to steady state with the new parameters using 0 input (i.e., set the IVGTT or OGTT flux to 0).
+
 Files by Figure:
 
 * Figure 2: IVGTTs, varying RRP size
