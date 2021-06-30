@@ -25,7 +25,9 @@ XPP files by figure:
 * ER/ATP Model - Addition of Tg and Tolbutamide (Figure 17; slow bursting persists in presence of both thapsigargin and tolbutamide) [[figure17.ode]](figure17.ode)
 
 Master file
-* Combined Model (Choose File/Get set to get all three models and fast/medium/slow bursting). [[biophan.ode]](biophan.ode)
+* Combined Model (Choose File/Get set to get all three models and fast/medium/slow bursting). 
+  * XPP: [[biophan.ode]](biophan.ode)
+  * Matlab: [[biophan.m]](biophan.m)
 
 
 
