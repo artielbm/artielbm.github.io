@@ -155,7 +155,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 
 1.  R. Bertram, L. Satin, M. Zhang, P. Smolen, and A. Sherman. 2004. _Calcium and glycolysis mediate multiple bursting modes in pancreatic islets_, Biophys. J., **87**:3074-3087. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/15347584/) [[XPP Files and Errata](../Models/DOM1.0)]
 
-1.  R. Bertram and A. Sherman. 2004. _A calcium based phantom bursting model for pancreatic beta-cells,_ Bull. Math. Biol., **66**:1313-1344. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/15294427/)[[XPP Files](../Models/Phantom_II)]
+1.  R. Bertram and A. Sherman. 2004. _A calcium based phantom bursting model for pancreatic beta-cells,_ Bull. Math. Biol., **66**:1313-1344. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/15294427/)[[XPP and Matlab Files](../Models/Phantom_II)]
 
 1.  C. Zimliki, D. Mears, and A. Sherman. 2004. _Three roads to islet bursting: Emergent oscillations in coupled phantom bursters_, Biophys. J., **87**:193-206. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/15240457/)[[XPP file]](../Models/ThreeRoads/)
 
@@ -165,7 +165,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 
 1.  A. R. Sedaghat, A. Sherman, and M. J. Quon. 2002. _A mathematical model of metabolic insulin signaling pathways_, Am. J. Physiol. (Endocrinol. Metab.), **283**:E1084-E1101. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/12376338/) [[Supplementary Material: XPP/WinPP Differential Equation Files](../Models/Insulin)]
 
-1.  P. B. Goforth, R. Bertram, F. A. Khan, M. Zhang, A. Sherman, and L. S. Satin. 2002\. _Calcium-activated K<sup>+</sup> channels of mouse pancreatic beta-cells are controlled by both store and cytoplasmic Ca<sup>2+</sup>_. J. Gen. Physiol., **120**:307-322\. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/12198088/) [[XPP Files]](../Models/Subspace)
+1.  P. B. Goforth, R. Bertram, F. A. Khan, M. Zhang, A. Sherman, and L. S. Satin. 2002. _Calcium-activated K<sup>+</sup> channels of mouse pancreatic beta-cells are controlled by both store and cytoplasmic Ca<sup>2+</sup>_. J. Gen. Physiol., **120**:307-322\. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/12198088/) [[XPP Files]](../Models/Subspace)
 
 1.  V. Matveev, A. Sherman, and R. S. Zucker. 2002. _New and Corrected Simulations of Synaptic Facilitation_, Biophys. J., **83**:1368-73. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/12202362/) [[Simulation Software]](../Models/ResidualFree)
 
