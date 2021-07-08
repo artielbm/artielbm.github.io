@@ -1,6 +1,6 @@
 %%%%%% FIG. 8 Very Strong secretion = OGTT of FIG. 6 Very Strong Secretion
 
-init=[90.68, 0, 4.55, 1153.70, -0.02788, 3.374, 0.2, 1, 29, 195.59]; % IC, sigma=964, si=0.2
+init=[90.68, 0, 4.55, 1153.70, -0.02788, 964, 0.2, 1, 29, 195.59]; % IC, sigma=964, si=0.2
 odeparams.IVGTT=0;
 odeparams.OGTT=0;
 odeparams.meal=1;
@@ -10,12 +10,10 @@ odeparams.Iinj=0;
 
 
 odeparams.tar_si=0.2; 
-odeparams.GF_bar=5.7;  
-odeparams.GF_b=0.57;
+odeparams.GF_bar=0.02;  
+odeparams.GF_b=0.002;
 odeparams.r20=0.006;
-odeparams.SG=0.0118; 
-odeparams.Ib=15.787;
-
+odeparams.Eg0=17; 
 
 
 
@@ -34,33 +32,30 @@ odeparams.Ginj=0;
 odeparams.Iinj=0;
 
 odeparams.tar_si=0.2; 
-odeparams.GF_bar=5.7;  
-odeparams.GF_b=0.57;
+odeparams.GF_bar=0.02;  
+odeparams.GF_b=0.002;
 odeparams.r20=0.006;
-odeparams.SG=0.0118; 
-odeparams.Ib=15.787;
-
+odeparams.Eg0=17; 
 
 
 [t1,y1] = ode15s(@IVGTT_ode,tspan,init,options,odeparams);
 
 %%%%%%%% FIG. 8 Strong Secretion = OGTT of FIG. 6 Strong Secretion
 
-init=[90.68, 0, 4.55, 1153.70, -0.02788, 1.687, 0.4, 1, 29, 195.59]; % IC, sigma=482, si=0.4
+init=[90.68, 0, 4.55, 1153.70, -0.02788, 482, 0.4, 1, 29, 195.59]; % IC, sigma=482, si=0.4
 odeparams.IVGTT=0;
 odeparams.OGTT=0;
 odeparams.meal=1;
 odeparams.Ginj=0;
 odeparams.Iinj=0;
 
+
+
 odeparams.tar_si=0.4; 
-odeparams.GF_bar=5.7;  
-odeparams.GF_b=0.57;
+odeparams.GF_bar=0.02;  
+odeparams.GF_b=0.002;
 odeparams.r20=0.006;
-odeparams.SG=0.0118; 
-odeparams.Ib=9.167;
-
-
+odeparams.Eg0=17; 
 
 
 
@@ -79,20 +74,18 @@ odeparams.Ginj=0;
 odeparams.Iinj=0;
 
 odeparams.tar_si=0.4; 
-odeparams.GF_bar=5.7;  
-odeparams.GF_b=0.57;
+odeparams.GF_bar=0.02;  
+odeparams.GF_b=0.002;
 odeparams.r20=0.006;
-odeparams.SG=0.0118; 
-odeparams.Ib=9.167;
-
+odeparams.Eg0=17; 
 
 
 [t2,y2] = ode15s(@IVGTT_ode,tspan,init,options,odeparams);
 
 
-%%%% FIG. 8 Control  = OGTT of FIG. 6 Control
+%%%% FIG. 8 Control 4 = OGTT of FIG. 6 Control
 
-init=[90.68, 0, 4.55, 1153.70, -0.02788, 0.843, 0.8, 1, 29, 195.59]; % IC ,sigma=241, si=0.8
+init=[90.68, 0, 4.55, 1153.70, -0.02788, 241, 0.8, 1, 29, 195.59]; % IC ,sigma=241, si=0.8
 
 odeparams.IVGTT=0;
 odeparams.OGTT=0;
@@ -100,13 +93,13 @@ odeparams.meal=1;
 odeparams.Ginj=0;
 odeparams.Iinj=0;
 
-odeparams.tar_si=0.8; 
-odeparams.GF_bar=5.7;  
-odeparams.GF_b=0.57;
-odeparams.r20=0.006;
-odeparams.SG=0.0118; 
-odeparams.Ib=4.5569;
 
+
+odeparams.tar_si=0.8; 
+odeparams.GF_bar=0.02;  
+odeparams.GF_b=0.002;
+odeparams.r20=0.006;
+odeparams.Eg0=17; 
 
 
 
@@ -124,20 +117,17 @@ odeparams.meal=0;
 odeparams.Ginj=0;
 odeparams.Iinj=0;
 
-
 odeparams.tar_si=0.8; 
-odeparams.GF_bar=5.7;  
-odeparams.GF_b=0.57;
+odeparams.GF_bar=0.02;  
+odeparams.GF_b=0.002;
 odeparams.r20=0.006;
-odeparams.SG=0.0118; 
-odeparams.Ib=4.5569;
-
+odeparams.Eg0=17; 
 
 
 [t4,y4] = ode15s(@IVGTT_ode,tspan,init,options,odeparams);
 
 %%%% FIG. 8 Large RRP = OGTT from FIG3 of Large RRP 4
-init=[90.68, 0, 4.55, 1153.70, -0.02788, 0.843, 0.8, 1, 29, 195.59]; % IC,sigma=241, si=0.8
+init=[90.68, 0, 4.55, 1153.70, -0.02788, 241, 0.8, 1, 29, 195.59]; % IC,sigma=241, si=0.8
 
 odeparams.IVGTT=0;
 odeparams.OGTT=0;
@@ -145,12 +135,14 @@ odeparams.meal=1;
 odeparams.Ginj=0;
 odeparams.Iinj=0;
 
+
+
 odeparams.tar_si=0.8; 
-odeparams.GF_bar=5.7;  
-odeparams.GF_b=0.57;
+odeparams.GF_bar=0.02;  
+odeparams.GF_b=0.002;
 odeparams.r20=0.06;
-odeparams.SG=0.0104; 
-odeparams.Ib=5.82;
+odeparams.Eg0=15; 
+
 
 
 options= odeset('RelTol',1e-5);
@@ -167,14 +159,11 @@ odeparams.meal=0;
 odeparams.Ginj=0;
 odeparams.Iinj=0;
 
-
 odeparams.tar_si=0.8; 
-odeparams.GF_bar=5.7;  
-odeparams.GF_b=0.57;
+odeparams.GF_bar=0.02;  
+odeparams.GF_b=0.002;
 odeparams.r20=0.06;
-odeparams.SG=0.0104; 
-odeparams.Ib=5.82;
-
+odeparams.Eg0=15; 
 
 %%%%init=[84.4, 0, 5.82, 1153.70, -0.039, 241, 0.8, 1, 64.39, 42.14]; % tmp IC 
 
@@ -241,6 +230,8 @@ plot(ttime,interp1(t2,y2(:,3),ttime),'b', 'linewidth',lw);
 plot(ttime,interp1(t4,y4(:,3),ttime),'k', 'linewidth',lw);
 xlabel('time (min)','fontsize', fs, 'fontname',fn);
 ylabel('I (\muU/ml)','fontsize', fs, 'fontname',fn);
+% lh=legend('Control','Strong','Very Strong','location','northwest'); error
+% in published figure corrected here:
 lh=legend('Very Strong','Strong','Control','location','northwest');
 set(lh,'FontSize',8); 
 legend('boxoff');
