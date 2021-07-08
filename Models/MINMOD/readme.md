@@ -37,3 +37,4 @@ Files by Figure:
 * Figure 8: OGTTs, varying RRP size or vesicle docking rate sigma
     * XPP:   Run [IVGTT.ode](IVGTT.ode) using in turn [FIG8_control.set](FIG8_control.set) and [FIG8_Large_RRP.set](FIG8_Large_RRP.set) for Panels A, B; [FIG8_control.set](FIG8_control.set), [FIG8_strong_secretion.set](FIG8_strong_secretion.set), and [FIG8_very_strong_secretion.set](FIG8_very_strong_secretion.set) for Panels C, D. 
     * Matlab: [FIG8.m](FIG8.m) calls [IVGTT_ode.m](IVGTT_ode.m) (sic) 
+    * Erratum: the legend in Fig. 8C is backwards: green should be "Very Strong" and black should be "Control".  Run FIG8.m for the corrected figure. 
