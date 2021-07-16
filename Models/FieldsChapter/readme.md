@@ -19,6 +19,7 @@ Files by figure:
     * [ode file](Biophan-mod.ode)
     * [panel A set file](PanelA.set)
     * [panel B set file](PanelB.set)
+    * [m file](Fig2_11.m)
 
 * [Figure A2.1]
     * [ode file](linear.ode)
