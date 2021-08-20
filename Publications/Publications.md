@@ -33,7 +33,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 
 1.  M. M. Janjic, R. M. Prévide, P. A. Fletcher, A. Sherman, K. Smiljanic, D. Abebe, I. Bjelobaba, and S. S. Stojilkivic. 2019. _Divergent expression patterns of pituitary gonadotropin subunit and GnRH receptor genes to continuous GnRH in vitro and in vivo._ Sci. Rep. **9**(1):20098. [[PubMed](https://www.ncbi.nlm.nih.gov/pubmed/31882740)]
 
-1.  R. T. Scarl, K. L. Corbin, N. W. Vann, H. M. Smith, L. S. Satin, A. Sherman, C. S. Nunemaker. 2019\. _Intact pancreatic islets and dispersed beta-cells both generate intracellular calcium oscillations but differ in their responsiveness to glucose._ Cell Calcium. **83**:102081. [[PubMed](https://www.ncbi.nlm.nih.gov/pubmed/31563790)]
+1.  R. T. Scarl, K. L. Corbin, N. W. Vann, H. M. Smith, L. S. Satin, A. Sherman, C. S. Nunemaker. 2019\. _Intact pancreatic islets and dispersed beta-cells both generate intracellular calcium oscillations but differ in their responsiveness to glucose._ Cell Calcium. **83**:102081. [[PubMed](https://www.ncbi.nlm.nih.gov/pubmed/31563790)] [[R Code]](https://artielbm.github.io/Models/Islets-Cells).
 
 1.  P. A. Fletcher, K. Smiljanic, R. Maso Prévide, J. Iben, T. Li, M. B. Rokic, A. Sherman, S. L. Coon, and S. S. Stojilkovic. 2019. _Cell Type- and Sex-Dependent Transcriptome Profiles of Rat Anterior Pituitary Cells._ Front. Endocrinol. **10**:623. [[PubMed](https://www.ncbi.nlm.nih.gov/pubmed/31620083)]
 
