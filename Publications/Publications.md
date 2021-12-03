@@ -223,6 +223,8 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 
     ### Invited Reviews
 
+1. I. Marinelli, P. A. Fletcher, A. S. Sherman, L. S. Satin, R. Bertram. 2021. _Symbiosis of electrical and metabolic oscillations in pancreatic $\beta$ cells._ Front. Physiol. **12**:781581. [[doi]](https://doi.org/10.3389/fphys.2021.781581)
+
 1.  R. Bertram, L. S. Satin, and A. S. Sherman. 2018. _Closing in on the mechanisms of pulsatile insulin secretion._ Diabetes, **67**:351-359. [[PubMed]](https://www.ncbi.nlm.nih.gov/pubmed/29463575). [[XPP File]](../Models/IOM1.0)
 
 1.  P. A. Fletcher, A. Sherman, and S. S. Stojilkovic. 2018. _Common and diverse elements of ion channels and receptors underlying electrical activity in endocrine pituitary cells._ Molecular and Cellular Endocrinology, **463**:23 - 36. [[PubMed](https://www.ncbi.nlm.nih.gov/pubmed/28652171)] [[XPP files]](../Models/Pituitary_MCE)
