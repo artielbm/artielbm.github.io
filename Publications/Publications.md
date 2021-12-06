@@ -9,6 +9,8 @@
 
    ### Journal Articles
    
+1. M. Kucka, A. Gonzalez-Iglesia, M. Tomic, R. M. Previde, K. Smiljanic, S. J. Sokanovic, P. A. Fletcher, A. Sherman, T. Balla, S. S. Stojilkovic. 2021. *Calcium-prolactin secretion coupling in rat pituitary lactotrophs is controlled by PI4-kinase alpha*, Front. Endocrinol. in press.
+
 1. J. Ha, R. Muniyappa, A. S. Sherman, and M. J. Quon. 2021. 
 *When MINMOD Artifactually Interprets Strong Insulin Secretion as Weak Insulin Action.* 
 Frontiers in Physiology. **12**:601894. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/33967818/) [[doi]](https://www.frontiersin.org/article/10.3389/fphys.2021.601894) [[XPP and Matlab Files]](https://github.com/artielbm/artielbm.github.io/tree/master/Models/MINMOD).   
