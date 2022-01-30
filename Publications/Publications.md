@@ -14,7 +14,7 @@
 phosphofructokinase M*,
 Biophys. J., in press.
 
-1. M. Kucka, A. Gonzalez-Iglesia, M. Tomic, R. M. Previde, K. Smiljanic, S. J. Sokanovic, P. A. Fletcher, A. Sherman, T. Balla, S. S. Stojilkovic. 2021. *Calcium-prolactin secretion coupling in rat pituitary lactotrophs is controlled by PI4-kinase alpha*, Front. Endocrinol. in press.
+1. M. Kucka, A. Gonzalez-Iglesia, M. Tomic, R. M. Previde, K. Smiljanic, S. J. Sokanovic, P. A. Fletcher, A. Sherman, T. Balla, S. S. Stojilkovic. 2021. *Calcium-prolactin secretion coupling in rat pituitary lactotrophs is controlled by PI4-kinase alpha*, Front. Endocrinol. **12**:790441. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/35058881/) [[doi]](https://doi.org/10.3389/fendo.2021.790441)
 
 1. J. Ha, R. Muniyappa, A. S. Sherman, and M. J. Quon. 2021. 
 *When MINMOD Artifactually Interprets Strong Insulin Secretion as Weak Insulin Action.* 
