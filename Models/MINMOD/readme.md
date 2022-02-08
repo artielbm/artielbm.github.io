@@ -1,5 +1,5 @@
 <p align="center">
-### Assessing Insulin Resistance
+<h3>Assessing Insulin Resistance</h3>
 </p>
 
 XPP and Matlab files for:
