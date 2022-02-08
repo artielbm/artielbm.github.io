@@ -1,4 +1,6 @@
+<p align="center">
 ### Assessing Insulin Resistance
+</p>
 
 XPP and Matlab files for:
 
