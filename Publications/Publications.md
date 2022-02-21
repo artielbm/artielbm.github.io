@@ -12,7 +12,7 @@
 1. I. Marinelli, V. S. Parekh, P. A. Fletcher, B. Thompson, J. Ren, X. Tang, T. L. Saunders, J. Ha, A. Sherman, R. Bertram, L. S. Satin. 2022.
 *Slow oscillations persist in pancreatic beta cells lacking
 phosphofructokinase M*,
-Biophys. J., [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/35131294/) [[doi]](https://doi.org/10.1016/j.bpj.2022.01.027).
+Biophys. J., **121**:692–704. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/35131294/) [[doi]](https://doi.org/10.1016/j.bpj.2022.01.027).
 
 1. M. Kucka, A. Gonzalez-Iglesia, M. Tomic, R. M. Previde, K. Smiljanic, S. J. Sokanovic, P. A. Fletcher, A. Sherman, T. Balla, S. S. Stojilkovic. 2021. *Calcium-prolactin secretion coupling in rat pituitary lactotrophs is controlled by PI4-kinase alpha*, Front. Endocrinol. **12**:790441. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/35058881/) [[doi]](https://doi.org/10.3389/fendo.2021.790441)
 
