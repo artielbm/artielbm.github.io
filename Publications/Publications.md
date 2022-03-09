@@ -9,7 +9,7 @@
 
    ### Journal Articles
 
-1. S. T. Chung, L. E. Levitt Katz, N. Stettler-Davis, J. Shults, A. Sherman, J. Ha, D.Stefanovski, R. C. Boston, D. J. Rader, S. N. Magge. 2022. *The relationship between atherogenic lipoproteins and insulin sensitivity in youth with obesity with and without abnormal glucose tolerance*, J. Clin. Endocrinol. Metab. in press. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/35240684/)[[doi]](https://doi.org/10.1210/clinem/dgac113)
+1. S. T. Chung, L. E. Levitt Katz, N. Stettler-Davis, J. Shults, A. Sherman, J. Ha, D. Stefanovski, R. C. Boston, D. J. Rader, S. N. Magge. 2022. *The relationship between atherogenic lipoproteins and insulin sensitivity in youth with obesity with and without abnormal glucose tolerance*, J. Clin. Endocrinol. Metab. in press. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/35240684/)[[doi]](https://doi.org/10.1210/clinem/dgac113)
 
 1. I. Marinelli, V. S. Parekh, P. A. Fletcher, B. Thompson, J. Ren, X. Tang, T. L. Saunders, J. Ha, A. Sherman, R. Bertram, L. S. Satin. 2022.
 *Slow oscillations persist in pancreatic beta cells lacking
