@@ -3,7 +3,7 @@
 
 This is supplementary material for:
 
-J. Ha and A. Sherman. 2020. Type 2 Diabetes: One Disease, Many Pathways, *Am J Physiol (Endocrinol Metab)* [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/32663101/).
+J. Ha and A. Sherman. 2020. Type 2 Diabetes: One Disease, Many Pathways, *Am J Physiol (Endocrinol Metab)* [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/32663101/) [[doi]](https://doi.org/10.1152/ajpendo.00512.2019) [[Other Supplementary Files]](https://doi.org/10.6084/m9.figshare.10792412).
 
 ### Matlab equation definition file for all figures except Figs. 9 and S15:
 
