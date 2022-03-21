@@ -9,7 +9,7 @@
 
    ### Journal Articles
 
-1. I. Marinelli, B. M. Thompson, V. S. Parekh, P. A. Fletcher, L. Gerardo-Giorda, A. S. Sherman, L. S. Satin, R. Bertram. 2022. Oscillations in K(ATP) Conductance Drive Slow Calcium Oscillations in Pancreatic β-Cells. Biophys. J., in press.
+1. I. Marinelli, B. M. Thompson, V. S. Parekh, P. A. Fletcher, L. Gerardo-Giorda, A. S. Sherman, L. S. Satin, R. Bertram. 2022. Oscillations in K(ATP) Conductance Drive Slow Calcium Oscillations in Pancreatic β-Cells. Biophys. J., [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/35300967/) [[doi]](https://doi.org/10.1016/j.bpj.2022.03.015).
 
 1. S. T. Chung, L. E. Levitt Katz, N. Stettler-Davis, J. Shults, A. Sherman, J. Ha, D. Stefanovski, R. C. Boston, D. J. Rader, S. N. Magge. 2022. *The relationship between atherogenic lipoproteins and insulin sensitivity in youth with obesity with and without abnormal glucose tolerance*, J. Clin. Endocrinol. Metab. in press. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/35240684/)[[doi]](https://doi.org/10.1210/clinem/dgac113)
 
