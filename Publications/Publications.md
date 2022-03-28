@@ -234,7 +234,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 
     ### Invited Reviews
 
-1. P. A. Fletcher, I. Marinelli, R. Bertram, L. S. Satin, and A. S. Sherman _Pulsatile Basal Insulin Secretion is Driven by Glycolytic Oscillations_ Physiology, in press.
+1. P. A. Fletcher, I. Marinelli, R. Bertram, L. S. Satin, and A. S. Sherman. _Pulsatile Basal Insulin Secretion is Driven by Glycolytic Oscillations_ Physiology, in press.
 
 1. B. E. Peercy and A. S. Sherman. _Do oscillations in pancreatic islets require pacemaker cells?_ J. Biosci., in press. [[doi]](https://trebuchet.public.springernature.app/get_content/f72b5bb8-3bf2-488f-9d25-7b216c1eb744)
 
