@@ -1,4 +1,8 @@
-This is supplemental material for Hypothesis: "Pulsatile Basal Insulin Secretion is Driven by Glycolytic Oscillations", in review at Physiology.
+This is supplemental material for "Pulsatile Basal Insulin Secretion is Driven by Glycolytic Oscillations", Fletcher et al, Physiology, in press.
 
-[XPP File](iom1_7_secretion_revision.ode)
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/35378996/)
+
+[doi](https://doi.org/10.1152/physiol.00044.2021)
+
+[XPP File](iom_secretion_physiology.ode)
 
