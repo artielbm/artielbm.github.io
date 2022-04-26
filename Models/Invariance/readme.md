@@ -5,4 +5,4 @@ P. Fletcher, B. Thompson, J. ren, X. Tang, T. L. Saunders, J. Ha,
 A. Sherman, R. Bertram, and L. S. Satin. Published in Biophysical
 Journal, 121:692-704, 2022.
 
-[ode file](BJ_22a.ode)
+[ode file](BJ_22a.ode.txt) (Remove .txt suffix to run)
