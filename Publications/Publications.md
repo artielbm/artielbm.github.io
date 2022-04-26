@@ -238,7 +238,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 
 1. B. E. Peercy and A. S. Sherman. 2022. _Do oscillations in pancreatic islets require pacemaker cells?_ J. Biosci., __47__:14. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/35212266/) [[doi]](https://trebuchet.public.springernature.app/get_content/f72b5bb8-3bf2-488f-9d25-7b216c1eb744)
 
-1. I. Marinelli, P. A. Fletcher, A. S. Sherman, L. S. Satin, and R. Bertram. 2021. _Symbiosis of electrical and metabolic oscillations in pancreatic beta cells._ Front. Physiol. **12**:781581. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/34925070/) [[doi]](https://doi.org/10.3389/fphys.2021.781581) [[XPP Code]](https://www.math.fsu.edu/~bertram/software/islet/)
+1. I. Marinelli, P. A. Fletcher, A. S. Sherman, L. S. Satin, and R. Bertram. 2021. _Symbiosis of electrical and metabolic oscillations in pancreatic beta cells._ Front. Physiol. **12**:781581. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/34925070/) [[doi]](https://doi.org/10.3389/fphys.2021.781581) [[XPP Code]](https://github.com/artielbm/artielbm.github.io/tree/master/Models/Symbiosis)
 
 1.  R. Bertram, L. S. Satin, and A. S. Sherman. 2018. _Closing in on the mechanisms of pulsatile insulin secretion._ Diabetes, **67**:351-359. [[PubMed]](https://www.ncbi.nlm.nih.gov/pubmed/29463575) [[XPP File]](../Models/IOM1.0)
 
