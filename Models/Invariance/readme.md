@@ -6,3 +6,5 @@ A. Sherman, R. Bertram, and L. S. Satin. Published in Biophysical
 Journal, 121:692-704, 2022.
 
 [ode file](BJ_22a.ode.txt) (Remove .txt suffix to run)
+
+Also posted at https://www.math.fsu.edu/~bertram/software/islet/
