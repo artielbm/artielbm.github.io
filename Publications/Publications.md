@@ -20,7 +20,7 @@ Biophys. J., **121**:692–704. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/35131
 
 1. M. Kucka, A. Gonzalez-Iglesia, M. Tomic, R. M. Previde, K. Smiljanic, S. J. Sokanovic, P. A. Fletcher, A. Sherman, T. Balla, S. S. Stojilkovic. 2021. *Calcium-prolactin secretion coupling in rat pituitary lactotrophs is controlled by PI4-kinase alpha*, Front. Endocrinol. **12**:790441. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/35058881/) [[doi]](https://doi.org/10.3389/fendo.2021.790441)
 
-1. M C Sage Ishimwe, Annemarie Wentzel, Elyssa M Shoup, Nana H Osei-Tutu, Thomas Hormenu, Arielle C Patterson, Hadi Bagheri, Christopher W DuBose, Lilian S Mabundo, Joon Ha, Arthur Sherman, Anne E Sumner. 2021. *Beta-cell failure rather than insulin resistance is the major cause of abnormal glucose tolerance in Africans: insight from the Africans in America study*. BMJ Open Diabetes Res Care, **9**(1):e002447. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/34531244/) [[doi]](https://doi.org/10.1136/bmjdrc-2021-002447).
+1. M. C. S. Ishimwe, A. Wentzel, E. M. Shoup, N. H. Osei-Tutu, T. Hormenu, A. C. Patterson, H. Bagheri, C. W. DuBose, L. S. Mabundo, J. Ha, A. Sherman, A. E. Sumner. 2021. *Beta-cell failure rather than insulin resistance is the major cause of abnormal glucose tolerance in Africans: insight from the Africans in America study*. BMJ Open Diabetes Res Care, **9**(1):e002447. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/34531244/) [[doi]](https://doi.org/10.1136/bmjdrc-2021-002447).
 
 1. J. Ha, R. Muniyappa, A. S. Sherman, and M. J. Quon. 2021. 
 *When MINMOD Artifactually Interprets Strong Insulin Secretion as Weak Insulin Action.* 
