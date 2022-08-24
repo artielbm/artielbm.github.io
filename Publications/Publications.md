@@ -236,7 +236,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 
     ### Invited Reviews
 
-1. P. A. Fletcher, I. Marinelli, R. Bertram, L. S. Satin, and A. S. Sherman. 2022. _Pulsatile Basal Insulin Secretion is Driven by Glycolytic Oscillations_ Physiology, in press. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/35378996/) [[doi]](https://doi.org/10.1152/physiol.00044.2021) [[Cover Art]](https://journals.physiology.org/toc/physiologyonline/current)[[XPP Code]](https://github.com/artielbm/artielbm.github.io/tree/master/Models/Subthreshold)
+1. P. A. Fletcher, I. Marinelli, R. Bertram, L. S. Satin, and A. S. Sherman. 2022. _Pulsatile Basal Insulin Secretion is Driven by Glycolytic Oscillations_ Physiology, **37**:216 - 223. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/35378996/) [[doi]](https://doi.org/10.1152/physiol.00044.2021) [[Cover Art]](https://journals.physiology.org/toc/physiologyonline/current)[[XPP Code]](https://github.com/artielbm/artielbm.github.io/tree/master/Models/Subthreshold)
 
 1. B. E. Peercy and A. S. Sherman. 2022. _Do oscillations in pancreatic islets require pacemaker cells?_ J. Biosci., __47__:14. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/35212266/) [[doi]](https://trebuchet.public.springernature.app/get_content/f72b5bb8-3bf2-488f-9d25-7b216c1eb744)
 
