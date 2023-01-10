@@ -8,7 +8,7 @@
 * * *
 
    ### Journal Articles
-1. P. A. Fletcher, K. Smiljanic, R. M. Prévide, S. Constantin, A. S. Sherman, S. L. Coon, S. S. Stojilkovic. 2022. *The astroglial and stem cell functions of adult rat folliculostellate cells.* Glia, in press. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/36093576/) [[doi]](https://doi.org/10.1002/glia.24267). 
+1. P. A. Fletcher, K. Smiljanic, R. M. Prévide, S. Constantin, A. S. Sherman, S. L. Coon, S. S. Stojilkovic. 2022. *The astroglial and stem cell functions of adult rat folliculostellate cells.* Glia, **71**(2):205-228. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/36093576/) [[doi]](https://doi.org/10.1002/glia.24267). 
 
 1. I. Marinelli, B. M. Thompson, V. S. Parekh, P. A. Fletcher, L. Gerardo-Giorda, A. S. Sherman, L. S. Satin, R. Bertram. 2022. *Oscillations in K(ATP) Conductance Drive Slow Calcium Oscillations in Pancreatic β-Cells.* Biophys. J. **121**(8):1449 - 1464. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/35300967/) [[doi]](https://doi.org/10.1016/j.bpj.2022.03.015) [[XPP]](https://github.com/artielbm/artielbm.github.io/tree/master/Models/Invariance).
 
