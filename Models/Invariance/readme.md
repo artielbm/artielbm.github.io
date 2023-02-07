@@ -4,6 +4,6 @@ I. Marinelli, B. M. Thompson, V. S. Parekh, P. A. Fletcher, L. Gerardo-Giorda, A
 
 XPP code for:
 
-The Phantom Bursting Model [PBM](./PBM.ode}
+The Phantom Bursting Model [PBM](./PBM.ode)
 
 The Integrated Oscillatior Model [IOM](./IOM.ode)
