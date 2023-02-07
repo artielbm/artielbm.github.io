@@ -1,0 +1,120 @@
+# PBM.ode
+#
+% Phantom bursting model computer code for the publication "Oscillations in K(ATP) Conductance 
+% Drive Slow Calcium Oscillations in Pancreatic Beta-Cells" by I. Marinelli, B. M. Thompson,
+% V. S. Parekh, P. A. Fletcher, L. Gerardo-Giorda, A. S. Sherman, L. S. Satin, and R. Bertram.
+% Published in Biophysical Journal, 121:1449-1464, 2022.
+
+% Model is taken from BMB 2004 publication, Bertram and Sherman.
+
+# Variables:
+#    v -- cellular membrane potential (mV)
+#    n -- activation of delayed rectifier
+#    c -- free cytosolic calcium concentration (muM)
+#    a -- cytosolic ADP/ATP 
+#    cer -- concentration of free calcium in the endoplasmic reticulum (muM)
+
+# Units:
+# time: ms
+# volume: l
+# conductance: pS
+# V: mV
+# I: fA
+# J: muM/ms
+# alpha: mumol/fA/ms
+
+
+
+# Initial conditions
+
+v(0)=-66
+n(0)=0
+c(0)=0.1
+a(0)=0.52
+cer(0)=110
+
+
+##################################
+## Electrical and Calcium Model ##
+##################################
+
+# Ca2+ current, ica
+num gca = 1200, vca = 25,
+num vm = -20, sm = 12,
+
+minf = 1/(1+exp((vm-v)/sm))
+ica=gca*minf*(v-vca)
+
+
+# Delayed-rectifying K+ current, ik
+num gk= 3000, 
+num taun=16, vn=-16, sn=5,
+
+par vk=-75 
+
+ninf=1/(1+exp((vn-v)/sn))
+ik=gk*n*(v-vk)
+
+
+#  Ca2+-activated K+ current, ikca
+num kd=0.3,
+par gkca= 10,
+
+
+omega =c^5/(kd^5+c^5)
+ikca=gkca* omega*(v - vk)
+
+
+# K-atp channel current, ikatp
+
+num pr= 1.75, kr = 58
+num gkatpbar= 500, sa = 0.1, taua = 300000
+
+par Dz=1, G=11
+
+r = (G - pr)/kr
+ainf = 1/(1+exp((r-c)/sa))
+ikatp = Dz*gkatpbar*(v-vk)*a
+
+
+# Ca2+ fluxes across the plasma membrane 
+num alpha= 4.5E-6, kpmca =0.2
+
+jpmca = kpmca*c
+jmem = -(alpha*ica + jpmca)
+
+
+# Ca2+ fluxes into ER
+num kserca=0.4, pleak=5.0E-4,
+
+jserca = kserca*c 
+jerleak = pleak*(cer-c)
+jer = jerleak-jserca
+
+
+
+#####################################
+##      Differential Equations	   ##
+#####################################
+
+num Cm=5300, fca=0.01, lambda = 1.25, sigmaer = 5
+
+v'=-(ica+ikca+ikatp+ik)/Cm
+n'= (ninf-n)/taun
+c'= fca*(jer+jmem)
+a'= (ainf-a)/taua
+cer'=-fca*sigmaer*jer
+
+
+############################################
+#         XPP: numerical details	   #
+############################################
+
+
+@ meth=cvode, toler=1.0e-10, atoler=1.0e-10, dt=10
+@ total=900000,  maxstor=20000,bounds=10000000
+@ xp=tmin, yp=v,xlo=0, xhi=15, ylo=-70, yhi=-10
+
+aux tmin=t/60000
+
+done
