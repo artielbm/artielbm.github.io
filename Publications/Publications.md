@@ -9,7 +9,7 @@
 
    ### Journal Articles
 
-1.A. N. Lorenz, L. Pyle, J. Ha, A. Sherman, M. Cree-Green, S. D. Sagel, K. J. Nadeau, C. L. Chan, *Predictive value of 1-Hour glucose elevations during oral glucose tolerance testing for cystic fibrosis-related diabetes*. Pediatric Diabetes, in press.
+1. A. N. Lorenz, L. Pyle, J. Ha, A. Sherman, M. Cree-Green, S. D. Sagel, K. J. Nadeau, C. L. Chan, *Predictive value of 1-Hour glucose elevations during oral glucose tolerance testing for cystic fibrosis-related diabetes*. Pediatric Diabetes, in press.
 
 1. P. A. Fletcher, K. Smiljanic, R. M. Prévide, S. Constantin, A. S. Sherman, S. L. Coon, S. S. Stojilkovic. 2022. *The astroglial and stem cell functions of adult rat folliculostellate cells.* Glia, **71**(2):205-228. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/36093576/) [[doi]](https://doi.org/10.1002/glia.24267). 
 
