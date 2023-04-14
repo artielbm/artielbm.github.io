@@ -9,7 +9,7 @@
 
    ### Journal Articles
 
-1. A. N. Lorenz, L. Pyle, J. Ha, A. Sherman, M. Cree-Green, S. D. Sagel, K. J. Nadeau, C. L. Chan, *Predictive value of 1-Hour glucose elevations during oral glucose tolerance testing for cystic fibrosis-related diabetes*. Pediatric Diabetes, in press.
+1. A. N. Lorenz, L. Pyle, J. Ha, A. Sherman, M. Cree-Green, S. D. Sagel, K. J. Nadeau, C. L. Chan, 2023. *Predictive value of 1-Hour glucose elevations during oral glucose tolerance testing for cystic fibrosis-related diabetes*. Pediatric Diabetes, in press.
 
 1. P. A. Fletcher, K. Smiljanic, R. M. Prévide, S. Constantin, A. S. Sherman, S. L. Coon, S. S. Stojilkovic. 2022. *The astroglial and stem cell functions of adult rat folliculostellate cells.* Glia, **71**(2):205-228. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/36093576/) [[doi]](https://doi.org/10.1002/glia.24267). 
 
@@ -298,7 +298,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 
     ### Commentary
 
-1. P. A. Fletcher, B. Thompson, C. Liu, R. Bertram, L. S. Satin, A. S. Sherman. *Ca<sup>2+</sup> Release or Ca<sup>2+</sup> Entry, that is the Question: What Governs Ca<sup>2+</sup> Oscillations in Pancreatic Beta Cells?*, Am. J. Physiol., in press.
+1. P. A. Fletcher, B. Thompson, C. Liu, R. Bertram, L. S. Satin, A. S. Sherman. 2023. *Ca<sup>2+</sup> Release or Ca<sup>2+</sup> Entry, that is the Question: What Governs Ca<sup>2+</sup> Oscillations in Pancreatic Beta Cells?*, Am. J. Physiol., in press.
 
 1.  L. S. Satin, J. Ha, and A. S. Sherman. 2016. _Islets Transplanted into the Eye: Do They Improve Our Insight into Islet Adaptation to Insulin Resistance?_ Diabetes, **65**(9):2470-2. [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/27555572)] [Commentary on [Chen et al, Diabetes. 2016 **65**(9):2676-85](http://www.ncbi.nlm.nih.gov/pubmed/27207518)]
 
