@@ -298,8 +298,8 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 
     ### Commentary
 
-1. P. A. Fletcher, B. Thompson, C. Liu, R. Bertram, L. S. Satin, A. S. Sherman. 2023. *Ca<sup>2+</sup> Release or Ca<sup>2+</sup> Entry, that is the Question: What Governs Ca<sup>2+</sup> Oscillations in Pancreatic Beta Cells?*, Am. J. Physiol., in press.
+1. P. A. Fletcher, B. Thompson, C. Liu, R. Bertram, L. S. Satin, A. S. Sherman. 2023. *Ca<sup>2+</sup> Release or Ca<sup>2+</sup> Entry, that is the Question: What Governs Ca<sup>2+</sup> Oscillations in Pancreatic Beta Cells?*, Am. J. Physiol., in press. [Commentary on Posti&#263 et al, 2023, Am. J. Physiol., 324(1):E42-E55
 
-1.  L. S. Satin, J. Ha, and A. S. Sherman. 2016. _Islets Transplanted into the Eye: Do They Improve Our Insight into Islet Adaptation to Insulin Resistance?_ Diabetes, **65**(9):2470-2. [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/27555572)] [Commentary on [Chen et al, Diabetes. 2016 **65**(9):2676-85](http://www.ncbi.nlm.nih.gov/pubmed/27207518)]
+1.  L. S. Satin, J. Ha, and A. S. Sherman. 2016. _Islets Transplanted into the Eye: Do They Improve Our Insight into Islet Adaptation to Insulin Resistance?_ Diabetes, **65**(9):2470-2. [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/27555572)] [Commentary on Chen et al, Diabetes. 2016 **65**(9):2676-85 (http://www.ncbi.nlm.nih.gov/pubmed/27207518)]
 
 1.  A. Sherman. 2011. _Dynamical systems theory in physiology._ J. Gen. Physiol. **138**:13-19. [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/21708952)] [Commentary on [Cha et al, J. Gen. Physiol. 2011 **138**(1):39-4765.](http://www.ncbi.nlm.nih.gov/pubmed/21708954)] [[Cover Art]](../Models/JGP)
