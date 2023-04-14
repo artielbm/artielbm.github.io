@@ -298,7 +298,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 
     ### Commentary
 
-1. P. A. Fletcher, B. Thompson, C. Liu, R. Bertram, L. S. Satin, A. S. Sherman. *Ca<sup>2+></sup> Release or Ca<sup>2+</sup> Entry, that is the Question: What Governs Ca<sup>2+</sup> Oscillations in Pancreatic Beta Cells?*, Am. J. Physiol., in press.
+1. P. A. Fletcher, B. Thompson, C. Liu, R. Bertram, L. S. Satin, A. S. Sherman. *Ca<sup>2+</sup> Release or Ca<sup>2+</sup> Entry, that is the Question: What Governs Ca<sup>2+</sup> Oscillations in Pancreatic Beta Cells?*, Am. J. Physiol., in press.
 
 1.  L. S. Satin, J. Ha, and A. S. Sherman. 2016. _Islets Transplanted into the Eye: Do They Improve Our Insight into Islet Adaptation to Insulin Resistance?_ Diabetes, **65**(9):2470-2. [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/27555572)] [Commentary on [Chen et al, Diabetes. 2016 **65**(9):2676-85](http://www.ncbi.nlm.nih.gov/pubmed/27207518)]
 
