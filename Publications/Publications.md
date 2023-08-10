@@ -9,6 +9,8 @@
 
    ### Journal Articles
 
+1. J. Ha, S. T. Chung, C. Bogardus, R. Jagannathan, M. Bergman, A. S. Sherman. 2023. *One-hour glucose is an earlier marker of dysglycemia than two-hour glucose*. Diabetes Res Clin Pract., in press [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/37482221/) [[doi]](https://doi.org/10.1016/j.diabres.2023.110839). 
+
 1. A. N. Lorenz, L. Pyle, J. Ha, A. Sherman, M. Cree-Green, S. D. Sagel, K. J. Nadeau, C. L. Chan. 2023. *Predictive value of 1-Hour glucose elevations during oral glucose tolerance testing for cystic fibrosis-related diabetes*. Pediatric Diabetes, in press [[doi]](https://doi.org/10.1155/2023/4395556).
 
 1. P. A. Fletcher, K. Smiljanic, R. M. Prévide, S. Constantin, A. S. Sherman, S. L. Coon, S. S. Stojilkovic. 2022. *The astroglial and stem cell functions of adult rat folliculostellate cells.* Glia, **71**(2):205-228. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/36093576/) [[doi]](https://doi.org/10.1002/glia.24267). 
