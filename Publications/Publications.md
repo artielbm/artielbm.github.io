@@ -271,7 +271,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 1.  A. Sherman. 1995\. _Theoretical aspects of synchronized bursting in beta-cells,_ in Pacemaker Activity and Intercellular Communication, J. D. Huizinga, ed., CRC Press, Boca Raton, pp. 323-337.
 
     ### Book Chapters & Other Reviews
-1. R. Bertram, I. Marinelli, P. A. Fletcher, L. S. Satin, A. S. Sherman. 2023.  _Deconstructing the Integrated Oscillator Model for Pancreatic &beta; Cells. Math. Biosci., in press.
+1. R. Bertram, I. Marinelli, P. A. Fletcher, L. S. Satin, A. S. Sherman. 2023.  _Deconstructing the Integrated Oscillator Model for Pancreatic &beta; Cells_. Math. Biosci., in press.
 
 1. L. S. Satin, M. Watts, and A. Sherman. 2020. _An introduction to beta cell electrophysiology and modeling,_ in Diabetes System Biology: Quantitative methods for understanding beta-cell dynamics and function, A. Khadra, editor.  IOP Publishing, Bristol, UK, pp. 2-1 - 2-46. [[doi]](https://doi.org/10.1088/978-0-7503-3739-7) [[XPP and Matlab Files]](https://github.com/artielbm/artielbm.github.io/blob/master/Models/FieldsChapter/readme.md)
 
