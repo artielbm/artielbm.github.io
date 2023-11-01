@@ -301,7 +301,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 
     ### Commentary
 
-1. A. S. Sherman, P. A. Fletcher, L. S. Satin, R. Bertram. 2023. _The Pancreatic Beta Cell: Biology and Mathematics Advance Together_, SIAM News, **56**(9):1.  [[Online]]([https://sinews.siam.org/Portals/Sinews2/Issue%20Pdfs/sn_November2023.pdf](https://sinews.siam.org/Details-Page/the-pancreatic-beta-cell-biology-and-mathematics-advance-together)
+1. A. S. Sherman, P. A. Fletcher, L. S. Satin, R. Bertram. 2023. _The Pancreatic Beta Cell: Biology and Mathematics Advance Together_, SIAM News, **56**(9):1.  [[Online]](https://sinews.siam.org/Details-Page/the-pancreatic-beta-cell-biology-and-mathematics-advance-together).
 
 1. P. A. Fletcher, B. Thompson, C. Liu, R. Bertram, L. S. Satin, A. S. Sherman. 2023. *Ca<sup>2+</sup> Release or Ca<sup>2+</sup> Entry, that is the Question: What Governs Ca<sup>2+</sup> Oscillations in Pancreatic Beta Cells?*, Am. J. Physiol., **324**(6):E477-E487. [[PubMed](https://pubmed.ncbi.nlm.nih.gov/37074988/)] [[doi](https://doi.org/10.1152/ajpendo.00030.2023)] [[XPP files](https://doi.org/10.6084/m9.figshare.22529515)] [Commentary on Postić et al, Am. J. Physiol. 2023 324(1):E42-E55 [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/36449570/)]
 
