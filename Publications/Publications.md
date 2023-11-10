@@ -9,7 +9,7 @@
 
    ### Journal Articles
 
-1. J. Corradi, B. Thompson, P. A. Fletcher, R. Bertram, A. S. Sherman, L. S. Satin. 2023.  *K_ATP channel activity and slow oscillations in pancreatic beta cells are regulated by mitochondrial ATP production*. J. Physiol., in press
+1. J. Corradi, B. Thompson, P. A. Fletcher, R. Bertram, A. S. Sherman, L. S. Satin. 2023.  *K<sub>ATP</sub> channel activity and slow oscillations in pancreatic beta cells are regulated by mitochondrial ATP production*. J. Physiol., in press
 1. J. Ha, S. T. Chung, C. Bogardus, R. Jagannathan, M. Bergman, A. S. Sherman. 2023. *One-hour glucose is an earlier marker of dysglycemia than two-hour glucose*. Diabetes Res Clin Pract., **203**:110839 [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/37482221/) [[doi]](https://doi.org/10.1016/j.diabres.2023.110839). 
 
 1. A. N. Lorenz, L. Pyle, J. Ha, A. Sherman, M. Cree-Green, S. D. Sagel, K. J. Nadeau, C. L. Chan. 2023. *Predictive value of 1-Hour glucose elevations during oral glucose tolerance testing for cystic fibrosis-related diabetes*. Pediatric Diabetes, vol. 2023, Article ID 4395556 [[doi]](https://doi.org/10.1155/2023/4395556).
