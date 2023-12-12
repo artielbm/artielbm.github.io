@@ -9,7 +9,7 @@
 
    ### Journal Articles
 1. K. B. Dietsche, S. N. Magge, S. A. Dixon, F. S. Davis, A. Krenek, A. Chowdhury, L. Mabundo, M. Stagliano, A. B. Courville, S. Yang, S. Turner, H. Cai, K. Kasturi, A. S. Sherman, J. Ha, E. Shouppe, M. Walter, P. J. Walter, K. Y. Chen, R. J. Brychta, C. Peer, Y. Zeng,
-W. Figg, F. Cogen, D. E. Estrada, S. Chacko, S. T. Chung. Glycemia and Gluconeogenesis with Metformin and Liraglutide: A Randomized Trial in Youth-onset Type 2 Diabetes, J. Clin. Endocrinol. Metab., in press.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/37967247/) [[doi]](https://doi.org/10.1210/clinem/dgad669).
+W. Figg, F. Cogen, D. E. Estrada, S. Chacko, S. T. Chung. *Glycemia and Gluconeogenesis with Metformin and Liraglutide: A Randomized Trial in Youth-onset Type 2 Diabetes*, J. Clin. Endocrinol. Metab., in press.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/37967247/) [[doi]](https://doi.org/10.1210/clinem/dgad669).
 
 1. J. Corradi, B. Thompson, P. A. Fletcher, R. Bertram, A. S. Sherman, L. S. Satin. 2023.  *K<sub>ATP</sub> channel activity and slow oscillations in pancreatic beta cells are regulated by mitochondrial ATP production*. J. Physiol., in press [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/37983196/) [[doi]](https://physoc.onlinelibrary.wiley.com/doi/full/10.1113/JP284982)
 
