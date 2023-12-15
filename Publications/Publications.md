@@ -8,7 +8,7 @@
 * * *
 
    ### Journal Articles
-1. J. Ha<sup>a</sup>, S. T. Chung<sup>a</sup>, M. Springer, J. Y. Kim, P. Chen, A. Chhabra, M. G. Cree, C. Diniz Behn, A. E. Sumner, S. Arslanian, A. S. Sherman. 2023. *Estimating Insulin Sensitivity and Beta-Cell Function from the Oral Glucose Tolerance Test: Validation of a new Insulin Sensitivity and Secretion (ISS) Model*, Am. J. Physiol. (Endocrinol. Metab.), in press [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/38054972/) [[doi]](https://doi.org/10.1152/ajpendo.00189.2023). <sup>a</sup>Co-first authors.
+1. J. Ha<sup>a</sup>, S. T. Chung<sup>a</sup>, M. Springer, J. Y. Kim, P. Chen, A. Chhabra, M. G. Cree, C. Diniz Behn, A. E. Sumner, S. Arslanian, A. S. Sherman. 2023. *Estimating Insulin Sensitivity and Beta-Cell Function from the Oral Glucose Tolerance Test: Validation of a new Insulin Sensitivity and Secretion (ISS) Model*, Am. J. Physiol. (Endocrinol. Metab.), in press [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/38054972/) [[doi]](https://doi.org/10.1152/ajpendo.00189.2023) <sup>a</sup>Co-first authors.
 
 1. K. B. Dietsche, S. N. Magge, S. A. Dixon, F. S. Davis, A. Krenek, A. Chowdhury, L. Mabundo, M. Stagliano, A. B. Courville, S. Yang, S. Turner, H. Cai, K. Kasturi, A. S. Sherman, J. Ha, E. Shouppe, M. Walter, P. J. Walter, K. Y. Chen, R. J. Brychta, C. Peer, Y. Zeng,
 W. Figg, F. Cogen, D. E. Estrada, S. Chacko, S. T. Chung. 2023. *Glycemia and Gluconeogenesis with Metformin and Liraglutide: A Randomized Trial in Youth-onset Type 2 Diabetes*, J. Clin. Endocrinol. Metab., in press  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/37967247/) [[doi]](https://doi.org/10.1210/clinem/dgad669).
