@@ -1,4 +1,4 @@
-This is supplemental material for "Pulsatile Basal Insulin Secretion is Driven by Glycolytic Oscillations", Fletcher et al, Physiology, in press.
+This is supplemental material for "Pulsatile Basal Insulin Secretion is Driven by Glycolytic Oscillations", Fletcher et al, Physiology, 2022 **37**:216 - 223.
 
 [PubMed](https://pubmed.ncbi.nlm.nih.gov/35378996/)
 
