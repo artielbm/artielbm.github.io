@@ -13,7 +13,7 @@
 1. K. B. Dietsche, S. N. Magge, S. A. Dixon, F. S. Davis, A. Krenek, A. Chowdhury, L. Mabundo, M. Stagliano, A. B. Courville, S. Yang, S. Turner, H. Cai, K. Kasturi, A. S. Sherman, J. Ha, E. Shouppe, M. Walter, P. J. Walter, K. Y. Chen, R. J. Brychta, C. Peer, Y. Zeng,
 W. Figg, F. Cogen, D. E. Estrada, S. Chacko, S. T. Chung. 2023. *Glycemia and Gluconeogenesis with Metformin and Liraglutide: A Randomized Trial in Youth-onset Type 2 Diabetes*, J. Clin. Endocrinol. Metab., in press  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/37967247/) [[doi]](https://doi.org/10.1210/clinem/dgad669).
 
-1. J. Corradi, B. Thompson, P. A. Fletcher, R. Bertram, A. S. Sherman, L. S. Satin. 2023.  *K<sub>ATP</sub> channel activity and slow oscillations in pancreatic beta cells are regulated by mitochondrial ATP production*. J. Physiol., **601**(24):5655-5667 [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/37983196/) [[doi]](https://physoc.onlinelibrary.wiley.com/doi/full/10.1113/JP284982).
+1. J. Corradi, B. Thompson, P. A. Fletcher, R. Bertram, A. S. Sherman, L. S. Satin. 2023.  *K<sub>ATP</sub> channel activity and slow oscillations in pancreatic beta cells are regulated by mitochondrial ATP production*. J. Physiol., **601**(24):5655-5667 [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/37983196/) [[doi]](https://physoc.onlinelibrary.wiley.com/doi/full/10.1113/JP284982)[[XPP and Matlab Files](https://figshare.com/articles/journal_contribution/Supplemental_computer_code_for_Corradi_et_al_J_Physiol_2023/24545830).
 
 1. J. Ha, S. T. Chung, C. Bogardus, R. Jagannathan, M. Bergman, A. S. Sherman. 2023. *One-hour glucose is an earlier marker of dysglycemia than two-hour glucose*. Diabetes Res Clin Pract., **203**:110839 [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/37482221/) [[doi]](https://doi.org/10.1016/j.diabres.2023.110839). 
 
@@ -313,4 +313,4 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 
 1.  L. S. Satin, J. Ha, and A. S. Sherman. 2016. _Islets Transplanted into the Eye: Do They Improve Our Insight into Islet Adaptation to Insulin Resistance?_ Diabetes, **65**(9):2470-2. [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/27555572)] [Commentary on Chen et al, Diabetes. 2016 **65**(9):2676-85 [[PubMed]](http://www.ncbi.nlm.nih.gov/pubmed/27207518)]
 
-1.  A. Sherman. 2011. _Dynamical systems theory in physiology._ J. Gen. Physiol. **138**:13-19. [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/21708952)] [Commentary on [Cha et al, J. Gen. Physiol. 2011 **138**(1):39-4765.[[PubMed]](http://www.ncbi.nlm.nih.gov/pubmed/21708954)] [[Cover Art]](../Models/JGP)
+1.  A. Sherman. 2011. _Dynamical systems theory in physiology._ J. Gen. Physiol. **138**:13-19. [[PubMed](http://www.ncbi.nlm.nih.gov/pubmed/21708952)] [Commentary on Cha et al, J. Gen. Physiol. 2011 **138**(1):39-4765.[[PubMed]](http://www.ncbi.nlm.nih.gov/pubmed/21708954)] [[Cover Art]](../Models/JGP)
