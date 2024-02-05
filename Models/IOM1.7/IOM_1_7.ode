@@ -1,0 +1,388 @@
+# This ODE file defines a version of the Integrated Oscillator Model 
+# originally published in: 
+# 
+# Pulsatile Basal Insulin Secretion is Driven by Glycolytic Oscillations
+# P. A. Fletcher, I. Marinelli, R. Bertram, L. S. Satin, A. S. Sherman
+# Physiology, 37. https://doi.org/10.1152/physiol.00044.2021 
+#
+# This version adds Isoc, and removes the glucose pulse and secretion module
+# time units (ms), and was used to produce simulations in Figures 4 and 5 of:
+#
+# REF:
+# "Ca2+ Release or Ca2+ Entry, that is the Question: What Governs Ca2+ Oscillations in Pancreatic Beta Cells?" 
+# Patrick A. Fletcher, Ben Thompson, Chanté Liu, Richard Bertram, Leslie S. Satin, Arthur S. Sherman
+#
+# To reproduce Figure 4, set:  pleak_stim=0.000225
+# To reproduce Figure 5, set:  serca_stim=0.3
+
+######
+# Stimulus application via a smoothed step:
+# - equation to mimic solution perifusion - smooth step as in solution y(t) from:
+#   xb' = (x0 - xb)/taub  --> taub is 1/flowrate - bath flow time constant
+#   xt' = kin*xb - kout*xt = (kt*xb - xt)/taut  -->  taut -> tissue absorbtion time constant
+
+par taub = 30000
+par taut = 45000
+
+par t1on = 120000
+par t1off = 780000
+x1on = heav(t - t1on)*(1 - exp(-(t - t1on)/taub))*(1 - exp(-(t - t1on)/taut))
+x1off = heav(t - t1off)*(1 - exp(-(t - t1off)/taub))*(1 - exp(-(t - t1off)/taut))
+
+# par vserca = 0.35
+par vserca = 0.125
+#par serca_bas=0.35
+#par serca_stim=0.3
+#vserca = serca_bas + (serca_stim - serca_bas)*(x1on - x1off)
+aux vserca = vserca
+
+#par pleak = 0.00015
+par pleak = 0.000075
+aux pleak = pleak
+
+#par g=10
+par g=15
+#par g_bas=6
+#par g_stim=8
+#par tglu_on = 420000
+#gon = heav(t - tglu_on)*(1 - exp(-(t - tglu_on)/taub))*(1 - exp(-(t - tglu_on)/taut))
+#g = g_bas + (g_stim - g_bas)*gon
+aux g = g
+
+
+##################################
+##        Metabolic Model       ##
+##################################
+
+# Glucokinase reaction rate 
+par vgk=0.005
+num kgk=8.0
+num ngk=1.7
+Jgk=vgk*G^ngk/(G^ngk+kgk^ngk)
+
+# PFK reaction rate, Jpfk
+num k1=30.000
+num k2=1.000
+num k3=50000
+num k4=1000.000
+num famp=0.0200
+num fatp=20.00
+num ffbp=0.200
+num fbt=20.00
+num fmt=20.00
+
+# (alpha,beta,gamma,delta)
+# (0,0,0,0)
+weight1=1
+topa1=0
+bottom1=1
+
+# (0,0,0,1)
+weight2=atp^2/k4
+topa2=topa1
+bottom2=bottom1+weight2
+
+# (0,0,1,0)
+weight3=f6p^2/k3
+topa3=topa2+weight3
+bottom3=bottom2+weight3
+
+# (0,0,1,1)
+weight4=(f6p*atp)^2/(fatp*k3*k4)
+topa4=topa3+weight4
+bottom4=bottom3+weight4
+
+# (0,1,0,0)
+weight5=fbp/k2
+topa5=topa4
+bottom5=bottom4+weight5
+
+# (0,1,0,1)
+weight6=(fbp*atp^2)/(k2*k4*fbt)
+topa6=topa5
+bottom6=bottom5+weight6
+
+# (0,1,1,0)
+weight7=(fbp*f6p^2)/(k2*k3*ffbp)
+topa7=topa6+weight7
+bottom7=bottom6+weight7
+
+# (0,1,1,1)
+weight8=(fbp*f6p^2*atp^2)/(k2*k3*k4*ffbp*fbt*fatp)
+topa8=topa7+weight8
+bottom8=bottom7+weight8
+
+# (1,0,0,0)
+weight9=amp/k1
+topa9=topa8
+bottom9=bottom8+weight9
+
+# (1,0,0,1)
+weight10=(amp*atp^2)/(k1*k4*fmt)
+topa10=topa9
+bottom10=bottom9+weight10
+
+# (1,0,1,0)
+weight11=(amp*f6p^2)/(k1*k3*famp)
+topa11=topa10+weight11
+bottom11=bottom10+weight11
+
+# (1,0,1,1)
+weight12=(amp*f6p^2*atp^2)/(k1*k3*k4*famp*fmt*fatp)
+topa12=topa11+weight12
+bottom12=bottom11+weight12
+
+# (1,1,0,0)
+weight13=(amp*fbp)/(k1*k2)
+topa13=topa12
+bottom13=bottom12+weight13
+
+# (1,1,0,1)
+weight14=(amp*fbp*atp^2)/(k1*k2*k4*fbt*fmt)
+topa14=topa13
+bottom14=bottom13+weight14
+
+# (1,1,1,0) -- the most active state of the enzyme
+weight15=(amp*fbp*f6p^2)/(k1*k2*k3*ffbp*famp)
+topa15=topa14
+topb=weight15
+bottom15=bottom14+weight15
+
+# (1,1,1,1)
+weight16=(amp*fbp*f6p^2*atp^2)/(k1*k2*k3*k4*ffbp*famp*fbt*fmt*fatp)
+topa16=topa15+weight16
+bottom16=bottom15+weight16
+
+# Phosphofructokinase rate
+par kpfk=0.05
+par vpfk=0.01
+Jpfk= vpfk*(topb + kpfk*topa16)/bottom16
+
+##########
+# Gapdh rate, Jgapdh
+Jgapdh = sqrt(fbp)
+
+##########
+# PDH reaction rate, Jpdh
+par vpdh=0.005
+
+# how to control nozzle? shift kCaPDH higher. for simplicity, just use c
+par kcapdh=300
+par kcam=400
+cam = kcam * c
+sinfty = cam/(cam + kCaPDH)
+
+Jpdh = vpdh*sinfty*Jgapdh
+
+#####################################
+## ATP dynamics 
+#####################################
+
+#######
+# basal and glucose-stimulated ADP phosphorylation rate
+#par vg=2
+#par kg=0.05
+#y = vg*(Jpdh/(kg+Jpdh))
+
+#alt: linearly boost JPDH to r's scale.
+par ky=20
+y = ky*Jpdh
+
+# Calcium inhibition of ATP production (Keizer-Magnus effect)
+par kkm=0
+cainh=1-kkm*c
+
+par r=0.7
+par freezeprod = 0, Jprod0 = 0
+vphos = exp( (r + y) * cainh)
+Jprod = (1 - freezeprod)*vphos*adp + freezeprod*Jprod0
+
+#######
+# ATP hydrolysis
+# par vhyd=5
+par vhyd=6
+par vhydbas=0.8
+vhydtot=vhydbas + vhyd*(Jpmca + Jserca/2)
+Jhyd = vhydtot*atp
+
+######################################
+## Adenosine phosphorylation states  # 
+######################################
+# assuming 2 conservation laws eliminates two variables:
+# 1. atot=atp+adp+amp (adenosine is neither created nor destroyed, just changes phosphorylation states)
+# 2. amp=adp^2/atp ( rapid equilibrium of the Adenylate kinase (myokinase) reaction: atp+amp <=> 2adp )
+
+num atot = 3000
+atp = 0.5*(atot-adp + sqrt(adp*atot)*sqrt(-2+atot/adp-3*adp/atot))
+amp = adp^2/atp
+
+ratio = atp/adp
+
+##################################
+## Ionic currents               ##
+##################################
+
+num vca=25
+
+#par ko = 5.0
+#vk = 23.5370*log(ko/120)
+num vk = -75
+
+########
+# ICa
+par gca=1000
+num vm=-20, sm=12
+minf = 1/(1+exp((vm-v)/sm))
+ica = gca*minf*(v-vca)
+
+########
+# Ik
+par gk=2700
+num vn=-16, sn=5, taun=20
+ninf = 1/(1+exp((vn-v)/sn))
+ik = gk*n*(v-vk)
+
+########
+# Ikca
+# - EBIO should decrease kd ~7-fold. (PMID: 11134030)
+# (EC50 nM, n) symmetric then asymmetric
+# SK1      (440, 4.2) (456, 3.8)
+# SK1+EBIO (67.1, 6.3) (67.3, 6)
+# SK2	   (480, 3.8) (480, 4)
+# SK2+EBIO (68.7, 5.6) (69.4, 5.9)
+par gkca=50
+par kd=0.3
+num nkca=4
+qinf = c^nkca/(kd^nkca+c^nkca)
+ikca = gkca*qinf*(v-vk)
+
+########
+#Ikatp
+# - diazoxide using increased ktt
+par gkatpbar=27000
+par ktt=1
+num kdd=17, ktd=26
+mgadp = 0.165*adp
+adp3m = 0.135*adp
+atp4m = 0.05*atp
+topo = 0.08*(1+2*mgadp/kdd) + 0.89*(mgadp/kdd)^2
+bottomo = (1+mgadp/kdd)^2 * (1+adp3m/ktd+atp4m/ktt)
+katpo = topo/bottomo 
+ikatp = gkatpbar*katpo*(v-vk)
+
+#######
+# Isoc
+# https://doi.org/10.1371/journal.pone.0069598  <-- Ks=50uM, nHill=4, taus=30s
+# dynamics of activation here would be physiological...
+par vsoc=-20
+#par gsoc=10 (for commentary)
+par gsoc=0
+par ksoc=300
+osoc = ksoc^4/(ksoc^4 + cer^4)
+Isoc = gsoc * osoc * (v-vsoc)
+
+############################
+#       Ca2+ fluxes	       #
+############################
+# Ca2+ fluxes across the plasma membrane
+num alpha=4.5e-6
+Jin = -alpha*(ica+Isoc)
+
+# PMCA - Hill version
+par vpmca=0.042
+par kpmca=0.1
+jpmca = vpmca*c^2/(c^2+kpmca^2)
+
+#par vncx=0.0
+#par kncx=1.0
+#jncx = vncx*c^4/(c^2+kncx^4)
+
+# SERCA - Hill version
+par kserca=0.2
+Jserca=vserca*c^2/(c^2+kserca^2)
+
+# Ca2+ efflux through leak
+Jleak = pleak*(cer-c) 
+
+Jmem = Jin - Jpmca
+Jer = Jserca - Jleak
+
+# Ca2+ efflux through the IP3R
+# IP3 receptor
+#par pip3=1
+#par dip3=0.5
+#par dact=0.35
+#par dinact=0.4
+#ainf_ip3 = c/(c + dact)
+#hinf = dinact/(dinact + c)
+#binf = ip3/(ip3 + dip3)
+#oinf=ainf_ip3*ainf_ip3*ainf_ip3*hinf*hinf*hinf*binf*binf*binf
+#jip3=pip3*oinf*(cer-c)
+#Jer = Jserca - Jleak - Jip3
+
+############################
+#       Vector field	   #
+############################
+par taua=300000
+num fca=0.01
+par sigmaer=30
+num Cm=5300
+
+par kgo=1
+par kadp=1
+
+v' = -(ica + ik + ikca + ikatp + isoc)/Cm
+n' = (ninf-n)/taun
+cer' = fca*sigmaer*Jer
+c' = fca*(Jmem - Jer)
+adp' =kadp*(Jhyd-Jprod)/taua
+f6p'=kgo*0.3*(Jgk-Jpfk)
+fbp'=kgo*(Jpfk-0.5*Jpdh)
+
+
+# Initial conditions
+#init v=-58.925
+#init n=0.0002
+#init cer=287.98
+#init c=0.07504
+#init adp=819.29
+#init f6p=38.201
+#init fbp=69.872
+#init v=-64.3581
+init n=0.0001
+init cer=460.4832
+init c=0.0959
+init adp=839.3863
+init f6p=60.1374
+init fbp=110.4577
+
+
+
+aux jprod = Jprod
+aux prod = kadp*Jprod/taua
+aux cons = kadp*Jhyd/taua
+aux amp=amp
+aux atp=atp
+aux ratio=ratio
+aux rplusy = r + y
+aux vphos = vphos
+aux jpumps = Jpmca + Jserca/2
+aux qinf = qinf
+aux ikca = ikca
+aux katpo = katpo
+aux ikatp = ikatp
+aux osoc = osoc
+aux Isoc = Isoc
+aux tmin = t/60000
+aux tsec = t/1000
+
+
+############################################
+#         XPP: numerical details	   #
+############################################
+
+@ meth=5dp, toler=1.0e-6, atoler=1.0e-8, dt=25, dtmax=100, total=900000
+@ maxstor=1000000,bounds=10000000, xp=tsec, yp=c
+@ xlo=0, xhi=900, ylo=0.06, yhi=0.2
+
+done
