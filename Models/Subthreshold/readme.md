@@ -6,3 +6,4 @@ This is supplemental material for "Pulsatile Basal Insulin Secretion is Driven b
 
 [XPP File](iom_secretion_physiology.ode)
 
+This paper used IOM1.7 for simulations.  Matlab and xpp files for a bare-bones version of that model can be found here: [[IOM1.7]](../IOM1.7)
