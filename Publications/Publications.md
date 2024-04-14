@@ -308,7 +308,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
     ### Commentary
 
 1. L. S. Satin, J. Corradi, A. S. Sherman. 2024. _Do We Need a New Hypothesis for KATP Closure in
-b-Cells? Distinguishing the Baby From the Bathwater_. Diabetes, in press.
+<&beta>-Cells? Distinguishing the Baby From the Bathwater_. Diabetes, in press.
 
 1. A. S. Sherman, P. A. Fletcher, L. S. Satin, R. Bertram. 2023. _The Pancreatic Beta Cell: Biology and Mathematics Advance Together_, SIAM News, **56**(9):1.  [[Online]](https://sinews.siam.org/Details-Page/the-pancreatic-beta-cell-biology-and-mathematics-advance-together).
 
