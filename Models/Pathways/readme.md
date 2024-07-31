@@ -19,7 +19,7 @@ J. Ha and A. Sherman. 2020. Type 2 Diabetes: One Disease, Many Pathways, *Am J P
 
 #### Figures 1 - 4. Matlab will generate Fig1 - Fig6, corresponding to Panels A - F (a counter will tick off 365 iterations):
 
-Figure 1: [FIG1.m](./pathway_matlab/FIG1.m)
+Figure 1: [FIG1.m](./pathway_matlab/FIG1_new.m)
 
 Figure 2: [FIG2.m](./pathway_matlab/FIG2.m)
 
