@@ -1,5 +1,10 @@
 clear
 
+% Artie 07/31/24
+% a cleaner version of the FIG1.m file originally posted on Github
+% no structure that grows every iteration to store the OGTT data
+% doesn't write out the data and read it back in to plot
+
 total_t=2628000; % 5 years: 1440*365*5
 OGTT_period=7200; % 5 days
 nPeriods=total_t/OGTT_period; % number of 5-day blocks
@@ -13,7 +18,7 @@ HGP_no_si=0; % for recomputing HGP in full_run.m
 
 odeparams.BW=75;
 odeparams.mealbar=11.055; 
-outfile='FIG1 new.xlsx';
+outfile='FIG1.xlsx';
 odeparams.k=0.4861;
 
 odeparams.meal=1;
