@@ -9,13 +9,15 @@
 
    ### Journal Articles
 
+1. J. Ha, J. Y. Kim, M. Springer, A. Chhabra, S. T. Chung, A. E. Sumner, A. Sherman, S. Arslanian. 2024. *A Mathematical Model-Derived Disposition Index Without Insulin Validated in Youth with Obesity*, J. Clin. Endocrinol. Metab., in press.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/39172553/) [[doi]](https://doi.org/10.1210/clinem/dgae582) [[Supplemental Material]](https://doi.org/10.6084/m9.figshare.25326055).  
+
 1. C. B. Kabeza, K. Ntabadde, C. W. DuBose, J. Ha, A. S. Sherman, and A. E. Sumner.  2024. *Determining the 1-hour post-load glucose which identifies diabetes in
 Africans: Insight from the Africans in America study*, Diabetes Res Clin Pract., [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/39069090/) [[doi]](https://doi.org/10.1016/j.diabres.2024.111792).
 
 1. J. Ha<sup>a</sup>, S. T. Chung<sup>a</sup>, M. Springer, J. Y. Kim, P. Chen, A. Chhabra, M. G. Cree, C. Diniz Behn, A. E. Sumner, S. Arslanian, A. S. Sherman. 2023. *Estimating Insulin Sensitivity and Beta-Cell Function from the Oral Glucose Tolerance Test: Validation of a new Insulin Sensitivity and Secretion (ISS) Model*, Am. J. Physiol. (Endocrinol. Metab.), **326**(4):E454-E471. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/38054972/) [[doi]](https://doi.org/10.1152/ajpendo.00189.2023)[[Matlab and Python Fitting Code]](https://figshare.com/articles/preprint/Fitting_the_Insulin_Sensitivity_and_Secretion_ISS_Model_to_OGTTs/23535612) <sup>a</sup>Co-first authors.
 
 1. K. B. Dietsche, S. N. Magge, S. A. Dixon, F. S. Davis, A. Krenek, A. Chowdhury, L. Mabundo, M. Stagliano, A. B. Courville, S. Yang, S. Turner, H. Cai, K. Kasturi, A. S. Sherman, J. Ha, E. Shouppe, M. Walter, P. J. Walter, K. Y. Chen, R. J. Brychta, C. Peer, Y. Zeng,
-W. Figg, F. Cogen, D. E. Estrada, S. Chacko, S. T. Chung. 2023. *Glycemia and Gluconeogenesis with Metformin and Liraglutide: A Randomized Trial in Youth-onset Type 2 Diabetes*, J. Clin. Endocrinol. Metab., in press  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/37967247/) [[doi]](https://doi.org/10.1210/clinem/dgad669).
+W. Figg, F. Cogen, D. E. Estrada, S. Chacko, S. T. Chung. 2023. *Glycemia and Gluconeogenesis with Metformin and Liraglutide: A Randomized Trial in Youth-onset Type 2 Diabetes*, J. Clin. Endocrinol. Metab., 109(**5**):1361-1370  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/37967247/) [[doi]](https://doi.org/10.1210/clinem/dgad669).
 
 1. J. Corradi, B. Thompson, P. A. Fletcher, R. Bertram, A. S. Sherman, L. S. Satin. 2023.  *K<sub>ATP</sub> channel activity and slow oscillations in pancreatic beta cells are regulated by mitochondrial ATP production*. J. Physiol., **601**(24):5655-5667 [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/37983196/) [[doi]](https://physoc.onlinelibrary.wiley.com/doi/full/10.1113/JP284982)[[XPP and Matlab Files]](https://figshare.com/articles/journal_contribution/Supplemental_computer_code_for_Corradi_et_al_J_Physiol_2023/24545830).
 
