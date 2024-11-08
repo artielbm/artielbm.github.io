@@ -11,7 +11,7 @@
 
 1. S. Sivcev, S. Constantin, K. Smiljanic, S. J. Sokanovic, P. A. Fletcher, A. S. Sherman, H. Zemkova, and S. S. Stojilkovic. 2024. *Distribution and calcium signaling function of somatostatin receptor subtypes in rat pituitary*, Cell Calcium, in press. [[doi]](https://www.sciencedirect.com/science/article/pii/S0143416024001258).
 
-1. M. Bergman, M. Abdul-Ghani, J. Chan, M. I. Schmidt, J. Ha, S. S. Kim, A. S. Sherman, R. Jagannathan, and J. Tuomilehto. 2024. *Staging schema for early diagnosis of prediabetes*, Lancet Diabetes Endocrinol., in press.
+1. M. Bergman, M. Abdul-Ghani, J. Chan, M. I. Schmidt, J. Ha, S. S. Kim, A. S. Sherman, R. Jagannathan, and J. Tuomilehto. 2024. *Staging schema for early diagnosis of prediabetes*, Lancet Diabetes Endocrinol., in press. [[doi]](https://www.thelancet.com/journals/landia/article/PIIS2213-8587(24)00320-6/)
 
 1. J. Ha, J. Y. Kim, M. Springer, A. Chhabra, S. T. Chung, A. E. Sumner, A. Sherman, S. Arslanian. 2024. *A Mathematical Model-Derived Disposition Index Without Insulin Validated in Youth with Obesity*, J. Clin. Endocrinol. Metab., in press.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/39172553/) [[doi]](https://doi.org/10.1210/clinem/dgae582) [[Supplemental Material]](https://doi.org/10.6084/m9.figshare.25326055).  
 
