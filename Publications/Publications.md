@@ -9,7 +9,7 @@
 
    ### Journal Articles
 
-1. M. Im, J. Kim, S. Ryang, D. Kim, W. Yi, J. M. Kim, M. Kim, Y. J. Kim, Y. J. Kim, H. Kang, I. J. Kim, R. Jagannathan, S. T. Chung, M. Bergman. A. S. Sherman, S. S. Kim, J. Ha. 2024. High one-hour plasma glucose is an intermediate risk state and an early predictor of type 2 diabetes in a longitudinal Korean cohort. Diabetes Res Clin Pract., in press.
+1. M. Im, J. Kim, S. Ryang, D. Kim, W. Yi, J. M. Kim, M. Kim, Y. J. Kim, Y. J. Kim, H. Kang, I. J. Kim, R. Jagannathan, S. T. Chung, M. Bergman. A. S. Sherman, S. S. Kim, J. Ha. 2024. High one-hour plasma glucose is an intermediate risk state and an early predictor of type 2 diabetes in a longitudinal Korean cohort. Diabetes Res Clin Pract., in press.  [[doi]](https://doi.org/10.1016/j.diabres.2024.111938).
 
 1. S. Sivcev, S. Constantin, K. Smiljanic, S. J. Sokanovic, P. A. Fletcher, A. S. Sherman, H. Zemkova, and S. S. Stojilkovic. 2024. *Distribution and calcium signaling function of somatostatin receptor subtypes in rat pituitary*, Cell Calcium, in press. [[doi]](https://www.sciencedirect.com/science/article/pii/S0143416024001258).
 
