@@ -291,7 +291,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
     ### Book Chapters & Other Reviews
 1. R. Bertram, I. Marinelli, P. A. Fletcher, L. S. Satin, A. S. Sherman. 2023.  _Deconstructing the Integrated Oscillator Model for Pancreatic Beta Cells_. Math. Biosci., **365**:109085.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/37802364/) [[doi]](https://doi.org/10.1016/j.mbs.2023.109085).
 
-1. P. A. Fletcher and A. S. Sherman. 2023. _Calcium Signaling in Context: Case Studies in Endocrine Cells_, in Calcium Signals, From Single Molecules to Physiology, L. S. Satin, M. Ben-Johny and I. E. Dick, eds. IOP Publishing, ISBN 978-0-7503-2009-2, [[URL]](https://iopscience.iop.org/book/edit/978-0-7503-2009-2) [[doi]](10.1088/978-0-7503-2009-2ch10).
+1. P. A. Fletcher and A. S. Sherman. 2023. _Calcium Signaling in Context: Case Studies in Endocrine Cells_, in Calcium Signals: From single molecules to physiology, L. S. Satin, M. Ben-Johny and I. E. Dick, eds. IOP Publishing. [[URL]](https://iopscience.iop.org/book/edit/978-0-7503-2009-2) [[doi]](10.1088/978-0-7503-2009-2ch10).
 
 1. L. S. Satin, M. Watts, and A. Sherman. 2020. _An introduction to beta cell electrophysiology and modeling,_ in Diabetes System Biology: Quantitative methods for understanding beta-cell dynamics and function, A. Khadra, editor.  IOP Publishing, Bristol, UK, pp. 2-1 - 2-46. [[doi]](https://doi.org/10.1088/978-0-7503-3739-7) [[XPP and Matlab Files]](https://github.com/artielbm/artielbm.github.io/blob/master/Models/FieldsChapter/readme.md)
 
