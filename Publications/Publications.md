@@ -15,7 +15,7 @@
 
 1. M. Bergman, M. Abdul-Ghani, J. Chan, M. I. Schmidt, J. Ha, S. S. Kim, A. S. Sherman, R. Jagannathan, and J. Tuomilehto. 2024. *Staging schema for early diagnosis of prediabetes*, Lancet Diabetes Endocrinol., **12**(12):873-876. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/39522533/) [[doi]](https://www.thelancet.com/journals/landia/article/PIIS2213-8587(24)00320-6/)
 
-1. J. Ha, J. Y. Kim, M. Springer, A. Chhabra, S. T. Chung, A. E. Sumner, A. Sherman, S. Arslanian. 2024. *A Mathematical Model-Derived Disposition Index Without Insulin Validated in Youth with Obesity*, J. Clin. Endocrinol. Metab., in press.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/39172553/) [[doi]](https://doi.org/10.1210/clinem/dgae582) [[Supplemental Material]](https://doi.org/10.6084/m9.figshare.25326055).  
+1. J. Ha, J. Y. Kim, M. Springer, A. Chhabra, S. T. Chung, A. E. Sumner, A. Sherman, S. Arslanian. 2024. *A Mathematical Model-Derived Disposition Index Without Insulin Validated in Youth with Obesity*, J. Clin. Endocrinol. Metab., **110**(3):706 - 714.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/39172553/) [[doi]](https://doi.org/10.1210/clinem/dgae582) [[Supplemental Material]](https://doi.org/10.6084/m9.figshare.25326055).  
 
 1. C. B. Kabeza, K. Ntabadde, C. W. DuBose, J. Ha, A. S. Sherman, and A. E. Sumner.  2024. *Determining the 1-hour post-load glucose which identifies diabetes in
 Africans: Insight from the Africans in America study*, Diabetes Res Clin Pract., **214**:111792. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/39069090/) [[doi]](https://doi.org/10.1016/j.diabres.2024.111792).
