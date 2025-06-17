@@ -84,7 +84,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 
 1.  C. H. Ahn, S. H. Min, D.-W. Lee, T. J. Oh, K. M. Kim, J. H. Moon, S. H. Choi, K. S. Park, H. C. Jang, J. Ha and A. Sherman, and S. Lim. 2017. _Hemoglobin Glycation Index Is Associated with Cardiovascular Diseases in People with Impaired Glucose Metabolism._ J. Clin. Endocrinol. Metab., 102(8):2905-2913. [[PubMed](https://www.ncbi.nlm.nih.gov/pubmed/28541544)]
 
-1.  J. Ha and A. S. Sherman. 2017. _How Adaptation Makes Low Firing Rates Robust. J. Math. Neurosci., **7**:4._ [[PubMed](https://www.ncbi.nlm.nih.gov/pubmed/28647913)] [[The Paper (Open Access)](http://rdcu.be/tG2S)] [[xpp files]](https://artielbm.github.io/Models/Adaptation)]
+1.  J. Ha and A. S. Sherman. 2017. _How Adaptation Makes Low Firing Rates Robust. J. Math. Neurosci., **7**:4._ [[PubMed](https://www.ncbi.nlm.nih.gov/pubmed/28647913)] [[The Paper (Open Access)](https://link.springer.com/content/pdf/10.1186/s13408-017-0047-3.pdf)] [[xpp files]](https://artielbm.github.io/Models/Adaptation)]
 
 1.  N. R. Gandasi, P. Yin, M. Riz, M. V. Chibalina, G. Cortese, P.-E. Lund, V. Matveev, P. Rorsman, A. Sherman, M. G. Pedersen, and S. Barg. 2017. _Ca<sup>2+</sup> channel clustering with insulin-containing granules is disturbed in type 2 diabetes._ J. Clin. Invest., **127**(6):2353-2364. [[PubMed](https://www.ncbi.nlm.nih.gov/pubmed/28481223)]
 
