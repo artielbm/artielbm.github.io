@@ -10,7 +10,7 @@
    ### Journal Articles
 
 1. V. Subramanian, A. S. Sherman, J. J. Holst, F. K. Knop, T. Vilsbøll, J. I. Bagger. 2025. *Evaluating the role of alpha cell dysregulation in the progression
-to type 2 diabetes using mathematical simulations*, Diabetologia, in press [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/40924110/) [[doi]](https://doi.org/10.1007/s00125-025-06524-1)  [[Mathematica Code]](https://doi.org/10.7281/T19XBTVF). 
+to type 2 diabetes using mathematical simulations*, Diabetologia, **68**(11):2595-2608. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/40924110/) [[doi]](https://doi.org/10.1007/s00125-025-06524-1)  [[Mathematica Code]](https://doi.org/10.7281/T19XBTVF). 
 
 1. M. Im, J. Kim, S. Ryang, D. Kim, W. Yi, J. M. Kim, M. Kim, Y. J. Kim, Y. J. Kim, H. Kang, I. J. Kim, R. Jagannathan, S. T. Chung, M. Bergman. A. S. Sherman, S. S. Kim, J. Ha. 2024. *High one-hour plasma glucose is an intermediate risk state and an early predictor of type 2 diabetes in a longitudinal Korean cohort*. Diabetes Res Clin Pract., **219**:111938. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/39617334/) [[doi]](https://doi.org/10.1016/j.diabres.2024.111938).
 
