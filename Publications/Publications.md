@@ -9,7 +9,7 @@
 
    ### Journal Articles
 
-1. S. P. Bigirimana, K. Ntabadde, G. G. Smith, C. W. DuBose, R. Jaganathan, D. B. Sacks3, A. S. Sherman,A. E. Sumner. 2025. *Call for Modification of the Intermediate Hyperglycemic classification of the 1hour-Oral Glucose Tolerance Test*. Diabetes Res Clin Pract., in press.
+1. S. P. Bigirimana, K. Ntabadde, G. G. Smith, C. W. DuBose, R. Jaganathan, D. B. Sacks, A. S. Sherman, A. E. Sumner. 2025. *Call for Modification of the Intermediate Hyperglycemic classification of the 1hour-Oral Glucose Tolerance Test*. Diabetes Res Clin Pract., in press.
 
 1. V. Subramanian, A. S. Sherman, J. J. Holst, F. K. Knop, T. Vilsbøll, J. I. Bagger. 2025. *Evaluating the role of alpha cell dysregulation in the progression to type 2 diabetes using mathematical simulations*, Diabetologia, **68**(11):2595-2608. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/40924110/) [[doi]](https://doi.org/10.1007/s00125-025-06524-1)  [[Mathematica Code]](https://doi.org/10.7281/T19XBTVF). 
 
