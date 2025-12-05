@@ -9,6 +9,9 @@
 
    ### Journal Articles
 
+1. D. Kim, J. Kim, M. Im, S. Ryang M. Kim, Y. J. Kim, I. J. Kim. Y. J. Kim, H. Kang, S. T. Chung, A. S. Sherman. S. S. Kim, J. Ha. Declining insulin sensitivity is a key pathological contributor to dysglycemia: A Longitudinal Validation Study in the Korean Genome and Epidemiology Study (KoGES). Front. Endocrinol., in press.
+
+
 1. S. P. Bigirimana, K. Ntabadde, G. G. Smith, C. W. DuBose, R. Jaganathan, D. B. Sacks, A. S. Sherman, A. E. Sumner. 2025. *Call for Modification of the Intermediate Hyperglycemic classification of the 1hour-Oral Glucose Tolerance Test*. Diabetes Res Clin Pract., **230**:112999. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/41232720/) [[doi]](https://doi.org/10.1016/j.diabres.2025.112999)
 
 1. V. Subramanian, A. S. Sherman, J. J. Holst, F. K. Knop, T. Vilsbøll, J. I. Bagger. 2025. *Evaluating the role of alpha cell dysregulation in the progression to type 2 diabetes using mathematical simulations*, Diabetologia, **68**(11):2595-2608. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/40924110/) [[doi]](https://doi.org/10.1007/s00125-025-06524-1)  [[Mathematica Code]](https://doi.org/10.7281/T19XBTVF). 
