@@ -28,11 +28,13 @@ New York University, Ph. D. Mathematics, October, 1986
 
 **9/89 - 7/96** N. I. H. Senior Staff Fellow, Mathematical Research Branch, N.I.D.D.K.
 
-**7/96 - Present** Senior Investigator (Research Mathematician), Mathematical Research Branch/Laboratory of Biological Modeling, N.I.D.D.K.
+**7/96 - 12/25** Senior Investigator (Research Mathematician), Mathematical Research Branch/Laboratory of Biological Modeling, N.I.D.D.K.
 
 **2/05 - 12/25** Chief, Laboratory of Biological Modeling, N.I.D.D.K.
 
 **8/11** Appointed to Senior Biomedical Research Service.
+
+**01/26 - Present** Special Volunteer, Laboratory of Biological Modeling, N. I. D. D. K.
 
 ### Honors
 
