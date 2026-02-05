@@ -15,7 +15,9 @@
 
 1. S. P. Bigirimana, K. Ntabadde, G. G. Smith, C. W. DuBose, R. Jaganathan, D. B. Sacks, A. S. Sherman, A. E. Sumner. 2025. *Call for Modification of the Intermediate Hyperglycemic classification of the 1hour-Oral Glucose Tolerance Test*. Diabetes Res Clin Pract., **230**:112999. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/41232720/) [[doi]](https://doi.org/10.1016/j.diabres.2025.112999)
 
-1. V. Subramanian, A. S. Sherman, J. J. Holst, F. K. Knop, T. Vilsbøll, J. I. Bagger. 2025. *Evaluating the role of alpha cell dysregulation in the progression to type 2 diabetes using mathematical simulations*, Diabetologia, **68**(11):2595-2608. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/40924110/) [[doi]](https://doi.org/10.1007/s00125-025-06524-1)  [[Mathematica Code]](https://doi.org/10.7281/T19XBTVF). 
+1. V. Subramanian, A. S. Sherman, J. J. Holst, F. K. Knop, T. Vilsbøll, J. I. Bagger. 2025. *Evaluating the role of alpha cell dysregulation in the progression to type 2 diabetes using mathematical simulations*, Diabetologia, **68**(11):2595-2608. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/40924110/) [[doi]](https://doi.org/10.1007/s00125-025-06524-1)  [[Mathematica Code]](https://doi.org/10.7281/T19XBTVF).
+
+1. J. Ha, J. Y. Kim, M. Springer, A. Chhabra, S. T. Chung, A. E. Sumner, A. Sherman, S. Arslanian. 2025. *A Mathematical Model-Derived Disposition Index Without Insulin Validated in Youth with Obesity*, J. Clin. Endocrinol. Metab., **110**(3):706 - 714.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/39172553/) [[doi]](https://doi.org/10.1210/clinem/dgae582) [[Supplemental Material]](https://doi.org/10.6084/m9.figshare.25326055). 
 
 1. M. Im, J. Kim, S. Ryang, D. Kim, W. Yi, J. M. Kim, M. Kim, Y. J. Kim, Y. J. Kim, H. Kang, I. J. Kim, R. Jagannathan, S. T. Chung, M. Bergman. A. S. Sherman, S. S. Kim, J. Ha. 2024. *High one-hour plasma glucose is an intermediate risk state and an early predictor of type 2 diabetes in a longitudinal Korean cohort*. Diabetes Res Clin Pract., **219**:111938. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/39617334/) [[doi]](https://doi.org/10.1016/j.diabres.2024.111938).
 
@@ -23,7 +25,7 @@
 
 1. M. Bergman, M. Abdul-Ghani, J. Chan, M. I. Schmidt, J. Ha, S. S. Kim, A. S. Sherman, R. Jagannathan, and J. Tuomilehto. 2024. *Staging schema for early diagnosis of prediabetes*, Lancet Diabetes Endocrinol., **12**(12):873-876. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/39522533/) [[doi]](https://www.thelancet.com/journals/landia/article/PIIS2213-8587(24)00320-6/)
 
-1. J. Ha, J. Y. Kim, M. Springer, A. Chhabra, S. T. Chung, A. E. Sumner, A. Sherman, S. Arslanian. 2025. *A Mathematical Model-Derived Disposition Index Without Insulin Validated in Youth with Obesity*, J. Clin. Endocrinol. Metab., **110**(3):706 - 714.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/39172553/) [[doi]](https://doi.org/10.1210/clinem/dgae582) [[Supplemental Material]](https://doi.org/10.6084/m9.figshare.25326055).  
+ 
 
 1. C. B. Kabeza, K. Ntabadde, C. W. DuBose, J. Ha, A. S. Sherman, and A. E. Sumner.  2024. *Determining the 1-hour post-load glucose which identifies diabetes in
 Africans: Insight from the Africans in America study*, Diabetes Res Clin Pract., **214**:111792. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/39069090/) [[doi]](https://doi.org/10.1016/j.diabres.2024.111792).
