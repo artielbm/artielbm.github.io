@@ -7,7 +7,7 @@
 
 * * *
 
-   ### Journal Articles
+## Journal Articles
 
 1. S. Ryang, J. Kim, M. Kim, M. Im, D. Kim, Y. J. Kim, H. Kang, Y. J. Kim, I. J. Kim, S. T. Chung, M. Bergman, A. Sherman, S. S. Kim, J. Ha. 2026. *A novel disposition index without insulin is an earlier and sensitive predictor of type 2 diabetes than current diagnostic criteria*, Diabetes Res. Clin. Pract., in press. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/41619944/) [[doi]](https://doi.org/10.1016/j.diabres.2026.113131)
 
