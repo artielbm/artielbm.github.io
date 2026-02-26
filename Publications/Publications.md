@@ -9,7 +9,9 @@
 
 ## Journal Articles
 
-1. S. Ryang, J. Kim, M. Kim, M. Im, D. Kim, Y. J. Kim, H. Kang, Y. J. Kim, I. J. Kim, S. T. Chung, M. Bergman, A. Sherman, S. S. Kim, J. Ha. 2026. *A novel disposition index without insulin is an earlier and sensitive predictor of type 2 diabetes than current diagnostic criteria*, Diabetes Res. Clin. Pract., in press. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/41619944/) [[doi]](https://doi.org/10.1016/j.diabres.2026.113131)
+1. E. A. Huefner, K. Ntabadde, G. G. Smith, S. P. Bigirimana, C. W. DuBose, A. S. Sherman, and A. E. Sumner. 2026. *African Immigrants with Type 2 Diabetes Present with Three Physiologic Subtypes: Implications for Screening, Diagnosis, and Treatment*, BMJ Open Diabetes Research & Care, in press.
+
+1. S. Ryang, J. Kim, M. Kim, M. Im, D. Kim, Y. J. Kim, H. Kang, Y. J. Kim, I. J. Kim, S. T. Chung, M. Bergman, A. Sherman, S. S. Kim, J. Ha. 2026. *A novel disposition index without insulin is an earlier and sensitive predictor of type 2 diabetes than current diagnostic criteria*, Diabetes Res. Clin. Pract., **233**:113131. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/41619944/) [[doi]](https://doi.org/10.1016/j.diabres.2026.113131)
 
 1. D. Kim, J. Kim, M. Im, S. Ryang M. Kim, Y. J. Kim, I. J. Kim. Y. J. Kim, H. Kang, S. T. Chung, A. S. Sherman. S. S. Kim, J. Ha. 2026. *Declining insulin sensitivity is a key pathological contributor to dysglycemia: A Longitudinal Validation Study in the Korean Genome and Epidemiology Study (KoGES)*. Front. Endocrinol., **16**:1726006. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/41561051/)
 [[doi]](https://www.frontiersin.org/journals/endocrinology/articles/10.3389/fendo.2025.1726006/full) 
@@ -335,7 +337,7 @@ Biophys. J., **119**(11):2335-2348. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/3
 1. L. S. Satin, J. Corradi, A. S. Sherman. 2024. _Do We Need a New Hypothesis for KATP Closure in
 &beta; cells? Distinguishing the Baby From the Bathwater_. Diabetes, **73**(6):844-848 [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/38640066/)[[doi](https://doi.org/10.2337/db24-0131)].
 
-1. A. S. Sherman, P. A. Fletcher, L. S. Satin, R. Bertram. 2023. _The Pancreatic Beta Cell: Biology and Mathematics Advance Together_, SIAM News, **56**(9):1.  [[Online]](https://sinews.siam.org/Details-Page/the-pancreatic-beta-cell-biology-and-mathematics-advance-together).
+1. A. S. Sherman, P. A. Fletcher, L. S. Satin, R. Bertram. 2023. _The Pancreatic Beta Cell: Biology and Mathematics Advance Together_, SIAM News, **56**(9):1  [[Online]](https://sinews.siam.org/Details-Page/the-pancreatic-beta-cell-biology-and-mathematics-advance-together).
 
 1. P. A. Fletcher, B. Thompson, C. Liu, R. Bertram, L. S. Satin, A. S. Sherman. 2023. *Ca<sup>2+</sup> Release or Ca<sup>2+</sup> Entry, that is the Question: What Governs Ca<sup>2+</sup> Oscillations in Pancreatic Beta Cells?*, Am. J. Physiol., **324**(6):E477-E487. [[PubMed](https://pubmed.ncbi.nlm.nih.gov/37074988/)] [[doi](https://doi.org/10.1152/ajpendo.00030.2023)] [[XPP files](https://doi.org/10.6084/m9.figshare.22529515)] [Commentary on Postić et al, Am. J. Physiol. 2023 324(1):E42-E55 [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/36449570/)]
 
