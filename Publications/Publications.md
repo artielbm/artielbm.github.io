@@ -9,9 +9,9 @@
 
 ## Journal Articles
 
-1. B. Yang, J. Ha, A. S. Sherman. 2026. *African Immigrants with Type 2 Diabetes Present with Three Physiologic Subtypes: Implications for Screening, Diagnosis, and Treatment*, Am. J. Physiol. [[doi]](https://doi.org/10.1152/ajpendo.00414.2025)
+1. B. Yang, J. Ha, A. S. Sherman. 2026. *Is High Insulin Protective or Detrimental? Mathematical Modeling Reveals the Base of the Iceberg*, Am. J. Physiol. [[doi]](https://doi.org/10.1152/ajpendo.00414.2025)
 
-1. E. A. Huefner, K. Ntabadde, G. G. Smith, S. P. Bigirimana, C. W. DuBose, A. S. Sherman, A. E. Sumner. 2026. *African Immigrants with Type 2 Diabetes Present with Three Physiologic Subtypes: Implications for Screening, Diagnosis, and Treatment*, BMJ Open Diabetes Research & Care, in press.
+1. E. A. Huefner, K. Ntabadde, G. G. Smith, S. P. Bigirimana, C. W. DuBose, A. S. Sherman, A. E. Sumner. 2026. *African Immigrants with Type 2 Diabetes Present with Three Physiologic Subtypes: Implications for Screening, Diagnosis, and Treatment*, BMJ Open Diabetes Research & Care, in press. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/41850717/) [[doi]](https://doi.org/10.1152/ajpendo.00414.2025)
 
 1. S. Ryang, J. Kim, M. Kim, M. Im, D. Kim, Y. J. Kim, H. Kang, Y. J. Kim, I. J. Kim, S. T. Chung, M. Bergman, A. Sherman, S. S. Kim, J. Ha. 2026. *A novel disposition index without insulin is an earlier and sensitive predictor of type 2 diabetes than current diagnostic criteria*, Diabetes Res. Clin. Pract., **233**:113131. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/41619944/) [[doi]](https://doi.org/10.1016/j.diabres.2026.113131)
 
