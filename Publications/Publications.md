@@ -9,7 +9,7 @@
 
 ## Journal Articles
 
-1. B. Yang, J. Ha, A. S. Sherman. 2026. *Is High Insulin Protective or Detrimental? Mathematical Modeling Reveals the Base of the Iceberg*, Am. J. Physiol. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/41800787/) [[doi]](https://doi.org/10.1152/ajpendo.00414.2025)
+1. B. Yang, J. Ha, A. S. Sherman. 2026. *Is High Insulin Protective or Detrimental? Mathematical Modeling Reveals the Base of the Iceberg*, Am. J. Physiol. **330**(5):E627-E640. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/41800787/) [[doi]](https://doi.org/10.1152/ajpendo.00414.2025)
 
 1. E. A. Huefner, K. Ntabadde, G. G. Smith, S. P. Bigirimana, C. W. DuBose, A. S. Sherman, A. E. Sumner. 2026. *African Immigrants with Type 2 Diabetes Present with Three Physiologic Subtypes: Implications for Screening, Diagnosis, and Treatment*, BMJ Open Diabetes Research & Care, **14**(2):e005504. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/41850717/) [[doi]](https://doi.org/10.1136/bmjdrc-2025-005504)
 
