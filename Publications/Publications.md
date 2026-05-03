@@ -9,7 +9,7 @@
 
 ## Journal Articles
 
-1. B. Yang, J. Ha, A. S. Sherman. 2026. *Is High Insulin Protective or Detrimental? Mathematical Modeling Reveals the Base of the Iceberg*, Am. J. Physiol. **330**(5):E627-E640. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/41800787/) [[doi]](https://doi.org/10.1152/ajpendo.00414.2025)
+1. B. Yang, J. Ha, A. S. Sherman. 2026. *Is High Insulin Protective or Detrimental? Mathematical Modeling Reveals the Base of the Iceberg*, Am. J. Physiol. **330**(5):E627-E640. (Selected as best paper of the month) [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/41800787/) [[doi]](https://doi.org/10.1152/ajpendo.00414.2025)
 
 1. E. A. Huefner, K. Ntabadde, G. G. Smith, S. P. Bigirimana, C. W. DuBose, A. S. Sherman, A. E. Sumner. 2026. *African Immigrants with Type 2 Diabetes Present with Three Physiologic Subtypes: Implications for Screening, Diagnosis, and Treatment*, BMJ Open Diabetes Research & Care, **14**(2):e005504. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/41850717/) [[doi]](https://doi.org/10.1136/bmjdrc-2025-005504)
 
@@ -19,7 +19,7 @@
 
 1. S. P. Bigirimana, K. Ntabadde, G. G. Smith, C. W. DuBose, R. Jaganathan, D. B. Sacks, A. S. Sherman, A. E. Sumner. 2025. *Call for Modification of the Intermediate Hyperglycemic classification of the 1hour-Oral Glucose Tolerance Test*. Diabetes Res Clin Pract., **230**:112999. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/41232720/) [[doi]](https://doi.org/10.1016/j.diabres.2025.112999)
 
-1. V. Subramanian, A. S. Sherman, J. J. Holst, F. K. Knop, T. Vilsbøll, J. I. Bagger. 2025. *Evaluating the role of alpha cell dysregulation in the progression to type 2 diabetes using mathematical simulations*, Diabetologia, **68**(11):2595-2608. [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/40924110/) [[doi]](https://doi.org/10.1007/s00125-025-06524-1)  [[Mathematica Code]](https://doi.org/10.7281/T19XBTVF).
+1. V. Subramanian, A. S. Sherman, J. J. Holst, F. K. Knop, T. Vilsbøll, J. I. Bagger. 2025. *Evaluating the role of alpha cell dysregulation in the progression to type 2 diabetes using mathematical simulations*, Diabetologia, **68**(11):2595-2608. (Selected as one of the best papers of the month)[[PubMed]](https://pubmed.ncbi.nlm.nih.gov/40924110/) [[doi]](https://doi.org/10.1007/s00125-025-06524-1)  [[Mathematica Code]](https://doi.org/10.7281/T19XBTVF).
 
 1. J. Ha, J. Y. Kim, M. Springer, A. Chhabra, S. T. Chung, A. E. Sumner, A. Sherman, S. Arslanian. 2025. *A Mathematical Model-Derived Disposition Index Without Insulin Validated in Youth with Obesity*, J. Clin. Endocrinol. Metab., **110**(3):706 - 714.  [[PubMed]](https://pubmed.ncbi.nlm.nih.gov/39172553/) [[doi]](https://doi.org/10.1210/clinem/dgae582) [[Supplemental Material]](https://doi.org/10.6084/m9.figshare.25326055). 
 
